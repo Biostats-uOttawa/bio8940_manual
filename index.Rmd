@@ -23,6 +23,7 @@ params:
 knitr::opts_chunk$set(echo = TRUE)#, warning = FALSE, message = FALSE)
 # knitr::opts_chunk$set(out.extra = 'class="plot"')
 # knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+library(bookdown)
 library(tidyverse)
 library(patchwork)
 #svglite
