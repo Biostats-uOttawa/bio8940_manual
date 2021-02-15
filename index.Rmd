@@ -1,0 +1,213 @@
+---
+title: "BIO8940 Advanced stats and Open Science"
+subtitle: "Work in Progress"
+author: "Julien Martin"
+date: "`r format(Sys.Date(), '%d-%m-%Y')`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+#lot: yes
+#lof: yes
+fontsize: 12pt
+#monofont: "Source Code Pro"
+monofontoptions: "Scale=0.7"
+description: "Theory and practicals for BIO8940 course at the University of Ottawa"
+github-repo: "BIO8940-uOttawa/class_book"
+cover-image: "images/missing.png"
+params:
+  echo_sol: true
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)#, warning = FALSE, message = FALSE)
+# knitr::opts_chunk$set(out.extra = 'class="plot"')
+# knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
+library(tidyverse)
+library(patchwork)
+#svglite
+```
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), "bookdown", "knitr", "rmarkdown"
+), 'packages.bib')
+```
+
+# Note {-}
+
+```{block2, type = "rmdimportant"}
+Work in progress. New chapters are going to appears regularly meaning that if you download the pdf it might be incomplete by the time we do the practical in class.
+``` 
+
+# Préface {-}
+
+<!-- {-} pour enlever num/rotation -->
+
+Les exercices de laboratoire que vous retrouverez dans les pages qui suivent sont conçus de manière à vous permettre de développer une expérience pratique en analyse de données à l'aide d'un logiciel (R).
+R est un logiciel très puissant, mais comme tous les logiciels, il a des limites.
+En particulier il ne peut réfléchir à votre place, vous dire si l'analyse que vous tentez d'effectuer est appropriée ou sensée, ou interpréter biologiquement les résultats.
+
+## Quelques points importants à retenir {-}
+
+* Avant de commencer une analyse statistique, il faut d'abord vous familiariser son fonctionnement.
+Cela ne veut pas dire que vous devez connaître les outils mathématiques qui la sous-tendent, mais vous devriez au moins comprendre les principes utilisés lors de cette analyse.
+Avant de faire un exercice de laboratoire, lisez donc la section correspondante dans les notes de cours.
+Sans cette lecture préalable, il est très probable que les résultats produits par le logiciel, même si l'analyse a été effectuée correctement, seront indéchiffrables.
+* Les laboratoires sont conçus pour compléter les cours théoriques et vice versa.
+À cause des contraintes d'horaires, il se pourrait que le cours et le laboratoire ne soient pas parfaitement synchronisés.
+N'hésitez donc pas à poser des questions sur le labo en classe ou des questions théoriques au laboratoire.
+* Travaillez sur les exercices de laboratoire à votre propre rythme.
+Certains exercices prennent beaucoup moins de temps que d'autres et il n'est pas nécessaire de compléter un exercice par séance de laboratoire.
+En fait deux séances de laboratoire sont prévues pour certains des exercices.
+Même si vous n'êtes pas notés sur les exercices de laboratoire, soyez conscient que ces exercices
+sont essentiels.
+Si vous ne les faites pas, il est très peu probable que vous serez capable de compléter les devoirs et le projet de session.
+Prenez donc ces exercices de laboratoire au sérieux !
+* Les 2 premier laboratoires sont conçu pour vous permettre d'acquérir ou de réviser le minimum de connaissances requises pour vous permettre de réaliser les exercices de laboratoires avec R.
+Il y a presque toujours de multiples façons de faire les choses avec R et vous ne trouverez ici que des méthodes simples.
+Ceux et celles d'entre vous qui y sont enclins pourront trouver en ligne des instructions plus détaillées et complexes.
+En particulier, je vous conseille :
+
+  * R pour les débutants
+http://cran.r-project.org/doc/contrib/Paradis-rdebuts_fr.pdf
+  * An introduction to R
+http://cran.r-project.org/doc/manuals/R-intro.html
+  * Si vous préférez des manuels, le site web de CRAN en garde une liste commentée à :
+http://www.r-project.org/doc/bib/R-books.html
+  * Une liste impressionnante de très bon livre sur R
+https://www.bigbookofr.com/
+  * Finalement, comme aide-mémoire à garder sous la main, je vous recommande R reference card par Tom Short
+http://cran.r-project.org/doc/contrib/Short-refcard.pdf
+
+## Qu'est-ce que R et pourquoi l'utiliser dans ce cours? {-}
+
+R est un logiciel libre et multi-plateforme formant un système statistique et graphique.
+R est également un langage de  programmation spécialisé pour les statistiques.
+
+R a deux très grands avantages pour ce cours, et un inconvénient embêtant initialement mais qui vous forcera à acquérir des excellentes habitudes de travail.
+Le premier avantage est que vous pouvez tous l'installer sur votre (ou vos) ordinateurs personnel gratuitement.
+C'est important parce que c'est à l'usage que vous apprendrez et maîtriserez réellement les biostatistiques et cela implique que vous devez avoir un accès facile et illimité à un logiciel statistique.
+Le deuxième avantage est que R peut tout faire en statistiques.
+R est conçu pour être extensible et est devenu l'outil de prédilection des statisticiens mondialement.
+La question n'est plus : " Est-ce que R peut faire ceci? ", mais devient " Comment faire ceci avec R ".
+Et la recherche internet est votre ami.
+Aucun autre logiciel n'offre ces deux avantages.
+
+L'inconvénient embêtant initialement est que l'on doit opérer R en tapant des instructions (ou en copiant des sections de code) plutôt qu'en utilisant des menus et en cliquant sur différentes options.
+Si on ne sait pas quelle commande taper, rien ne se passe.
+Ce n'est donc pas facile d'utilisation à priori.
+Cependant, il est possible d'apprendre rapidement à faire certaines des opérations de base (ouvrir un fichier de données, faire un graphique pour examiner ces données, effectuer un test statistique simple).
+Et une fois que l'on comprend le principe de la chose, on peut assez facilement trouver sur le web des exemples d'analyses ou de graphiques plus complexes et adapter le code à nos propres besoins.
+C'est ce que vous ferez dans le premier laboratoire pour vous familiariser avec R.
+
+Pourquoi cet inconvénient est-il d'une certaine façon un avantage? Parce que vous allez sauver du temps en fin de compte.
+Garanti.
+Croyez-moi, on ne fait jamais une analyse une seule fois.
+En cours de route, on découvre des erreurs d'entrée de données, ou que l'on doit faire l'analyse séparément pour des sous-groupes, ou on obtient des données supplémentaires, ou on fait une erreur.
+On doit alors recommencer l'analyse.
+Avec une interface graphique et des menus, cela implique recommencer à cliquer ici, entre des paramètres dans des boîtes et sélectionner des boutons.
+Chaque fois avec possibilité d'erreur.
+Avec une série de commandes écrites, il suffit de corriger ce qui doit l'être puis de copier-coller l'ensemble pour répéter instantanément.
+Et vous avez la possibilité de parfaitement documenter ce que vous avez fait.
+C'est comme cela que les professionnels travaillent et offrent une assurance de qualité de leurs résultats.
+
+## Installation des logiciels nécessaires {-}
+### R{-}
+Pour installer R sur un nouvel ordinateur, allez au site http://cran.r-project.org/.
+Vous y trouverez des versions compilées (binaries) ou non (sources) pour votre système d'exploitation de prédilection (Windows, MacOS, Linux).
+
+Note : R a déjà été installé sur les ordinateurs du laboratoire (la version pourrait être un peu plus ancienne, mais cela devrait être sans conséquences).
+
+### Text editor or IDE
+
+Tinn-r 
+Atom sublime, emacs, vim
+
+#### Rstudio {-}
+RStudio est un environnement de développement intégré (IDE) créé spécifiquement pour travailler avec R. Sa popularité connaît une progression foudroyante depuis 2014.
+Il permet de consulter dans une interface conviviale ses fichiers de script, la ligne de commande R, les rubriques d’aide,
+les graphiques, etc.
+
+RStudio est disponible à l’identique pour les plateformes Windows, OS X et Linux.
+Pour une utilisation locale sur son poste de travail, on installera la version libre (Open Source) de RStudio Desktop depuis le site
+https://www.rstudio.com/products/rstudio/download/
+
+#### Visual Studio Code {-}
+
+#### Tinn-r {-}
+
+### Paquets pour R {-}
+* Rmarkdown
+* tinytex
+
+Ces 2 paquets devrait être installé automatiquement avec RStudio, mais pas toujours. Je vous recommande donc de les installer manuellement. Pour ce faire, simplement copier-coller le texte suivant dans le terminal R.
+
+```{r, ind-install, eval = FALSE}
+install.packages(c("rmarkdown", "tinytex"))
+```
+
+
+### pandoc {-}
+
+### laTex {-}
+
+* tinytex
+ or others
+
+
+## Instructions générales pour les laboratoires {-}
+
+- Apporter une clé USB ou son équivalent à chaque séance de laboratoire pour sauvegarder votre travail.
+- Lire l’exercice de laboratoire AVANT la séance, lire le code R correspondant et préparer vos questions sur le code.
+- Durant les pré-labs, écouter les instructions et posez vos questions au moment approprié.
+- Faites les exercices du manuel de laboratoire à votre rythme, en équipe, puis je vous recommande de commencer (compléter?) le devoir.
+Profitez de la présence du démonstrateur et du prof...
+- Pendant vos analyses, copiez-collez des fragments de sorties de R dans un document (par exemple dans votre traitement de texte favori) et annotez abondamment.
+- Ne tapez pas directement vos commandes dans R mais plutôt dans un script.
+Vous pourrez ainsi refaire le labo instantanément, récupérer des fragments de code, ou plus facilement identifier les erreurs dans vos analyses.
+- Créez votre propre librairie de fragments de codes (snippets).
+Annotez-là abondamment.
+Vous vous en féliciterez plus tard.
+
+## Notes sur le manuel {-}
+
+Vous trouverez dans le manuel des explications sur la théorie, du code R, des explications sur R et des exercises.
+
+Le manuel essaie aussi de mettre en évidence le texte de différentes manières.
+
+
+```{block2, type = "rmdcode"}
+Avec des sections à vous de jouer, ui indique un exercise à faire, idéalement sans regarder la solution qui se trouve plus bas.
+```
+
+```{block2, type = "rmdcaution"}
+des avertissements
+```
+
+```{block2, type = "rmdwarning"}
+des avertissements
+```
+
+```{block2, type = "rmdimportant"}
+des points importants
+```
+
+```{block2, type = "rmdnote"}
+des notes
+```
+
+```{block2, type = "rmdtip"}
+et des conseils
+```
+### Resources {-}
+
+Ce document est généré par l'excellente extension [bookdown](https://bookdown.org/) de [Yihui Xie](https://yihui.name/). Il est basé sur le précédent manuel de laboratoire *BIO4558 manuel de laboratoire* par Antoine Morin. L'introduction à R est largement reprise de l'excellent manuel de **Julien Barnier** intitulé [*Introduction à R et au tidyverse*](https://juba.github.io/tidyverse/)
+
+
+### Licence {-}
+
+Ce document est mis à disposition selon les termes de la [Licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International](http://creativecommons.org/licenses/by-nc-sa/4.0/).
+
+![Licence Creative Commons](images/icons/license_cc.png)

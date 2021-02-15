@@ -1,0 +1,30 @@
+#list files in order for book
+book_filename: BIO8940_book
+repo: https://github.com/BIO8940-uOttawa/class_book
+output_dir: docs
+delete_merged_file: true
+#language:
+#  label:
+#    fig: "FIGURE "
+#    tab: "TABLE "
+#  ui:
+#    edit: "Edit"
+#    chapter_name: "Chapter "
+# rmd_files: ["index.Rmd",
+#   "01-open_science.Rmd",
+#   "0X-intro_glm.Rmd"
+  # "01-introR_1.Rmd",
+  # "01-introR_2.Rmd",
+  # "01-introR_3.Rmd",
+  # "01-introR_4.Rmd",
+  # "02-Gpower.Rmd",
+  # "03-reg_lin.Rmd",
+  # "04-t_test.Rmd",
+  # "05-anova.Rmd",
+  # "06-anova_mult.Rmd",
+  # "07-reg_mult.Rmd",
+  # "08-ancova_glm.Rmd",
+  # "09-model_freq.Rmd",
+  # "10-notebook.Rmd"
+ # ]
+#clean: [packages.bib, bookdown.bbl]
