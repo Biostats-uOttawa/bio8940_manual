@@ -125,8 +125,8 @@ This reveals substantial variation among the sample variances on the transformed
 We could calculate λ(mean) for each genotype × treatment combination and provide a statistical summary of each group’s λ.
 
 ```{r}
-grpMeans <- with(dat_tf, tapply(total.fruits, list(gna), mean))
-summary(grpMeans)
+grp_means <- with(dat_tf, tapply(total.fruits, list(gna), mean))
+summary(grp_means)
 ```
 
 A core property of the Poisson distribution is that the variance is equal to the mean. A simple diagnostic is a plot of the group variances against the group means:
@@ -139,7 +139,7 @@ A core property of the Poisson distribution is that the variance is equal to the
 We’ve already calculated the group (genotype × treatment) means, we calculate the variances in the same way.
 
 ```{r}
-grpVars <- with(
+grp_vars <- with(
   dat_tf,
   tapply(
     total.fruits,
@@ -151,48 +151,54 @@ grpVars <- with(
 We can get approximate estimates of the quasi-Poisson (linear) and negative binomial (linear/quadratic) pattern using lm.
 
 ```{r}
-lm1 <- lm(grpVars ~ grpMeans - 1) ## `quasi-Poisson' fit
-phi.fit <- coef(lm1)
-lm2 <- lm((grpVars - grpMeans) ~ I(grpMeans^2) - 1)
-k.fit <- 1 / coef(lm2)
+lm1 <- lm(grp_vars ~ grp_means - 1) ## `quasi-Poisson' fit
+phi_fit <- coef(lm1)
+lm2 <- lm((grp_vars - grp_means) ~ I(grp_means^2) - 1)
+k_fit <- 1 / coef(lm2)
 ```
 
 Now we can plot them.
 
 ```{r}
-plot(grpVars ~ grpMeans, xlab = "group means", ylab = "group variances")
+plot(grp_vars ~ grp_means, xlab = "group means", ylab = "group variances")
 abline(c(0, 1), lty = 2)
 text(105, 500, "Poisson")
-curve(phi.fit * x, col = 2, add = TRUE)
+curve(phi_fit * x, col = 2, add = TRUE)
 ## bquote() is used to substitute numeric values
 ## in equations with symbols
 text(110, 3900,
-  bquote(paste("QP: ", sigma^2 == .(round(phi.fit, 1)) * mu)),
+  bquote(paste("QP: ", sigma^2 == .(round(phi_fit, 1)) * mu)),
   col = 2
 )
-curve(x * (1 + x / k.fit), col = 4, add = TRUE)
-text(104, 7200, paste("NB: k=", round(k.fit, 1), sep = ""), col = 4)
-Lfit <- loess(grpVars ~ grpMeans)
+curve(x * (1 + x / k_fit), col = 4, add = TRUE)
+text(104, 7200, paste("NB: k=", round(k_fit, 1), sep = ""), col = 4)
+l_fit <- loess(grp_vars ~ grp_means)
 mvec <- 0:120
-lines(mvec, predict(Lfit, mvec), col = 5)
+lines(mvec, predict(l_fit, mvec), col = 5)
 ```
 
 Same with ggplot
 ```{r}
 ggplot(
-  data.frame(grpMeans, grpVars),
-  aes(x = grpMeans, y = grpVars)
-) +
+  data.frame(grp_means, grp_vars),
+  aes(x = grp_means, y = grp_vars)) +
   geom_point() +
   geom_smooth(aes(colour = "Loess", fill = "Loess")) +
-  geom_smooth(method = "lm", formula = y ~ x - 1, aes(colour = "Q_Pois", fill = "Q_Pois")) +
+  geom_smooth(
+    method = "lm", formula = y ~ x - 1,
+    aes(colour = "Q_Pois", fill = "Q_Pois")) +
   stat_function(
-    fun = function(x) x * (1 + x / k.fit),
+    fun = function(x) x * (1 + x / k_fit),
     aes(colour = "Neg_bin", fill = "Neg_bin")
   ) +
-  geom_abline(aes(intercept = 0, slope = 1, colour = "Poisson", fill = "Poisson")) +
-  scale_colour_manual(name = "legend", values = c("blue", "purple", "black", "red")) +
-  scale_fill_manual(name = "legend", values = c("blue", "purple", "black", "red")) +
+  geom_abline(
+    aes(intercept = 0, slope = 1, colour = "Poisson", fill = "Poisson")) +
+  scale_colour_manual(
+    name = "legend",
+    values = c("blue", "purple", "black", "red")) +
+  scale_fill_manual(
+    name = "legend",
+    values = c("blue", "purple", "black", "red")) +
   guides(fill = FALSE)
 ```
 <!-- Todo need to edit the color legend -->
@@ -231,11 +237,11 @@ Another general starting approach is to fit GLMs to each group of data separatel
 This should result in reasonable variation among treatment effects. We first fit the models, and then examine the coefficients.
 
 ```{r}
-glm.lis <- lmList(
+glm_lis <- lmList(
   total.fruits ~ nutrient * amd | gen,
   data = dat_tf,
   family = "poisson")
-plot.lmList(glm.lis)
+plot.lmList(glm_lis)
 ```
 
 **Exercise**
@@ -402,8 +408,8 @@ As expected from the similarity of the variance estimates, the population- level
  Now we want to do inference on the fixed effects. We use the drop1 func- tion to assess both the AIC difference and the likelihood ratio test between models. (In glmm_funs.R we define a convenience function dfun to con- vert the AIC tables returned by drop1 (which we will create momentarily) into ∆AIC tables.) Although the likelihood ratio test (and the AIC) are asymptotic tests, comparing fits between full and reduced models is still more accurate than the Wald (curvature-based) tests shown in the summary tables for glmer fits.
 
  ```{r}
-(dd_AIC <- dfun(drop1(mp4)))
-(dd_LRT <- drop1(mp4, test = "Chisq"))
+(dd_aic <- dfun(drop1(mp4)))
+(dd_lrt <- drop1(mp4, test = "Chisq"))
 ```
 
 On the basis of these comparisons, there appears to be a very strong effect of rack and weak effects of status and of the interaction term. Dropping the nutrient:amd interaction gives a (slightly) increased AIC (∆AIC = 1.4), so the full model has the best expected predictive capability (by a small margin). On the other hand, the p-value is slightly above 0.05 (p = 0.06). At this point we remove the non-significant interaction term so we can test the main effects. (We don’t worry about removing status because it measures an aspect of experimental design that we want to leave in the model whether it is significant or not.) Once we have fitted the reduced model, we can run the LRT via anova.
@@ -422,9 +428,9 @@ In addition, we can check the normality of the random effects and find they are 
 
 
 ```{r}
-reStack <- plyr::ldply(ranef(mp5))
+re_stack <- plyr::ldply(ranef(mp5))
 print(qqmath(~ `(Intercept)` | .id,
-  data = reStack, scales = list(relation = "free"),
+  data = re_stack, scales = list(relation = "free"),
   prepanel = prepanel.qqmathline,
   panel = function(x, ...) {
     panel.qqmathline(x, ...)
