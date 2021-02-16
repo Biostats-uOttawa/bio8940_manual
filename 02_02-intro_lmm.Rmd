@@ -37,7 +37,6 @@ Let's load the data file and make sure we understand what it contains
 ```{r load_data_aggr, message=FALSE, results='hide', warning=FALSE}
 
 unicorns <- read.csv("data/unicorns_aggression.csv")
-
 ```
 
 You can use `summary(unicorns)` to get an overview of the data and/or `head(unicorns)` to see the structure in the first few lines. This data frame has 6 variables:

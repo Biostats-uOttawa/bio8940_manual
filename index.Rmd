@@ -20,20 +20,20 @@ params:
   echo_sol: true
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)#, warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE) # , warning = FALSE, message = FALSE)
 # knitr::opts_chunk$set(out.extra = 'class="plot"')
 # knitr::opts_chunk$set(fig.pos = "!H", out.extra = "")
 library(bookdown)
 library(tidyverse)
 library(patchwork)
-#svglite
+# svglite
 ```
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
   .packages(), "bookdown", "knitr", "rmarkdown"
-), 'packages.bib')
+), "packages.bib")
 ```
 
 # Note {-}
