@@ -17,7 +17,8 @@ description: "Theory and practicals for BIO8940 course at the University of Otta
 github-repo: "BIO8940-uOttawa/class_book"
 cover-image: "images/missing.png"
 params:
-  echo_sol: true
+  echo_sol: TRUE
+  longrun: FALSE
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE) # , warning = FALSE, message = FALSE)

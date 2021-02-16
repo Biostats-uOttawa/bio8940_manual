@@ -8,7 +8,7 @@ Spatial variation in nutrient availability and herbivory is likely to cause pop-
 
 You need to downaload the "glmm_funs.R" script for some functions used in the Practical
 
-```{r, eval = TRUE}
+```{r, eval = TRUE, warning = FALSE, message = FALSE}
 library(lme4)
 library(plyr)
 library(reshape)
@@ -79,10 +79,16 @@ We have only two random effects (population, individual), and so Laplace or Gaus
 I usually like to start with a relatively simple overall plot of the data, disregarding the random factors, just to see what’s going on. For reasons to be discussed below, we choose to look at the data on the log (or log(1 + x) scale. Let’s plot either box-and-whisker plots (useful summaries) or dot plots (more detailed, good for seeing if we missed anything).
 
 ```{r}
-qplot(interaction(nutrient, amd), log(1 + total.fruits), data = dat_tf, geom = "boxplot") +
+qplot(
+    interaction(nutrient, amd),
+    log(1 + total.fruits),
+    data = dat_tf, geom = "boxplot") +
   facet_wrap(~reg, nrow = 1) +
   theme(axis.text.x = element_text(angle = 45))
-qplot(interaction(nutrient, amd), log(1 + total.fruits), data = dat_tf) +
+qplot(
+    interaction(nutrient, amd),
+    log(1 + total.fruits),
+    data = dat_tf) +
   facet_wrap(~reg, nrow = 1) +
   stat_sum() +
   theme(axis.text.x = element_text(angle = 45))
@@ -225,7 +231,10 @@ Another general starting approach is to fit GLMs to each group of data separatel
 This should result in reasonable variation among treatment effects. We first fit the models, and then examine the coefficients.
 
 ```{r}
-glm.lis <- lmList(total.fruits ~ nutrient * amd | gen, data = dat_tf, family = "poisson")
+glm.lis <- lmList(
+  total.fruits ~ nutrient * amd | gen,
+  data = dat_tf,
+  family = "poisson")
 plot.lmList(glm.lis)
 ```
 
@@ -327,9 +336,11 @@ anova(mp4, mp4v1)
 anova(mp4, mp4v2)
 ```
 
-For various forms of linear mixed models, the RLRsim package can do efficient simulation-based hypothesis testing of variance components — un- fortunately, that doesn’t include GLMMs. If we are sufficiently patient we can do hypothesis testing via brute-force parametric bootstrapping where we repeatedly simulate data from the reduced (null) model, fit both the re- duced and full models to the simulated data, and compute the distribution of the deviance (change in -2 log likelihood). The code below took about half an hour on a reasonably modern desktop computer.
+For various forms of linear mixed models, the RLRsim package can do efficient simulation-based hypothesis testing of variance components — un- fortunately, that doesn’t include GLMMs.
+If we are sufficiently patient we can do hypothesis testing via brute-force parametric bootstrapping where we repeatedly simulate data from the reduced (null) model, fit both the re- duced and full models to the simulated data, and compute the distribution of the deviance (change in -2 log likelihood).
+The code below took about half an hour on a reasonably modern desktop computer.
 
-```{r simdev_glmm, cache = TRUE, eval = TRUE, echo = TRUE}
+```{r simdev_glmm, eval = FALSE, echo = TRUE}
 simdev <- function() {
   newdat <- simulate(mp4v1)
   reduced <- lme4::refit(mp4v1, newdat)
@@ -341,6 +352,26 @@ set.seed(101)
 ## raply in plyr is a convenient wrapper for repeating the simulation many times
 nulldist <- raply(200, simdev(), .progress = "text")
 ## zero spurious (small) negative values
+nulldist[nulldist < 0 & abs(nulldist) < 1e-5] <- 0
+obsdev <- 2 * c(logLik(mp4) - logLik(mp4v1))
+```
+
+```{r simdev_glmm_saved, eval = params$longrun, echo = FALSE, include = FALSE, purl = FALSE}
+simdev <- function() {
+  newdat <- simulate(mp4v1)
+  reduced <- lme4::refit(mp4v1, newdat)
+  full <- lme4::refit(mp4, newdat)
+  2 * (c(logLik(full) - logLik(reduced)))
+}
+
+set.seed(101)
+nulldist <- raply(200, simdev(), .progress = "text")
+save(nulldist, file = "data/r_obj/glmm_simdev.rda")
+nulldist[nulldist < 0 & abs(nulldist) < 1e-5] <- 0
+obsdev <- 2 * c(logLik(mp4) - logLik(mp4v1))
+```
+```{r, echo = FALSE, include = FALSE, purl = FALSE, eval = !params$longrun}
+load("data/r_obj/glmm_simdev.rda")
 nulldist[nulldist < 0 & abs(nulldist) < 1e-5] <- 0
 obsdev <- 2 * c(logLik(mp4) - logLik(mp4v1))
 ```
@@ -387,7 +418,7 @@ Test now the reduced model.
 
 In the reduced model, we find that both nutrients and clipping have strong effects, whether measured by AIC or LRT. If we wanted to be still more careful about our interpretation, we would try to relax the asymptotic assumption. In classical linear models, we would do this by doing F tests with the appropriate denominator degrees of freedom. In “modern” mixed model approaches, we might try to use denominator-degree-of-freedom approximations such as the Kenward-Roger (despite the controversy over these approximations, they are actually available in `lmerTest`, but they do not apply to GLMMs. We can use a parametric bootstrap comparison between nested models to test fixed effects, as we did above for random effects, with the caveat that is computationally slow.
 
-  In addition, we can check the normality of the random effects and find they are reasonable (Fig. 10). We use ldply from the reshape package to collapse the list of random effect values into a data frame (we might have to do something different if there were more than one random effect within each level, e.g. a model including (nutrient|gen)). The fancy panel code in the figure adds a reference line to the Q-Q plot.
+In addition, we can check the normality of the random effects and find they are reasonable (Fig. 10). We use ldply from the reshape package to collapse the list of random effect values into a data frame (we might have to do something different if there were more than one random effect within each level, e.g. a model including (nutrient|gen)). The fancy panel code in the figure adds a reference line to the Q-Q plot.
 
 
 ```{r}
