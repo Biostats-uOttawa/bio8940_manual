@@ -4,7 +4,7 @@
 
 
 ```{r, eval = FALSE}
-m1 <- glm(fish ~ french_captain, data= dads_joke, family = poisson)
+m1 <- glm(fish ~ french_captain, data = dads_joke, family = poisson)
 ```
 
 

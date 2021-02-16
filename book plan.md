@@ -1,24 +1,25 @@
-# (PART) Open Science {-}
+# Book plan
 
-# Open Science
+## (PART) Open Science {-}
 
-# Intro to Rmarkdown
+## Open Science
 
-# Coding etiquette
+## Intro to Rmarkdown
 
-# Using github and R
+## Coding etiquette
 
-# (PART) Statistics {-}
+## Using github and R
 
-# Refresher on `glm`
+## (PART) Statistics {-}
 
-# Linear mixed models
+## Refresher on `glm`
 
-# Generalized linear mixed models
+## Linear mixed models
 
-# Introduction to Bayesian Analysis
+## Generalized linear mixed models
 
+## Introduction to Bayesian Analysis
 
-# (PART) Appendix {-}
+## (PART) Appendix {-}
 
-# Introduction to R
+## Introduction to R
