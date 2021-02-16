@@ -39,7 +39,8 @@ jobs:
 
       - name: Install packages
         run: |
-          R -e 'install.packages(c("bookdown", "svglite","renv"))'
+          R -e 'install.packages(c("bookdown", "svglite","tinytex", "renv"))'
+          R -e 'tinytex::install_tinytex()'
           R -e 'renv::restore()'
 
       - name: Build site
