@@ -46,9 +46,10 @@ jobs:
 
       - name: Build site
         run: |
-          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::gitbook', quiet = TRUE)"
-          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown::pdf_book', params = list(echo_sol = FALSE), quiet = TRUE)"
-          Rscript -e "bookdown::render_book('index.Rmd', 'bookdown:::epub_book', quiet = TRUE)"
+          bookdown::render_book('index.Rmd', 'bookdown::gitbook', quiet = TRUE)
+          bookdown::render_book('index.Rmd', 'bookdown::pdf_book', params = list(echo_sol = FALSE), quiet = TRUE)
+          bookdown::render_book('index.Rmd', 'bookdown:::epub_book', quiet = TRUE)
+        shell: Rscript {0}
 
       - name: Install npm
         uses: actions/setup-node@v1
