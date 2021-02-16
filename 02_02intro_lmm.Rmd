@@ -1,51 +1,80 @@
 # Refresher on `glm`
 
+## Practical
 
-```{r, eval = FALSE}
-m1 <- glm(fish ~ french_captain, data= dads_joke, family = poisson)
+
+### The superb wild unicorns of the Scottish Highlands
+
+Unicorns, a legendary animal and also symbol or Scotland, are frequently described as extremely wild woodland creature but also a symbol of purity and grace. Here is one of most accurate representation of the lengendary animal.
+
+```{r, out.width="50%", echo = FALSE, fig.align="center", fig.cap = "The superb unicorn of the Scottish Highlands"}
+knitr::include_graphics("images/unicorn.png")
 ```
 
 
-**Exercice 5**
+Despite their image of purity and grace, unicorns (*Unicornus legendaricus*) are raging fighter when it comes to compete for the best sweets you can find at the bottom of rainbows (unicorn favourite source of food).
 
-On a relevé les notes en maths, anglais et sport d'une classe de 6 élèves et on a stocké ces données dans trois vecteurs :
+We want to know:
 
-```{r}
-maths <- c(12, 16, 8, 18, 6, 10)
-anglais <- c(14, 9, 13, 15, 17, 11)
-sport <- c(18, 11, 14, 10, 8, 12)
+* If aggressiveness differs among individuals
+* If aggressive behaviour is plastic (change with the environment)
+* If aggressive behaviour depends on body condition of focal animal
+<!-- * If individuals differ in their plasticity -->
+
+With respect to plasticity, we will focus on rival size as an 'environment'. Common sense, and animal-contest theory, suggest a small animal would be wise not to escalate an aggressive contest against a larger, stronger rival. However, there are reports in the legendary beasty literature that they get more aggressive as rival size increases. Those reports are based on small sample sizes and uncontrolled field observations by Munro baggers enjoying their whisky after a long day in the hills.
+
+#### Experimental design -  what is the structure of the data we have?
+
+Here, we have measured aggression in a population of wild unicorns. We brought some (n=80) individual into the lab, tagged them so they were individually identifiable, then repeatedly observed their aggression when presented with  model 'intruders' (animal care committe approved). There were three models; one of average unicorn (calculated as the population mean body length), one that was build to be 1 standard deviation below the population mean, and one that was 1 standard deviation above.
+
+Data were collected on all individuals in two block of lab work. Within each block, each animal was tested 3 times, once against an 'intruder' of each size. The test order in which each male experienced the three instruder sizes was randomised in each block. The body size of all focal individuals was measured at the beginning of each block so we know that too (and have two separate measures per individual).
+
+#### Data
+
+Let's load the data file and make sure we understand what it contains
+```{r load_data_aggr, message=FALSE, results='hide', warning=FALSE}
+
+unicorns <- read.csv("data/unicorns_aggression.csv")
+
 ```
 
-Calculer la moyenne des élèves de la classe en anglais.
+You can use `summary(unicorns)` to get an overview of the data and/or `head(unicorns)` to see the structure in the first few lines. This data frame has 6 variables:
 
-Calculer la moyenne générale de chaque élève.
+* Individual __ID__
+* Experimental __Block__, denoted for now as a continuous variable with possible values of -0.5 (first block) or +0.5 (second block)
+* Individual __body_size__, as measured at the start of each block in kg
+* The repeat number for each behavioural test, __assay_rep__
+* Opponent size (__opp_size__), in standard deviations from the mean (i.e., -1,0,1)
+* __aggression__, our behavioural trait, measured 6 times in total per individual (2 blocks of 3 tests)
 
 
-```{r, eval = TRUE, echo = params$echo_sol, class.source = "exer"}
-mean(anglais)
-(maths + anglais + sport) / 3
+### Questions
+
+**1)** Load the libraries (`lme4`)
+
+**2)** Load the data `unicorns.csv` and look at the summary and data structure
+
+**3)** Fit a first mixed model with `lmer` that have only individual identity as a random effect and only a population mean.
+
+**4)** Look at the output of the model (*summary()*)
+
+**5)** This is a fairly rubbish model so now fit a better model by adding opponent size (*opp_size*) and block (*block*) as fixed effects. Look at the output of the model (*summary()*)
+
+**6)** Where are the **p-values** ? what I have done wrong. Load `lmerTest` and refit the model using the exact same code. Look at the summary again.
+
+**7)** Testing for random effects using `ranova()`. You can also do it by hand if you want.
+
+**8)** Estimate repeatability, either by hand or using the `rpt` package
+
+**9)** Now what about the effect on an individual body size on its aggression. Do a new model including body size also as a fixed effects. Look at the model output, estimate the probability associated witht eh random effects.
+
+**10)** Make a few diagnostic plots before you can get to excited by your results (*homoscedasticity*, *Gaussian distribution for residuals*, *linear relation*, *similar within group variance* )
+
+**11)** Compare repeatability among different models.
+
+
+### Happy mixed-modelling
+
+```{r, out.width = "20%", echo = FALSE, fig.align = "center", fig.cap = "The superb unicorn"}
+knitr::include_graphics("images/unicorn.png")
 ```
-
-**Exercice 5**
-
-On a relevé les notes en maths, anglais et sport d'une classe de 6 élèves et on a stocké ces données dans trois vecteurs :
-
-```{r}
-maths <- c(12, 16, 8, 18, 6, 10)
-anglais <- c(14, 9, 13, 15, 17, 11)
-sport <- c(18, 11, 14, 10, 8, 12)
-```
-
-Calculer la moyenne des élèves de la classe en anglais.
-
-Calculer la moyenne générale de chaque élève.
-
-<div class = "exer">
-
-Test pour montrer la solution
-```{r, eval = TRUE, echo = params$echo_sol}
-mean(anglais)
-(maths + anglais + sport) / 3
-plot(rnorm(100))
-```
-</div>

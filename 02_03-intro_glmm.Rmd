@@ -43,9 +43,10 @@ Calculer la moyenne générale de chaque élève.
 <div class = "exer">
 
 Test pour montrer la solution
-```{r, eval = TRUE, echo = params$echo_sol}
+```{r, out.width = "20%", echo = FALSE, fig.align = "center"}
 mean(anglais)
 (maths + anglais + sport) / 3
 plot(rnorm(100))
+ knitr::include_graphics("images/unicorn.png")
 ```
 </div>
