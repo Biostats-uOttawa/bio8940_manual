@@ -1,4 +1,6 @@
-# Refresher on `glm`
+# Introduction to linear mixed models
+
+
 
 ## Practical
 
