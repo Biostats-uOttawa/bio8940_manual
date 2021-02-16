@@ -37,17 +37,17 @@ In this data set, the response variable is the number of fruits (i.e. seedcapsul
 Here we need to select a realistic full model, based on the scientific ques-tions and the data actually at hand. We first load the data set and makesure that each variable is appropriately designated as numeric or factor (i.e.categorical variable).
 
 ```{r}
-dat.tf <- read.csv("data/Banta_TotalFruits.csv")
-str(dat.tf)
+dat_tf <- read.csv("data/Banta_TotalFruits.csv")
+str(dat_tf)
 ```
 
 The `X`, `gen`, `rack` and `nutrient` variables are coded as integers, but we want them to be factors.
- We use transform(), which operates within the data set, to avoid typing lots of commands like `dat.tf$rack <- factor(dat.tf$rack)`
+ We use transform(), which operates within the data set, to avoid typing lots of commands like `dat_tf$rack <- factor(dat_tf$rack)`
  At the same time, we reorder the `clipping` variable so that `"unclipped"` is the reference level (we could also have used `relevel(amd,"unclipped")`).
 
 ```{r}
-dat.tf <- mutate(
-  dat.tf,
+dat_tf <- mutate(
+  dat_tf,
   X=factor(X),
   gen=factor(gen),
   rack=factor(rack),
@@ -59,7 +59,7 @@ dat.tf <- mutate(
 Now we check replication for each genotype (columns) within each population (rows).
 
 ```{r}
-(reptab <- with(dat.tf, table(popu, gen)))
+(reptab <- with(dat_tf, table(popu, gen)))
 ```
 
 **Exercise**: this mode of inspection is OK for this data set but might fail for much larger data sets or for more levels of nesting. See if you can think of some other numerical or graphical methods for inspecting the structure of data sets. For example,
@@ -79,10 +79,10 @@ We have only two random effects (population, individual), and so Laplace or Gaus
 I usually like to start with a relatively simple overall plot of the data, disregarding the random factors, just to see what’s going on. For reasons to be discussed below, we choose to look at the data on the log (or log(1 + x) scale. Let’s plot either box-and-whisker plots (useful summaries) or dot plots (more detailed, good for seeing if we missed anything).
 
 ```{r}
-qplot(interaction(nutrient,amd), log(1 + total.fruits), data = dat.tf,geom = "boxplot") +
+qplot(interaction(nutrient,amd), log(1 + total.fruits), data = dat_tf,geom = "boxplot") +
   facet_wrap(~reg, nrow = 1) +
   theme(axis.text.x = element_text(angle = 45))
-qplot(interaction(nutrient, amd), log(1 + total.fruits), data = dat.tf) +
+qplot(interaction(nutrient, amd), log(1 + total.fruits), data = dat_tf) +
   facet_wrap(~reg, nrow = 1) +
   stat_sum() +
   theme(axis.text.x = element_text(angle = 45))
@@ -97,7 +97,7 @@ The data are non-normal in principle (i.e., count data, so our first guess would
 First we define a new factor that represents every combination of geno-type and treatment (nutrient × clipping) treatment, and sort it in order of increasing mean fruit set.
 
 ```{r}
-dat.tf <- dat.tf %>%
+dat_tf <- dat_tf %>%
   mutate(
     gna = interaction(gen,nutrient,amd),
     gna = reorder(gna, total.fruits, mean)
@@ -107,7 +107,7 @@ dat.tf <- dat.tf %>%
 Now time to plot it
 
 ```{r}
-ggplot(dat.tf, aes(x = gna,y = log(1 + total.fruits))) +
+ggplot(dat_tf, aes(x = gna,y = log(1 + total.fruits))) +
   geom_boxplot() +
   theme_bw() + theme(axis.text.x = element_text(angle = 90))
 ```
@@ -118,7 +118,7 @@ This reveals substantial variation among the sample variances on the transformed
 We could calculate λ(mean) for each genotype × treatment combination and provide a statistical summary of each group’s λ.
 
 ```{r}
-grpMeans <- with(dat.tf, tapply(total.fruits, list(gna), mean))
+grpMeans <- with(dat_tf, tapply(total.fruits, list(gna), mean))
 summary(grpMeans)
 ```
 
@@ -133,7 +133,7 @@ We’ve already calculated the group (genotype × treatment) means, we calculate
 
 ```{r}
 grpVars <- with(
-  dat.tf,
+  dat_tf,
     tapply(
       total.fruits,
       list(gna), var)
@@ -197,13 +197,13 @@ These fits are not rigorous statistical tests — they violate a variety of assu
 Just to avoid surprises
 
 ```{r}
-ggplot(dat.tf, aes(x=amd,y=log(total.fruits+1),colour=nutrient))+
+ggplot(dat_tf, aes(x=amd,y=log(total.fruits+1),colour=nutrient))+
 geom_point()+
 ## need to use as.numeric(amd) to get lines
 stat_summary(aes(x=as.numeric(amd)),fun=mean,geom="line")+
 theme_bw()+ggplot2::theme(panel.margin=unit(0,"lines"))+
 facet_wrap(~popu)
-ggplot(dat.tf,aes(x=amd,y=log(total.fruits+1),colour=gen))+
+ggplot(dat_tf,aes(x=amd,y=log(total.fruits+1),colour=gen))+
 geom_point()+
 stat_summary(aes(x=as.numeric(amd)),fun=mean,geom="line")+
 theme_bw()+
@@ -218,7 +218,7 @@ Another general starting approach is to fit GLMs to each group of data separatel
 This should result in reasonable variation among treatment effects. We first fit the models, and then examine the coefficients.
 
 ```{r}
-glm.lis <- lmList(total.fruits~nutrient*amd|gen,data=dat.tf, family="poisson")
+glm.lis <- lmList(total.fruits~nutrient*amd|gen,data=dat_tf, family="poisson")
 plot.lmList(glm.lis)
 ```
 
@@ -234,7 +234,7 @@ mp1 <- glmer(total.fruits ~ nutrient*amd +
 rack + status +
 (amd*nutrient|popu)+
 (amd*nutrient|gen),
-data=dat.tf, family="poisson")
+data=dat_tf, family="poisson")
 overdisp_fun(mp1)
 ```
 
@@ -261,7 +261,7 @@ mp3 <- glmer(total.fruits ~ nutrient*amd +
 rack + status +
 (amd+nutrient|popu)+
 (amd+nutrient|gen)+(1|X),
-data=dat.tf, family="poisson")
+data=dat_tf, family="poisson")
 
 attr(VarCorr(mp3)$gen,"correlation")
 attr(VarCorr(mp3)$popu,"correlation")
@@ -278,7 +278,7 @@ A convenient way to proceed if we are going to try fitting several different com
 mp_obs <- glmer(total.fruits ~ nutrient*amd +
 rack + status +
 (1|X),
-data=dat.tf, family="poisson")
+data=dat_tf, family="poisson")
 ```
 
 Now, for example, `update(mp_obs,.~.+(1|gen)+(amd|popu))` fits the model with intercept random effects at the genotype level and variation in clipping effects across populations.
