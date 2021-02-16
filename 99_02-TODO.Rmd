@@ -1,0 +1,7 @@
+# To do list {-}
+
+* clean code
+* add more info about allEffects and plotting prediction of models
+* convert all plots to ggplot
+* convert data handling to tidyverse
+* finish chapters
