@@ -25,8 +25,8 @@ jobs:
 
       - name: Install pandoc and Xquartz
         run: |
-#          brew install pandoc
           brew install --cask xquartz
+#          brew install pandoc
 
       - name: Cache Renv packages
         uses: actions/cache@v2
