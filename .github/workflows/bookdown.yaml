@@ -20,8 +20,8 @@ jobs:
 
       - name: Setup Pandoc
         uses: r-lib/actions/setup-pandoc@v1
-        # with:
-        #  pandoc-version: '2.11.2'
+        #  with:
+        #    pandoc-version: '2.11.2'
 
       - name: Install pandoc and Xquartz
         run: |
