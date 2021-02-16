@@ -1,3 +1,0 @@
-# R {-}
-
-Need to write something about R
