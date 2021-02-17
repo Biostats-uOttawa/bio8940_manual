@@ -1,55 +1,131 @@
 # Introduction to Rmarkdown
 
-## Practical 
+## Practical
+
+We will create a new Rmarkdown document and edit it using basic `R` and `Rmarkdown` functions.
 
 ### Context
 
-Let's apply what we have learnt in the course on **Writing dynamic and reproducible documents - An introduction to R Markdown**
- <!-- add link to slides(https:// mysite /intro_rmarkdown/#1).  -->
-
-We will use the awesome `palmerpenguins` dataset `r emo::ji("penguin")`, an alternative to Fisher's `iris` dataset, to explore and visualize data.
+We will use the awesome `palmerpenguins` dataset `r emo::ji("penguin")` to explore and visualize data.
 
 These data have been collected and shared by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and [Palmer Station, Antarctica LTER](https://pal.lternet.edu/).
 
 The package was built by Drs Allison Horst and Alison Hill, check out the [official website](https://allisonhorst.github.io/palmerpenguins/).
 
-The package `palmerpenguins` has two datasets.
+The package `palmerpenguins` has two datasets: 
+
+- `penguins_raw` has the raw data of penguins observations (see `?penguins_raw` for more info)
+- `penguins` is a simplified version of the raw data (see `?penguins` for more info)
+
+For this exercise, we're gonna use the `penguins` dataset.
 
 ```{r showdata-md}
 library(palmerpenguins)
-```
-
-The dataset `penguins` is a simplified version of the raw data; see `?penguins` for more info:
-
-```{r example-penguins-md}
 head(penguins)
 ```
-
-The other dataset `penguins_raw` has the raw data; see `?penguins_raw` for more info:
-
-```{r example-penguins-raw-md}
-head(penguins_raw)
-```
-
-
-For this exercise, we're gonna use the `penguins` dataset.
 
 
 ### Questions
 
 **1)** Install the package `palmerpenguins`.
 
-**2)** Create a new R Markdown document, name it and save it. Delete everything after line 12. Add a new section title, simple text and text in bold font. Compile ("Knit").
+```{r, eval = FALSE, class.source = "exer"}
+install.packages("palmerpenguins")
+```
 
-**3)** Add a chunk in which you load the `palmerpenguins`. The corresponding line of code should be hidden in the output. Load also the `tidyverse` suite of packages. Modify the defaults to suppress all messages.
+**2)** 
+
+- Create a new R Markdown document, name it and save it.
+- Delete everything after line 12.
+- Add a new section title, simple text and text in bold font.
+- Compile ("Knit").
+
+**3)**
+
+- Add a chunk in which you load the `palmerpenguins`. The corresponding line of code should be hidden in the output.
+- Load also the `tidyverse` suite of packages. Modify the defaults to suppress all messages.
+
+<div class= "exer">
+````markdown
+`r ''````{r, echo = FALSE, message = FALSE}
+library(palmerpenguins)
+library(tidyverse)
+```
+````
+</div>
 
 **4)** Add another chunk in which you build a table with the 10 first rows of the dataset.
 
+<div class= "exer">
+
+````markdown
+`r ''````{r}
+penguins %>%
+  slice(1:10) %>%
+  knitr::kable()
+```
+````
+</div>
+
 **5)** In a new section, display how many individuals, penguins species and islands we have in the dataset. This info should appear directly in the text, you need to use inline code `r emo::ji("smile")`. Calculate the mean of the (numeric) traits measured on the penguins.
+
+<div class= "exer">
+
+````markdown
+## Numerical exploration
+
+There are `r '\x60r nrow(penguins)\x60'` penguins in the dataset, and `r '\x60r length(unique(penguins$species))\x60'` different species.
+The data were collected in `r '\x60r length(unique(penguins$island))\x60'` islands of the Palmer archipelago in Antarctica.
+
+The mean of all traits that were measured on the penguins are:
+`r ''````{r echo = FALSE}
+penguins %>%
+  group_by(species) %>%
+  summarize(across(where(is.numeric), mean, na.rm = TRUE))
+```
+````
+</div>
 
 **6)** In another section, entitled 'Graphical exploration', build a figure with 3 superimposed histograms, each one corresponding to the body mass of a species.
 
+<div class= "exer">
+
+````markdown
+## Graphical exploration
+
+A histogram of body mass per species:
+`r ''````{r, fig.cap="Distribution of body mass by species of penguins"}
+penguins %>%
+  ggplot() +
+  aes(x = body_mass_g) +
+  geom_histogram(aes(fill = species),
+                 alpha = 0.5,
+                 position = "identity") +
+  scale_fill_manual(values = c("darkorange","purple","cyan4")) +
+  theme_minimal() +
+  labs(x = "Body mass (g)",
+       y = "Frequency",
+       title = "Penguin body mass")
+```
+````
+</div>
+
 **7)** In another section, entitled 'Linear regression', fit a model of bill length as a function of body size (flipper length), body mass and sex. Obtain the output and graphically evaluate the assumptions of the model.
+
+<div class= "exer">
+
+````markdown
+## Linear regression
+
+And here is a nice model with graphical output
+`r ''````{r, fig.cap = "Checking assumptions of the model"}
+m1 <- lm(bill_length_mm ~  flipper_length_mm + body_mass_g + sex, data = penguins)
+summary(m1)
+par(mfrow= c(2,2))
+plot(m1)
+```
+````
+</div>
 
 **8)** Add references manually or using `citr` in `RStudio`.
 
@@ -62,8 +138,9 @@ For this exercise, we're gonna use the `penguins` dataset.
 
 **10)** Build your report in html, pdf and docx format. `r emo::ji("tada")`
 
+### Examples
 
-
-### Happy coding
-
-![](images/lter_penguins.png)
+You can see an example of the [Rmarkdown](data/examples/rmarkdown_practical.Rmd) and [pdf](data/examples/rmarkdown_practical.pdf) output [here](data/examples)
+```{r, out.width="20%", echo = FALSE, fig.align="center", fig.cap = "Happy coding"}
+knitr::include_graphics("images/lter_penguins.png")
+```
