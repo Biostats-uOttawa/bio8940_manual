@@ -1,5 +1,3 @@
-# (PART) Statistics {-}
-
 # Refresher on `glm`
 
 
