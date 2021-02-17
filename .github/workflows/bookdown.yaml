@@ -60,6 +60,10 @@ jobs:
       - name: Install npm
         uses: actions/setup-node@v1
 
+      - name: Build site
+        run: |
+          cp data docs/data
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
