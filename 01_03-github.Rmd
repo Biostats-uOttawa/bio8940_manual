@@ -32,7 +32,6 @@ head(penguins_raw)
 
 For this exercise, we're gonna use the `penguins` dataset.
 
-
 ### Questions
 
 **1)** Create a github acocunt if not done yet.
@@ -61,10 +60,6 @@ For this exercise, we're gonna use the `penguins` dataset.
 
 You have successfully used all the essential tools of `git` `r emo::ji("tada")` . You are really to explore `r emo::ji("detective")` and discover its power `r emo::ji("flex")`
 
-
-### Happy git(hub)-ing
-
-```{r, out.width="20%", echo = FALSE, fig.align="center"}
+```{r, out.width="30%", echo = FALSE, fig.align="center", fig.cap = "Happy git(hub)-ing"}
 knitr::include_graphics("images/github_ninja.jpg")
 ```
-
