@@ -179,19 +179,32 @@ For instance, we can (and should have started with) an initial plot of the pheno
 The code below uses the excellent `r emo::ji("package")` `ggplot2` but the same figure can be done using base R code.
 
 ```{r plot_aggr, echo=TRUE, eval = FALSE}
-
 ggplot(unicorns, aes(x = opp_size, y = aggression)) +
-  geom_jitter(alpha = 0.5,
-              width = 0.05) +
+  geom_jitter(
+    alpha = 0.5,
+    width = 0.05
+  ) +
   scale_x_continuous(breaks = c(-1, 0, 1)) +
-  labs(x = "Opponent size (SD)",
-       y = "Aggression") +
+  labs(
+    x = "Opponent size (SD)",
+    y = "Aggression"
+  ) +
   theme_classic()
-
 ```
 </div>
 
-```{r r_plot_aggr, ref.label=c("plot_aggr"), echo = FALSE, eval = TRUE, warning = FALSE, fig.cap = "Unicorn aggressivity as a function of opponent size when fighting for sweets", fig.height=4, fig.width=5, fig.align='center'}
+```{r rplotaggr, eval = TRUE, warning = FALSE, fig.cap = "Unicorn aggressivity as a function of opponent size when fighting for sweets", fig.align='center'}
+ggplot(unicorns, aes(x = opp_size, y = aggression)) +
+  geom_jitter(
+    alpha = 0.5,
+    width = 0.05
+  ) +
+  scale_x_continuous(breaks = c(-1, 0, 1)) +
+  labs(
+    x = "Opponent size (SD)",
+    y = "Aggression"
+  ) +
+  theme_classic()
 ```
 
 As predicted, there is a general increase in aggression with opponent size (points are lightly jittered on the x-axis to show the spread of data a little better)
@@ -243,7 +256,7 @@ This is checked with:
     - I know this sounds pretty bad
 3. using quantile-quantile plot or histogram of residuals
 ```{r, fig.cap = "Checking residuals have Gaussian distribution"}
-par(mfrow = c(1, 2)) #multiple graphs in a window
+par(mfrow = c(1, 2)) # multiple graphs in a window
 qqnorm(residuals(m_2)) # a q-q plot
 qqline(residuals(m_2))
 hist(resid(m_2)) # are the residuals roughly Gaussian?
@@ -270,7 +283,8 @@ r1 <- r1[order(r1$condval), ] # sorting the BLUPs
 ggplot(r1, aes(y = grp, x = condval)) +
   geom_point() +
   geom_pointrange(
-    aes(xmin = condval - condsd * 1.96, xmax = condval + condsd * 1.96)) +
+    aes(xmin = condval - condsd * 1.96, xmax = condval + condsd * 1.96)
+  ) +
   geom_vline(aes(xintercept = 0, color = "red")) +
   theme_classic() +
   theme(legend.position = "none")
@@ -295,17 +309,21 @@ summary(m_2)
 
 ```{block2, type = "rmdcode"}
 **Try tweaking the fixed part of your model:**
+
 - What happens if you add more fixed effects? Try it!
 - Could focal body size also matter? If so, should you rescale before adding it to the model?
 - Should you add interactions (e.g. block:opp_size)?
 - Should you drop non-significant fixed effects?
+
 ```
 
 
 ```{block2, type = "rmdcode"}
 **Having changed the fixed part of your model, do the variance estimates change at all?**
+
 * Is among-individual variance always estimated as zero regardless of fixed effects?
 * Is among-individual variance significant with some fixed effets structures but not others?
+
 ```
 
 ### What is the repeatability?

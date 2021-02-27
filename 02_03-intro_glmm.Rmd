@@ -63,9 +63,11 @@ Now we check replication for each genotype (columns) within each population (row
 
 ```{block2, type = "rmdcode"}
 **Exercise**: this mode of inspection is OK for this data set but might fail for much larger data sets or for more levels of nesting. See if you can think of some other numerical or graphical methods for inspecting the structure of data sets. 
+
 1. plot(reptab) gives a mosaic plot of the two-way table; examine this, see if you can figure out how to interpret it, and decide whether you think it might be useful
 2. try the commands colSums(reptab>0) (and the equivalent for rowSums) and figure out what they are telling you.
 3. Using this recipe, how would you compute the range of number of genotypes per treatment combination?
+
 ```
 
 <div class = "exer">
@@ -161,7 +163,7 @@ A core property of the Poisson distribution is that the variance is equal to the
 - Poisson-distributed data will result in a linear pattern with slope = 1
 - as long as the variance is generally greater than the mean, we call the data overdispersed. Overdispersion comes in various forms:
     - a linear mean-variance relationship with Var = φµ (a line through the origin) with φ > 1 is called a quasi-Poisson pattern (this term describes the mean-variance relationship, not any particular proability distribution); we can implement it statistically via quasilikelihood (Venables and Ripley, 2002) or by using a particular parameterization of the negative binomial distribution (“NB1” inthe terminology of Hardin and Hilbe (2007))
-    - a semi-quadratic pattern, Var = µ(1 + αµ) or µ(1 + µ/k), is characteristic of overdispersed data that is driven by underlying heterogeneity among samples, either the negative binomial (gamma-Poisson) or the lognormal-Poisson (Elston et al., 2001)
+    - a semi-quadratic pattern, Var = µ(1 + αµ) or µ(1 + µ/k), is characteristic of overdispersed data that is driven by underlying heterogeneity among samples, either the negative binomial (gamma-Poisson) or the lognormal-Poisson [@elston2001]
 
 We’ve already calculated the group (genotype × treatment) means, we calculate the variances in the same way.
 
@@ -310,7 +312,7 @@ plot.lmList(glm_lis)
 Three genotypes (5, 6, 34) have extreme coefficients (Fig. 5). A mixed model assumes that the underlying random effects are normally distributed, although we shouldn’t take these outliers too seriously at this point — we are not actually plotting the random effects, or even estimates of random effects (which are not themselves guaranteed to be normally distributed), but rather separate estimates for each group.
 Create a plotting function for Q-Q plots of these coefficients to visualize the departure from normality.
 
-```{r, gfig.cap = "Q-Q plots of model coefficients for GLM fits on each genotype"}
+```{r, fig.cap = "Q-Q plots of model coefficients for GLM fits on each genotype"}
 qqmath.lmList(glm_lis)
 ```
 We see that these extreme coefficients fall far outside a normal error distribution. We shouldn’t take these outliers too seriously at this point — we are not actually plotting the random effects, or even estimates of random effects, but rather separate estimates for each group. 
@@ -333,7 +335,7 @@ overdisp_fun(mp1)
 
 We can ignore the model convergence for the moment. This shows that the data are (extremely) over-dispersed, given the model.
 
-Now we add the observation-level random effect to the model to account for overdispersion [@Elston2001].
+Now we add the observation-level random effect to the model to account for overdispersion [@elston2001].
 
 ```{r}
 mp2 <- update(mp1, . ~ . + (1 | X))
@@ -383,6 +385,7 @@ Now, for example, `update(mp_obs,.~.+(1|gen)+(amd|popu))` fits the model with in
 1. clipping variation at both genotype and population levels;
 2. nutrient variation at both genotype and populations; convince yourself that trying to fit variation in either clipping or nutrients leads to overfitting (perfect correlations).
 3. Fit the model with only intercept variation at the population and genotype levels, saving it as mp4; show that there is non-zero variance estimated
+
 ```
 
 <div class = "exer">
@@ -546,10 +549,11 @@ ggplot(data = r5, aes(sample = condval)) +
 
 - Re-do the analysis with region as a fixed effect.
 - Re-do the analysis with a one-way layout as suggested above
+
 ```
 
 ### Happy generalized mixed-modelling
 
-```{r, out.width = "20%", echo = FALSE, fig.align = "center", fig.cap = "A GLMM character"}
+```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "A GLMM character"}
 knitr::include_graphics("images/Thorn.png")
 ```
