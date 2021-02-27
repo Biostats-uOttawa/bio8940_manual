@@ -9,8 +9,8 @@ bookdown::render_book("index.Rmd", "bookdown::epub_book")
 
 
 # bookdown::preview_chapter("06-anova_mult.Rmd", output_format = 'bookdown::html_chapters', output_dir = "docs/preview")
-bookdown::preview_chapter("01-introR_4.Rmd", output_dir = "docs/preview")
-bookdown::preview_chapter("02-Gpower.Rmd", output_dir = "docs/preview")
+bookdown::preview_chapter("02_02-intro_lmm.Rmd", output_dir = "docs/preview")
+bookdown::preview_chapter("02_03-intro_glmm.Rmd", output_dir = "docs/preview")
 bookdown::preview_chapter("03-reg_lin.Rmd", output_dir = "docs/preview")
 bookdown::preview_chapter("04-t_test.Rmd", output_dir = "docs/preview")
 bookdown::preview_chapter("05-anova.Rmd", output_dir = "docs/preview")
