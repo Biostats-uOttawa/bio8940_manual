@@ -4,6 +4,31 @@
 
 ## Practical
 
+### Overview
+This practical is intended to get you started fitting some simple mixed models with so called *random intercepts*. The tutorial is derived from one that accompanied the paper [@houslay_avoiding_2017], "[Avoiding the misuse of BLUP in behavioral ecology](https://doi.org/10.1093/beheco/arx023)". Here, you will be working through  a simplified version in which I have taken more time to cover the basic mixed models and don't cover  multivariate models which were really the main point of that paper. So if you find this material interesting don't worry we will go through a more advanced version of the original paper on multivariate models in [chapter XX](#to_be_written). The original version will be worth a work through to help you break into multivariate mixed models anyway! Here we will:
+
+* Learn how to fit - and interpret the results of - a simple univariate mixed effect model
+* See how to add fixed and random effects to your model, and to test their significance in the normal frequentists sense
+
+<!-- * Use random regression or random slope models as extensions of the simple mixed model. We will do this in a hypothetical investigation of  behavioural plasticity, adopting a 'reaction norm perspective' and asking whether individuals differ in phenotypic plasticity (a phenomenon sometimes called IxE)
+ * Try and flag some common pitfalls with random regression models, and in particular show you why you need to be careful interpreting effect sizes and why you need to think a bit about if (and how) to scale and centre covariates.
+ * Finally, as a lead in why you really should learn about multivariate models after this, we will highlight how character state views of plasticity are really just approximations of multivariate 'character state' approaches. This is a bit mind blowing at first, but once you understand you will start to see just how far the rabbit hole goes...
+ -->
+
+We are going to use the `r emo::ji("package")` `lme4` [@R-lme4] which is widely used and great for simple mixed models. However, since, for philosophical reasons, `lme4` does not provide any p-values for either fixed or random effects, we are going to use the `r emo::ji("package")` `lmerTest` [@R-lmerTest], which add a bunch a nice goodies to `lme4`  For slightly more complex models, including multivariate ones, generalised models, and random effects of things like shared space, pedigree, phylogeny I tend to use different `r emo::ji("package")` like `MCMCglmm` [@MCMCglmm2010] (which is Bayesian, look at Jarrod Hadfield's excellent course notes [@R-MCMCglmm]) or ASReml-R [@R-asreml] (which is likelihood based/frequentist but sadly is not free).
+
+
+<!-- Further data sets and tutorials written by Tom can be found at [https://tomhouslay.com/tutorials/](https://tomhouslay.com/tutorials/). -->
+
+### R packages needed
+
+First we load required libraries
+```{r loadlibs, message=FALSE, results='hide', warning=FALSE}
+
+library(lmerTest)
+library(tidyverse)
+library(rptR)
+```
 
 ### The superb wild unicorns of the Scottish Highlands
 
@@ -23,23 +48,35 @@ We want to know:
 * If aggressive behaviour depends on body condition of focal animal
 <!-- * If individuals differ in their plasticity -->
 
-With respect to plasticity, we will focus on rival size as an 'environment'. Common sense, and animal-contest theory, suggest a small animal would be wise not to escalate an aggressive contest against a larger, stronger rival. However, there are reports in the legendary beasty literature that they get more aggressive as rival size increases. Those reports are based on small sample sizes and uncontrolled field observations by Munro baggers enjoying their whisky after a long day in the hills.
+With respect to plasticity, we will focus on rival size as an 'environment'. Common sense, and animal-contest theory, suggest a small animal would be wise not to escalate an aggressive contest against a larger, stronger rival. However, there are reports in the legendary beasty literature that they get more aggressive as rival size increases. Those reports are based on small sample sizes and uncontrolled field observations by foreigners Munro baggers enjoying their whisky after a long day in the hills.
 
-#### Experimental design -  what is the structure of the data we have?
+#### Experimental design 
 
 Here, we have measured aggression in a population of wild unicorns. We brought some (n=80) individual into the lab, tagged them so they were individually identifiable, then repeatedly observed their aggression when presented with  model 'intruders' (animal care committe approved). There were three models; one of average unicorn (calculated as the population mean body length), one that was build to be 1 standard deviation below the population mean, and one that was 1 standard deviation above.
 
-Data were collected on all individuals in two block of lab work. Within each block, each animal was tested 3 times, once against an 'intruder' of each size. The test order in which each male experienced the three instruder sizes was randomised in each block. The body size of all focal individuals was measured at the beginning of each block so we know that too (and have two separate measures per individual).
+Data were collected on all individuals in two block of lab work. Within each block, each animal was tested 3 times, once against an 'intruder' of each size. The test order in which each animal experienced the three instruder sizes was randomised in each block. The body size of all focal individuals was measured at the beginning of each block so we know that too (and have two separate measures per individual).
 
-#### Data
+#### looking at the data
 
-Let's load the data file and make sure we understand what it contains
+Let's load the data file `unicorns_aggression.csv` in a R object named `unicorns` and make sure we understand what it contains
+
+<div class= "exer">
+
 ```{r load_data_aggr, message=FALSE, results='hide', warning=FALSE}
 
 unicorns <- read.csv("data/unicorns_aggression.csv")
 ```
 
-You can use `summary(unicorns)` to get an overview of the data and/or `head(unicorns)` to see the structure in the first few lines. This data frame has 6 variables:
+You can use `summary(unicorns)` to get an overview of the data and/or `str(unicorns)` to see the structure in the first few lines. This data frame has 6 variables:
+
+```{r}
+str(unicorns)
+summary(unicorns)
+```
+
+</div>
+
+So the different columns in the data set are:
 
 * Individual __ID__
 * Experimental __Block__, denoted for now as a continuous variable with possible values of -0.5 (first block) or +0.5 (second block)
@@ -49,29 +86,318 @@ You can use `summary(unicorns)` to get an overview of the data and/or `head(unic
 * __aggression__, our behavioural trait, measured 6 times in total per individual (2 blocks of 3 tests)
 
 
-### Questions
+*maybe add something on how to look at data structure closely using tables*
 
-**1)** Load the libraries (`lme4`)
+### Do unicorns differ in aggressiveness? Your first mixed model
 
-**2)** Load the data `unicorns.csv` and look at the summary and data structure
+Fit a first mixed model with `lmer` that have only individual identity as a random effect and only a population mean.
 
-**3)** Fit a first mixed model with `lmer` that have only individual identity as a random effect and only a population mean.
+Why, so simple? Because we simply want to partition variance around the mean into a component that among-individual variance and one that is within-individual variance.
 
-**4)** Look at the output of the model (*summary()*)
+<div class= "exer">
 
-**5)** This is a fairly rubbish model so now fit a better model by adding opponent size (*opp_size*) and block (*block*) as fixed effects. Look at the output of the model (*summary()*)
+A sensible researcher would probably take the time to do some exploratory data plots here. So let's write a mixed model. This one is going to have no fixed effects except the mean, and just one random effect - individual identity.
 
-**6)** Where are the **p-values** ? what I have done wrong. Load `lmerTest` and refit the model using the exact same code. Look at the summary again.
+```{r mod1}
 
-**7)** Testing for random effects using `ranova()`. You can also do it by hand if you want.
+m_1 <- lmer(aggression ~ 1 +  (1 | ID), data = unicorns)
 
-**8)** Estimate repeatability, either by hand or using the `rpt` package
+```
 
-**9)** Now what about the effect on an individual body size on its aggression. Do a new model including body size also as a fixed effects. Look at the model output, estimate the probability associated witht eh random effects.
+There is a warning... something about "singularities". Ignore that for a moment. 
 
-**10)** Make a few diagnostic plots before you can get to excited by your results (*homoscedasticity*, *Gaussian distribution for residuals*, *linear relation*, *similar within group variance* )
+</div>
 
-**11)** Compare repeatability among different models.
+Now you need to get the model output. By that I just mean use `summary(model_name)`.
+
+<div class= "exer">
+
+```{r mod1_summary}
+
+summary(m_1)
+
+```
+</div>
+
+
+In the summary you will  find a table of fixed effects. 
+
+```
+Fixed effects:
+             Estimate Std. Error        df t value Pr(>|t|)    
+(Intercept)   9.00181    0.05272 479.00000   170.7   <2e-16 ***
+```
+
+The intercept (here the mean) is about 9 and is significantly >0 - fine, but not very interesting to us.
+
+You will also find a random effect table that contains estimates of the among individual (ID) and residual variances. 
+
+```
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ ID       (Intercept) 0.000    0.000   
+ Residual             1.334    1.155   
+Number of obs: 480, groups:  ID, 80
+```
+
+The among individual (ID) is estimated as zero. In fact this is what the cryptic warning was about: in most situations the idea of a random effect explaining less than zero variance is not sensible (strangely there are exception!).  So by default the variance estimates are constrained to lie in positive parameter space. Here in trying to find the maximum likelihood solution for among-individual variance, our model has run up against this constraint.
+
+#### Testing for random effects
+
+We can  test the statistical significance of the random effect using the `ranova()` command in `lmerTest`. This function is actually doing a *likelihood ratio test* (LRT) of the random effect. The premise of which is that twice the difference in log-likelihood of the full and reduced (i.e. with the random effect dropped) is itself distributed as $\chi^2$$ with DF equal to the number of parameters dropped (here 1). Actually, there is a good argument that this is too conservative, but we can discuss that later. So let's do the LRT for the random effect using `ranova()`
+
+<div class= "exer">
+
+```{r mod1_ranova}
+
+ranova(m_1)
+
+```
+</div>
+
+There is apparently no among-individual variance in aggressiveness.
+
+So this is a fairly rubbish and underwhelming model. Let's improve it.
+
+### Do unicorns differ in aggressiveness? A better mixed model
+
+The answer we got from our first model is **not** wrong, it estimated the parameters we asked for and that might be informative or not and that might be representative or not of the true biology. Anyway all models are **wrong** but as models go this one is fairly rubbish. In fact we have explained no variation at all as we have no fixed effects (except the mean) and our random effect variance is zero. We woud have seen just how pointless this model was if we'd plotted it
+
+```{r mod1_plot, fig.cap = "Fitted values vs residuals for a simple mixed model of unicorn aggression"}
+
+plot(m_1)
+
+```
+
+So we can probably do better at modelling the data, which may or may not change our view on whether there is any real variation among unicorns in aggressiveness.
+
+For instance, we can (and should have started with) an initial plot of the phenotypic data against opponent size indicates to have a look at our prediction.
+
+ 
+<div class="exer">
+
+The code below uses the excellent `r emo::ji("package")` `ggplot2` but the same figure can be done using base R code.
+
+```{r plot_aggr, echo=TRUE, eval = FALSE}
+
+ggplot(unicorns, aes(x = opp_size, y = aggression)) +
+  geom_jitter(alpha = 0.5,
+              width = 0.05) +
+  scale_x_continuous(breaks = c(-1, 0, 1)) +
+  labs(x = "Opponent size (SD)",
+       y = "Aggression") +
+  theme_classic()
+
+```
+</div>
+
+```{r r_plot_aggr, ref.label=c("plot_aggr"), echo = FALSE, eval = TRUE, warning = FALSE, fig.cap = "Unicorn aggressivity as a function of opponent size when fighting for sweets", fig.height=4, fig.width=5, fig.align='center'}
+```
+
+As predicted, there is a general increase in aggression with opponent size (points are lightly jittered on the x-axis to show the spread of data a little better)
+
+You can see the same thing from a quick look at the population means for aggression at opponent size. Here we do it with the `kable` function that makes nice tables in `rmarkdown` documents.
+
+```{r mean_aggr, echo=TRUE}
+
+unicorns %>%
+  group_by(opp_size) %>%
+  summarise(mean_aggr = mean(aggression)) %>%
+  knitr::kable(digits = 2)
+
+```
+
+So, there does appear to be plasticity of aggression with changing size of the model opponent. But other things may explain variation in aggressiveness too - what about block for instance? Block effects may not be the subject of any biologically interesting hypotheses, but accounting for any differences between blocks could remove noise.
+
+There may also be systematic change in behaviour as an individual experiences more repeat observations (i.e. exposure to the model). Do they get sensitised or habituated to the model intruder for example?
+
+So let's  run a mixed model with the same random effect of individual, but with a fixed effects of opponent size (our predictor of interest) and experimental block.
+
+<div class="exer">
+
+```{r mod2}
+
+m_2 <- lmer(aggression ~ opp_size  + block + (1 | ID), data = unicorns)
+
+```
+
+</div>
+
+#### Diagnostic plots
+
+Run a few diagnostic plots before we look at the answers. In diagnostic plots, we want to check the condition of applications of the linear mixed model which are the same 4 as the linear model plus 2 extra:
+
+1. Linearity of the relation between covariates and the response
+2. No error on measurement of covariates
+3. Residual have a Gaussian distribution
+4. Homscedasticty (variance of residuals is constant across covariates)
+5. Random effects have a Gaussian distribution
+6. Residual variance is constant across all levels of a random effect
+
+<div class = "exer">
+This is checked with:
+
+1. done with data exploration graph (i.e. just plot the data see if it is linear)
+    - see previous graph
+2. assumed to be correct if measurement error is lower than 10% of variance in the variable
+    - I know this sounds pretty bad
+3. using quantile-quantile plot or histogram of residuals
+```{r, fig.cap = "Checking residuals have Gaussian distribution"}
+par(mfrow = c(1, 2)) #multiple graphs in a window
+qqnorm(residuals(m_2)) # a q-q plot
+qqline(residuals(m_2))
+hist(resid(m_2)) # are the residuals roughly Gaussian?
+```
+
+4. using plot of residuals by fitted values
+```{r, fig.cap = "Residuals by fitted values for model m_2 to check homoscedasticity"}
+plot(m_2)
+```
+5. histogram of the predictions for the random effects (BLUPs)
+```{r, fig.cap = "Checking random effects are gaussian"}
+# extracting blups
+r1 <- as.data.frame(ranef(m_2, condVar = TRUE))
+
+par(mfrow = c(1, 2))
+hist(r1$condval)
+qqnorm(r1$condval)
+qqline(r1$condval)
+```
+
+6. plotting the sorted BLUPs with their errors
+```{r mod2_plots, eval=TRUE}
+r1 <- r1[order(r1$condval), ] # sorting the BLUPs
+ggplot(r1, aes(y = grp, x = condval)) +
+  geom_point() +
+  geom_pointrange(
+    aes(xmin = condval - condsd * 1.96, xmax = condval + condsd * 1.96)) +
+  geom_vline(aes(xintercept = 0, color = "red")) +
+  theme_classic() +
+  theme(legend.position = "none")
+```
+
+</div>
+
+#### Inferences
+
+**Now summarise this model. We will pause here for you to think about and discuss a few things:**
+* What can you take from the fixed effect table?
+* How do you interpret the intercept now that there are other effects in the model?
+* What would happen if we scaled our fixed covariates differently? Why?
+
+<div class = "exer">
+```{r}
+summary(m_2)
+```
+
+</div>
+
+
+```{block2, type = "rmdcode"}
+**Try tweaking the fixed part of your model:**
+- What happens if you add more fixed effects? Try it!
+- Could focal body size also matter? If so, should you rescale before adding it to the model?
+- Should you add interactions (e.g. block:opp_size)?
+- Should you drop non-significant fixed effects?
+```
+
+
+```{block2, type = "rmdcode"}
+**Having changed the fixed part of your model, do the variance estimates change at all?**
+* Is among-individual variance always estimated as zero regardless of fixed effects?
+* Is among-individual variance significant with some fixed effets structures but not others?
+```
+
+### What is the repeatability?
+
+As a reminder, repeatability is the proportion of variance explained by a random effect and it is estimate as the ratio of the variance associated to a random effect by the total variance, or the sum of the residual variance and the different variance compoentn associated with the random effects.
+In our first model among-individual variance was zero, so R was zero. If we have a different model of aggression and get a non-zero value of the random effect variance, we can obviously calculate a repeatability estimate (R). So we are all working from the same starting point, let's all stick with a common set of fixed effects from here on:
+
+```{r mod3}
+
+m_3 <- lmer(
+  aggression ~ opp_size + scale(body_size)
+              + scale(assay_rep, scale = FALSE) + block
+              + (1 | ID),
+  data = unicorns)
+summary(m_3)
+
+```
+
+So we'd probably calculate R using the individual and residual variance simply as:
+
+```{r}
+0.02538 / (0.02538 + 0.58048)
+```
+
+```{block2, type = "rmdcode"}
+Do you see where I took the numbers ?
+```
+
+We can use some more fancy coding to extract the estimates and plugged them in a formula to estimate the repeatbility
+
+```{r mod3_Rcalc}
+v_id <- VarCorr(m_3)$ID[1, 1]
+v_r <- attr(VarCorr(m_3), "sc")^2
+r_man <- v_id / (v_id + v_r)
+r_man
+```
+
+Which yields an estimate of approximately R=4%. Strictly speaking we should make clear this a **conditional repeatability** estimate.
+
+Conditional on what you might ask...  on the fixed effects in your model. So our best estimate of 4% refers to the proportion of variance in aggressiveness *not explained by fixed effects* that is explained by individual identity. This isn't much and still won't be significant, but illustrates the point that conditional repeatabilities often have a tendency to go up as people explain more of the residual variance by adding fixed effects. This is fine and proper, but can mislead the unwary reader.
+It also means that decisions about which fixed effects to include in your model need to be based on how you want to interpret R not just on, for instance, whether fixed effects are deemed significant.
+
+### A quick note on uncertainty
+
+Using `lmer` in the `r emo::ji("package")` `lme4` `r emo::ji("package")` there isn't a really simple way to put some measure of uncertainty (SE or CI) on derived parameters like repeatabilities. This is a bit annoying. Such things are more easily done with other mixed model `r emo::ji("package")` like `MCMCglmm` and `asreml` which are a bit more specialist. If you are using `lmer` for models you want to publish then you could look into the `r emo::ji("package")` `rptR` [@R-rptR]. This  acts as a 'wrapper' for `lmer` models and adds some nice functionality including options to boostrap confidence intervals. Regardless, of how you do it, if you want to put a repeatability in one of your papers as a key result - it really should be accompanied by a measure of uncertainty just like any other effect size estimate.
+
+Here I am estimating the repeatability and using bootstrap to estimate a confidence interval and a probability associated with the repeatability with the `rptR` `r emo::ji("package")`. For more information about the use of the package and the theory behind it suggest the excellent paper associated with the package [@rptR2017]
+
+```{r, echo = TRUE, results =  TRUE, warning = FALSE, message = FALSE}
+r_rpt <- rptGaussian(
+  aggression ~ opp_size + block + (1 | ID),
+  grname = "ID", data = unicorns)
+r_rpt
+```
+
+###  An easy way to mess up your mixed models
+We will try some more advanced mixed models in a moment to explore plasticity in aggressiveness a bit more. First let's quickly look for among-individual variance in focal body size. Why not? We have the data handy, everyone says morphological traits are very repeatable and - lets be honest - who wouldn't like to see a small P value after striking out with aggressiveness.
+
+Include a random effect of ID as before and maybe a fixed effect of block, just to see if the beasties were growing a bit between data collection periods.
+
+```{r mod_size_wrong}
+
+lmer_size <- lmer(body_size ~ block + (1 | ID),
+                data = unicorns)
+
+```
+Summarise and test the random effect.
+
+```{block2, type = "rmdcode"}
+**What might you conclude, and why would this be foolish?**
+```
+
+<div class = "exer">
+
+Hopefully you spotted the problem here. You have fed in a data set with 6 records per individual (with 2 sets of 3 identical values per unicorns), when you know size was only measured twice in reality. This means you'd expect to get a (potentially very) upwardly biased estimate of R and a (potentially very) downwardly biased P value when testing among-individual variance. 
+</div>
+
+```{block2, type = "rmdcode"}
+**How can we do it properly?**
+```
+<div class = "exer">
+We can prune the data to the two actual observations per unicorns by just selecting the first assay in each block.
+
+```{r mod_size_right}
+
+unicorns2 <- unicorns[unicorns$assay_rep == 1, ]
+lmer_size2 <- lmer(body_size ~   block +  (1 | ID),
+                data = unicorns2)
+
+```
+Summarise and test your random effect and you'll see the qualitative conclusions will actually be very similar using the pruned data set. Of course this won't generallty but be true, so just be careful. Mixed models are intended to help you model repeated measures data with non-independence, but they won't get you out of trouble if you mis-represent the true structure of observations on your dependent variable.
+</div>
 
 
 ### Happy mixed-modelling
