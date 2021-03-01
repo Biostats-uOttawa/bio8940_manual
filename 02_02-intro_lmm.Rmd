@@ -243,7 +243,8 @@ Run a few diagnostic plots before we look at the answers. In diagnostic plots, w
 1. Linearity of the relation between covariates and the response
 2. No error on measurement of covariates
 3. Residual have a Gaussian distribution
-4. Homscedasticty (variance of residuals is constant across covariates)
+4. Homoscedasticty (variance of residuals is constant across covariates)
+
 5. Random effects have a Gaussian distribution
 6. Residual variance is constant across all levels of a random effect
 
@@ -266,6 +267,7 @@ hist(resid(m_2)) # are the residuals roughly Gaussian?
 ```{r, fig.cap = "Residuals by fitted values for model m_2 to check homoscedasticity"}
 plot(m_2)
 ```
+
 5. histogram of the predictions for the random effects (BLUPs)
 ```{r, fig.cap = "Checking random effects are gaussian"}
 # extracting blups
@@ -334,7 +336,7 @@ In our first model among-individual variance was zero, so R was zero. If we have
 ```{r mod3}
 
 m_3 <- lmer(
-  aggression ~ opp_size + scale(body_size)
+  aggression ~ opp_size + scale(body_size, center = TRUE, scale = TRUE)
               + scale(assay_rep, scale = FALSE) + block
               + (1 | ID),
   data = unicorns)
@@ -392,6 +394,16 @@ lmer_size <- lmer(body_size ~ block + (1 | ID),
 ```
 Summarise and test the random effect.
 
+<div class= "exer">
+
+```{r}
+summary(lmer_size)
+ranova(lmer_size)
+```
+
+</div>
+
+
 ```{block2, type = "rmdcode"}
 **What might you conclude, and why would this be foolish?**
 ```
@@ -410,10 +422,13 @@ We can prune the data to the two actual observations per unicorns by just select
 ```{r mod_size_right}
 
 unicorns2 <- unicorns[unicorns$assay_rep == 1, ]
+
 lmer_size2 <- lmer(body_size ~   block +  (1 | ID),
                 data = unicorns2)
-
+summary(lmer_size2)
+ranova(lmer_size2)
 ```
+
 Summarise and test your random effect and you'll see the qualitative conclusions will actually be very similar using the pruned data set. Of course this won't generallty but be true, so just be careful. Mixed models are intended to help you model repeated measures data with non-independence, but they won't get you out of trouble if you mis-represent the true structure of observations on your dependent variable.
 </div>
 
