@@ -73,8 +73,10 @@ penguins %>%
 ````markdown
 ## Numerical exploration
 
-There are `r '\x60r nrow(penguins)\x60'` penguins in the dataset, and `r '\x60r length(unique(penguins$species))\x60'` different species.
-The data were collected in `r '\x60r length(unique(penguins$island))\x60'` islands of the Palmer archipelago in Antarctica.
+There are `r '\x60r nrow(penguins)\x60'` penguins in the dataset,
+and `r '\x60r length(unique(penguins$species))\x60'` different species.
+The data were collected in `r '\x60r length(unique(penguins$island))\x60'`
+islands of the Palmer archipelago in Antarctica.
 
 The mean of all traits that were measured on the penguins are:
 
