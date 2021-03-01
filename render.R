@@ -1,4 +1,12 @@
 #!/usr/bin/env Rscript
+
+
+knitr::write_bib(c(
+    .packages(), rownames(installed.packages())
+    # "bookdown", "knitr", "rmarkdown", "MCMCglmm", "gremlin"
+), "packages.bib")
+
+
 rm(list = ls())
 bookdown::render_book("index.Rmd", "bookdown::gitbook", params = list(echo_sol = TRUE))
 rm(list = ls())
