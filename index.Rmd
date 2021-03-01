@@ -21,7 +21,7 @@ params:
   longrun: FALSE
 ---
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE) # , warning = FALSE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE) # , warning = FALSE, message = FALSE)
 library(bookdown)
 library(tidyverse)
 library(patchwork)
