@@ -26,3 +26,6 @@ bookdown::preview_chapter("06-anova_mult.Rmd", output_dir = "docs/preview")
 bookdown::preview_chapter("07-reg_mult.Rmd", output_dir = "docs/preview")
 bookdown::preview_chapter("08-ancova_glm.Rmd", output_dir = "docs/preview")
 bookdown::preview_chapter("09-model_freq.Rmd", output_dir = "docs/preview")
+
+knitr::purl("02_02-intro_lmm.Rmd")
+knitr::purl("02_03-intro_glmm.Rmd")

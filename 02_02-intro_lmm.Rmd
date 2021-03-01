@@ -178,7 +178,7 @@ For instance, we can (and should have started with) an initial plot of the pheno
 
 The code below uses the excellent `r emo::ji("package")` `ggplot2` but the same figure can be done using base R code.
 
-```{r plot_aggr, echo=TRUE, eval = FALSE}
+```{r plot_aggr, echo=TRUE, eval = FALSE, purl = FALSE}
 ggplot(unicorns, aes(x = opp_size, y = aggression)) +
   geom_jitter(
     alpha = 0.5,
