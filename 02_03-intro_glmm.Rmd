@@ -94,7 +94,7 @@ range(reptab2)
 
 This reveals that we have only 2–4 populations per region and 2–3 genotypes per population. However, we also have 2–13 replicates per genotype for each treatment combination (four unique treatment combinations: 2 levels of nutrients by 2 levels of simulated herbivory). Thus, even though this was a reasonably large experiment (625 plants), there were a very small number of replicates with which to estimate variance components, and many more potential interactions than our data can support. Therefore, judicious selection of model terms, based on both biology and the data, is warranted. We note that we don’t really have enough levels per random effect, nor enough replication per unique treatment combination. Therefore, we decide to omit the fixed effect of “region”, although we recognize that populations in different regions are widely geographically separated.
 
-We have only two random effects (population, individual), and so Laplace or Gauss-Hermite Quadrature (GHQ) should suffice, rather than requiring more complex methods. However, as in all GLMMs where the scale param- eter is treated as fixed and deviations from the fixed scale parameter would be identifiable (i.e. Poisson and binomial (N > 1), but not binary, models) we may have to deal with overdispersion.
+However, as in all GLMMs where the scale parameter is treated as fixed and deviations from the fixed scale parameter would be identifiable (i.e. Poisson and binomial (N > 1), but not binary, models) we may have to deal with overdispersion.
 
 
 ### Look at overall patterns in data
@@ -102,7 +102,7 @@ We have only two random effects (population, individual), and so Laplace or Gaus
 
 I usually like to start with a relatively simple overall plot of the data, disregarding the random factors, just to see what’s going on. For reasons to be discussed below, we choose to look at the data on the log (or log(1 + x) scale. Let’s plot either box-and-whisker plots (useful summaries) or dot plots (more detailed, good for seeing if we missed anything).
 
-```{r, echo = FALSE, fig.cap = "Number of fruits (log + 1) as a function of treatments"}
+```{r, echo = TRUE, fig.cap = "Number of fruits (log + 1) as a function of treatments"}
 p1 <- qplot(
     interaction(nutrient, amd),
     log(1 + total.fruits),
