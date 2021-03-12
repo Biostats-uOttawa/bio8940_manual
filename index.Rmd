@@ -25,6 +25,10 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE) # , warning = FALSE, message = 
 library(bookdown)
 library(tidyverse)
 library(patchwork)
+library(lmerTest)
+library(MCMCglmm)
+library(brms)
+library(tidybayes)
 ```
 
 # Note {-}
