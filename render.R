@@ -1,6 +1,8 @@
 #!/usr/bin/env Rscript
 
-
+renv::hydrate()
+renv::refresh()
+renv::snapshot()
 knitr::write_bib(c(
     .packages(), rownames(installed.packages())
     # "bookdown", "knitr", "rmarkdown", "MCMCglmm", "gremlin"

@@ -4,19 +4,12 @@
 
 
 ```{r setup_shrin, include=FALSE}
-
 options(gganimate.dev_args = list(
   width = 600,
-  height = 450#,
-  # bg = 'transparent'   # this will just mess up traces unfortunately
+  height = 450
   )
 )
-
 library(tidyverse)
-#library(broom)
-#library(viridis)
-#library(gifski)
-
 ```
 
 The following is an example of **shrinkage**, sometimes called **partial-pooling**, as it occurs in **mixed effects models**.
@@ -66,7 +59,7 @@ create_data <- function(
   sd_int = .5,
   sd_slope = .25,
   cor = 0,
-  balanced = TRUE,
+  balanced = 1,
   seed = 888
   ) {
 
@@ -79,9 +72,10 @@ create_data <- function(
   varmat <- matrix(c(sd_int^2, cor, cor, sd_slope^2), 2, 2)
 
   u <- mvtnorm::rmvnorm(n_cluster, sigma = varmat)
-  colnames(u) = c('Intercept', 'x')
+  colnames(u) <- c('Intercept', 'x')
 
-  y <- (intercept + u[cluster, 'Intercept']) + (beta + u[cluster, 'x'])*x + rnorm(N, sd = sigma)
+  y <- (intercept + u[cluster, 'Intercept']) + (beta + u[cluster, 'x']) * x +
+    rnorm(N, sd = sigma)
 
   df <-data.frame(
     y,
@@ -92,7 +86,7 @@ create_data <- function(
   if (balanced < 0 | balanced > 1) {
     stop('Balanced should be a proportion to sample.')
   } else {
-    df <- sample_frac(df, balanced)
+    df <- slice_sample(df, prop = balanced)
   }
 
   df
@@ -101,10 +95,9 @@ create_data <- function(
 
 
 ```{r create_plot_data, echo=FALSE, eval=FALSE}
-create_plot_data <- function(model, data = df)
-  {
+create_plot_data <- function(model, data = df) {
   # bind re + lm by group results
-  plot_data_re_lm =
+  plot_data_re_lm <-
     bind_rows(
       coef(mod)$cluster %>%
         rownames_to_column(var = 'cluster') %>%
@@ -117,7 +110,7 @@ create_plot_data <- function(model, data = df)
     rename(Intercept = `(Intercept)`)
 
   # fixed effect estimates
-  fe_data =  fixef(mod) %>%
+  fe_data <- fixef(mod) %>%
     t() %>%
     data.frame() %>%
     rename(Intercept = X.Intercept.) %>%
@@ -135,10 +128,10 @@ create_plot_data <- function(model, data = df)
 We will use **lme4** to run the analysis.  We can see that the model recovers the parameters fairly well, even with the default of only 1000 observations.
 
 ```{r run_baseline_model, eval=TRUE}
-df = create_data()
+df <- create_data()
 
 library(lme4)
-mod = lmer(y ~ x + (x|cluster), df)
+mod <- lmer(y ~ x + (x|cluster), df)
 summary(mod, cor=F)
 ```
 
@@ -151,7 +144,7 @@ start with variance in intercept only then variance in both slope and intercept,
 Now it is time to visualize the results.  We will use **gganimate** to bring the shrinkage into focus.  We start with the estimates that would be obtained by a 'regression-by-cluster' approach or a linear regression for each cluster.  The movement shown will be of those cluster-specific estimates toward the mixed model estimates.  On the x axis is the estimate for the intercepts, on the y axis are the estimated slopes of the `x` covariate.
 
 ```{r vis_baseline_model, echo=FALSE, eval=F}
-plot_data = create_plot_data(model = mod)
+plot_data <- create_plot_data(model = mod)
 plot_fun(plot_data = plot_data,
          end_pause = 30,
          duration = 12,
@@ -160,157 +153,19 @@ plot_fun(plot_data = plot_data,
 anim_save('images/shrinkage/baseline.gif')
 
 plot_fun(plot_data = plot_data, animate = F)
-ggsave('images/shrinkage/baseline_static.svg')
+ggsave('images/shrinkage/baseline_static.png')
 ```
 
 ```{r baseline_gif, echo=F, eval=T, dev.args=list(bg = 'transparent'), cache=FALSE}
-knitr::include_graphics('images/shrinkage/baseline.gif')
+if (knitr::is_html_output(excludes = "epub")) {
+  knitr::include_graphics('images/shrinkage_1.gif')
+} else {
+  knitr::include_graphics("images/shrinkage_1_static.png")
+}
 ```
 
 
 We see more clearly what the mixed model does.  The general result  is that cluster-specific effects (lighter color) are shrunk back toward the population-average effects (the 'black hole'), as the imposed normal distribution for the random effects makes the extreme values less probable. Likewise, those more extreme cluster-specific effects, some of which are not displayed as they are so far from the population average, will generally have the most shrinkage imposed.  In terms of prediction, it is akin to introducing bias for the cluster specific effects while lowering variance for prediction of new data, and allows us to make predictions on new categories we have not previously seen - we just assume an 'average' cluster effect, i.e. a random effect of 0.
-
-<!--
-Now we'll look at what happens under different data circumstances.
-
-## More subject level variance
-
-What happens when we add more subject level variance relative to the residual variance?  The mixed model will show relatively less shrinkage, and what were previously less probable outcomes are now more probable, and thus opting for the clusters to speak for themselves.
-
-```{r add_subject_var, echo = F, eval = F}
-df = create_data(sd_int = 1, sd_slope = 1)
-mod = lmer(y ~ x + (x|cluster), df)
-plot_data = create_plot_data(model = mod)
-plot_fun(plot_data = plot_data,
-         end_pause = 60,
-         duration = 12,
-         nframes = 120)
-anim_save('shrinkage/add_subject_level_variance.gif')
-
-plot_fun(plot_data = plot_data, animate = F)
-ggsave('shrinkage/add_subject_level_variance_static.svg')
-```
-
-```{r subject_level_var_gif, echo=F, eval=F, dev.args=list(bg = 'transparent'), cache=FALSE}
-knitr::include_graphics('shrinkage/add_subject_level_variance.gif')
-```
-
-<aside><img src="shrinkage/add_subject_level_variance_static.svg" style="display:block; margin: 0 auto; width: 250%"></aside>
-
-## More slope variance
-
-If we add more slope variance relative to the intercept variance, this more  or less changes the orientation of the original plot.  The shrinkage will be more along the x axis.
-
-One point to keep in mind is that the slope variance is naturally on a very different scale than the intercept variance, usually many times smaller[^slopescale]. This can make the model more difficult to estimate.  As such, scaling the covariate (e.g. to mean 0 and standard deviation of 1) is typically recommended, and at least in the linear model case, scaling the target variable can help as well.
-
-```{r add_slope_var, echo=F, eval=F}
-df = create_data(sd_int = .25, sd_slope = 1)
-mod = lmer(y ~ x + (x|cluster), df)
-plot_data = create_plot_data(model = mod)
-plot_fun(plot_data = plot_data,
-         end_pause = 60,
-         duration = 12,
-         nframes = 120)
-anim_save('shrinkage/more_slope_var.gif')
-
-plot_fun(plot_data = plot_data, animate = F)
-ggsave('shrinkage/more_slope_var_static.svg')
-```
-
-
-```{r slope_level_var_gif, echo=F, eval=F, dev.args=list(bg = 'transparent'), cache=FALSE}
-knitr::include_graphics('shrinkage/more_slope_var.gif')
-```
-
-## Fewer observations per cluster
-
-If we have fewer observations within each cluster, the more likely extreme values will present in the by-cluster approach, and thus more shrinkage is applied when using a mixed model. In this setting, we have relatively less knowledge about the groups, so we would prefer to lean our cluster estimates toward the population average. In the most extreme case of having only one or two observations per cluster, we could only estimate the fixed effects as the cluster-specific effects[^singletons].
-
-```{r fewer_observations, echo=F, eval=F}
-df = create_data(obs_per_cluster = 3)
-mod = lmer(y ~ x + (x|cluster), df)
-plot_data = create_plot_data(model = mod)
-plot_fun(plot_data = plot_data,
-         end_pause = 60,
-         duration = 12,
-         nframes = 120)
-anim_save('shrinkage/fewer_obs.gif')
-
-plot_fun(plot_data = plot_data, animate = F)
-ggsave('shrinkage/fewer_obs_static.svg')
-```
-
-```{r fewer_observations_gif, echo=F, eval=F, dev.args=list(bg = 'transparent'), cache=FALSE}
-knitr::include_graphics('shrinkage/fewer_obs.gif')
-```
-
-<aside><img src="shrinkage/fewer_obs_static.svg" style="display:block; margin: 0 auto; width: 250%"></aside>
-
-
-## More observations per cluster
-
-The opposite case is seen with more observations.  We see that the estimates do not so easily fly to extreme values to begin with.  With enough observations per cluster, you likely will see little shrinkage except with the more extreme cases.
-
-```{r more_observations, echo=F, eval=F}
-df = create_data(obs_per_cluster = 100)
-mod = lmer(y ~ x + (x|cluster), df)
-plot_data = create_plot_data(model = mod)
-plot_fun(plot_data = plot_data,
-         end_pause = 60,
-         duration = 12,
-         nframes = 120)
-anim_save('shrinkage/more_obs.gif')
-
-plot_fun(plot_data = plot_data, animate = F)
-ggsave('shrinkage/more_obs_static.svg')
-```
-
-```{r more_observations_gif, echo=F, eval=F, dev.args=list(bg = 'transparent'), cache=FALSE}
-knitr::include_graphics('shrinkage/more_obs.gif')
-```
-
-<aside><img src="shrinkage/more_obs_static.svg" style="display:block; margin: 0 auto; width: 250%"></aside>
-
-
-## Unbalanced
-
-With unbalanced data, we see the combination of having more vs. fewer observations per group. Those clusters with more observations will generally exhibit less shrinkage, and those with fewer observations the opposite, though this is tempered by the relative variance components.  In the following, the point size represents the cluster size.
-
-```{r unbalanced, eval = F, echo = F}
-df = create_data(balanced = .5, sd_int = .5, sd_slope = .5, sigma = .25)
-mod = lmer(y ~ x + (x|cluster), df)
-# mod
-
-plot_data = create_plot_data(model = mod)
-clus_counts = df %>% count(cluster) %>% pull(n)
-# table(clus_counts)
-
-plot_data$coefficients = plot_data$coefficients %>%
-  mutate(n_clus = rep(clus_counts, 2))
-
-plot_fun(plot_data = plot_data, pt_size = 'n_clus',
-         end_pause = 60,
-         duration = 12,
-         nframes = 120)
-
-re = plot_data$coefficients %>% filter(Model == 'mixed') %>% select(Intercept, x)
-fe = plot_data$coefficients %>% filter(Model == 'by-cluster') %>% select(Intercept, x)
-
-shrink = abs(fe) - abs(re)
-
-# cor(shrink, clus_counts, use = 'pair')
-
-anim_save('shrinkage/unbalanced.gif')
-
-plot_fun(plot_data = plot_data, animate = F)
-ggsave('shrinkage/unbalanced_static.svg')
-```
-
-```{r unbalanced_gif, echo=F, eval=F, dev.args=list(bg = 'transparent'), cache=FALSE}
-knitr::include_graphics('shrinkage/unbalanced.gif')
-```
-
-<aside><img src="shrinkage/unbalanced_static.svg" style="display:block; margin: 0 auto; width: 250%"></aside> -->
 
 
 ### Summary

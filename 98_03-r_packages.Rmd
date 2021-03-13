@@ -1,0 +1,5 @@
+# List of R packages used in this book {-}
+
+```{r, echo = FALSE}
+sort(rownames(installed.packages()))
+```

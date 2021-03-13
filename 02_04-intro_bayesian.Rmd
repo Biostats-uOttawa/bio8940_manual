@@ -53,7 +53,7 @@ the observed data**. So essentially you are doing that on a daily basis for ever
 ```{r, eval = FALSE, echo= FALSE, fig.width = 10.5, fig.height = 3.5, out.width = "100%", fig.cap = "Bayesian Triptych"}
 
 data <- tibble(
-  age = c(38, 45, 52, 61, 80, 74), 
+  age = c(38, 45, 52, 61, 80, 74),
   prop = c(0.146, 0.241, 0.571, 0.745, 0.843, 0.738)
 )
 
@@ -69,7 +69,7 @@ model_formula <- bf(
   # Precision
   phi ~ 1,
   # This is a nonlinear Beta regression model
-  nl = TRUE, 
+  nl = TRUE,
   family = Beta(link = identity)
 )
 
@@ -90,7 +90,7 @@ fit_prior <- brm(
   prior = c(prior_fixef, prior_phi),
   iter = 2000,
   chains = 4,
-  sample_prior = "only", 
+  sample_prior = "only",
   cores = 1,
   control = list(adapt_delta = 0.9, max_treedepth = 15)
 )
@@ -102,30 +102,30 @@ p1 <- ggplot(draws_prior) +
   aes(x = age, y = .value) +
   geom_line(aes(group = .draw), alpha = .2) +
   theme(
-    axis.ticks = element_blank(), 
-    axis.text = element_blank(), 
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
     axis.title = element_blank()
-  ) + 
+  ) +
   expand_limits(y = 0:1) +
   ggtitle("Plausible curves before seeing data")
 
 fm1 <- nls(prop ~ SSlogis(age, Asym, xmid, scal), data)
-new_data <- tibble(age = 0:100) %>% 
+new_data <- tibble(age = 0:100) %>%
   mutate(
     fit = predict(fm1, newdata = .)
   )
 
 point_orange <- "#FB6542"
 
-p2 <- ggplot(data) + 
-  aes(x = age, y = prop) + 
+p2 <- ggplot(data) +
+  aes(x = age, y = prop) +
   geom_line(aes(y = fit), data = new_data, size = 1) +
-  geom_point(color = point_orange, size = 2) + 
+  geom_point(color = point_orange, size = 2) +
   theme(
-    axis.ticks = element_blank(), 
-    axis.text = element_blank(), 
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
     axis.title = element_blank()
-  ) + 
+  ) +
   expand_limits(y = 0:1) +
   expand_limits(x = c(0, 100)) +
   ggtitle("How well do the curves fit the data")
@@ -142,29 +142,30 @@ fit <- brm(
 
 draws_posterior <- data %>%
   tidyr::expand(age = 0:100) %>%
-  tidybayes::add_fitted_draws(fit, n = 100) 
+  tidybayes::add_fitted_draws(fit, n = 100)
 
 p3 <- ggplot(draws_posterior) +
   aes(x = age, y = .value) +
   geom_line(aes(group = .draw), alpha = .2) +
   geom_point(
-    aes(y = prop), 
-    color = point_orange, size = 2, 
+    aes(y = prop),
+    color = point_orange, size = 2,
     data = data
   ) +
   theme(
-    axis.ticks = element_blank(), 
-    axis.text = element_blank(), 
+    axis.ticks = element_blank(),
+    axis.text = element_blank(),
     axis.title = element_blank()
   ) +
   expand_limits(y = 0:1) +
   ggtitle("Plausible curves after seeing data")
 
 p1 + p2 + p3
+ggsave("bayestriptic.png", width = 10.4, height = 5.1)
 ```
 
 ```{r, out.width = "100%", echo = FALSE, fig.align = "center", fig.cap = "Bayesian Triptych"}
-knitr::include_graphics("images/bayestriptic.svg")
+knitr::include_graphics("images/bayestriptic.png")
 ```
 
 ```{block2, type="rmdwarning"}
@@ -254,6 +255,7 @@ summary(m_mer)
 ```
 
 Ok so it took no time at all to do it and we got our "classic" results.
+
 ### MCMCglmm
 
 What makes `MCMCglmm` so useful and powerful `r emo::ji("muscle")` in ecology and for *practical Bayesian people* is that:
@@ -272,7 +274,7 @@ What makes `MCMCglmm` so useful and powerful `r emo::ji("muscle")` in ecology an
 
 So here is how we can code the model in `MCMCglmm()`. It is fairly similar to `lmer()` except that the random effects are specified in a different *argument*.
 
-```{r}
+```{r, cache = TRUE}
 mcglm_time <- system.time(
   m_mcmcglmm <- MCMCglmm(
     aggression ~ opp_size + body_size_sc + assay_rep_sc + block,
@@ -292,7 +294,7 @@ autocorr.diag(m_mcmcglmm$VCV)
 ```
 
 Talk about autocorrelation, mixing, convergence and priors here
-```{r}
+```{r, cache = TRUE}
 n_samp <- 1000
 thin <- 500
 burnin <- 20000
@@ -302,8 +304,9 @@ mcglm_time <- system.time(
                 random = ~ ID,
     data = unicorns,
     nitt = n_samp * thin + burnin, thin = thin, burnin = burnin,
+    verbose = FALSE,
     prior = list(
-      R = list(V = 1 , nu = 0.002),
+      R = list(V = 1, nu = 0.002),
       G = list(
         G1 = list(V = 1, nu = 0.002)
       )
@@ -335,22 +338,23 @@ Quite a bit more harder. because constrained to be positive
 
 ### brms
 
-**brms** is an acronym for *Bayesian Regression Models using 'Stan'* [@Rbrms]. It is a package developed to fit regression models with a Bayesian approach using the amazing `stan` software [@stan2021]. 
+**brms** is an acronym for *Bayesian Regression Models using 'Stan'* [@R-brms]. It is a package developed to fit regression models with a Bayesian approach using the amazing `stan` software [@stan2021]. 
 
 What makes `brms` so useful and powerful `r emo::ji("muscle")` in ecology is that:
 
 1. it is really intuitive to code (same syntax as `glmer()`)
-2. it is incredibly flexible since it is essentially a front end for `stan` [@stan2021] [@RStan]
+2. it is incredibly flexible since it is essentially a front end for `stan` via its `rstan` interface [@R-rstan]
 
 **but** with *great powers come great responsability* `r emo::ji("spider")`
 
 
-```{r}
+```{r, cache = TRUE}
 brm_time <- system.time(
   m_brm <- brm(
     aggression ~ opp_size + body_size_sc + assay_rep_sc + block
         + (1 | ID),
-    data = unicorns
+    data = unicorns,
+    refresh = 0
   )
 )
 brm_time

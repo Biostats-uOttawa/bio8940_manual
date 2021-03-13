@@ -157,15 +157,14 @@ First we define a new factor that represents every combination of genotype and t
 ```{r}
 dat_tf <- dat_tf %>%
   mutate(
-    gna = interaction(gen, nutrient, amd),
-    gna = fct_reorder(gna, total.fruits, mean)
+    gna = reorder(interaction(gen, nutrient, amd), total.fruits, mean)
   )
 ```
 
 Now time to plot it
 
 ```{r, fig.cap = "Boxplot of total fruits (log + 1) per genotypes and treatments"}
-ggplot(dat_tf, aes(x = gna, y = log(total.fruits + 1))) +
+ggplot(dat_tf, aes(x = gna, y = log(1 + total.fruits))) +
   geom_boxplot() +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 90))

@@ -3,3 +3,5 @@ docs/
 *.log
 _bookdown_files/BIO8940_book_files/
 extra/
+BIO8940_book_files/
+BIO8940_book_cache/
