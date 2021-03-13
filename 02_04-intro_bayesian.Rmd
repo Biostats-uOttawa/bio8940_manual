@@ -200,7 +200,7 @@ softwares fitting models with a Bayesian approach: `MCMCglmm` [@MCMCglmm2010] an
 ### R packages needed
 
 First we load required libraries
-```{r loadlibs, message=FALSE, results='hide', warning=FALSE}
+```{r loadlibs_bayes, message=FALSE, results='hide', warning=FALSE}
 
 library(lmerTest)
 library(tidyverse)
