@@ -3,7 +3,7 @@
 ## Shrinkage
 
 
-```{r setup, include=FALSE}
+```{r setup_shrin, include=FALSE}
 
 options(gganimate.dev_args = list(
   width = 600,
@@ -13,7 +13,7 @@ options(gganimate.dev_args = list(
 )
 
 library(tidyverse)
-library(broom)
+#library(broom)
 #library(viridis)
 #library(gifski)
 
