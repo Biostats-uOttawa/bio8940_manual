@@ -14,8 +14,8 @@ options(gganimate.dev_args = list(
 
 library(tidyverse)
 library(broom)
-library(viridis)
-library(gifski)
+#library(viridis)
+#library(gifski)
 
 ```
 
@@ -100,7 +100,7 @@ create_data <- function(
 ```
 
 
-```{r create_plot_data, echo=FALSE, eval=TRUE}
+```{r create_plot_data, echo=FALSE, eval=FALSE}
 create_plot_data <- function(model, data = df)
   {
   # bind re + lm by group results
