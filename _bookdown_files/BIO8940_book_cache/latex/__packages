@@ -18,3 +18,10 @@ rptR
 plyr
 lattice
 reshape
+coda
+ape
+MCMCglmm
+Rcpp
+brms
+tidybayes
+gdtools
