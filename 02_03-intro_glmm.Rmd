@@ -164,7 +164,7 @@ dat_tf <- dat_tf %>%
 
 Now time to plot it
 
-```{r}
+```{r, fig.cap = "Boxplot of total fruits (log + 1) per genotypes and treatments"}
 ggplot(dat_tf, aes(x = gna, y = log(total.fruits + 1))) +
   geom_boxplot() +
   theme_bw() +
