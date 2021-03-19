@@ -182,9 +182,99 @@ prior information.
 ```
 
 
-### Bayesian box
+### Intro to MCMC
+
+We will now walk through a simple example coded in `R` to illustrate how an MCMC algorithm works.
 
 
+Suppose you are interested in the mean heart rate is of students when asked a question in a stat course. You are not sure what the exact mean value is, but you know the values are normally distributed with a standard deviation of 15. You have observed 5 individuals to have heart rate of `104, 120,160,90,130`. You could use MCMC sampling to draw samples from the target distribution.
+We need to specify:
+
+1. the starting value for the chain. 
+2. the length of the chain. In general, more iterations will give you more accurate output.
+
+
+```{r}
+set.seed(170)
+hr_obs <- c(104, 112, 132, 115, 110)
+
+start_value <- 250
+
+n_iter <- 2500 # define number of iterations
+
+pd_mean <- numeric(n_iter) # create vector for sample values
+
+pd_mean[1] <- start_value # define starting value
+
+for (i in 2:n_iter) {
+  proposal <- pd_mean[i - 1] + mvrnorm(1, 0, 5) # proposal
+  lprop <- sum(dnorm(proposal, hr_obs, 15)) # likelihood of proposed parameter
+  lprev <- sum(dnorm(pd_mean[i - 1], hr_obs, 15))
+  if (lprop / lprev > runif(1)) { # if likelihood of prosposed > likehood previous accept 
+  # and if likelihood is lower accept with random noise
+    pd_mean[i] <- proposal
+  } # if true sample the proposal
+  else {
+    (pd_mean[i] <- pd_mean[i - 1])
+  } # if false sample the current value
+}
+pd_mean <- as.mcmc(data.frame(mean = pd_mean))
+mcmc_combo(pd_mean, combo = c("trace", "dens_overlay"))
+summary(pd_mean)
+```
+
+
+```{r}
+set.seed(170)
+hr_obs <- c(104, 112, 132, 115, 110)
+n_iter <- 2500 # define number of iterations
+
+n_chain <- 3
+start_value <- c(250, 100, 50)
+
+pd_mean <- array(NA, dim= c(n_iter, n_chain, 1), dimnames=list(iter = NULL, chain = NULL, params = "beta") )# create vector for sample values
+
+for (j in seq_len(n_chain)) {
+  pd_mean[1,j,1] <- start_value[j] # define starting value
+  for (i in 2:n_iter) {
+    proposal <- pd_mean[i - 1, j, 1] + mvrnorm(1, 0, 5) # proposal
+    if (sum(dnorm(proposal, hr_obs, 15)) # likelihood of proposed parameter
+      / sum(dnorm(pd_mean[i - 1, j, 1], hr_obs, 15)) > runif(1, 0, 1)) {
+      pd_mean[i, j, 1] <- proposal
+    } # if true sample the proposal
+    else {
+      (pd_mean[i, j, 1] <- pd_mean[i - 1, j , 1])
+    } # if false sample the current value
+  }
+}
+color_scheme_set("mix-blue-red")
+mcmc_combo(pd_mean, combo = c("trace", "dens_overlay"))
+summary(pd_mean)
+
+mcmc_combo(pd_mean, combo = c("trace", "dens_overlay"), n_warmup = 500)
+
+pd_burn <- pd_mean[-c(1:500), , , drop = FALSE]
+summary(pd_burn)
+
+mcmc_combo(pd_burn, combo = c("trace", "dens_overlay"), iter1 = 501)
+```
+
+
+### Inferences
+
+#### Fixed effects
+
+Easy peazy lemon squeezy just have a look at the posteriro distribution, does it overlap 0 yes or no.
+
+talk about mean, median and mode of a distribution as well as credible intervals
+
+#### Random effects
+
+Quite a bit more harder. because constrained to be positive
+
+- Interpreting posterior distribution
+- DIC
+- WAIC
 
 
 ## Practical
@@ -260,12 +350,12 @@ Ok so it took no time at all to do it and we got our "classic" results.
 
 What makes `MCMCglmm` so useful and powerful `r emo::ji("muscle")` in ecology and for *practical Bayesian people* is that:
 
-1. it is blazing fast `r emo::ji("fast")` (for Bayesian analysis)
+1. it is blazing fast `r emo::ji("fast")` (for Bayesian analysis) for some models
 2. it is fairly intuitive to code
 
 **but** it also has some inconvenients:
 
-1. it is blazing fast for **Bayesian analysis** meaning `r emo::ji("snail")` it is super slow compared to *maximum likelihood* approaches
+1. it is blazing fast for **Bayesian analysis** meaning it is `r emo::ji("snail")` compared to *maximum likelihood* approaches
 2. it has some limitations in terms of functionality, distribution availability and model specifications compared to other *Bayesian* softwares
 3. the priors, *oh, the priors* `r emo::ji("loudly_crying_face")`, are a bit tricky to code, handle `r emo::ji("exploding_head")`.
 
@@ -316,7 +406,7 @@ mcglm_time <- system.time(
 summary(m_mcmcglmm)
 mcglm_time
 ```
-
+ evaluate model here
 ```{r}
 plot(m_mcmcglmm$Sol)
 plot(m_mcmcglmm$VCV)
@@ -329,12 +419,20 @@ autocorr.diag(m_mcmcglmm$VCV)
 
 Easy peazy lemon squeezy just have a look at the posteriro distribution, does it overlap 0 yes or no.
 
+```{r}
+posterior.mode(m_mcmcglmm$sol)
+HPDintervals(m_mcmcglmm$sol)
+```
+
 #### Random effects
 
 Quite a bit more harder. because constrained to be positive
 
-- Interpreting posterior distribution
-- using DIC
+```{r}
+
+posterior.mode(m_mcmcglmm$VCV)
+HPDintervals(m_mcmcglmm$VCV)
+```
 
 ### brms
 
@@ -353,12 +451,14 @@ brm_time <- system.time(
   m_brm <- brm(
     aggression ~ opp_size + body_size_sc + assay_rep_sc + block
         + (1 | ID),
-    data = unicorns,
-    refresh = 0
+    data = unicorns, iter = 4750, warmup = 1000, thin = 15, cores =4
+    #refresh = 0
   )
 )
 brm_time
 summary(m_brm)
+mcmc_acf_bar(m_brm, regex_pars = c("sd"))
+
 ```
 
 #### Hunder the hood 
@@ -382,14 +482,17 @@ knitr::include_graphics("images/shinystan.png")
 
 #### Fixed effects
 
-Easy peazy lemon squeezy just have a look at the posteriro distribution, does it overlap 0 yes or no.
+```{r}
+summary(m_brm)
+mcmc_plot(m_brm, regex_pars = "b_")
+```
 
 #### Random effects
 
-Quite a bit more harder. because constrained to be positive
-
-- Interpreting posterior distribution
-- using DIC
+```{r}
+summary(m_brm)
+mcmc_plot(m_brm, pars = c("sd_ID__Intercept", "sigma"))
+```
 
 
 ## Happy Bayesian stats
