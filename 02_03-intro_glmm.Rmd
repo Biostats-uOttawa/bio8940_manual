@@ -6,11 +6,10 @@ Spatial variation in nutrient availability and herbivory is likely to cause pop-
 
 ### Packages and functions
 
-You need to download the "glmm_funs.R" script for some functions used in the Practical
+You need to download the "extra_funs.R" script for some functions used in the Practical
 
 ```{r, eval = TRUE, warning = FALSE, message = FALSE}
 library(lme4)
-library(plyr)
 library(tidyverse)
 library(patchwork)
 library(lattice)
@@ -475,8 +474,7 @@ simdev <- function() {
 }
 
 set.seed(101)
-## raply in plyr is a convenient wrapper for repeating the simulation many times
-nulldist <- raply(200, simdev(), .progress = "text")
+nulldist0 <- replicate(2, simdev())
 ## zero spurious (small) negative values
 nulldist[nulldist < 0 & abs(nulldist) < 1e-5] <- 0
 obsdev <- 2 * c(logLik(mp4) - logLik(mp4v1))

@@ -207,7 +207,7 @@ pd_mean <- numeric(n_iter) # create vector for sample values
 pd_mean[1] <- start_value # define starting value
 
 for (i in 2:n_iter) {
-  proposal <- pd_mean[i - 1] + mvrnorm(1, 0, 5) # proposal
+  proposal <- pd_mean[i - 1] + MASS::mvrnorm(1, 0, 5) # proposal
   lprop <- sum(dnorm(proposal, hr_obs, 15)) # likelihood of proposed parameter
   lprev <- sum(dnorm(pd_mean[i - 1], hr_obs, 15))
   if (lprop / lprev > runif(1)) { # if likelihood of prosposed > likehood previous accept 
@@ -219,7 +219,7 @@ for (i in 2:n_iter) {
   } # if false sample the current value
 }
 pd_mean <- as.mcmc(data.frame(mean = pd_mean))
-mcmc_combo(pd_mean, combo = c("trace", "dens_overlay"))
+mcmc_combo(pd_mean, combo = c("trace", "dens"))
 summary(pd_mean)
 ```
 
@@ -237,7 +237,7 @@ pd_mean <- array(NA, dim= c(n_iter, n_chain, 1), dimnames=list(iter = NULL, chai
 for (j in seq_len(n_chain)) {
   pd_mean[1,j,1] <- start_value[j] # define starting value
   for (i in 2:n_iter) {
-    proposal <- pd_mean[i - 1, j, 1] + mvrnorm(1, 0, 5) # proposal
+    proposal <- pd_mean[i - 1, j, 1] + MASS::mvrnorm(1, 0, 5) # proposal
     if (sum(dnorm(proposal, hr_obs, 15)) # likelihood of proposed parameter
       / sum(dnorm(pd_mean[i - 1, j, 1], hr_obs, 15)) > runif(1, 0, 1)) {
       pd_mean[i, j, 1] <- proposal
@@ -292,12 +292,12 @@ softwares fitting models with a Bayesian approach: `MCMCglmm` [@MCMCglmm2010] an
 
 First we load required libraries
 ```{r loadlibs_bayes, message=FALSE, results='hide', warning=FALSE}
-
 library(lmerTest)
 library(tidyverse)
 library(rptR)
 library(brms)
 library(MCMCglmm)
+library(bayesplot)
 ```
 
 ### A refresher on unicorn ecology
@@ -350,14 +350,14 @@ Ok so it took no time at all to do it and we got our "classic" results.
 
 What makes `MCMCglmm` so useful and powerful `r emo::ji("muscle")` in ecology and for *practical Bayesian people* is that:
 
-1. it is blazing fast `r emo::ji("fast")` (for Bayesian analysis) for some models
+1. it is blazing fast `r emo::ji("fast")` (for Bayesian analysis) for some models particularly models with structured covariances
 2. it is fairly intuitive to code
 
 **but** it also has some inconvenients:
 
 1. it is blazing fast for **Bayesian analysis** meaning it is `r emo::ji("snail")` compared to *maximum likelihood* approaches
 2. it has some limitations in terms of functionality, distribution availability and model specifications compared to other *Bayesian* softwares
-3. the priors, *oh, the priors* `r emo::ji("loudly_crying_face")`, are a bit tricky to code, handle `r emo::ji("exploding_head")`.
+3. the priors, *oh, the priors* `r emo::ji("loudly_crying_face")`, are a bit tricky to code and understand `r emo::ji("exploding_head")`.
 
 
 #### Fitting the Model
@@ -377,7 +377,7 @@ mcglm_time
 
 Model is slow and not good. We need more iteration and maybe even a longer burnin, and honestly maybe better priors.
 
-```{r}
+```{r, fig.cap = "Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings"}
 plot(m_mcmcglmm$Sol)
 plot(m_mcmcglmm$VCV)
 autocorr.diag(m_mcmcglmm$VCV)
@@ -407,7 +407,7 @@ summary(m_mcmcglmm)
 mcglm_time
 ```
  evaluate model here
-```{r}
+```{r, fig.cap = "Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings"}
 plot(m_mcmcglmm$Sol)
 plot(m_mcmcglmm$VCV)
 autocorr.diag(m_mcmcglmm$VCV)
@@ -420,8 +420,8 @@ autocorr.diag(m_mcmcglmm$VCV)
 Easy peazy lemon squeezy just have a look at the posteriro distribution, does it overlap 0 yes or no.
 
 ```{r}
-posterior.mode(m_mcmcglmm$sol)
-HPDintervals(m_mcmcglmm$sol)
+posterior.mode(m_mcmcglmm$Sol)
+HPDinterval(m_mcmcglmm$Sol)
 ```
 
 #### Random effects
@@ -429,9 +429,8 @@ HPDintervals(m_mcmcglmm$sol)
 Quite a bit more harder. because constrained to be positive
 
 ```{r}
-
 posterior.mode(m_mcmcglmm$VCV)
-HPDintervals(m_mcmcglmm$VCV)
+HPDinterval(m_mcmcglmm$VCV)
 ```
 
 ### brms
@@ -446,7 +445,7 @@ What makes `brms` so useful and powerful `r emo::ji("muscle")` in ecology is tha
 **but** with *great powers come great responsability* `r emo::ji("spider")`
 
 
-```{r, cache = TRUE}
+```{r, cache = TRUE, fig.cap = "Autocorrelation in the chain for variance parameters in model m_brm"}
 brm_time <- system.time(
   m_brm <- brm(
     aggression ~ opp_size + body_size_sc + assay_rep_sc + block
@@ -482,14 +481,14 @@ knitr::include_graphics("images/shinystan.png")
 
 #### Fixed effects
 
-```{r}
+```{r, fig.cap = "Fixed effect estimates (with 95% credible intervals) from model m_brm"}
 summary(m_brm)
 mcmc_plot(m_brm, regex_pars = "b_")
 ```
 
 #### Random effects
 
-```{r}
+```{r, fig.cap = "Among-individual and residual standard deviance ( with 95% credible intervals) estimated from model m_brm"}
 summary(m_brm)
 mcmc_plot(m_brm, pars = c("sd_ID__Intercept", "sigma"))
 ```
@@ -497,7 +496,7 @@ mcmc_plot(m_brm, pars = c("sd_ID__Intercept", "sigma"))
 
 ## Happy Bayesian stats
 
-```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "A GLMM character"}
-knitr::include_graphics("images/Thorn.png")
+```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Sherlock Holmes, a truly bayesian detective"}
+knitr::include_graphics("images/sherlock.jpg")
 ```
 
