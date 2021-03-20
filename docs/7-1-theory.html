@@ -195,8 +195,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.6" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#what-is-the-repeatability"><i class="fa fa-check"></i><b>5.2.6</b> What is the repeatability?</a></li>
 <li class="chapter" data-level="5.2.7" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#a-quick-note-on-uncertainty"><i class="fa fa-check"></i><b>5.2.7</b> A quick note on uncertainty</a></li>
 <li class="chapter" data-level="5.2.8" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#an-easy-way-to-mess-up-your-mixed-models"><i class="fa fa-check"></i><b>5.2.8</b> An easy way to mess up your mixed models</a></li>
+<li class="chapter" data-level="5.2.9" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#happy-mixed-modelling"><i class="fa fa-check"></i><b>5.2.9</b> Happy mixed-modelling</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="5-3-happy-mixed-modelling.html"><a href="5-3-happy-mixed-modelling.html"><i class="fa fa-check"></i><b>5.3</b> Happy mixed-modelling</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="6-introduction-to-glmm.html"><a href="6-introduction-to-glmm.html"><i class="fa fa-check"></i><b>6</b> Introduction to <code>GLMM</code></a>
 <ul>
@@ -211,8 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.7" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#fitting-and-evaluating-glmms"><i class="fa fa-check"></i><b>6.1.7</b> Fitting and evaluating GLMMs</a></li>
 <li class="chapter" data-level="6.1.8" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#inference"><i class="fa fa-check"></i><b>6.1.8</b> Inference</a></li>
 <li class="chapter" data-level="6.1.9" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#conclusions"><i class="fa fa-check"></i><b>6.1.9</b> Conclusions</a></li>
+<li class="chapter" data-level="6.1.10" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#happy-generalized-mixed-modelling"><i class="fa fa-check"></i><b>6.1.10</b> Happy generalized mixed-modelling</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="6-2-happy-generalized-mixed-modelling.html"><a href="6-2-happy-generalized-mixed-modelling.html"><i class="fa fa-check"></i><b>6.2</b> Happy generalized mixed-modelling</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="7-introduction-to-bayesian-inference.html"><a href="7-introduction-to-bayesian-inference.html"><i class="fa fa-check"></i><b>7</b> Introduction to <code>Bayesian Inference</code></a>
 <ul>
@@ -230,8 +230,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.4" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#inferences-2"><i class="fa fa-check"></i><b>7.2.4</b> Inferences</a></li>
 <li class="chapter" data-level="7.2.5" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#brms"><i class="fa fa-check"></i><b>7.2.5</b> brms</a></li>
 <li class="chapter" data-level="7.2.6" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#inferences-3"><i class="fa fa-check"></i><b>7.2.6</b> Inferences</a></li>
+<li class="chapter" data-level="7.2.7" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#happy-bayesian-stats"><i class="fa fa-check"></i><b>7.2.7</b> Happy Bayesian stats</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="7-3-happy-bayesian-stats.html"><a href="7-3-happy-bayesian-stats.html"><i class="fa fa-check"></i><b>7.3</b> Happy Bayesian stats</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="8-random-regressions-and-multivariate-mixed-models.html"><a href="8-random-regressions-and-multivariate-mixed-models.html"><i class="fa fa-check"></i><b>8</b> Random regressions and multivariate mixed models</a>
 <ul>
@@ -349,8 +349,8 @@ We need to specify:</p>
 <span id="cb149-13"><a href="7-1-theory.html#cb149-13" aria-hidden="true" tabindex="-1"></a>  proposal <span class="ot">&lt;-</span> pd_mean[i <span class="sc">-</span> <span class="dv">1</span>] <span class="sc">+</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>) <span class="co"># proposal</span></span>
 <span id="cb149-14"><a href="7-1-theory.html#cb149-14" aria-hidden="true" tabindex="-1"></a>  lprop <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">dnorm</span>(proposal, hr_obs, <span class="dv">15</span>)) <span class="co"># likelihood of proposed parameter</span></span>
 <span id="cb149-15"><a href="7-1-theory.html#cb149-15" aria-hidden="true" tabindex="-1"></a>  lprev <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">dnorm</span>(pd_mean[i <span class="sc">-</span> <span class="dv">1</span>], hr_obs, <span class="dv">15</span>))</span>
-<span id="cb149-16"><a href="7-1-theory.html#cb149-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (lprop <span class="sc">/</span> lprev <span class="sc">&gt;</span> <span class="fu">runif</span>(<span class="dv">1</span>)) { <span class="co"># if likelihood of prosposed &gt; likehood previous accept </span></span>
-<span id="cb149-17"><a href="7-1-theory.html#cb149-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># and if likelihood is lower accept with random noise</span></span>
+<span id="cb149-16"><a href="7-1-theory.html#cb149-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (lprop <span class="sc">/</span> lprev <span class="sc">&gt;</span> <span class="fu">runif</span>(<span class="dv">1</span>)) { <span class="co"># if likelihood of prosposed &gt; likehood previous accept</span></span>
+<span id="cb149-17"><a href="7-1-theory.html#cb149-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># and if likelihood is lower accept with random noise</span></span>
 <span id="cb149-18"><a href="7-1-theory.html#cb149-18" aria-hidden="true" tabindex="-1"></a>    pd_mean[i] <span class="ot">&lt;-</span> proposal</span>
 <span id="cb149-19"><a href="7-1-theory.html#cb149-19" aria-hidden="true" tabindex="-1"></a>  } <span class="co"># if true sample the proposal</span></span>
 <span id="cb149-20"><a href="7-1-theory.html#cb149-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> {</span>
@@ -384,18 +384,18 @@ We need to specify:</p>
 <span id="cb152-5"><a href="7-1-theory.html#cb152-5" aria-hidden="true" tabindex="-1"></a>n_chain <span class="ot">&lt;-</span> <span class="dv">3</span></span>
 <span id="cb152-6"><a href="7-1-theory.html#cb152-6" aria-hidden="true" tabindex="-1"></a>start_value <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">250</span>, <span class="dv">100</span>, <span class="dv">50</span>)</span>
 <span id="cb152-7"><a href="7-1-theory.html#cb152-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb152-8"><a href="7-1-theory.html#cb152-8" aria-hidden="true" tabindex="-1"></a>pd_mean <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NA</span>, <span class="at">dim=</span> <span class="fu">c</span>(n_iter, n_chain, <span class="dv">1</span>), <span class="at">dimnames=</span><span class="fu">list</span>(<span class="at">iter =</span> <span class="cn">NULL</span>, <span class="at">chain =</span> <span class="cn">NULL</span>, <span class="at">params =</span> <span class="st">&quot;beta&quot;</span>) )<span class="co"># create vector for sample values</span></span>
+<span id="cb152-8"><a href="7-1-theory.html#cb152-8" aria-hidden="true" tabindex="-1"></a>pd_mean <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="cn">NA</span>, <span class="at">dim =</span> <span class="fu">c</span>(n_iter, n_chain, <span class="dv">1</span>), <span class="at">dimnames =</span> <span class="fu">list</span>(<span class="at">iter =</span> <span class="cn">NULL</span>, <span class="at">chain =</span> <span class="cn">NULL</span>, <span class="at">params =</span> <span class="st">&quot;beta&quot;</span>)) <span class="co"># create vector for sample values</span></span>
 <span id="cb152-9"><a href="7-1-theory.html#cb152-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb152-10"><a href="7-1-theory.html#cb152-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="fu">seq_len</span>(n_chain)) {</span>
-<span id="cb152-11"><a href="7-1-theory.html#cb152-11" aria-hidden="true" tabindex="-1"></a>  pd_mean[<span class="dv">1</span>,j,<span class="dv">1</span>] <span class="ot">&lt;-</span> start_value[j] <span class="co"># define starting value</span></span>
+<span id="cb152-11"><a href="7-1-theory.html#cb152-11" aria-hidden="true" tabindex="-1"></a>  pd_mean[<span class="dv">1</span>, j, <span class="dv">1</span>] <span class="ot">&lt;-</span> start_value[j] <span class="co"># define starting value</span></span>
 <span id="cb152-12"><a href="7-1-theory.html#cb152-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>n_iter) {</span>
 <span id="cb152-13"><a href="7-1-theory.html#cb152-13" aria-hidden="true" tabindex="-1"></a>    proposal <span class="ot">&lt;-</span> pd_mean[i <span class="sc">-</span> <span class="dv">1</span>, j, <span class="dv">1</span>] <span class="sc">+</span> MASS<span class="sc">::</span><span class="fu">mvrnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>) <span class="co"># proposal</span></span>
 <span id="cb152-14"><a href="7-1-theory.html#cb152-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">sum</span>(<span class="fu">dnorm</span>(proposal, hr_obs, <span class="dv">15</span>)) <span class="co"># likelihood of proposed parameter</span></span>
-<span id="cb152-15"><a href="7-1-theory.html#cb152-15" aria-hidden="true" tabindex="-1"></a>      <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">dnorm</span>(pd_mean[i <span class="sc">-</span> <span class="dv">1</span>, j, <span class="dv">1</span>], hr_obs, <span class="dv">15</span>)) <span class="sc">&gt;</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) {</span>
+<span id="cb152-15"><a href="7-1-theory.html#cb152-15" aria-hidden="true" tabindex="-1"></a>    <span class="sc">/</span> <span class="fu">sum</span>(<span class="fu">dnorm</span>(pd_mean[i <span class="sc">-</span> <span class="dv">1</span>, j, <span class="dv">1</span>], hr_obs, <span class="dv">15</span>)) <span class="sc">&gt;</span> <span class="fu">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) {</span>
 <span id="cb152-16"><a href="7-1-theory.html#cb152-16" aria-hidden="true" tabindex="-1"></a>      pd_mean[i, j, <span class="dv">1</span>] <span class="ot">&lt;-</span> proposal</span>
 <span id="cb152-17"><a href="7-1-theory.html#cb152-17" aria-hidden="true" tabindex="-1"></a>    } <span class="co"># if true sample the proposal</span></span>
 <span id="cb152-18"><a href="7-1-theory.html#cb152-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span> {</span>
-<span id="cb152-19"><a href="7-1-theory.html#cb152-19" aria-hidden="true" tabindex="-1"></a>      (pd_mean[i, j, <span class="dv">1</span>] <span class="ot">&lt;-</span> pd_mean[i <span class="sc">-</span> <span class="dv">1</span>, j , <span class="dv">1</span>])</span>
+<span id="cb152-19"><a href="7-1-theory.html#cb152-19" aria-hidden="true" tabindex="-1"></a>      (pd_mean[i, j, <span class="dv">1</span>] <span class="ot">&lt;-</span> pd_mean[i <span class="sc">-</span> <span class="dv">1</span>, j, <span class="dv">1</span>])</span>
 <span id="cb152-20"><a href="7-1-theory.html#cb152-20" aria-hidden="true" tabindex="-1"></a>    } <span class="co"># if false sample the current value</span></span>
 <span id="cb152-21"><a href="7-1-theory.html#cb152-21" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb152-22"><a href="7-1-theory.html#cb152-22" aria-hidden="true" tabindex="-1"></a>}</span>

@@ -575,7 +575,7 @@ ggplot(data = r5, aes(sample = condval)) +
 
 ```
 
-## Happy generalized mixed-modelling
+### Happy generalized mixed-modelling
 
 ```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "A GLMM character"}
 knitr::include_graphics("images/Thorn.png")

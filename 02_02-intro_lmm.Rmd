@@ -607,7 +607,7 @@ Summarise and test your random effect and you'll see the qualitative conclusions
 </div>
 
 
-## Happy mixed-modelling
+### Happy mixed-modelling
 
 ```{r, out.width = "20%", echo = FALSE, fig.align = "center", fig.cap = "The superb unicorn"}
 knitr::include_graphics("images/unicorn.png")

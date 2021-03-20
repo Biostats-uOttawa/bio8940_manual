@@ -210,8 +210,8 @@ for (i in 2:n_iter) {
   proposal <- pd_mean[i - 1] + MASS::mvrnorm(1, 0, 5) # proposal
   lprop <- sum(dnorm(proposal, hr_obs, 15)) # likelihood of proposed parameter
   lprev <- sum(dnorm(pd_mean[i - 1], hr_obs, 15))
-  if (lprop / lprev > runif(1)) { # if likelihood of prosposed > likehood previous accept 
-  # and if likelihood is lower accept with random noise
+  if (lprop / lprev > runif(1)) { # if likelihood of prosposed > likehood previous accept
+    # and if likelihood is lower accept with random noise
     pd_mean[i] <- proposal
   } # if true sample the proposal
   else {
@@ -232,18 +232,18 @@ n_iter <- 2500 # define number of iterations
 n_chain <- 3
 start_value <- c(250, 100, 50)
 
-pd_mean <- array(NA, dim= c(n_iter, n_chain, 1), dimnames=list(iter = NULL, chain = NULL, params = "beta") )# create vector for sample values
+pd_mean <- array(NA, dim = c(n_iter, n_chain, 1), dimnames = list(iter = NULL, chain = NULL, params = "beta")) # create vector for sample values
 
 for (j in seq_len(n_chain)) {
-  pd_mean[1,j,1] <- start_value[j] # define starting value
+  pd_mean[1, j, 1] <- start_value[j] # define starting value
   for (i in 2:n_iter) {
     proposal <- pd_mean[i - 1, j, 1] + MASS::mvrnorm(1, 0, 5) # proposal
     if (sum(dnorm(proposal, hr_obs, 15)) # likelihood of proposed parameter
-      / sum(dnorm(pd_mean[i - 1, j, 1], hr_obs, 15)) > runif(1, 0, 1)) {
+    / sum(dnorm(pd_mean[i - 1, j, 1], hr_obs, 15)) > runif(1, 0, 1)) {
       pd_mean[i, j, 1] <- proposal
     } # if true sample the proposal
     else {
-      (pd_mean[i, j, 1] <- pd_mean[i - 1, j , 1])
+      (pd_mean[i, j, 1] <- pd_mean[i - 1, j, 1])
     } # if false sample the current value
   }
 }
@@ -336,12 +336,12 @@ This function simply estimate the `user` and `computer` time use by the function
 mer_time <- system.time(
   m_mer <- lmer(
     aggression ~ opp_size + body_size_sc + assay_rep_sc + block
-                + (1 | ID),
-    data = unicorns)
+      + (1 | ID),
+    data = unicorns
+  )
 )
 mer_time
 summary(m_mer)
-
 ```
 
 Ok so it took no time at all to do it and we got our "classic" results.
@@ -368,8 +368,9 @@ So here is how we can code the model in `MCMCglmm()`. It is fairly similar to `l
 mcglm_time <- system.time(
   m_mcmcglmm <- MCMCglmm(
     aggression ~ opp_size + body_size_sc + assay_rep_sc + block,
-                random = ~ ID,
-    data = unicorns)
+    random = ~ID,
+    data = unicorns
+  )
 )
 summary(m_mcmcglmm)
 mcglm_time
@@ -391,7 +392,7 @@ burnin <- 20000
 mcglm_time <- system.time(
   m_mcmcglmm <- MCMCglmm(
     aggression ~ opp_size + body_size_sc + assay_rep_sc + block,
-                random = ~ ID,
+    random = ~ID,
     data = unicorns,
     nitt = n_samp * thin + burnin, thin = thin, burnin = burnin,
     verbose = FALSE,
@@ -449,15 +450,14 @@ What makes `brms` so useful and powerful `r emo::ji("muscle")` in ecology is tha
 brm_time <- system.time(
   m_brm <- brm(
     aggression ~ opp_size + body_size_sc + assay_rep_sc + block
-        + (1 | ID),
-    data = unicorns, iter = 4750, warmup = 1000, thin = 15, cores =4
-    #refresh = 0
+      + (1 | ID),
+    data = unicorns, iter = 4750, warmup = 1000, thin = 15, cores = 4
+    # refresh = 0
   )
 )
 brm_time
 summary(m_brm)
 mcmc_acf_bar(m_brm, regex_pars = c("sd"))
-
 ```
 
 #### Hunder the hood 
@@ -494,7 +494,7 @@ mcmc_plot(m_brm, pars = c("sd_ID__Intercept", "sigma"))
 ```
 
 
-## Happy Bayesian stats
+### Happy Bayesian stats
 
 ```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Sherlock Holmes, a truly bayesian detective"}
 knitr::include_graphics("images/sherlock.jpg")

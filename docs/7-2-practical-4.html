@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="7-1-theory.html"/>
-<link rel="next" href="7-3-happy-bayesian-stats.html"/>
+<link rel="next" href="8-random-regressions-and-multivariate-mixed-models.html"/>
 <script src="libs/header-attrs-2.7.3/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -195,8 +195,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.6" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#what-is-the-repeatability"><i class="fa fa-check"></i><b>5.2.6</b> What is the repeatability?</a></li>
 <li class="chapter" data-level="5.2.7" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#a-quick-note-on-uncertainty"><i class="fa fa-check"></i><b>5.2.7</b> A quick note on uncertainty</a></li>
 <li class="chapter" data-level="5.2.8" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#an-easy-way-to-mess-up-your-mixed-models"><i class="fa fa-check"></i><b>5.2.8</b> An easy way to mess up your mixed models</a></li>
+<li class="chapter" data-level="5.2.9" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#happy-mixed-modelling"><i class="fa fa-check"></i><b>5.2.9</b> Happy mixed-modelling</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="5-3-happy-mixed-modelling.html"><a href="5-3-happy-mixed-modelling.html"><i class="fa fa-check"></i><b>5.3</b> Happy mixed-modelling</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="6-introduction-to-glmm.html"><a href="6-introduction-to-glmm.html"><i class="fa fa-check"></i><b>6</b> Introduction to <code>GLMM</code></a>
 <ul>
@@ -211,8 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.7" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#fitting-and-evaluating-glmms"><i class="fa fa-check"></i><b>6.1.7</b> Fitting and evaluating GLMMs</a></li>
 <li class="chapter" data-level="6.1.8" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#inference"><i class="fa fa-check"></i><b>6.1.8</b> Inference</a></li>
 <li class="chapter" data-level="6.1.9" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#conclusions"><i class="fa fa-check"></i><b>6.1.9</b> Conclusions</a></li>
+<li class="chapter" data-level="6.1.10" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#happy-generalized-mixed-modelling"><i class="fa fa-check"></i><b>6.1.10</b> Happy generalized mixed-modelling</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="6-2-happy-generalized-mixed-modelling.html"><a href="6-2-happy-generalized-mixed-modelling.html"><i class="fa fa-check"></i><b>6.2</b> Happy generalized mixed-modelling</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="7-introduction-to-bayesian-inference.html"><a href="7-introduction-to-bayesian-inference.html"><i class="fa fa-check"></i><b>7</b> Introduction to <code>Bayesian Inference</code></a>
 <ul>
@@ -230,8 +230,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.4" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#inferences-2"><i class="fa fa-check"></i><b>7.2.4</b> Inferences</a></li>
 <li class="chapter" data-level="7.2.5" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#brms"><i class="fa fa-check"></i><b>7.2.5</b> brms</a></li>
 <li class="chapter" data-level="7.2.6" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#inferences-3"><i class="fa fa-check"></i><b>7.2.6</b> Inferences</a></li>
+<li class="chapter" data-level="7.2.7" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#happy-bayesian-stats"><i class="fa fa-check"></i><b>7.2.7</b> Happy Bayesian stats</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="7-3-happy-bayesian-stats.html"><a href="7-3-happy-bayesian-stats.html"><i class="fa fa-check"></i><b>7.3</b> Happy Bayesian stats</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="8-random-regressions-and-multivariate-mixed-models.html"><a href="8-random-regressions-and-multivariate-mixed-models.html"><i class="fa fa-check"></i><b>8</b> Random regressions and multivariate mixed models</a>
 <ul>
@@ -312,12 +312,13 @@ This function simply estimate the <code>user</code> and <code>computer</code> ti
 <div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="7-2-practical-4.html#cb163-1" aria-hidden="true" tabindex="-1"></a>mer_time <span class="ot">&lt;-</span> <span class="fu">system.time</span>(</span>
 <span id="cb163-2"><a href="7-2-practical-4.html#cb163-2" aria-hidden="true" tabindex="-1"></a>  m_mer <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
 <span id="cb163-3"><a href="7-2-practical-4.html#cb163-3" aria-hidden="true" tabindex="-1"></a>    aggression <span class="sc">~</span> opp_size <span class="sc">+</span> body_size_sc <span class="sc">+</span> assay_rep_sc <span class="sc">+</span> block</span>
-<span id="cb163-4"><a href="7-2-practical-4.html#cb163-4" aria-hidden="true" tabindex="-1"></a>                <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
-<span id="cb163-5"><a href="7-2-practical-4.html#cb163-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> unicorns)</span>
-<span id="cb163-6"><a href="7-2-practical-4.html#cb163-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb163-7"><a href="7-2-practical-4.html#cb163-7" aria-hidden="true" tabindex="-1"></a>mer_time</span></code></pre></div>
+<span id="cb163-4"><a href="7-2-practical-4.html#cb163-4" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
+<span id="cb163-5"><a href="7-2-practical-4.html#cb163-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> unicorns</span>
+<span id="cb163-6"><a href="7-2-practical-4.html#cb163-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb163-7"><a href="7-2-practical-4.html#cb163-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb163-8"><a href="7-2-practical-4.html#cb163-8" aria-hidden="true" tabindex="-1"></a>mer_time</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.057   0.004   0.062</code></pre>
+##   0.059   0.000   0.060</code></pre>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="7-2-practical-4.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_mer)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: aggression ~ opp_size + body_size_sc + assay_rep_sc + block +      (1 | ID)
@@ -372,9 +373,10 @@ This function simply estimate the <code>user</code> and <code>computer</code> ti
 <div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="7-2-practical-4.html#cb167-1" aria-hidden="true" tabindex="-1"></a>mcglm_time <span class="ot">&lt;-</span> <span class="fu">system.time</span>(</span>
 <span id="cb167-2"><a href="7-2-practical-4.html#cb167-2" aria-hidden="true" tabindex="-1"></a>  m_mcmcglmm <span class="ot">&lt;-</span> <span class="fu">MCMCglmm</span>(</span>
 <span id="cb167-3"><a href="7-2-practical-4.html#cb167-3" aria-hidden="true" tabindex="-1"></a>    aggression <span class="sc">~</span> opp_size <span class="sc">+</span> body_size_sc <span class="sc">+</span> assay_rep_sc <span class="sc">+</span> block,</span>
-<span id="cb167-4"><a href="7-2-practical-4.html#cb167-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">random =</span> <span class="sc">~</span> ID,</span>
-<span id="cb167-5"><a href="7-2-practical-4.html#cb167-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> unicorns)</span>
-<span id="cb167-6"><a href="7-2-practical-4.html#cb167-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb167-4"><a href="7-2-practical-4.html#cb167-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">random =</span> <span class="sc">~</span>ID,</span>
+<span id="cb167-5"><a href="7-2-practical-4.html#cb167-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> unicorns</span>
+<span id="cb167-6"><a href="7-2-practical-4.html#cb167-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb167-7"><a href="7-2-practical-4.html#cb167-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## 
 ##                        MCMC iteration = 0
 ## 
@@ -433,7 +435,7 @@ This function simply estimate the <code>user</code> and <code>computer</code> ti
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="7-2-practical-4.html#cb171-1" aria-hidden="true" tabindex="-1"></a>mcglm_time</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   1.538   0.000   1.538</code></pre>
+##   1.819   0.000   1.819</code></pre>
 <p>Model is slow and not good. We need more iteration and maybe even a longer burnin, and honestly maybe better priors.</p>
 <div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="7-2-practical-4.html#cb173-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_mcmcglmm<span class="sc">$</span>Sol)</span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-78-1"></span>
@@ -469,7 +471,7 @@ Figure 7.4: Posterior trace and distribution of the paremeters in m_mcmcglmm usi
 <span id="cb177-4"><a href="7-2-practical-4.html#cb177-4" aria-hidden="true" tabindex="-1"></a>mcglm_time <span class="ot">&lt;-</span> <span class="fu">system.time</span>(</span>
 <span id="cb177-5"><a href="7-2-practical-4.html#cb177-5" aria-hidden="true" tabindex="-1"></a>  m_mcmcglmm <span class="ot">&lt;-</span> <span class="fu">MCMCglmm</span>(</span>
 <span id="cb177-6"><a href="7-2-practical-4.html#cb177-6" aria-hidden="true" tabindex="-1"></a>    aggression <span class="sc">~</span> opp_size <span class="sc">+</span> body_size_sc <span class="sc">+</span> assay_rep_sc <span class="sc">+</span> block,</span>
-<span id="cb177-7"><a href="7-2-practical-4.html#cb177-7" aria-hidden="true" tabindex="-1"></a>                <span class="at">random =</span> <span class="sc">~</span> ID,</span>
+<span id="cb177-7"><a href="7-2-practical-4.html#cb177-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">random =</span> <span class="sc">~</span>ID,</span>
 <span id="cb177-8"><a href="7-2-practical-4.html#cb177-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> unicorns,</span>
 <span id="cb177-9"><a href="7-2-practical-4.html#cb177-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">nitt =</span> n_samp <span class="sc">*</span> thin <span class="sc">+</span> burnin, <span class="at">thin =</span> thin, <span class="at">burnin =</span> burnin,</span>
 <span id="cb177-10"><a href="7-2-practical-4.html#cb177-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
@@ -511,7 +513,7 @@ Figure 7.4: Posterior trace and distribution of the paremeters in m_mcmcglmm usi
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="7-2-practical-4.html#cb179-1" aria-hidden="true" tabindex="-1"></a>mcglm_time</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##  70.746   0.032  70.848</code></pre>
+##  77.653   0.000  77.668</code></pre>
 <p>evaluate model here</p>
 <div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="7-2-practical-4.html#cb181-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(m_mcmcglmm<span class="sc">$</span>Sol)</span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-80-1"></span>
@@ -586,16 +588,16 @@ Figure 7.7: Posterior trace and distribution of the paremeters in m_mcmcglmm wit
 <div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="7-2-practical-4.html#cb193-1" aria-hidden="true" tabindex="-1"></a>brm_time <span class="ot">&lt;-</span> <span class="fu">system.time</span>(</span>
 <span id="cb193-2"><a href="7-2-practical-4.html#cb193-2" aria-hidden="true" tabindex="-1"></a>  m_brm <span class="ot">&lt;-</span> <span class="fu">brm</span>(</span>
 <span id="cb193-3"><a href="7-2-practical-4.html#cb193-3" aria-hidden="true" tabindex="-1"></a>    aggression <span class="sc">~</span> opp_size <span class="sc">+</span> body_size_sc <span class="sc">+</span> assay_rep_sc <span class="sc">+</span> block</span>
-<span id="cb193-4"><a href="7-2-practical-4.html#cb193-4" aria-hidden="true" tabindex="-1"></a>        <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
-<span id="cb193-5"><a href="7-2-practical-4.html#cb193-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> unicorns, <span class="at">iter =</span> <span class="dv">4750</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">thin =</span> <span class="dv">15</span>, <span class="at">cores =</span><span class="dv">4</span></span>
-<span id="cb193-6"><a href="7-2-practical-4.html#cb193-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">#refresh = 0</span></span>
+<span id="cb193-4"><a href="7-2-practical-4.html#cb193-4" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
+<span id="cb193-5"><a href="7-2-practical-4.html#cb193-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> unicorns, <span class="at">iter =</span> <span class="dv">4750</span>, <span class="at">warmup =</span> <span class="dv">1000</span>, <span class="at">thin =</span> <span class="dv">15</span>, <span class="at">cores =</span> <span class="dv">4</span></span>
+<span id="cb193-6"><a href="7-2-practical-4.html#cb193-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># refresh = 0</span></span>
 <span id="cb193-7"><a href="7-2-practical-4.html#cb193-7" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb193-8"><a href="7-2-practical-4.html#cb193-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Compiling Stan program...</code></pre>
 <pre><code>## Start sampling</code></pre>
 <div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="7-2-practical-4.html#cb196-1" aria-hidden="true" tabindex="-1"></a>brm_time</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##  64.671   4.515  83.047</code></pre>
+##   5.721   1.153  15.374</code></pre>
 <div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="7-2-practical-4.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_brm)</span></code></pre></div>
 <pre><code>##  Family: gaussian 
 ##   Links: mu = identity; sigma = identity 
@@ -607,19 +609,19 @@ Figure 7.7: Posterior trace and distribution of the paremeters in m_mcmcglmm wit
 ## Group-Level Effects: 
 ## ~ID (Number of levels: 80) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.14      0.07     0.01     0.27 1.00      933      824
+## sd(Intercept)     0.14      0.07     0.02     0.27 1.00     1105      876
 ## 
 ## Population-Level Effects: 
 ##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept        9.00      0.04     8.93     9.07 1.00     1124     1057
-## opp_size         1.05      0.04     0.97     1.13 1.00      968      995
-## body_size_sc     0.04      0.04    -0.04     0.12 1.00      965      808
-## assay_rep_sc    -0.06      0.04    -0.15     0.03 1.00      968      938
-## block           -0.02      0.07    -0.15     0.12 1.01      784      988
+## Intercept        9.00      0.04     8.92     9.08 1.00      995     1078
+## opp_size         1.05      0.04     0.97     1.13 1.00      954      954
+## body_size_sc     0.03      0.04    -0.05     0.11 1.00     1090      985
+## assay_rep_sc    -0.06      0.04    -0.14     0.02 1.00     1097     1081
+## block           -0.02      0.07    -0.15     0.12 1.00     1073     1019
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.77      0.03     0.72     0.82 1.00     1051      990
+## sigma     0.77      0.03     0.71     0.82 1.00      957      917
 ## 
 ## Samples were drawn using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
@@ -785,7 +787,18 @@ Figure 7.11: Among-individual and residual standard deviance ( with 95% credible
 </div>
 </div>
 </div>
+<div id="happy-bayesian-stats" class="section level3" number="7.2.7">
+<h3><span class="header-section-number">7.2.7</span> Happy Bayesian stats</h3>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-89"></span>
+<img src="images/sherlock.jpg" alt="Sherlock Holmes, a truly bayesian detective" width="50%" />
+<p class="caption">
+Figure 7.12: Sherlock Holmes, a truly bayesian detective
+</p>
 </div>
+
+</div>
+</div>
+<!-- </div> -->
 <script src="js/solution.js"></script>
             </section>
 
@@ -793,7 +806,7 @@ Figure 7.11: Among-individual and residual standard deviance ( with 95% credible
         </div>
       </div>
 <a href="7-1-theory.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="7-3-happy-bayesian-stats.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="8-random-regressions-and-multivariate-mixed-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
