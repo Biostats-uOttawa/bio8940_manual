@@ -361,7 +361,7 @@ mcmc_us <- MCMCglmm(cbind(speed_sc, exploration_sc) ~ trait - 1 +
   random = ~ us(trait):ID,
   rcov = ~ us(trait):units,
   family = c("gaussian", "gaussian"),
-  prior = prior_1exx,
+  prior = prior_1ex,
   nitt = 420000,
   burnin = 20000,
   thin = 100,
