@@ -1,7 +1,8 @@
 #*.html
-docs/
+#docs/
 *.log
-_bookdown_files/BIO8940_book_files/
+_bookdown_files/
 extra/
-BIO8940_book_files/
+#BIO8940_book_files/
 BIO8940_book_cache/
+BIO8940_book.*

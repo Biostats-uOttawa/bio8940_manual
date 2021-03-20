@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>8.2 Practical | BIO8940 Advanced stats and Open Science</title>
+  <meta name="description" content="Theory and practicals for BIO8940 course at the University of Ottawa" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="8.2 Practical | BIO8940 Advanced stats and Open Science" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="images/missing.png" />
+  <meta property="og:description" content="Theory and practicals for BIO8940 course at the University of Ottawa" />
+  <meta name="github-repo" content="BIO8940-uOttawa/class_book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="8.2 Practical | BIO8940 Advanced stats and Open Science" />
+  
+  <meta name="twitter:description" content="Theory and practicals for BIO8940 course at the University of Ottawa" />
+  <meta name="twitter:image" content="images/missing.png" />
+
+<meta name="author" content="Julien Martin" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="8-1-theory-1.html"/>
+<link rel="next" href="r-1.html"/>
+<script src="libs/header-attrs-2.7.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Advanced stats and open science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Note</a></li>
+<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="" data-path="quelques-points-importants-à-retenir.html"><a href="quelques-points-importants-à-retenir.html"><i class="fa fa-check"></i>Quelques points importants à retenir</a></li>
+<li class="chapter" data-level="" data-path="quest-ce-que-r-et-pourquoi-lutiliser-dans-ce-cours.html"><a href="quest-ce-que-r-et-pourquoi-lutiliser-dans-ce-cours.html"><i class="fa fa-check"></i>Qu’est-ce que R et pourquoi l’utiliser dans ce cours?</a></li>
+<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html"><i class="fa fa-check"></i>Installation des logiciels nécessaires</a>
+<ul>
+<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#r"><i class="fa fa-check"></i>R</a></li>
+<li class="chapter" data-level="0.0.1" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#text-editor-or-ide"><i class="fa fa-check"></i><b>0.0.1</b> Text editor or IDE</a></li>
+<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#paquets-pour-r"><i class="fa fa-check"></i>Paquets pour R</a></li>
+<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#pandoc"><i class="fa fa-check"></i>pandoc</a></li>
+<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#latex"><i class="fa fa-check"></i>laTex</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="instructions-générales-pour-les-laboratoires.html"><a href="instructions-générales-pour-les-laboratoires.html"><i class="fa fa-check"></i>Instructions générales pour les laboratoires</a></li>
+<li class="chapter" data-level="" data-path="notes-sur-le-manuel.html"><a href="notes-sur-le-manuel.html"><i class="fa fa-check"></i>Notes sur le manuel</a>
+<ul>
+<li class="chapter" data-level="" data-path="notes-sur-le-manuel.html"><a href="notes-sur-le-manuel.html#resources"><i class="fa fa-check"></i>Resources</a></li>
+<li class="chapter" data-level="" data-path="notes-sur-le-manuel.html"><a href="notes-sur-le-manuel.html#licence"><i class="fa fa-check"></i>Licence</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I Open Science</b></span></li>
+<li class="chapter" data-level="1" data-path="1-introduction-to-open-science.html"><a href="1-introduction-to-open-science.html"><i class="fa fa-check"></i><b>1</b> Introduction to open Science</a></li>
+<li class="chapter" data-level="2" data-path="2-introduction-to-rmarkdown.html"><a href="2-introduction-to-rmarkdown.html"><i class="fa fa-check"></i><b>2</b> Introduction to Rmarkdown</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2-1-practical.html"><a href="2-1-practical.html"><i class="fa fa-check"></i><b>2.1</b> Practical</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="2-1-practical.html"><a href="2-1-practical.html#context"><i class="fa fa-check"></i><b>2.1.1</b> Context</a></li>
+<li class="chapter" data-level="2.1.2" data-path="2-1-practical.html"><a href="2-1-practical.html#questions"><i class="fa fa-check"></i><b>2.1.2</b> Questions</a></li>
+<li class="chapter" data-level="" data-path="2-1-practical.html"><a href="2-1-practical.html#example-of-output"><i class="fa fa-check"></i>Example of output</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-introduction-to-github-with-r.html"><a href="3-introduction-to-github-with-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to github with R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3-1-practical-1.html"><a href="3-1-practical-1.html"><i class="fa fa-check"></i><b>3.1</b> Practical</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="3-1-practical-1.html"><a href="3-1-practical-1.html#context-1"><i class="fa fa-check"></i><b>3.1.1</b> Context</a></li>
+<li class="chapter" data-level="3.1.2" data-path="3-1-practical-1.html"><a href="3-1-practical-1.html#information-of-the-data"><i class="fa fa-check"></i><b>3.1.2</b> Information of the data</a></li>
+<li class="chapter" data-level="3.1.3" data-path="3-1-practical-1.html"><a href="3-1-practical-1.html#questions-1"><i class="fa fa-check"></i><b>3.1.3</b> Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Statistics</b></span></li>
+<li class="chapter" data-level="4" data-path="4-refresher-on-glm.html"><a href="4-refresher-on-glm.html"><i class="fa fa-check"></i><b>4</b> Refresher on <code>glm</code></a></li>
+<li class="chapter" data-level="5" data-path="5-introduction-to-linear-mixed-models.html"><a href="5-introduction-to-linear-mixed-models.html"><i class="fa fa-check"></i><b>5</b> Introduction to linear mixed models</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5-1-shrinkage.html"><a href="5-1-shrinkage.html"><i class="fa fa-check"></i><b>5.1</b> Shrinkage</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="5-1-shrinkage.html"><a href="5-1-shrinkage.html#analysis"><i class="fa fa-check"></i><b>5.1.1</b> Analysis</a></li>
+<li class="chapter" data-level="5.1.2" data-path="5-1-shrinkage.html"><a href="5-1-shrinkage.html#data"><i class="fa fa-check"></i><b>5.1.2</b> Data</a></li>
+<li class="chapter" data-level="5.1.3" data-path="5-1-shrinkage.html"><a href="5-1-shrinkage.html#run-the-baseline-model"><i class="fa fa-check"></i><b>5.1.3</b> Run the baseline model</a></li>
+<li class="chapter" data-level="5.1.4" data-path="5-1-shrinkage.html"><a href="5-1-shrinkage.html#visualize-the-baseline-model"><i class="fa fa-check"></i><b>5.1.4</b> Visualize the baseline model</a></li>
+<li class="chapter" data-level="5.1.5" data-path="5-1-shrinkage.html"><a href="5-1-shrinkage.html#summary"><i class="fa fa-check"></i><b>5.1.5</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html"><i class="fa fa-check"></i><b>5.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#overview"><i class="fa fa-check"></i><b>5.2.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#r-packages-needed"><i class="fa fa-check"></i><b>5.2.2</b> R packages needed</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#the-superb-wild-unicorns-of-the-scottish-highlands"><i class="fa fa-check"></i><b>5.2.3</b> The superb wild unicorns of the Scottish Highlands</a></li>
+<li class="chapter" data-level="5.2.4" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#do-unicorns-differ-in-aggressiveness-your-first-mixed-model"><i class="fa fa-check"></i><b>5.2.4</b> Do unicorns differ in aggressiveness? Your first mixed model</a></li>
+<li class="chapter" data-level="5.2.5" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#do-unicorns-differ-in-aggressiveness-a-better-mixed-model"><i class="fa fa-check"></i><b>5.2.5</b> Do unicorns differ in aggressiveness? A better mixed model</a></li>
+<li class="chapter" data-level="5.2.6" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#what-is-the-repeatability"><i class="fa fa-check"></i><b>5.2.6</b> What is the repeatability?</a></li>
+<li class="chapter" data-level="5.2.7" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#a-quick-note-on-uncertainty"><i class="fa fa-check"></i><b>5.2.7</b> A quick note on uncertainty</a></li>
+<li class="chapter" data-level="5.2.8" data-path="5-2-practical-2.html"><a href="5-2-practical-2.html#an-easy-way-to-mess-up-your-mixed-models"><i class="fa fa-check"></i><b>5.2.8</b> An easy way to mess up your mixed models</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="5-3-happy-mixed-modelling.html"><a href="5-3-happy-mixed-modelling.html"><i class="fa fa-check"></i><b>5.3</b> Happy mixed-modelling</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-introduction-to-glmm.html"><a href="6-introduction-to-glmm.html"><i class="fa fa-check"></i><b>6</b> Introduction to <code>GLMM</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html"><i class="fa fa-check"></i><b>6.1</b> Practical</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#packages-and-functions"><i class="fa fa-check"></i><b>6.1.1</b> Packages and functions</a></li>
+<li class="chapter" data-level="6.1.2" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#the-data-set"><i class="fa fa-check"></i><b>6.1.2</b> The data set</a></li>
+<li class="chapter" data-level="6.1.3" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#specifying-fixed-and-random-effects"><i class="fa fa-check"></i><b>6.1.3</b> Specifying fixed and random Effects</a></li>
+<li class="chapter" data-level="6.1.4" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#look-at-overall-patterns-in-data"><i class="fa fa-check"></i><b>6.1.4</b> Look at overall patterns in data</a></li>
+<li class="chapter" data-level="6.1.5" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#choose-an-error-distribution"><i class="fa fa-check"></i><b>6.1.5</b> Choose an error distribution</a></li>
+<li class="chapter" data-level="6.1.6" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#fitting-group-wise-glm"><i class="fa fa-check"></i><b>6.1.6</b> Fitting group-wise GLM</a></li>
+<li class="chapter" data-level="6.1.7" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#fitting-and-evaluating-glmms"><i class="fa fa-check"></i><b>6.1.7</b> Fitting and evaluating GLMMs</a></li>
+<li class="chapter" data-level="6.1.8" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#inference"><i class="fa fa-check"></i><b>6.1.8</b> Inference</a></li>
+<li class="chapter" data-level="6.1.9" data-path="6-1-practical-3.html"><a href="6-1-practical-3.html#conclusions"><i class="fa fa-check"></i><b>6.1.9</b> Conclusions</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="6-2-happy-generalized-mixed-modelling.html"><a href="6-2-happy-generalized-mixed-modelling.html"><i class="fa fa-check"></i><b>6.2</b> Happy generalized mixed-modelling</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-introduction-to-bayesian-inference.html"><a href="7-introduction-to-bayesian-inference.html"><i class="fa fa-check"></i><b>7</b> Introduction to <code>Bayesian Inference</code></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7-1-theory.html"><a href="7-1-theory.html"><i class="fa fa-check"></i><b>7.1</b> theory</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="7-1-theory.html"><a href="7-1-theory.html#bayes-theorem"><i class="fa fa-check"></i><b>7.1.1</b> Bayes’ theorem</a></li>
+<li class="chapter" data-level="7.1.2" data-path="7-1-theory.html"><a href="7-1-theory.html#intro-to-mcmc"><i class="fa fa-check"></i><b>7.1.2</b> Intro to MCMC</a></li>
+<li class="chapter" data-level="7.1.3" data-path="7-1-theory.html"><a href="7-1-theory.html#inferences-1"><i class="fa fa-check"></i><b>7.1.3</b> Inferences</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html"><i class="fa fa-check"></i><b>7.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#r-packages-needed-1"><i class="fa fa-check"></i><b>7.2.1</b> R packages needed</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#a-refresher-on-unicorn-ecology"><i class="fa fa-check"></i><b>7.2.2</b> A refresher on unicorn ecology</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#mcmcglmm"><i class="fa fa-check"></i><b>7.2.3</b> MCMCglmm</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#inferences-2"><i class="fa fa-check"></i><b>7.2.4</b> Inferences</a></li>
+<li class="chapter" data-level="7.2.5" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#brms"><i class="fa fa-check"></i><b>7.2.5</b> brms</a></li>
+<li class="chapter" data-level="7.2.6" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#inferences-3"><i class="fa fa-check"></i><b>7.2.6</b> Inferences</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7-3-happy-bayesian-stats.html"><a href="7-3-happy-bayesian-stats.html"><i class="fa fa-check"></i><b>7.3</b> Happy Bayesian stats</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="8-random-regressions-and-multivariate-mixed-models.html"><a href="8-random-regressions-and-multivariate-mixed-models.html"><i class="fa fa-check"></i><b>8</b> Random regressions and multivariate mixed models</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8-1-theory-1.html"><a href="8-1-theory-1.html"><i class="fa fa-check"></i><b>8.1</b> theory</a></li>
+<li class="chapter" data-level="8.2" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html"><i class="fa fa-check"></i><b>8.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#r-packages-needed-2"><i class="fa fa-check"></i><b>8.2.1</b> R packages needed</a></li>
+<li class="chapter" data-level="8.2.2" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#the-blue-dragon-of-the-west"><i class="fa fa-check"></i><b>8.2.2</b> The blue dragon of the west</a></li>
+<li class="chapter" data-level="8.2.3" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#multiple-univariate-models"><i class="fa fa-check"></i><b>8.2.3</b> Multiple univariate models</a></li>
+<li class="chapter" data-level="8.2.4" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#multivariate-approach"><i class="fa fa-check"></i><b>8.2.4</b> Multivariate approach</a></li>
+<li class="chapter" data-level="8.2.5" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#happy-multivariate-models"><i class="fa fa-check"></i><b>8.2.5</b> Happy multivariate models</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Appendix</b></span></li>
+<li class="chapter" data-level="" data-path="r-1.html"><a href="r-1.html"><i class="fa fa-check"></i>R</a></li>
+<li class="chapter" data-level="" data-path="to-do-list.html"><a href="to-do-list.html"><i class="fa fa-check"></i>To do list</a></li>
+<li class="chapter" data-level="" data-path="list-of-r-packages-used-in-this-book.html"><a href="list-of-r-packages-used-in-this-book.html"><i class="fa fa-check"></i>List of R packages used in this book</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIO8940 Advanced stats and Open Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="practical-5" class="section level2" number="8.2">
+<h2><span class="header-section-number">8.2</span> Practical</h2>
+<p>In this practical, we have collected data on the amazing blue dragon of the west that roam the sky at night.</p>
+<p>We will use two different 📦 to fit more complex models that are not possible with <code>lmer()</code> from <code>lme4</code>
+📦 <span class="citation">(<a href="references.html#ref-R-lme4" role="doc-biblioref">Bates et al. 2020</a>)</span>. We will use:</p>
+<ul>
+<li><code>asreml-R</code> which is a commercial software developped by VSNi <span class="citation">(<a href="references.html#ref-R-asreml" role="doc-biblioref">Butler 2020</a>)</span>. <code>ASReml</code> fit models using a maxiumum likelihood approach, is quite flexible and fast.</li>
+<li><code>MCMCglmm</code> which is free and open-source and fit model using a Bayesian approach <span class="citation">(<a href="references.html#ref-MCMCglmm2010" role="doc-biblioref">Hadfield 2010</a>)</span>. It is super flexible and allow to fit a wide diversity of distribution.</li>
+</ul>
+<p>The aims of the practical are to learn:</p>
+<ul>
+<li>How to phrase questions of interest in terms of variances and covariances (or derived correlations or regressions);</li>
+<li>How to incorporate more advanced model structures, such as:
+<ul>
+<li>Fixed effects that apply only to a subset of the response traits;</li>
+<li>Traits which are measured a different number of times (e.g., repeated measures of behaviour and a single value of breeding success);</li>
+</ul></li>
+<li>Hypothesis testing using likelihood ratio tests.</li>
+</ul>
+<div id="r-packages-needed-2" class="section level3" number="8.2.1">
+<h3><span class="header-section-number">8.2.1</span> R packages needed</h3>
+<p>First we load required libraries</p>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="8-2-practical-5.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb210-2"><a href="8-2-practical-5.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb210-3"><a href="8-2-practical-5.html#cb210-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(asreml)</span>
+<span id="cb210-4"><a href="8-2-practical-5.html#cb210-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MCMCglmm)</span>
+<span id="cb210-5"><a href="8-2-practical-5.html#cb210-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nadiv)</span></code></pre></div>
+</div>
+<div id="the-blue-dragon-of-the-west" class="section level3" number="8.2.2">
+<h3><span class="header-section-number">8.2.2</span> The blue dragon of the west</h3>
+<p>For this practical, we have collected data on the amazing blue dragon of the west that roam the sky at night.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-91"></span>
+<img src="images/blue_dragon.jpg" alt="Blue dragon male" width="50%" />
+<p class="caption">
+Figure 8.2: Blue dragon male
+</p>
+</div>
+<p>We tagged all dragons individually when they hatch from their eggs. Here, we concentrate on female dragon that produce a single clucth of eggs per mating seasons. Adult femlae blue dragons need to explore vast amount of land to find a compatible male. We thus hypothesized that maximum flight speed as well as exploration are key traits to determine fitness. We were able to obtain repeated measures of flying speed and exploration on 80 adult females during one mating season and also measure the number of egg layed at the end of the season.</p>
+<p>Each females was capture 4 times during the season and each time we measured the maximum flying speed using a wind tunnel and exploration using a openfield test.</p>
+<p>The data frame has 6 variables:</p>
+<ul>
+<li>ID: Individual identity</li>
+<li>assay_rep: the repeat number of the behavioural assay</li>
+<li>max_speed: maximum flying speed</li>
+<li>exploration:</li>
+<li>eggs: measure of reproductive succes measured only once per individual</li>
+<li>body_size: individual body size measured on the day of the test</li>
+</ul>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="8-2-practical-5.html#cb211-1" aria-hidden="true" tabindex="-1"></a>df_dragons <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/dragons.csv&quot;</span>)</span>
+<span id="cb211-2"><a href="8-2-practical-5.html#cb211-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(df_dragons)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    320 obs. of  6 variables:
+##  $ ID         : chr  &quot;S_1&quot; &quot;S_1&quot; &quot;S_1&quot; &quot;S_1&quot; ...
+##  $ assay_rep  : int  1 2 3 4 1 2 3 4 1 2 ...
+##  $ max_speed  : num  58.7 57.9 64.3 61.4 65.5 ...
+##  $ exploration: num  126 125 127 127 125 ...
+##  $ eggs       : int  39 NA NA NA 56 NA NA NA 51 NA ...
+##  $ body_size  : num  21.7 21.5 21.3 20.8 25.7 ...</code></pre>
+<p>To help with convergence of the model, and also help with parameter interpretation, we will first scale our covariates.</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="8-2-practical-5.html#cb213-1" aria-hidden="true" tabindex="-1"></a>df_dragons <span class="ot">&lt;-</span> df_dragons <span class="sc">%&gt;%</span></span>
+<span id="cb213-2"><a href="8-2-practical-5.html#cb213-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb213-3"><a href="8-2-practical-5.html#cb213-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_size_sc =</span> <span class="fu">scale</span>(body_size),</span>
+<span id="cb213-4"><a href="8-2-practical-5.html#cb213-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">assay_rep_sc =</span> <span class="fu">scale</span>(assay_rep, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb213-5"><a href="8-2-practical-5.html#cb213-5" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</div>
+<div id="multiple-univariate-models" class="section level3" number="8.2.3">
+<h3><span class="header-section-number">8.2.3</span> Multiple univariate models</h3>
+<p>We first use the <code>lme4</code> 📦 to determine the proportion of phenotypic variation (adjusted for fixed effects) that is due to differences among individuals, separately for each trait with repeated measures.</p>
+<div id="flying-speed" class="section level4" number="8.2.3.1">
+<h4><span class="header-section-number">8.2.3.1</span> Flying speed</h4>
+<p>Our model includes fixed effects of the assay repeat number (centred) and individual body size (centred and scaled to standard deviation units), as we wish to control for any systematic effects of these variables on individual behaviour. Be aware that controlling variables are at your discretion — for example, while we want to characterise among-individual variance in flying speed after controlling for size effects in this study, others may wish to characterise among-individual variance in flying speed without such control. Using techniques shown later in the practical, it would be entirely possible to characterise both among-individual variance in flying speed and in size, and the among-individual covariance between these measurements.</p>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="8-2-practical-5.html#cb214-1" aria-hidden="true" tabindex="-1"></a>lmer_f <span class="ot">&lt;-</span> <span class="fu">lmer</span>(max_speed <span class="sc">~</span> assay_rep_sc <span class="sc">+</span> body_size_sc <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
+<span id="cb214-2"><a href="8-2-practical-5.html#cb214-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_dragons</span>
+<span id="cb214-3"><a href="8-2-practical-5.html#cb214-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb214-4"><a href="8-2-practical-5.html#cb214-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb214-5"><a href="8-2-practical-5.html#cb214-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">resid</span>(lmer_f, <span class="at">type =</span> <span class="st">&quot;pearson&quot;</span>) <span class="sc">~</span> <span class="fu">fitted</span>(lmer_f))</span>
+<span id="cb214-6"><a href="8-2-practical-5.html#cb214-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(lmer_f))</span>
+<span id="cb214-7"><a href="8-2-practical-5.html#cb214-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(lmer_f))</span>
+<span id="cb214-8"><a href="8-2-practical-5.html#cb214-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(lmer_f))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-94"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-94-1.svg" alt="Checking assumptions of model lmer_f" width="672" />
+<p class="caption">
+Figure 8.3: Checking assumptions of model lmer_f
+</p>
+</div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="8-2-practical-5.html#cb215-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer_f)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+## Formula: max_speed ~ assay_rep_sc + body_size_sc + (1 | ID)
+##    Data: df_dragons
+## 
+## REML criterion at convergence: 1791.4
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.3645 -0.6496 -0.1154  0.6463  2.6894 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  ID       (Intercept)  6.951   2.636   
+##  Residual             11.682   3.418   
+## Number of obs: 320, groups:  ID, 80
+## 
+## Fixed effects:
+##              Estimate Std. Error       df t value Pr(&gt;|t|)    
+## (Intercept)   63.5344     0.3513  78.0954 180.870   &lt;2e-16 ***
+## assay_rep_sc  -0.1519     0.1709 238.9807  -0.889    0.375    
+## body_size_sc   0.4468     0.3445  88.0328   1.297    0.198    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) assy__
+## assay_rp_sc  0.000       
+## body_siz_sc  0.000 -0.002</code></pre>
+<p>Having examined diagnostic plots of the model fit, we can check the model summary. We are interested in the random effects section of the lme4 model output (specifically the variance component — note that the standard deviation here is simply the square root of the variance). Evidence for ‘animal personality’ (or ‘consistent among-individual differences in behaviour’) in the literature is largely taken from the repeatability of behaviorual traits: we can compute this repeatability (also known as the intraclass correlation coefficient) by dividing the variance in the trait due to differences among individuals (<span class="math inline">\(V_{ID}\)</span>) by the total phenotypic variance after accounting for the fixed effects (<span class="math inline">\(V_{ID} + V_{residual}\)</span> ).</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="8-2-practical-5.html#cb217-1" aria-hidden="true" tabindex="-1"></a>rep_flying <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(lmer_f)) <span class="sc">%&gt;%</span></span>
+<span id="cb217-2"><a href="8-2-practical-5.html#cb217-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(grp, vcov) <span class="sc">%&gt;%</span></span>
+<span id="cb217-3"><a href="8-2-practical-5.html#cb217-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(grp, vcov) <span class="sc">%&gt;%</span></span>
+<span id="cb217-4"><a href="8-2-practical-5.html#cb217-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">repeatability =</span> ID <span class="sc">/</span> (ID <span class="sc">+</span> Residual))</span>
+<span id="cb217-5"><a href="8-2-practical-5.html#cb217-5" aria-hidden="true" tabindex="-1"></a>rep_flying</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-96">Table 8.1: </span>Variance components and repeatbility for the maximum
+flying speed of blue dragons</caption>
+<thead>
+<tr class="header">
+<th align="right">ID</th>
+<th align="right">Residual</th>
+<th align="right">repeatability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">6.951</td>
+<td align="right">11.682</td>
+<td align="right">0.373</td>
+</tr>
+</tbody>
+</table>
+<p>So we can see that 37.31% of the phenotypic variation in boldness (having controlled for body size and assay
+repeat number) is due to differences among individuals.</p>
+</div>
+<div id="exploration" class="section level4" number="8.2.3.2">
+<h4><span class="header-section-number">8.2.3.2</span> Exploration</h4>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="8-2-practical-5.html#cb218-1" aria-hidden="true" tabindex="-1"></a>lmer_e <span class="ot">&lt;-</span> <span class="fu">lmer</span>(exploration <span class="sc">~</span> assay_rep_sc <span class="sc">+</span> body_size_sc <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
+<span id="cb218-2"><a href="8-2-practical-5.html#cb218-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_dragons</span>
+<span id="cb218-3"><a href="8-2-practical-5.html#cb218-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb218-4"><a href="8-2-practical-5.html#cb218-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb218-5"><a href="8-2-practical-5.html#cb218-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">resid</span>(lmer_e, <span class="at">type =</span> <span class="st">&quot;pearson&quot;</span>) <span class="sc">~</span> <span class="fu">fitted</span>(lmer_e))</span>
+<span id="cb218-6"><a href="8-2-practical-5.html#cb218-6" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(lmer_e))</span>
+<span id="cb218-7"><a href="8-2-practical-5.html#cb218-7" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(lmer_e))</span>
+<span id="cb218-8"><a href="8-2-practical-5.html#cb218-8" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(lmer_e))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-97"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-97-1.svg" alt="Checking assumptions of model lmer_e" width="672" />
+<p class="caption">
+Figure 8.4: Checking assumptions of model lmer_e
+</p>
+</div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="8-2-practical-5.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer_e)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
+## Formula: exploration ~ assay_rep_sc + body_size_sc + (1 | ID)
+##    Data: df_dragons
+## 
+## REML criterion at convergence: 1691.2
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.73290 -0.62520  0.01635  0.55523  2.95896 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  ID       (Intercept) 3.623    1.903   
+##  Residual             9.091    3.015   
+## Number of obs: 320, groups:  ID, 80
+## 
+## Fixed effects:
+##               Estimate Std. Error        df t value Pr(&gt;|t|)    
+## (Intercept)  127.22524    0.27148  78.08871 468.639   &lt;2e-16 ***
+## assay_rep_sc  -0.07811    0.15076 238.99943  -0.518    0.605    
+## body_size_sc   0.26114    0.26806  85.68180   0.974    0.333    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) assy__
+## assay_rp_sc  0.000       
+## body_siz_sc  0.000 -0.002</code></pre>
+<p>So the model looks good and we can see our estimates for both fixed and random effects. We can now estimate the repeatbility of exploration.</p>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="8-2-practical-5.html#cb221-1" aria-hidden="true" tabindex="-1"></a>rep_expl <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">VarCorr</span>(lmer_e)) <span class="sc">%&gt;%</span></span>
+<span id="cb221-2"><a href="8-2-practical-5.html#cb221-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(grp, vcov) <span class="sc">%&gt;%</span></span>
+<span id="cb221-3"><a href="8-2-practical-5.html#cb221-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(grp, vcov) <span class="sc">%&gt;%</span></span>
+<span id="cb221-4"><a href="8-2-practical-5.html#cb221-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">repeatability =</span> ID <span class="sc">/</span> (ID <span class="sc">+</span> Residual))</span>
+<span id="cb221-5"><a href="8-2-practical-5.html#cb221-5" aria-hidden="true" tabindex="-1"></a>rep_expl</span></code></pre></div>
+<table>
+<caption><span id="tab:unnamed-chunk-99">Table 8.2: </span>Variance components and repeatability for exploration
+behaviour of blue dragons</caption>
+<thead>
+<tr class="header">
+<th align="right">ID</th>
+<th align="right">Residual</th>
+<th align="right">repeatability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">6.951</td>
+<td align="right">11.682</td>
+<td align="right">0.373</td>
+</tr>
+</tbody>
+</table>
+<p>Both of traits of interest are repeatable at the among-individual level. So, the remaining question is estimating the relation between these two traits. Are individuals that are consistently faster than average also more exploratory than average (and vice versa)?</p>
+</div>
+<div id="correlation-using-blups" class="section level4" number="8.2.3.3">
+<h4><span class="header-section-number">8.2.3.3</span> Correlation using BLUPs</h4>
+<p>Using BLUPs to estimate correlations between traits or to further investigate biological associations can lead to spurious results and anticonservative hypothesis tests and narrow confidence intervals. <span class="citation"><a href="references.html#ref-hadfield_misuse_2010" role="doc-biblioref">Hadfield et al.</a> (<a href="references.html#ref-hadfield_misuse_2010" role="doc-biblioref">2010</a>)</span> discuss the problem as well as present some alternative method to avoid the problem using Bayesian methods. However, it is always preferable to use multivariate models when possible.</p>
+<p>We need to create a data frame that contain the BLUPs from both univariate models.</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="8-2-practical-5.html#cb222-1" aria-hidden="true" tabindex="-1"></a>df_blups_fe <span class="ot">&lt;-</span> <span class="fu">merge</span>(</span>
+<span id="cb222-2"><a href="8-2-practical-5.html#cb222-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="fu">ranef</span>(lmer_f)),</span>
+<span id="cb222-3"><a href="8-2-practical-5.html#cb222-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>(<span class="fu">ranef</span>(lmer_e)),</span>
+<span id="cb222-4"><a href="8-2-practical-5.html#cb222-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">&quot;grp&quot;</span></span>
+<span id="cb222-5"><a href="8-2-practical-5.html#cb222-5" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb222-6"><a href="8-2-practical-5.html#cb222-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb222-7"><a href="8-2-practical-5.html#cb222-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">speed =</span> condval.x,</span>
+<span id="cb222-8"><a href="8-2-practical-5.html#cb222-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">exploration =</span> condval.y</span>
+<span id="cb222-9"><a href="8-2-practical-5.html#cb222-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<p>We can now test the correlation among-individual between flying speed and exploration.</p>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="8-2-practical-5.html#cb223-1" aria-hidden="true" tabindex="-1"></a>(cor_blups <span class="ot">&lt;-</span> <span class="fu">with</span>(df_blups_fe, <span class="fu">cor.test</span>(condval.x, condval.y)))</span></code></pre></div>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  condval.x and condval.y
+## t = 3.2131, df = 78, p-value = 0.00191
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.1320924 0.5223645
+## sample estimates:
+##       cor 
+## 0.3418867</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="8-2-practical-5.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_blups_fe, <span class="fu">aes</span>(<span class="at">x =</span> exploration, <span class="at">y =</span> speed)) <span class="sc">+</span></span>
+<span id="cb225-2"><a href="8-2-practical-5.html#cb225-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb225-3"><a href="8-2-practical-5.html#cb225-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">xlab =</span> <span class="st">&quot;Exploration (BLUP)&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Flying speed (BLUP)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb225-4"><a href="8-2-practical-5.html#cb225-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-101"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-101-1.svg" alt="Relation between exploration and flying speed using BLUPs from univariate models" width="672" />
+<p class="caption">
+Figure 8.5: Relation between exploration and flying speed using BLUPs from univariate models
+</p>
+</div>
+<p>As you can see, we get a positive correlation with a very small p-value (<span class="math inline">\(P = 0.0019099\)</span>), indicating that these traits are involved in a behavioural syndrome. While the correlation itself is fairly weak ($r = 0.3418867), it appears to be highly significant, and suggests that individuals that are faster than average also tend to be more exploratory than average.
+However, as discussed in <span class="citation"><a href="references.html#ref-hadfield_misuse_2010" role="doc-biblioref">Hadfield et al.</a> (<a href="references.html#ref-hadfield_misuse_2010" role="doc-biblioref">2010</a>)</span> and <span class="citation"><a href="references.html#ref-houslay_avoiding_2017" role="doc-biblioref">Houslay and Wilson</a> (<a href="references.html#ref-houslay_avoiding_2017" role="doc-biblioref">2017</a>)</span>, using BLUPs in this way leads to anticonservative significance tests. This is because the error inherent in their prediction is not carried forward from the lmer models to the subsequent analysis (in this case, a correlation test).
+To illustrate this point quickly, below we plot the individual estimates along with their associated standard errors.</p>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="8-2-practical-5.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_blups_fe, <span class="fu">aes</span>(<span class="at">x =</span> exploration, <span class="at">y =</span> speed)) <span class="sc">+</span></span>
+<span id="cb226-2"><a href="8-2-practical-5.html#cb226-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb226-3"><a href="8-2-practical-5.html#cb226-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(</span>
+<span id="cb226-4"><a href="8-2-practical-5.html#cb226-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">xmin =</span> exploration <span class="sc">-</span> condsd.x,</span>
+<span id="cb226-5"><a href="8-2-practical-5.html#cb226-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">xmax =</span> exploration <span class="sc">+</span> condsd.x</span>
+<span id="cb226-6"><a href="8-2-practical-5.html#cb226-6" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb226-7"><a href="8-2-practical-5.html#cb226-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(</span>
+<span id="cb226-8"><a href="8-2-practical-5.html#cb226-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymin =</span> speed <span class="sc">-</span> condsd.y,</span>
+<span id="cb226-9"><a href="8-2-practical-5.html#cb226-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">ymax =</span> speed <span class="sc">+</span> condsd.y</span>
+<span id="cb226-10"><a href="8-2-practical-5.html#cb226-10" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb226-11"><a href="8-2-practical-5.html#cb226-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb226-12"><a href="8-2-practical-5.html#cb226-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">xlab =</span> <span class="st">&quot;Exploration (BLUP +/- SE)&quot;</span>,</span>
+<span id="cb226-13"><a href="8-2-practical-5.html#cb226-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Flying speed (BLUP +/- SE)&quot;</span></span>
+<span id="cb226-14"><a href="8-2-practical-5.html#cb226-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb226-15"><a href="8-2-practical-5.html#cb226-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-102"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-102-1.svg" alt="Relation between exploration and flying speed using BLUPs from univariate models including +/- SE as error bars" width="672" />
+<p class="caption">
+Figure 8.6: Relation between exploration and flying speed using BLUPs from univariate models including +/- SE as error bars
+</p>
+</div>
+</div>
+</div>
+<div id="multivariate-approach" class="section level3" number="8.2.4">
+<h3><span class="header-section-number">8.2.4</span> Multivariate approach</h3>
+<div id="based-on-asremlr" class="section level4" number="8.2.4.1">
+<h4><span class="header-section-number">8.2.4.1</span> Based on ASRemlR</h4>
+<p>The correct approach for testing the hypothesised relation between speed and exploration uses both response variables in a two-trait (‘bivariate’) mixed model. This model estimates the among-individual variance for each response variable (and the covariance between them).
+Separate (co)variances are also fitted for the residual variation.
+The bivariate model also allows for fixed effects to be fitted on both response variables.
+We set up our model using the <code>asreml</code> function call, with our bivariate response variable being <code>exploration</code> and flying <code>speed</code> bound together using <code>cbind</code>. You will also note that we scale our response variables, meaning that each is centred at their mean value and standardised to units of 1 standard deviation. This is not essential, but simply makes it easier for the model to be fit. Scaling the response variables also aids our understanding of the output, as both flying speed and exploration are now on the same scale.</p>
+<p><code>asreml</code> can be a bit specific sometime and random effects should absolutely be <code>factor</code> and not <code>character</code> or <code>integer</code></p>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="8-2-practical-5.html#cb227-1" aria-hidden="true" tabindex="-1"></a>df_dragons <span class="ot">&lt;-</span> df_dragons <span class="sc">%&gt;%</span></span>
+<span id="cb227-2"><a href="8-2-practical-5.html#cb227-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb227-3"><a href="8-2-practical-5.html#cb227-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">ID =</span> <span class="fu">as.factor</span>(ID),</span>
+<span id="cb227-4"><a href="8-2-practical-5.html#cb227-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">speed_sc =</span> <span class="fu">scale</span>(max_speed),</span>
+<span id="cb227-5"><a href="8-2-practical-5.html#cb227-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">exploration_sc =</span> <span class="fu">scale</span>(exploration)</span>
+<span id="cb227-6"><a href="8-2-practical-5.html#cb227-6" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb227-7"><a href="8-2-practical-5.html#cb227-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb227-8"><a href="8-2-practical-5.html#cb227-8" aria-hidden="true" tabindex="-1"></a>asr_us <span class="ot">&lt;-</span> <span class="fu">asreml</span>(<span class="fu">cbind</span>(speed_sc, exploration_sc) <span class="sc">~</span> trait <span class="sc">+</span></span>
+<span id="cb227-9"><a href="8-2-practical-5.html#cb227-9" aria-hidden="true" tabindex="-1"></a>  trait<span class="sc">:</span>assay_rep_sc <span class="sc">+</span> trait<span class="sc">:</span>body_size_sc,</span>
+<span id="cb227-10"><a href="8-2-practical-5.html#cb227-10" aria-hidden="true" tabindex="-1"></a><span class="at">random =</span> <span class="sc">~</span> ID<span class="sc">:</span><span class="fu">us</span>(trait),</span>
+<span id="cb227-11"><a href="8-2-practical-5.html#cb227-11" aria-hidden="true" tabindex="-1"></a><span class="at">residual =</span> <span class="sc">~</span> units<span class="sc">:</span><span class="fu">us</span>(trait),</span>
+<span id="cb227-12"><a href="8-2-practical-5.html#cb227-12" aria-hidden="true" tabindex="-1"></a><span class="at">data =</span> df_dragons,</span>
+<span id="cb227-13"><a href="8-2-practical-5.html#cb227-13" aria-hidden="true" tabindex="-1"></a><span class="at">maxiter =</span> <span class="dv">100</span></span>
+<span id="cb227-14"><a href="8-2-practical-5.html#cb227-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Online License checked out Fri Mar 19 23:43:51 2021
+## Model fitted using the sigma parameterization.
+## ASReml 4.1.0 Fri Mar 19 23:43:51 2021
+##           LogLik        Sigma2     DF     wall    cpu
+##  1      -333.105           1.0    634 23:43:51    0.0
+##  2      -303.637           1.0    634 23:43:51    0.0
+##  3      -274.849           1.0    634 23:43:51    0.0
+##  4      -260.243           1.0    634 23:43:51    0.0
+##  5      -256.118           1.0    634 23:43:51    0.0
+##  6      -255.891           1.0    634 23:43:51    0.0
+##  7      -255.889           1.0    634 23:43:51    0.0</code></pre>
+<p>On the right hand side of our model formula, we use the <code>trait</code> keyword to specify that this is a multivariate model — <code>trait</code> itself tells the model to give us the intercept for each trait. We then interact <code>trait</code> with the fixed effects, <code>assay_rep_sc</code> and <code>body_size_sc</code>, so that we get estimates for the effect of these variables on each of teh 2 traits.
+The random effects structure starts with the random effects, where we tell the model to fit an <em>unstructured</em> (us) covariance matrix for the grouping variable ID. This means that the variance in exploration due to differences among individuals, the variance in boldness due to differences among individuals, and the covariance between these variances will be estimated.
+Next, we set a structure for the residual variation (<code>residual</code>), which is also sometimes known as the <em>within-individual variation</em>. As we have repeated measures for both traits at the individual level, we also set an <em>unstructured</em> covariance matrix, which estimates the residual variance for each trait and also allows the residuals
+to covary across the two traits.
+Finally, we provide the name of the data frame, and a maximum number of iterations for ASReml to attempt to fit the model.
+After the model has been fit by ASReml, we can check the fit using the same type of model diagnostic plots as we use for <code>lme4</code>:</p>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="8-2-practical-5.html#cb229-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb229-2"><a href="8-2-practical-5.html#cb229-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">residuals</span>(asr_us) <span class="sc">~</span> <span class="fu">fitted</span>(asr_us))</span>
+<span id="cb229-3"><a href="8-2-practical-5.html#cb229-3" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(asr_us))</span>
+<span id="cb229-4"><a href="8-2-practical-5.html#cb229-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(asr_us))</span>
+<span id="cb229-5"><a href="8-2-practical-5.html#cb229-5" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(asr_us))</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-104"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-104-1.svg" alt="Checking assumptions of model asr_us" width="672" />
+<p class="caption">
+Figure 8.7: Checking assumptions of model asr_us
+</p>
+</div>
+<p>The summary part of the ASReml model fit contains a large amount of information, so it is best to look only at certain parts of it at a single time. While we are not particularly interested in the fixed effects for current purposes, you can inspect these using the following code to check whether there were any large effects of <code>assay repeat</code> or <code>body size</code> on either trait:</p>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="8-2-practical-5.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(asr_us, <span class="at">all =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>coef.fixed</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<p>We can see that there is a separate intercept for both personality traits (no surprise that these are very close to zero, given that we mean-centred and scaled each trait before fitting the model), and an estimate of the effect of assay repeat and body size on both traits. None of these appear to be large effects, so let’s move on to the more interesting parts — the random effects estimates:</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="8-2-practical-5.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(asr_us)<span class="sc">$</span>varcomp</span></code></pre></div>
+<pre><code>##                                                  component  std.error   z.ratio bound %ch
+## ID:trait!trait_speed_sc:speed_sc                0.37333063 0.08607123  4.337461     P   0
+## ID:trait!trait_exploration_sc:speed_sc          0.08838639 0.06067006  1.456837     P   0
+## ID:trait!trait_exploration_sc:exploration_sc    0.28631012 0.07637247  3.748865     P   0
+## units:trait!R                                   1.00000000         NA        NA     F   0
+## units:trait!trait_speed_sc:speed_sc             0.62741689 0.05740281 10.930073     P   0
+## units:trait!trait_exploration_sc:speed_sc       0.32632113 0.04829175  6.757286     P   0
+## units:trait!trait_exploration_sc:exploration_sc 0.71844189 0.06572780 10.930563     P   0</code></pre>
+<p>In the above summary table, we have the among-individual (co)variances listed first (starting with ID), then the residual (or within-individual) (co)variances (starting with R). You will notice that the variance estimates here are actually close to the <code>lme4</code> repeatability estimates, because our response variables were scaled to phenotypic standard deviations. We can also find the ‘adjusted repeatability’ (i.e., the repeatability conditional on the fixed effects) for each trait by dividing its among-individual variance estimate by the sum
+of its among-individual and residual variances.
+Here, we use the <code>vpredict</code> function to estimate the repeatability and its
+standard error for each trait, conditional on the effects of assay repeat and body size.
+For this function, we provide the name of the model object, followed by a name that we want to give the estimate being returned, and a formula for the calculation. Each ‘V’ term in the formula refers to a variance component, using its position in the model summary shown above.</p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="8-2-practical-5.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vpredict</span>(asr_us, rep_speed <span class="sc">~</span> V1 <span class="sc">/</span> (V1 <span class="sc">+</span> V5))</span></code></pre></div>
+<pre><code>##            Estimate         SE
+## rep_speed 0.3730518 0.06124032</code></pre>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="8-2-practical-5.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vpredict</span>(asr_us, rep_expl <span class="sc">~</span> V3 <span class="sc">/</span> (V3 <span class="sc">+</span> V7))</span></code></pre></div>
+<pre><code>##          Estimate         SE
+## rep_expl 0.284956 0.06113539</code></pre>
+<p>We can also use this function to calculate the estimate and standard error of the correlation from our model (co)variances. We do this by specifying the formula for the correlation:</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="8-2-practical-5.html#cb238-1" aria-hidden="true" tabindex="-1"></a>(cor_fe <span class="ot">&lt;-</span> <span class="fu">vpredict</span>(asr_us, rep_expl <span class="sc">~</span> V2 <span class="sc">/</span> (<span class="fu">sqrt</span>(V1 <span class="sc">*</span> V3))))</span></code></pre></div>
+<pre><code>##           Estimate        SE
+## rep_expl 0.2703462 0.1594097</code></pre>
+<p>In this case, the estimate is similar (here, slightly lower) than our correlation estimate using BLUPs.
+However, if we consider confidence intervals as <span class="math inline">\(+/- 1.96SE\)</span> around the estimate, the lower bound of the confidence interval would actually be -0.0420968.
+With confidence intervals straddling zero, we would conclude that this correlation is likely non-significant.
+As the use of standard errors in this way is only approximate, we should also test our hypothesis formally using likelihood ratio tests.</p>
+<div id="hypothesis-testing" class="section level5" number="8.2.4.1.1">
+<h5><span class="header-section-number">8.2.4.1.1</span> Hypothesis testing</h5>
+<p>We can now test the statistical significance of this correlation directly, by fitting a second model without the among-individual covariance between our two traits, and then using a likelihood ratio test to determine whether the model with the covariance produces a better fit.
+Here, we use the <code>idh</code> structure for our random effects. This stands for ‘identity matrix’ (i.e., with 0s on the off-diagonals) with heterogeneous variances (i.e., the variance components for our two response traits are allowed to be different from one another).
+The rest of the model is identical to the previous version.</p>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="8-2-practical-5.html#cb240-1" aria-hidden="true" tabindex="-1"></a>asr_us <span class="ot">&lt;-</span> <span class="fu">asreml</span>(<span class="fu">cbind</span>(speed_sc, exploration_sc) <span class="sc">~</span> trait <span class="sc">+</span></span>
+<span id="cb240-2"><a href="8-2-practical-5.html#cb240-2" aria-hidden="true" tabindex="-1"></a>  trait<span class="sc">:</span>assay_rep_sc <span class="sc">+</span> trait<span class="sc">:</span>body_size_sc,</span>
+<span id="cb240-3"><a href="8-2-practical-5.html#cb240-3" aria-hidden="true" tabindex="-1"></a><span class="at">random =</span> <span class="sc">~</span> ID<span class="sc">:</span><span class="fu">idh</span>(trait),</span>
+<span id="cb240-4"><a href="8-2-practical-5.html#cb240-4" aria-hidden="true" tabindex="-1"></a><span class="at">residual =</span> <span class="sc">~</span> units<span class="sc">:</span><span class="fu">us</span>(trait),</span>
+<span id="cb240-5"><a href="8-2-practical-5.html#cb240-5" aria-hidden="true" tabindex="-1"></a><span class="at">data =</span> df_dragons,</span>
+<span id="cb240-6"><a href="8-2-practical-5.html#cb240-6" aria-hidden="true" tabindex="-1"></a><span class="at">maxiter =</span> <span class="dv">100</span></span>
+<span id="cb240-7"><a href="8-2-practical-5.html#cb240-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Model fitted using the sigma parameterization.
+## ASReml 4.1.0 Fri Mar 19 23:43:51 2021
+##           LogLik        Sigma2     DF     wall    cpu
+##  1      -327.051           1.0    634 23:43:52    0.0
+##  2      -299.874           1.0    634 23:43:52    0.0
+##  3      -273.689           1.0    634 23:43:52    0.0
+##  4      -260.838           1.0    634 23:43:52    0.0
+##  5      -257.331           1.0    634 23:43:52    0.0
+##  6      -257.120           1.0    634 23:43:52    0.0
+##  7      -257.118           1.0    634 23:43:52    0.0</code></pre>
+<p>The likelihood ratio test is calculated as twice the difference between model log-likelihoods, on a single degree of freedom (the covariance term):</p>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="8-2-practical-5.html#cb242-1" aria-hidden="true" tabindex="-1"></a>(p_biv <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(<span class="dv">2</span> <span class="sc">*</span> (asr_us<span class="sc">$</span>loglik <span class="sc">-</span> asr_us<span class="sc">$</span>loglik),</span>
+<span id="cb242-2"><a href="8-2-practical-5.html#cb242-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> <span class="dv">1</span>,</span>
+<span id="cb242-3"><a href="8-2-practical-5.html#cb242-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
+<span id="cb242-4"><a href="8-2-practical-5.html#cb242-4" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p>In sharp contrast to the highly-significant P-value given by a correlation test using BLUPs, here we find no evidence for a correlation between flying speed and exploration.
+To better understand why BLUPs produce an anticonservative p-value in comparison to multivariate models, we should plot the correlation estimates and their confidence intervals. The confidence intervals are taken directly from the cor.test function for BLUPs, and for ASReml they are calculated as 1.96 times the standard error from the <code>vpredict</code> function.</p>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="8-2-practical-5.html#cb244-1" aria-hidden="true" tabindex="-1"></a>df_cor <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb244-2"><a href="8-2-practical-5.html#cb244-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Method =</span> <span class="fu">c</span>(<span class="st">&quot;ASReml&quot;</span>, <span class="st">&quot;BLUPs&quot;</span>),</span>
+<span id="cb244-3"><a href="8-2-practical-5.html#cb244-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Correlation =</span> <span class="fu">c</span>(<span class="fu">as.numeric</span>(cor_fe[<span class="dv">1</span>]), cor_blups<span class="sc">$</span>estimate),</span>
+<span id="cb244-4"><a href="8-2-practical-5.html#cb244-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">low =</span> <span class="fu">c</span>(<span class="fu">as.numeric</span>(cor_fe[<span class="dv">1</span>] <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> cor_fe[<span class="dv">2</span>]), cor_blups<span class="sc">$</span>conf.int[<span class="dv">1</span>]),</span>
+<span id="cb244-5"><a href="8-2-practical-5.html#cb244-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">high =</span> <span class="fu">c</span>(<span class="fu">as.numeric</span>(cor_fe[<span class="dv">1</span>] <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> cor_fe[<span class="dv">2</span>]), cor_blups<span class="sc">$</span>conf.int[<span class="dv">2</span>])</span>
+<span id="cb244-6"><a href="8-2-practical-5.html#cb244-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb244-7"><a href="8-2-practical-5.html#cb244-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_cor, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> Correlation)) <span class="sc">+</span></span>
+<span id="cb244-8"><a href="8-2-practical-5.html#cb244-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb244-9"><a href="8-2-practical-5.html#cb244-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> low, <span class="at">ymax =</span> high)) <span class="sc">+</span></span>
+<span id="cb244-10"><a href="8-2-practical-5.html#cb244-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb244-11"><a href="8-2-practical-5.html#cb244-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb244-12"><a href="8-2-practical-5.html#cb244-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-111"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-111-1.svg" alt="Correlation estimates (with CI) using 2 different methods" width="672" />
+<p class="caption">
+Figure 8.8: Correlation estimates (with CI) using 2 different methods
+</p>
+</div>
+<p>Here we can clearly see that the BLUPs method - having failed to carry through the error around the predictions of individual-level estimates - is anticonservative, with small confidence intervals and a correspondingly small P-value (<span class="math inline">\(P = 0.0019099\)</span>. Testing the syndrome directly in a bivariate model that retains all the data, by
+comparison, enables us to capture the true uncertainty about the estimate of the correlation. This is reflected
+in the larger confidence intervals and, in this case, the non-significant P-value ($P = 1).</p>
+<!--
+need to add the selection aspect with trivariate model with fitness
+-->
+</div>
+<div id="conclusions-1" class="section level5" number="8.2.4.1.2">
+<h5><span class="header-section-number">8.2.4.1.2</span> Conclusions</h5>
+<p>To conclude, then: we found that the correlation between flying speed and exploration tends to be positive among female blue dragon. This correlation is not statistically significant, and thus does not provide strong evidence. However, inappropriate analysis of BLUP extracted from univariate models would lead to a different (erroneous) conclusion.</p>
+</div>
+</div>
+<div id="using-mcmcglmm" class="section level4" number="8.2.4.2">
+<h4><span class="header-section-number">8.2.4.2</span> Using MCMCglmm</h4>
+<p>In this section I present the code needed to fit the model and explain only the specific aspect of fittign and evaluating the models with <code>MCMCglmm</code>.</p>
+<p>To be completed. with more details</p>
+<p>First, we need to create a ‘prior’ for our model. We recommend reading up on the use of priors <span class="citation">(see the course notes of <code>MCMCglmm</code> <a href="references.html#ref-R-MCMCglmm" role="doc-biblioref">Hadfield 2021</a>)</span>; briefly, we use a parameter-expanded prior here that should be uninformative for our model. One of the model diagnostic steps that should be used later is to check that the model is robust to multiple prior specifications.</p>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="8-2-practical-5.html#cb245-1" aria-hidden="true" tabindex="-1"></a>prior_1ex <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb245-2"><a href="8-2-practical-5.html#cb245-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">R =</span> <span class="fu">list</span>(<span class="at">V =</span> <span class="fu">diag</span>(<span class="dv">2</span>), <span class="at">nu =</span> <span class="fl">0.002</span>),</span>
+<span id="cb245-3"><a href="8-2-practical-5.html#cb245-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">G =</span> <span class="fu">list</span>(<span class="at">G1 =</span> <span class="fu">list</span>(</span>
+<span id="cb245-4"><a href="8-2-practical-5.html#cb245-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">V =</span> <span class="fu">diag</span>(<span class="dv">2</span>) <span class="sc">*</span> <span class="fl">0.02</span>, <span class="at">nu =</span> <span class="dv">3</span>,</span>
+<span id="cb245-5"><a href="8-2-practical-5.html#cb245-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha.mu =</span> <span class="fu">rep</span>(<span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb245-6"><a href="8-2-practical-5.html#cb245-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha.V =</span> <span class="fu">diag</span>(<span class="dv">1000</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb245-7"><a href="8-2-practical-5.html#cb245-7" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb245-8"><a href="8-2-practical-5.html#cb245-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="8-2-practical-5.html#cb246-1" aria-hidden="true" tabindex="-1"></a>mcmc_us <span class="ot">&lt;-</span> <span class="fu">MCMCglmm</span>(<span class="fu">cbind</span>(speed_sc, exploration_sc) <span class="sc">~</span> trait <span class="sc">-</span> <span class="dv">1</span> <span class="sc">+</span></span>
+<span id="cb246-2"><a href="8-2-practical-5.html#cb246-2" aria-hidden="true" tabindex="-1"></a>    trait<span class="sc">:</span>assay_rep_sc <span class="sc">+</span></span>
+<span id="cb246-3"><a href="8-2-practical-5.html#cb246-3" aria-hidden="true" tabindex="-1"></a>    trait<span class="sc">:</span>body_size_sc,</span>
+<span id="cb246-4"><a href="8-2-practical-5.html#cb246-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> <span class="fu">us</span>(trait)<span class="sc">:</span>ID,</span>
+<span id="cb246-5"><a href="8-2-practical-5.html#cb246-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">rcov =</span> <span class="sc">~</span> <span class="fu">us</span>(trait)<span class="sc">:</span>units,</span>
+<span id="cb246-6"><a href="8-2-practical-5.html#cb246-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">c</span>(<span class="st">&quot;gaussian&quot;</span>, <span class="st">&quot;gaussian&quot;</span>),</span>
+<span id="cb246-7"><a href="8-2-practical-5.html#cb246-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">prior =</span> prior_1ex,</span>
+<span id="cb246-8"><a href="8-2-practical-5.html#cb246-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">nitt =</span> <span class="dv">420000</span>,</span>
+<span id="cb246-9"><a href="8-2-practical-5.html#cb246-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">burnin =</span> <span class="dv">20000</span>,</span>
+<span id="cb246-10"><a href="8-2-practical-5.html#cb246-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">thin =</span> <span class="dv">100</span>,</span>
+<span id="cb246-11"><a href="8-2-practical-5.html#cb246-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb246-12"><a href="8-2-practical-5.html#cb246-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_dragons</span>
+<span id="cb246-13"><a href="8-2-practical-5.html#cb246-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="8-2-practical-5.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc_us<span class="sc">$</span>VCV[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">4</span>)])</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-114-1"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-114-1.svg" alt="MCMC trace and Posterior distribution of the (co)variance estimates of model mcmc_us" width="672" />
+<p class="caption">
+Figure 8.9: MCMC trace and Posterior distribution of the (co)variance estimates of model mcmc_us
+</p>
+</div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="8-2-practical-5.html#cb248-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc_us<span class="sc">$</span>VCV[, <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">8</span>)])</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-114-2"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-114-2.svg" alt="MCMC trace and Posterior distribution of the (co)variance estimates of model mcmc_us" width="672" />
+<p class="caption">
+Figure 8.10: MCMC trace and Posterior distribution of the (co)variance estimates of model mcmc_us
+</p>
+</div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="8-2-practical-5.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mcmc_us)</span></code></pre></div>
+<pre><code>## 
+##  Iterations = 20001:419901
+##  Thinning interval  = 100
+##  Sample size  = 4000 
+## 
+##  DIC: 1596.532 
+## 
+##  G-structure:  ~us(trait):ID
+## 
+##                                            post.mean l-95% CI u-95% CI eff.samp
+## traitspeed_sc:traitspeed_sc.ID               0.38683  0.21533   0.5734     4000
+## traitexploration_sc:traitspeed_sc.ID         0.08094 -0.03047   0.2075     4000
+## traitspeed_sc:traitexploration_sc.ID         0.08094 -0.03047   0.2075     4000
+## traitexploration_sc:traitexploration_sc.ID   0.29561  0.15601   0.4674     4000
+## 
+##  R-structure:  ~us(trait):units
+## 
+##                                               post.mean l-95% CI u-95% CI eff.samp
+## traitspeed_sc:traitspeed_sc.units                0.6393   0.5280   0.7595     4000
+## traitexploration_sc:traitspeed_sc.units          0.3347   0.2389   0.4325     4000
+## traitspeed_sc:traitexploration_sc.units          0.3347   0.2389   0.4325     4000
+## traitexploration_sc:traitexploration_sc.units    0.7338   0.5978   0.8588     4000
+## 
+##  Location effects: cbind(speed_sc, exploration_sc) ~ trait - 1 + trait:assay_rep_sc + trait:body_size_sc 
+## 
+##                                   post.mean   l-95% CI   u-95% CI eff.samp pMCMC
+## traitspeed_sc                     0.0001628 -0.1603883  0.1615571     4000 0.998
+## traitexploration_sc              -0.0007606 -0.1554177  0.1500096     4000 0.996
+## traitspeed_sc:assay_rep_sc       -0.0359780 -0.1146608  0.0392440     4000 0.367
+## traitexploration_sc:assay_rep_sc -0.0218757 -0.1055696  0.0588048     4000 0.621
+## traitspeed_sc:body_size_sc        0.1032654 -0.0536780  0.2660416     4000 0.205
+## traitexploration_sc:body_size_sc  0.0707995 -0.0932983  0.2144463     4345 0.343</code></pre>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="8-2-practical-5.html#cb251-1" aria-hidden="true" tabindex="-1"></a>mcmc_prop_f <span class="ot">&lt;-</span> mcmc_us<span class="sc">$</span>VCV[, <span class="dv">1</span>] <span class="sc">/</span></span>
+<span id="cb251-2"><a href="8-2-practical-5.html#cb251-2" aria-hidden="true" tabindex="-1"></a>  (mcmc_us<span class="sc">$</span>VCV[, <span class="dv">1</span>] <span class="sc">+</span> mcmc_us<span class="sc">$</span>VCV[, <span class="dv">5</span>])</span>
+<span id="cb251-3"><a href="8-2-practical-5.html#cb251-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc_prop_f)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-116"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-116-1.svg" alt="Posterior trace and distribution of the repeatability in flying speed" width="672" />
+<p class="caption">
+Figure 8.11: Posterior trace and distribution of the repeatability in flying speed
+</p>
+</div>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="8-2-practical-5.html#cb252-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior.mode</span>(mcmc_prop_f)</span></code></pre></div>
+<pre><code>##      var1 
+## 0.3919935</code></pre>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="8-2-practical-5.html#cb254-1" aria-hidden="true" tabindex="-1"></a><span class="fu">HPDinterval</span>(mcmc_prop_f)</span></code></pre></div>
+<pre><code>##          lower     upper
+## var1 0.2523954 0.4946682
+## attr(,&quot;Probability&quot;)
+## [1] 0.95</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="8-2-practical-5.html#cb256-1" aria-hidden="true" tabindex="-1"></a>mcmc_prop_e <span class="ot">&lt;-</span> mcmc_us<span class="sc">$</span>VCV[, <span class="dv">4</span>] <span class="sc">/</span></span>
+<span id="cb256-2"><a href="8-2-practical-5.html#cb256-2" aria-hidden="true" tabindex="-1"></a>  (mcmc_us<span class="sc">$</span>VCV[, <span class="dv">4</span>] <span class="sc">+</span> mcmc_us<span class="sc">$</span>VCV[, <span class="dv">8</span>])</span>
+<span id="cb256-3"><a href="8-2-practical-5.html#cb256-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc_prop_e)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-118"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-118-1.svg" alt="Posterior trace and distribution of the repeatbility of exploration" width="672" />
+<p class="caption">
+Figure 8.12: Posterior trace and distribution of the repeatbility of exploration
+</p>
+</div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="8-2-practical-5.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior.mode</span>(mcmc_prop_e)</span></code></pre></div>
+<pre><code>##      var1 
+## 0.2874671</code></pre>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="8-2-practical-5.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="fu">HPDinterval</span>(mcmc_prop_e)</span></code></pre></div>
+<pre><code>##          lower     upper
+## var1 0.1642797 0.4043109
+## attr(,&quot;Probability&quot;)
+## [1] 0.95</code></pre>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="8-2-practical-5.html#cb261-1" aria-hidden="true" tabindex="-1"></a>mcmc_cor_fe <span class="ot">&lt;-</span> mcmc_us<span class="sc">$</span>VCV[, <span class="dv">2</span>] <span class="sc">/</span></span>
+<span id="cb261-2"><a href="8-2-practical-5.html#cb261-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sqrt</span>(mcmc_us<span class="sc">$</span>VCV[, <span class="dv">1</span>] <span class="sc">*</span> mcmc_us<span class="sc">$</span>VCV[, <span class="dv">4</span>])</span>
+<span id="cb261-3"><a href="8-2-practical-5.html#cb261-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mcmc_cor_fe)</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-119"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-119-1.svg" alt="Posterior trace and distribution of the correlation between flying speed and exploration" width="672" />
+<p class="caption">
+Figure 8.13: Posterior trace and distribution of the correlation between flying speed and exploration
+</p>
+</div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="8-2-practical-5.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior.mode</span>(mcmc_cor_fe)</span></code></pre></div>
+<pre><code>##      var1 
+## 0.2605385</code></pre>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="8-2-practical-5.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="fu">HPDinterval</span>(mcmc_cor_fe)</span></code></pre></div>
+<pre><code>##            lower     upper
+## var1 -0.08695933 0.5211489
+## attr(,&quot;Probability&quot;)
+## [1] 0.95</code></pre>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="8-2-practical-5.html#cb266-1" aria-hidden="true" tabindex="-1"></a>df_cor[<span class="dv">3</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;MCMCglmm&quot;</span></span>
+<span id="cb266-2"><a href="8-2-practical-5.html#cb266-2" aria-hidden="true" tabindex="-1"></a>df_cor[<span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">posterior.mode</span>(mcmc_cor_fe), <span class="fu">HPDinterval</span>(mcmc_cor_fe))</span>
+<span id="cb266-3"><a href="8-2-practical-5.html#cb266-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb266-4"><a href="8-2-practical-5.html#cb266-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_cor, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> Correlation)) <span class="sc">+</span></span>
+<span id="cb266-5"><a href="8-2-practical-5.html#cb266-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb266-6"><a href="8-2-practical-5.html#cb266-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> low, <span class="at">ymax =</span> high)) <span class="sc">+</span></span>
+<span id="cb266-7"><a href="8-2-practical-5.html#cb266-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb266-8"><a href="8-2-practical-5.html#cb266-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb266-9"><a href="8-2-practical-5.html#cb266-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="figure"><span id="fig:unnamed-chunk-120"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-120-1.svg" alt="Correlation estimates (with CI) using 3 different methods" width="672" />
+<p class="caption">
+Figure 8.14: Correlation estimates (with CI) using 3 different methods
+</p>
+</div>
+</div>
+</div>
+<div id="happy-multivariate-models" class="section level3" number="8.2.5">
+<h3><span class="header-section-number">8.2.5</span> Happy multivariate models</h3>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-121"></span>
+<img src="images/blue_dragon.jpg" alt="A female blue dragon of the West" width="50%" />
+<p class="caption">
+Figure 8.15: A female blue dragon of the West
+</p>
+</div>
+
+</div>
+</div>
+<!-- </div> -->
+
+
+
+</div>
+<script src="js/solution.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="8-1-theory-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/BIO8940-uOttawa/class_book/02_05-randreg_multivar.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["BIO8940_book.pdf", "BIO8940_book.epub", "BIO8940_book.mobi"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
