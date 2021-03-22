@@ -26,3 +26,5 @@ lattice
 palmerpenguins
 reshape
 asreml
+broom
+broom.mixed

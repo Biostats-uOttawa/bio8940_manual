@@ -1,7 +1,11 @@
 # To do list {-}
 
-* clean code
+* simulate new unicorn data
 * add more info about allEffects and plotting prediction of models
 * convert all plots to ggplot
 * convert data handling to tidyverse
-* finish chapters
+* add therory in all chapters
+* random regression practical
+* description of most common distributions and their use in ecology with packages on how to fit them
+* use git submodule for the data repos
+* intro and preface

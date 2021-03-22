@@ -7,8 +7,7 @@
 options(gganimate.dev_args = list(
   width = 600,
   height = 450
-  )
-)
+))
 library(tidyverse)
 ```
 
@@ -51,18 +50,16 @@ In this setting, $x$ is a standardized variable with mean zero and standard devi
 
 ```{r create_data, echo = FALSE, eval=TRUE}
 create_data <- function(
-  obs_per_cluster = 10,
-  n_cluster = 100,
-  intercept = 1,
-  beta = .5,
-  sigma = 1,
-  sd_int = .5,
-  sd_slope = .25,
-  cor = 0,
-  balanced = 1,
-  seed = 888
-  ) {
-
+                        obs_per_cluster = 10,
+                        n_cluster = 100,
+                        intercept = 1,
+                        beta = .5,
+                        sigma = 1,
+                        sd_int = .5,
+                        sd_slope = .25,
+                        cor = 0,
+                        balanced = 1,
+                        seed = 888) {
   set.seed(seed)
 
   cluster <- rep(1:n_cluster, each = obs_per_cluster)
@@ -72,19 +69,19 @@ create_data <- function(
   varmat <- matrix(c(sd_int^2, cor, cor, sd_slope^2), 2, 2)
 
   u <- mvtnorm::rmvnorm(n_cluster, sigma = varmat)
-  colnames(u) <- c('Intercept', 'x')
+  colnames(u) <- c("Intercept", "x")
 
-  y <- (intercept + u[cluster, 'Intercept']) + (beta + u[cluster, 'x']) * x +
+  y <- (intercept + u[cluster, "Intercept"]) + (beta + u[cluster, "x"]) * x +
     rnorm(N, sd = sigma)
 
-  df <-data.frame(
+  df <- data.frame(
     y,
     x,
     cluster
   )
 
   if (balanced < 0 | balanced > 1) {
-    stop('Balanced should be a proportion to sample.')
+    stop("Balanced should be a proportion to sample.")
   } else {
     df <- slice_sample(df, prop = balanced)
   }
@@ -100,13 +97,14 @@ create_plot_data <- function(model, data = df) {
   plot_data_re_lm <-
     bind_rows(
       coef(mod)$cluster %>%
-        rownames_to_column(var = 'cluster') %>%
-        mutate(Model = 'mixed'),
-      map_df(lmList(y ~ x|cluster, data),
-             function(x) as.data.frame(t(coef(x))),
-             .id = 'cluster') %>%
-        mutate(Model = 'by-cluster')
-  ) %>%
+        rownames_to_column(var = "cluster") %>%
+        mutate(Model = "mixed"),
+      map_df(lmList(y ~ x | cluster, data),
+        function(x) as.data.frame(t(coef(x))),
+        .id = "cluster"
+      ) %>%
+        mutate(Model = "by-cluster")
+    ) %>%
     rename(Intercept = `(Intercept)`)
 
   # fixed effect estimates
@@ -114,11 +112,15 @@ create_plot_data <- function(model, data = df) {
     t() %>%
     data.frame() %>%
     rename(Intercept = X.Intercept.) %>%
-    mutate(cluster=1,
-           Model = 'by-cluster')
+    mutate(
+      cluster = 1,
+      Model = "by-cluster"
+    )
 
-  list(coefficients = plot_data_re_lm,
-       fixed_effects = fe_data)
+  list(
+    coefficients = plot_data_re_lm,
+    fixed_effects = fe_data
+  )
 }
 ```
 
@@ -131,8 +133,8 @@ We will use **lme4** to run the analysis.  We can see that the model recovers th
 df <- create_data()
 
 library(lme4)
-mod <- lmer(y ~ x + (x|cluster), df)
-summary(mod, cor=F)
+mod <- lmer(y ~ x + (x | cluster), df)
+summary(mod, cor = F)
 ```
 
 <!-- put data creating and plotting fucntion in a file to be sourced.
@@ -145,20 +147,22 @@ Now it is time to visualize the results.  We will use **gganimate** to bring the
 
 ```{r vis_baseline_model, echo=FALSE, eval=F}
 plot_data <- create_plot_data(model = mod)
-plot_fun(plot_data = plot_data,
-         end_pause = 30,
-         duration = 12,
-         nframes = 120)
+plot_fun(
+  plot_data = plot_data,
+  end_pause = 30,
+  duration = 12,
+  nframes = 120
+)
 
-anim_save('images/shrinkage/baseline.gif')
+anim_save("images/shrinkage/baseline.gif")
 
 plot_fun(plot_data = plot_data, animate = F)
-ggsave('images/shrinkage/baseline_static.png')
+ggsave("images/shrinkage/baseline_static.png")
 ```
 
 ```{r baseline_gif, echo=F, eval=T, dev.args=list(bg = 'transparent'), cache=FALSE}
 if (knitr::is_html_output(excludes = "epub")) {
-  knitr::include_graphics('images/shrinkage_1.gif')
+  knitr::include_graphics("images/shrinkage_1.gif")
 } else {
   knitr::include_graphics("images/shrinkage_1_static.png")
 }
@@ -274,8 +278,7 @@ A sensible researcher would probably take the time to do some exploratory data p
 
 ```{r mod1}
 
-m_1 <- lmer(aggression ~ 1 +  (1 | ID), data = unicorns)
-
+m_1 <- lmer(aggression ~ 1 + (1 | ID), data = unicorns)
 ```
 
 There is a warning... something about "singularities". Ignore that for a moment. 
@@ -289,7 +292,6 @@ Now you need to get the model output. By that I just mean use `summary(model_nam
 ```{r mod1_summary}
 
 summary(m_1)
-
 ```
 </div>
 
@@ -325,7 +327,6 @@ We can  test the statistical significance of the random effect using the `ranova
 ```{r mod1_ranova}
 
 ranova(m_1)
-
 ```
 </div>
 
@@ -340,7 +341,6 @@ The answer we got from our first model is **not** wrong, it estimated the parame
 ```{r mod1_plot, fig.cap = "Fitted values vs residuals for a simple mixed model of unicorn aggression"}
 
 plot(m_1)
-
 ```
 
 So we can probably do better at modelling the data, which may or may not change our view on whether there is any real variation among unicorns in aggressiveness.
@@ -391,7 +391,6 @@ unicorns %>%
   group_by(opp_size) %>%
   summarise(mean_aggr = mean(aggression)) %>%
   knitr::kable(digits = 2)
-
 ```
 
 So, there does appear to be plasticity of aggression with changing size of the model opponent. But other things may explain variation in aggressiveness too - what about block for instance? Block effects may not be the subject of any biologically interesting hypotheses, but accounting for any differences between blocks could remove noise.
@@ -404,8 +403,7 @@ So let's  run a mixed model with the same random effect of individual, but with 
 
 ```{r mod2}
 
-m_2 <- lmer(aggression ~ opp_size  + block + (1 | ID), data = unicorns)
-
+m_2 <- lmer(aggression ~ opp_size + block + (1 | ID), data = unicorns)
 ```
 
 </div>
@@ -511,11 +509,11 @@ In our first model among-individual variance was zero, so R was zero. If we have
 
 m_3 <- lmer(
   aggression ~ opp_size + scale(body_size, center = TRUE, scale = TRUE)
-              + scale(assay_rep, scale = FALSE) + block
-              + (1 | ID),
-  data = unicorns)
+    + scale(assay_rep, scale = FALSE) + block
+    + (1 | ID),
+  data = unicorns
+)
 summary(m_3)
-
 ```
 
 So we'd probably calculate R using the individual and residual variance simply as:
@@ -551,7 +549,8 @@ Here I am estimating the repeatability and using bootstrap to estimate a confide
 ```{r, echo = TRUE, results =  TRUE, warning = FALSE, message = FALSE}
 r_rpt <- rptGaussian(
   aggression ~ opp_size + block + (1 | ID),
-  grname = "ID", data = unicorns)
+  grname = "ID", data = unicorns
+)
 r_rpt
 ```
 
@@ -563,8 +562,8 @@ Include a random effect of ID as before and maybe a fixed effect of block, just 
 ```{r mod_size_wrong}
 
 lmer_size <- lmer(body_size ~ block + (1 | ID),
-                data = unicorns)
-
+  data = unicorns
+)
 ```
 Summarise and test the random effect.
 
@@ -597,8 +596,9 @@ We can prune the data to the two actual observations per unicorns by just select
 
 unicorns2 <- unicorns[unicorns$assay_rep == 1, ]
 
-lmer_size2 <- lmer(body_size ~   block +  (1 | ID),
-                data = unicorns2)
+lmer_size2 <- lmer(body_size ~ block + (1 | ID),
+  data = unicorns2
+)
 summary(lmer_size2)
 ranova(lmer_size2)
 ```

@@ -233,16 +233,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2.7" data-path="7-2-practical-4.html"><a href="7-2-practical-4.html#happy-bayesian-stats"><i class="fa fa-check"></i><b>7.2.7</b> Happy Bayesian stats</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="8-random-regressions-and-multivariate-mixed-models.html"><a href="8-random-regressions-and-multivariate-mixed-models.html"><i class="fa fa-check"></i><b>8</b> Random regressions and multivariate mixed models</a>
+<li class="chapter" data-level="8" data-path="8-multivariate-mixed-models.html"><a href="8-multivariate-mixed-models.html"><i class="fa fa-check"></i><b>8</b> Multivariate mixed models</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="8-1-theory-1.html"><a href="8-1-theory-1.html"><i class="fa fa-check"></i><b>8.1</b> theory</a></li>
 <li class="chapter" data-level="8.2" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html"><i class="fa fa-check"></i><b>8.2</b> Practical</a>
 <ul>
 <li class="chapter" data-level="8.2.1" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#r-packages-needed-2"><i class="fa fa-check"></i><b>8.2.1</b> R packages needed</a></li>
-<li class="chapter" data-level="8.2.2" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#the-blue-dragon-of-the-west"><i class="fa fa-check"></i><b>8.2.2</b> The blue dragon of the west</a></li>
+<li class="chapter" data-level="8.2.2" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#the-blue-dragon-of-the-east"><i class="fa fa-check"></i><b>8.2.2</b> The blue dragon of the East</a></li>
 <li class="chapter" data-level="8.2.3" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#multiple-univariate-models"><i class="fa fa-check"></i><b>8.2.3</b> Multiple univariate models</a></li>
 <li class="chapter" data-level="8.2.4" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#multivariate-approach"><i class="fa fa-check"></i><b>8.2.4</b> Multivariate approach</a></li>
 <li class="chapter" data-level="8.2.5" data-path="8-2-practical-5.html"><a href="8-2-practical-5.html#happy-multivariate-models"><i class="fa fa-check"></i><b>8.2.5</b> Happy multivariate models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="9-random-regression-and-character-state-approaches.html"><a href="9-random-regression-and-character-state-approaches.html"><i class="fa fa-check"></i><b>9</b> Random regression and character state approaches</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="9-1-theory-2.html"><a href="9-1-theory-2.html"><i class="fa fa-check"></i><b>9.1</b> theory</a></li>
+<li class="chapter" data-level="9.2" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html"><i class="fa fa-check"></i><b>9.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#r-packages-needed-3"><i class="fa fa-check"></i><b>9.2.1</b> R packages needed</a></li>
+<li class="chapter" data-level="9.2.2" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#refresher-on-unicorn-aggression"><i class="fa fa-check"></i><b>9.2.2</b> Refresher on unicorn aggression</a></li>
+<li class="chapter" data-level="9.2.3" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#random-regression"><i class="fa fa-check"></i><b>9.2.3</b> Random regression</a></li>
+<li class="chapter" data-level="9.2.4" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#character-state-approach"><i class="fa fa-check"></i><b>9.2.4</b> Character-State approach</a></li>
+<li class="chapter" data-level="9.2.5" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#conclusions-2"><i class="fa fa-check"></i><b>9.2.5</b> Conclusions</a></li>
+<li class="chapter" data-level="9.2.6" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#happy-multivariate-models-1"><i class="fa fa-check"></i><b>9.2.6</b> Happy multivariate models</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Appendix</b></span></li>
@@ -357,7 +370,7 @@ Figure 5.1: The superb unicorn of the Scottish Highlands
 <p>Why, so simple? Because we simply want to partition variance around the mean into a component that among-individual variance and one that is within-individual variance.</p>
 <div class="exer">
 <p>A sensible researcher would probably take the time to do some exploratory data plots here. So let’s write a mixed model. This one is going to have no fixed effects except the mean, and just one random effect - individual identity.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="5-2-practical-2.html#cb25-1" aria-hidden="true" tabindex="-1"></a>m_1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(aggression <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span>  (<span class="dv">1</span> <span class="sc">|</span> ID), <span class="at">data =</span> unicorns)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="5-2-practical-2.html#cb25-1" aria-hidden="true" tabindex="-1"></a>m_1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(aggression <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID), <span class="at">data =</span> unicorns)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
 <p>There is a warning… something about “singularities.” Ignore that for a moment.</p>
 </div>
@@ -492,7 +505,7 @@ Figure 5.2: Unicorn aggressivity as a function of opponent size when fighting fo
 <p>There may also be systematic change in behaviour as an individual experiences more repeat observations (i.e. exposure to the model). Do they get sensitised or habituated to the model intruder for example?</p>
 <p>So let’s run a mixed model with the same random effect of individual, but with a fixed effects of opponent size (our predictor of interest) and experimental block.</p>
 <div class="exer">
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="5-2-practical-2.html#cb37-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(aggression <span class="sc">~</span> opp_size  <span class="sc">+</span> block <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID), <span class="at">data =</span> unicorns)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="5-2-practical-2.html#cb37-1" aria-hidden="true" tabindex="-1"></a>m_2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(aggression <span class="sc">~</span> opp_size <span class="sc">+</span> block <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID), <span class="at">data =</span> unicorns)</span></code></pre></div>
 </div>
 <div id="diagnostic-plots" class="section level4" number="5.2.5.1">
 <h4><span class="header-section-number">5.2.5.1</span> Diagnostic plots</h4>
@@ -632,10 +645,11 @@ Figure 5.5: Checking random effects are gaussian
 In our first model among-individual variance was zero, so R was zero. If we have a different model of aggression and get a non-zero value of the random effect variance, we can obviously calculate a repeatability estimate (R). So we are all working from the same starting point, let’s all stick with a common set of fixed effects from here on:</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="5-2-practical-2.html#cb44-1" aria-hidden="true" tabindex="-1"></a>m_3 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(</span>
 <span id="cb44-2"><a href="5-2-practical-2.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  aggression <span class="sc">~</span> opp_size <span class="sc">+</span> <span class="fu">scale</span>(body_size, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb44-3"><a href="5-2-practical-2.html#cb44-3" aria-hidden="true" tabindex="-1"></a>              <span class="sc">+</span> <span class="fu">scale</span>(assay_rep, <span class="at">scale =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> block</span>
-<span id="cb44-4"><a href="5-2-practical-2.html#cb44-4" aria-hidden="true" tabindex="-1"></a>              <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
-<span id="cb44-5"><a href="5-2-practical-2.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> unicorns)</span>
-<span id="cb44-6"><a href="5-2-practical-2.html#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_3)</span></code></pre></div>
+<span id="cb44-3"><a href="5-2-practical-2.html#cb44-3" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span> <span class="fu">scale</span>(assay_rep, <span class="at">scale =</span> <span class="cn">FALSE</span>) <span class="sc">+</span> block</span>
+<span id="cb44-4"><a href="5-2-practical-2.html#cb44-4" aria-hidden="true" tabindex="-1"></a>    <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
+<span id="cb44-5"><a href="5-2-practical-2.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> unicorns</span>
+<span id="cb44-6"><a href="5-2-practical-2.html#cb44-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb44-7"><a href="5-2-practical-2.html#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_3)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: aggression ~ opp_size + scale(body_size, center = TRUE, scale = TRUE) +      scale(assay_rep, scale = FALSE) + block + (1 | ID)
 ##    Data: unicorns
@@ -691,7 +705,8 @@ It also means that decisions about which fixed effects to include in your model 
 <p>Here I am estimating the repeatability and using bootstrap to estimate a confidence interval and a probability associated with the repeatability with the <code>rptR</code> 📦. For more information about the use of the package and the theory behind it suggest the excellent paper associated with the package <span class="citation">(<a href="references.html#ref-rptR2017" role="doc-biblioref">Stoffel et al. 2017</a>)</span></p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="5-2-practical-2.html#cb50-1" aria-hidden="true" tabindex="-1"></a>r_rpt <span class="ot">&lt;-</span> <span class="fu">rptGaussian</span>(</span>
 <span id="cb50-2"><a href="5-2-practical-2.html#cb50-2" aria-hidden="true" tabindex="-1"></a>  aggression <span class="sc">~</span> opp_size <span class="sc">+</span> block <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
-<span id="cb50-3"><a href="5-2-practical-2.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">grname =</span> <span class="st">&quot;ID&quot;</span>, <span class="at">data =</span> unicorns)</span></code></pre></div>
+<span id="cb50-3"><a href="5-2-practical-2.html#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">grname =</span> <span class="st">&quot;ID&quot;</span>, <span class="at">data =</span> unicorns</span>
+<span id="cb50-4"><a href="5-2-practical-2.html#cb50-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Bootstrap Progress:</code></pre>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="5-2-practical-2.html#cb52-1" aria-hidden="true" tabindex="-1"></a>r_rpt</span></code></pre></div>
 <pre><code>## 
@@ -710,7 +725,8 @@ It also means that decisions about which fixed effects to include in your model 
 <p>We will try some more advanced mixed models in a moment to explore plasticity in aggressiveness a bit more. First let’s quickly look for among-individual variance in focal body size. Why not? We have the data handy, everyone says morphological traits are very repeatable and - lets be honest - who wouldn’t like to see a small P value after striking out with aggressiveness.</p>
 <p>Include a random effect of ID as before and maybe a fixed effect of block, just to see if the beasties were growing a bit between data collection periods.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="5-2-practical-2.html#cb54-1" aria-hidden="true" tabindex="-1"></a>lmer_size <span class="ot">&lt;-</span> <span class="fu">lmer</span>(body_size <span class="sc">~</span> block <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
-<span id="cb54-2"><a href="5-2-practical-2.html#cb54-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> unicorns)</span></code></pre></div>
+<span id="cb54-2"><a href="5-2-practical-2.html#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> unicorns</span>
+<span id="cb54-3"><a href="5-2-practical-2.html#cb54-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <p>Summarise and test the random effect.</p>
 <div class="exer">
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="5-2-practical-2.html#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer_size)</span></code></pre></div>
@@ -766,9 +782,10 @@ It also means that decisions about which fixed effects to include in your model 
 <p>We can prune the data to the two actual observations per unicorns by just selecting the first assay in each block.</p>
 <div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="5-2-practical-2.html#cb59-1" aria-hidden="true" tabindex="-1"></a>unicorns2 <span class="ot">&lt;-</span> unicorns[unicorns<span class="sc">$</span>assay_rep <span class="sc">==</span> <span class="dv">1</span>, ]</span>
 <span id="cb59-2"><a href="5-2-practical-2.html#cb59-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb59-3"><a href="5-2-practical-2.html#cb59-3" aria-hidden="true" tabindex="-1"></a>lmer_size2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(body_size <span class="sc">~</span>   block <span class="sc">+</span>  (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
-<span id="cb59-4"><a href="5-2-practical-2.html#cb59-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> unicorns2)</span>
-<span id="cb59-5"><a href="5-2-practical-2.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer_size2)</span></code></pre></div>
+<span id="cb59-3"><a href="5-2-practical-2.html#cb59-3" aria-hidden="true" tabindex="-1"></a>lmer_size2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(body_size <span class="sc">~</span> block <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> ID),</span>
+<span id="cb59-4"><a href="5-2-practical-2.html#cb59-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> unicorns2</span>
+<span id="cb59-5"><a href="5-2-practical-2.html#cb59-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb59-6"><a href="5-2-practical-2.html#cb59-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmer_size2)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
 ## Formula: body_size ~ block + (1 | ID)
 ##    Data: unicorns2

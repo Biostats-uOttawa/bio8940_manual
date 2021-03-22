@@ -1,4 +1,4 @@
-# Random regressions and multivariate mixed models
+# Multivariate mixed models
 
 ## theory
 
@@ -11,7 +11,7 @@ knitr::include_graphics("images/fun_dragon.jpg")
 
 ## Practical
 
-In this practical, we have collected data on the amazing blue dragon of the west that roam the sky at night.
+In this practical, we have collected data on the amazing blue dragon of the East that roam the sky at night.
 
 We will use two different `r emo::ji("package")` to fit more complex models that are not possible with  `lmer()` from `lme4` 
 `r emo::ji("package")` [@R-lme4]. We will use:
@@ -40,9 +40,9 @@ library(MCMCglmm)
 library(nadiv)
 ```
 
-### The blue dragon of the west
+### The blue dragon of the East
 
-For this practical, we have collected data on the amazing blue dragon of the west that roam the sky at night.
+For this practical, we have collected data on the amazing blue dragon of the East that roam the sky at night.
 
 ```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Blue dragon male"}
 knitr::include_graphics("images/blue_dragon.jpg")
@@ -248,7 +248,8 @@ hist(residuals(asr_us))
 The summary part of the ASReml model fit contains a large amount of information, so it is best to look only at certain parts of it at a single time. While we are not particularly interested in the fixed effects for current purposes, you can inspect these using the following code to check whether there were any large effects of `assay repeat` or `body size` on either trait:
 
 ```{r}
-summary(asr_us, all = TRUE)$coef.fixed
+summary(asr_us, coef = TRUE)$coef.fixed
+wald(asr_us, ssType = "conditional", denDF = "numeric")
 ```
 
 We can see that there is a separate intercept for both personality traits (no surprise that these are very close to zero, given that we mean-centred and scaled each trait before fitting the model), and an estimate of the effect of assay repeat and body size on both traits. None of these appear to be large effects, so let’s move on to the more interesting parts — the random effects estimates:
@@ -423,4 +424,6 @@ ggplot(df_cor, aes(x = Method, y = Correlation)) +
 ```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "A female blue dragon of the West"}
 knitr::include_graphics("images/blue_dragon.jpg")
 ```
+
+
 
