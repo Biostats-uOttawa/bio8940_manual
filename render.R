@@ -29,5 +29,17 @@ bookdown::preview_chapter("07-reg_mult.Rmd", output_dir = "docs/preview")
 bookdown::preview_chapter("08-ancova_glm.Rmd", output_dir = "docs/preview")
 bookdown::preview_chapter("09-model_freq.Rmd", output_dir = "docs/preview")
 
-knitr::purl("02_02-intro_lmm.Rmd")
-knitr::purl("02_03-intro_glmm.Rmd")
+purl_fn <- function(chapter) {
+    for ( i in chapter) {
+        knitr::purl(paste0(i, ".Rmd"), output = paste0("../practical_data/R_code_chapter/", i, ".R"))
+    }
+}
+purl_fn(c(
+    "02_01-intro_glm",
+    "02_02-intro_lmm",
+    "02_03-intro_glmm",
+    "02_04-intro_bayesian",
+    "02_05-multivar",
+    "02_06-randreg"
+    )
+)
