@@ -179,7 +179,7 @@ pred_rr_asr <- as.data.frame(predict(rr_asr,
       c(opp_size = -1:1)
   )
 )$pvals)
-ggplot(pred_rr_asr, aes(x = opp_size,
+p_rr <- ggplot(pred_rr_asr, aes(x = opp_size,
 y = predicted.value,
 group = ID)) +
 geom_line(alpha = 0.2) +
@@ -189,6 +189,7 @@ scale_x_continuous(breaks = c(-1, 0, 1)) +
     y = "Aggression"
   ) +
   theme_classic()
+p_rr
 ```
 
 
@@ -256,8 +257,204 @@ ggplot(df_rand, aes(x = opp_size, y = Value, group = ID)) +
   facet_grid(. ~ Type)
 ```
 
+```{r, echo = FALSE, purl = FALSE}
+df_var <-data.frame(Method = c("lmer", "asreml", "MCMCglmm"), v_int = NA, cov = NA, v_sl = NA, v_r = NA)
+v_rr_mer <- as.data.frame(VarCorr(rr_mer))
+df_var[1, 2:5] <- v_rr_mer$vcov[c(1,3,2,4)]
+df_var[2, 2:5] <- summary(rr_asr)$varcomp$component
+df_var[3, 2:5] <- posterior.mode(rr_mcmc$VCV[,-2])
+knitr::kable(df_var,
+  caption = "Variance estimated from random regression models using 3 different softwares")
+```
 
 ### Character-State approach
+
+Need to pivot to a wider format
+```{r}
+unicorns_cs <- unicorns %>%
+  select(ID, body_size, assay_rep, block, aggression, opp_size) %>%
+  mutate(
+    opp_size = recode(as.character(opp_size), "-1" = "s", "0" = "m", "1" = "l")
+  ) %>%
+  dplyr::rename(agg = aggression) %>%
+  pivot_wider(names_from = opp_size, values_from = c(agg, assay_rep)) %>%
+  mutate(
+    body_size_sc = scale(body_size),
+    opp_order = as.factor(paste(assay_rep_s, assay_rep_m, assay_rep_l, sep = "_"))
+  )
+str(unicorns_cs)
+head(unicorns_cs)
+```
+
+```{r}
+cs_asr <- asreml(
+  cbind(agg_s, agg_m, agg_l) ~ trait + trait:body_size_sc +
+    trait:block +
+    trait:opp_order,
+  random =~ ID:us(trait),
+  residual =~ units:us(trait),
+  data = unicorns_cs,
+  maxiter = 200
+)
+
+plot(residuals(cs_asr) ~ fitted(cs_asr))
+qqnorm(residuals(cs_asr))
+qqline(residuals(cs_asr))
+hist(residuals(cs_asr))
+```
+
+```{r}
+summary(cs_asr, all = T)$coef.fixed
+wald.asreml(cs_asr, ssType = "conditional", denDF = "numeric")
+```
+
+```{r}
+summary(cs_asr)$varcomp[, c("component", "std.error")]
+```
+
+```{r}
+cs_idh_asr <- asreml(
+  cbind(agg_s, agg_m, agg_l) ~ trait + trait:body_size_sc +
+    trait:block +
+    trait:opp_order,
+  random = ~ ID:idh(trait),
+  residual = ~ units:us(trait),
+  data = unicorns_cs,
+  maxiter = 200
+)
+```
+
+```{r}
+pchisq(2 * (cs_asr$loglik - cs_idh_asr$loglik), 3,
+  lower.tail = FALSE
+)
+```
+
+```{r}
+vpredict(cs_asr, cor_S_M ~ V2 / (sqrt(V1) * sqrt(V3)))
+vpredict(cs_asr, cor_M_L ~ V5 / (sqrt(V3) * sqrt(V6)))
+vpredict(cs_asr, cor_S_L ~ V4 / (sqrt(V1) * sqrt(V6)))
+```
+
+```{r}
+vpredict(cs_asr, prop_S ~ V1 / (V1 + V8))
+vpredict(cs_asr, prop_M ~ V3 / (V3 + V10))
+vpredict(cs_asr, prop_L ~ V6 / (V6 + V13))
+```
+
+```{r}
+init_CS_cor1_tri <- c(
+  0.999,
+  0.999, 0.999,
+  1, 1, 1
+)
+names(init_CS_cor1_tri) <- c(
+  "F",
+  "F", "F",
+  "U", "U", "U"
+)
+cs_asr_cor1_tri <- asreml(
+  cbind(agg_s, agg_m, agg_l) ~ trait + trait:body_size_sc +
+    trait:block +
+    trait:opp_order,
+  random = ~ ID:corgh(trait, init = init_CS_cor1_tri),
+residual = ~ units:us(trait),
+data = unicorns_cs,
+maxiter = 500
+)
+pchisq(2 * (cs_asr$loglik - cs_asr_cor1_tri$loglik),
+  3,
+  lower.tail = FALSE
+)
+```
+
+```{r}
+df_CS_pred <- as.data.frame(predict(cs_asr,
+  classify = "trait:ID"
+)$pvals)
+# Add numeric variable for easier plotting
+# of opponent size
+df_CS_pred <- df_CS_pred %>%
+  mutate(sizeNum = ifelse(trait == "agg_s", -1,
+    ifelse(trait == "agg_m", 0, 1)
+  ))
+p_cs <- ggplot(df_CS_pred, aes(
+  x = sizeNum,
+  y = predicted.value,
+  group = ID
+)) +
+  geom_line(alpha = 0.2) +
+  scale_x_continuous(breaks = c(-1, 0, 1)) +
+  labs(
+    x = "Opponent size (SDU)",
+    y = "Aggression"
+  ) +
+  theme_classic()
+p_cs
+```
+
+```{r}
+unicorns <- arrange(unicorns, opp_size, by_group = ID)
+p_obs <- ggplot(unicorns[unicorns$block==-0.5,], aes(x = opp_size, y = aggression, group = ID)) +
+  geom_line(alpha = 0.3) +
+  scale_x_continuous(breaks = c(-1, 0, 1)) +
+  labs(
+    x = "Opponent size (SDU)",
+    y = "Aggression"
+  ) +
+  ggtitle("Observed") +
+  ylim(5.9, 12) +
+  theme_classic()
+
+p_rr <- p_rr + ggtitle("Random regression") + ylim(5.9, 12)
+p_cs <- p_cs + ggtitle("Character-State") + ylim(5.9, 12)
+p_obs + p_rr + p_cs
+```
+
+### From random regression to character-state
+
+```{r}
+var_mat_asr <- function(model, var_names, pos){
+  size <- length(var_names)
+  v_out <- matrix(NA, ncol = size, nrow = size)
+  rownames(v_out) <- var_names
+  colnames(v_out) <- var_names
+  v_out[upper.tri(v_out, diag = TRUE)] <- summary(model)$varcomp[pos, 1]
+  v_out <- forceSymmetric(v_out, uplo = "U")
+  as.matrix(v_out)
+}
+v_id_rr <- var_mat_asr(rr_asr, c("v_int", "v_sl"), 1:3)
+knitr::kable(v_id_rr, digits = 3)
+```
+```{r}
+v_id_cs <- var_mat_asr(cs_asr, c("v_s", "v_m", "v_l"), 1:6)
+knitr::kable(v_id_cs, digits = 3)
+```
+
+We also need to make a second matrix, let's call it **Q** (no particular reason, pick something else if you want). This is going to contain the values needed to turn an individual's intercept (mean) and slope (plasticity) deviations into estimates of environment-specific individual merit in a character state model.
+
+What do we mean by this? Well if an individual i has an intercept deviation of ID~int(i)~ and a slope deviation of ID~slp(i)~ for a given value of the environment  `opp_size` we might be interested in:
+
+ID~i~ = (1 x ID~int(i)~) + (`opp_size` x ID~slp(i)~)
+
+We want to look at character states representing the three observed values of `opp_size` here so
+
+```{r }
+Q <- as.matrix(cbind(c(1, 1, 1),
+                    c(-1, 0, 1)))
+```
+
+Then we can generate our among-individual covariance matrix environment specific aggresiveness, which we can call **ID_cs_rr** by matrix multiplication:
+```{r }
+ID_cs_rr<- Q %*% v_id_rr %*%t(Q)    #where t(Q) is the transpose of Q
+                               #and %*% is matrix multiplication
+
+ID_cs_rr  #rows and columns correspond to aggressiveness at opp_size=-1,0,1 in that order
+
+
+cov2cor(ID_cs_rr)   #Converting to a correlation scale
+cov2cor(v_id_cs)
+```
 
 
 ### Conclusions
