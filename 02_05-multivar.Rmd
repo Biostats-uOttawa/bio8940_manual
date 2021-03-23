@@ -99,7 +99,7 @@ summary(lmer_f)
 
 Having examined diagnostic plots of the model fit, we can check the model summary. We are interested in the random effects section of the lme4 model output (specifically the variance component — note that the standard deviation here is simply the square root of the variance). Evidence for ‘animal personality’ (or ‘consistent among-individual differences in behaviour’) in the literature is largely taken from the repeatability of behaviorual traits: we can compute this repeatability (also known as the intraclass correlation coefficient) by dividing the variance in the trait due to differences among individuals ($V_{ID}$) by the total phenotypic variance after accounting for the fixed effects ($V_{ID} + V_{residual}$ ). 
 
-```{r, results = "hide", cache = FALSE}
+```{r, results = "hide"}
 rep_flying <- as.data.frame(VarCorr(lmer_f)) %>%
   select(grp, vcov) %>%
   spread(grp, vcov) %>%
@@ -107,7 +107,7 @@ rep_flying <- as.data.frame(VarCorr(lmer_f)) %>%
 rep_flying
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, purl = FALSE}
 knitr::kable(rep_flying,
   digits = 3,
   caption = "Variance components and repeatbility for the maximum
@@ -134,7 +134,7 @@ summary(lmer_e)
 
 So the model looks good and we can see our estimates for both fixed and random effects. We can now estimate the repeatbility of exploration.
 
-```{r, results = "hide", cache = FALSE}
+```{r, results = "hide"}
 rep_expl <- as.data.frame(VarCorr(lmer_e)) %>%
   select(grp, vcov) %>%
   spread(grp, vcov) %>%
@@ -142,8 +142,8 @@ rep_expl <- as.data.frame(VarCorr(lmer_e)) %>%
 rep_expl
 ```
 
-```{r, echo = FALSE}
-knitr::kable(rep_flying,
+```{r, echo = FALSE, purl = FALSE}
+knitr::kable(rep_expl,
   digits = 3,
   caption = "Variance components and repeatability for exploration
    behaviour of blue dragons"
@@ -173,14 +173,14 @@ df_blups_fe <- merge(
 We can now test the correlation among-individual between flying speed and exploration.
 
 ```{r, fig.cap = "Relation between exploration and flying speed using BLUPs from univariate models"}
-(cor_blups <- with(df_blups_fe, cor.test(condval.x, condval.y)))
+(cor_blups <- with(df_blups_fe, cor.test(speed, exploration)))
 ggplot(df_blups_fe, aes(x = exploration, y = speed)) +
   geom_point() +
   labs(xlab = "Exploration (BLUP)", ylab = "Flying speed (BLUP)") +
   theme_classic()
 ```
 
-As you can see, we get a positive correlation with a very small p-value ($P = `r cor_blups$p.value`$), indicating that these traits are involved in a behavioural syndrome. While the correlation itself is fairly weak ($r = `r cor_blups$estimate`), it appears to be highly significant, and suggests that individuals that are faster than average also tend to be more exploratory than average.
+As you can see, we get a positive correlation with a very small p-value (P = `r print(cor_blups$p.value, digits = 3)`), indicating that these traits are involved in a behavioural syndrome. While the correlation itself is fairly weak ($r = `r print(cor_blups$estimate, digits = 3)`), it appears to be highly significant, and suggests that individuals that are faster than average also tend to be more exploratory than average.
 However, as discussed in @hadfield_misuse_2010 and @houslay_avoiding_2017, using BLUPs in this way leads to anticonservative significance tests. This is because the error inherent in their prediction is not carried forward from the lmer models to the subsequent analysis (in this case, a correlation test).
 To illustrate this point quickly, below we plot the individual estimates along with their associated standard errors.
 
@@ -221,12 +221,13 @@ df_dragons <- df_dragons %>%
     exploration_sc = scale(exploration)
   )
 
-asr_us <- asreml(cbind(speed_sc, exploration_sc) ~ trait +
-  trait:assay_rep_sc + trait:body_size_sc,
-random = ~ ID:us(trait),
-residual = ~ units:us(trait),
-data = df_dragons,
-maxiter = 100
+asr_us <- asreml(
+  cbind(speed_sc, exploration_sc) ~ trait +
+    trait:assay_rep_sc + trait:body_size_sc,
+  random = ~ ID:us(trait),
+  residual = ~ units:us(trait),
+  data = df_dragons,
+  maxiter = 100
 )
 ```
 
@@ -272,11 +273,11 @@ vpredict(asr_us, rep_expl ~ V3 / (V3 + V7))
 We can also use this function to calculate the estimate and standard error of the correlation from our model (co)variances. We do this by specifying the formula for the correlation:
 
 ```{r}
-(cor_fe <- vpredict(asr_us, rep_expl ~ V2 / (sqrt(V1 * V3))))
+(cor_fe <- vpredict(asr_us, cor_expl_speed ~ V2 / (sqrt(V1 * V3))))
 ```
 
 In this case, the estimate is similar (here, slightly lower) than our correlation estimate using BLUPs.
-However, if we consider confidence intervals as $+/- 1.96SE$ around the estimate, the lower bound of the confidence interval would actually be `r cor_fe[1] - cor_fe[2]*1.96`.
+However, if we consider confidence intervals as $+/- 1.96SE$ around the estimate, the lower bound of the confidence interval would actually be `r print(cor_fe[1] - cor_fe[2]*1.96, digits = 3)`.
 With confidence intervals straddling zero, we would conclude that this correlation is likely non-significant.
 As the use of standard errors in this way is only approximate, we should also test our hypothesis formally using likelihood ratio tests.
 
@@ -287,18 +288,19 @@ Here, we use the `idh` structure for our random effects. This stands for ‘iden
 The rest of the model is identical to the previous version.
 
 ```{r}
-asr_us <- asreml(cbind(speed_sc, exploration_sc) ~ trait +
-  trait:assay_rep_sc + trait:body_size_sc,
-random = ~ ID:idh(trait),
-residual = ~ units:us(trait),
-data = df_dragons,
-maxiter = 100
+asr_idh <- asreml(
+    cbind(speed_sc, exploration_sc) ~ trait +
+    trait:assay_rep_sc + trait:body_size_sc,
+  random = ~ ID:idh(trait),
+  residual = ~ units:us(trait),
+  data = df_dragons,
+  maxiter = 100
 )
 ```
 
 The likelihood ratio test is calculated as twice the difference between model log-likelihoods, on a single degree of freedom (the covariance term):
 ```{r}
-(p_biv <- pchisq(2 * (asr_us$loglik - asr_us$loglik),
+(p_biv <- pchisq(2 * (asr_us$loglik - asr_idh$loglik),
   df = 1,
   lower.tail = FALSE
 ))
@@ -322,9 +324,9 @@ ggplot(df_cor, aes(x = Method, y = Correlation)) +
   theme_classic()
 ```
 
-Here we can clearly see that the BLUPs method - having failed to carry through the error around the predictions of individual-level estimates - is anticonservative, with small confidence intervals and a correspondingly small P-value ($P = `r cor_blups$p.value`$. Testing the syndrome directly in a bivariate model that retains all the data, by
+Here we can clearly see that the BLUPs method - having failed to carry through the error around the predictions of individual-level estimates - is anticonservative, with small confidence intervals and a correspondingly small P-value ($P = `r print(cor_blups$p.value, digits = 3)`$). Testing the syndrome directly in a bivariate model that retains all the data, by
 comparison, enables us to capture the true uncertainty about the estimate of the correlation. This is reflected
-in the larger confidence intervals and, in this case, the non-significant P-value ($P = `r p_biv`).
+in the larger confidence intervals and, in this case, the non-significant P-value ($P = `r print(p_biv, digits = 3)`$).
 
 
 <!--
@@ -410,6 +412,7 @@ HPDinterval(mcmc_cor_fe)
 ```{r, fig.cap = "Correlation estimates (with CI) using 3 different methods"}
 df_cor[3, 1] <- "MCMCglmm"
 df_cor[3, -1] <- c(posterior.mode(mcmc_cor_fe), HPDinterval(mcmc_cor_fe))
+rownames(df_cor) <- NULL
 
 ggplot(df_cor, aes(x = Method, y = Correlation)) +
   geom_point() +
@@ -418,7 +421,12 @@ ggplot(df_cor, aes(x = Method, y = Correlation)) +
   geom_hline(yintercept = 0, linetype = 2) +
   theme_classic()
 ```
-
+```{r, echo = FALSE, purl = FALSE}
+knitr::kable(df_cor,
+  digits = 3,
+  caption = "Correlation (with 95% intervals) between flying speed and exploration estimated with 3 different methods"
+)
+```
 ### Happy multivariate models
 
 ```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "A female blue dragon of the West"}
