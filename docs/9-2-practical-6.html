@@ -254,8 +254,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.2" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#refresher-on-unicorn-aggression"><i class="fa fa-check"></i><b>9.2.2</b> Refresher on unicorn aggression</a></li>
 <li class="chapter" data-level="9.2.3" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#random-regression"><i class="fa fa-check"></i><b>9.2.3</b> Random regression</a></li>
 <li class="chapter" data-level="9.2.4" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#character-state-approach"><i class="fa fa-check"></i><b>9.2.4</b> Character-State approach</a></li>
-<li class="chapter" data-level="9.2.5" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#conclusions-2"><i class="fa fa-check"></i><b>9.2.5</b> Conclusions</a></li>
-<li class="chapter" data-level="9.2.6" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#happy-multivariate-models-1"><i class="fa fa-check"></i><b>9.2.6</b> Happy multivariate models</a></li>
+<li class="chapter" data-level="9.2.5" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#from-random-regression-to-character-state"><i class="fa fa-check"></i><b>9.2.5</b> From random regression to character-state</a></li>
+<li class="chapter" data-level="9.2.6" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#conclusions-2"><i class="fa fa-check"></i><b>9.2.6</b> Conclusions</a></li>
+<li class="chapter" data-level="9.2.7" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#happy-multivariate-models-1"><i class="fa fa-check"></i><b>9.2.7</b> Happy multivariate models</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Appendix</b></span></li>
@@ -364,8 +365,8 @@ we have 2 blocks of data, and block is fitted as a fixed effect, for ease of pre
 <span id="cb274-9"><a href="9-2-practical-6.html#cb274-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
 <span id="cb274-10"><a href="9-2-practical-6.html#cb274-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb274-11"><a href="9-2-practical-6.html#cb274-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> type)</span></code></pre></div>
-<div class="figure"><span id="fig:unnamed-chunk-125"></span>
-<img src="BIO8940_book_files/figure-html/unnamed-chunk-125-1.svg" alt="Predicted (from m_mer) and observed value of aggression as a function of opponent size in unicorns" width="672" />
+<div class="figure"><span id="fig:unnamed-chunk-126"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-126-1.svg" alt="Predicted (from m_mer) and observed value of aggression as a function of opponent size in unicorns" width="672" />
 <p class="caption">
 Figure 9.2: Predicted (from m_mer) and observed value of aggression as a function of opponent size in unicorns
 </p>
@@ -394,7 +395,7 @@ need to figure out the code
 <span id="cb276-6"><a href="9-2-practical-6.html#cb276-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
 <span id="cb276-7"><a href="9-2-practical-6.html#cb276-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb276-8"><a href="9-2-practical-6.html#cb276-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> type)</span></code></pre></div>
-<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-127-1.svg" width="672" /></p>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-128-1.svg" width="672" /></p>
 <p>We can test the improvement of the model fit using the overloaded anova function in R to perform a likelihood ratio test (LRT):</p>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="9-2-practical-6.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(rr_mer, m_mer, <span class="at">refit =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table>
@@ -484,16 +485,16 @@ need to figure out the code
 <span id="cb280-8"><a href="9-2-practical-6.html#cb280-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxiter =</span> <span class="dv">200</span></span>
 <span id="cb280-9"><a href="9-2-practical-6.html#cb280-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Model fitted using the gamma parameterization.
-## ASReml 4.1.0 Mon Mar 22 12:19:45 2021
+## ASReml 4.1.0 Mon Mar 22 18:08:56 2021
 ##           LogLik        Sigma2     DF     wall    cpu
-##  1      -109.426      0.463232    475 12:19:45    0.0
-##  2      -105.050      0.454593    475 12:19:45    0.0
-##  3      -101.814      0.443662    475 12:19:45    0.0
-##  4      -100.814      0.433873    475 12:19:45    0.0
-##  5      -100.683      0.428596    475 12:19:45    0.0
-##  6      -100.682      0.428170    475 12:19:45    0.0</code></pre>
+##  1      -109.426      0.463232    475 18:08:56    0.0
+##  2      -105.050      0.454593    475 18:08:56    0.0
+##  3      -101.814      0.443662    475 18:08:56    0.0
+##  4      -100.814      0.433873    475 18:08:56    0.0
+##  5      -100.683      0.428596    475 18:08:56    0.0
+##  6      -100.682      0.428170    475 18:08:56    0.0</code></pre>
 <div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="9-2-practical-6.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rr_asr)</span></code></pre></div>
-<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-132-1.svg" width="672" /></p>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-133-1.svg" width="672" /></p>
 <div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="9-2-practical-6.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rr_asr, <span class="at">coef =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>coef.fixed</span></code></pre></div>
 <pre><code>##                 solution  std error     z.ratio
 ## block        -0.02168725 0.05973354  -0.3630665
@@ -503,10 +504,10 @@ need to figure out the code
 ## (Intercept)   9.00181250 0.03901766 230.7112239</code></pre>
 <div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="9-2-practical-6.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wald.asreml</span>(rr_asr, <span class="at">ssType =</span> <span class="st">&quot;conditional&quot;</span>, <span class="at">denDF =</span> <span class="st">&quot;numeric&quot;</span>)</span></code></pre></div>
 <pre><code>## Model fitted using the gamma parameterization.
-## ASReml 4.1.0 Mon Mar 22 12:19:46 2021
+## ASReml 4.1.0 Mon Mar 22 18:08:57 2021
 ##           LogLik        Sigma2     DF     wall    cpu
-##  1      -100.682      0.428168    475 12:19:46    0.0
-##  2      -100.682      0.428168    475 12:19:46    0.0
+##  1      -100.682      0.428168    475 18:08:57    0.0
+##  2      -100.682      0.428168    475 18:08:57    0.0
 ## Calculating denominator DF</code></pre>
 <pre><code>## $Wald
 ## [0;34m
@@ -521,11 +522,16 @@ need to figure out the code
 ## block         1 318.1     0     0      A 0.71680
 ## 
 ## $stratumVariances
-##                                 df  Variance ID+ID:opp_size!us(2)_1:1 ID+ID:opp_size!us(2)_2:1 ID+ID:opp_size!us(2)_2:2 units!R
-## ID+ID:opp_size!us(2)_1:1  78.00483 0.4790737                 5.216311                -3.301137                0.5221955       1
-## ID+ID:opp_size!us(2)_2:1   0.00000 0.0000000                 0.000000                 0.000000                0.0000000       1
-## ID+ID:opp_size!us(2)_2:2  78.94046 1.1937287                 0.000000                 0.000000                3.9943993       1
-## units!R                  318.05470 0.4281680                 0.000000                 0.000000                0.0000000       1</code></pre>
+##                                 df  Variance ID+ID:opp_size!us(2)_1:1 ID+ID:opp_size!us(2)_2:1
+## ID+ID:opp_size!us(2)_1:1  78.00483 0.4790737                 5.216311                -3.301137
+## ID+ID:opp_size!us(2)_2:1   0.00000 0.0000000                 0.000000                 0.000000
+## ID+ID:opp_size!us(2)_2:2  78.94046 1.1937287                 0.000000                 0.000000
+## units!R                  318.05470 0.4281680                 0.000000                 0.000000
+##                          ID+ID:opp_size!us(2)_2:2 units!R
+## ID+ID:opp_size!us(2)_1:1                0.5221955       1
+## ID+ID:opp_size!us(2)_2:1                0.0000000       1
+## ID+ID:opp_size!us(2)_2:2                3.9943993       1
+## units!R                                 0.0000000       1</code></pre>
 <div class="sourceCode" id="cb288"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb288-1"><a href="9-2-practical-6.html#cb288-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(rr_asr)<span class="sc">$</span>varcomp</span></code></pre></div>
 <pre><code>##                           component  std.error   z.ratio bound %ch
 ## ID+ID:opp_size!us(2)_1:1 0.05042932 0.02027564  2.487187     P   0
@@ -540,13 +546,13 @@ need to figure out the code
 <span id="cb290-6"><a href="9-2-practical-6.html#cb290-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxiter =</span> <span class="dv">200</span></span>
 <span id="cb290-7"><a href="9-2-practical-6.html#cb290-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Model fitted using the gamma parameterization.
-## ASReml 4.1.0 Mon Mar 22 12:19:46 2021
+## ASReml 4.1.0 Mon Mar 22 18:08:57 2021
 ##           LogLik        Sigma2     DF     wall    cpu
-##  1      -132.611      0.560353    475 12:19:46    0.0
-##  2      -132.106      0.567043    475 12:19:46    0.0
-##  3      -131.796      0.575157    475 12:19:46    0.0
-##  4      -131.743      0.580762    475 12:19:46    0.0
-##  5      -131.742      0.580480    475 12:19:46    0.0</code></pre>
+##  1      -132.611      0.560353    475 18:08:57    0.0
+##  2      -132.106      0.567043    475 18:08:57    0.0
+##  3      -131.796      0.575157    475 18:08:57    0.0
+##  4      -131.743      0.580762    475 18:08:57    0.0
+##  5      -131.742      0.580480    475 18:08:57    0.0</code></pre>
 <div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="9-2-practical-6.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="dv">2</span> <span class="sc">*</span> (rr_asr<span class="sc">$</span>loglik <span class="sc">-</span> rio_asr<span class="sc">$</span>loglik), <span class="dv">2</span>,</span>
 <span id="cb292-2"><a href="9-2-practical-6.html#cb292-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
 <span id="cb292-3"><a href="9-2-practical-6.html#cb292-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
@@ -562,12 +568,12 @@ need to figure out the code
 <span id="cb296-6"><a href="9-2-practical-6.html#cb296-6" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb296-7"><a href="9-2-practical-6.html#cb296-7" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>pvals)</span></code></pre></div>
 <pre><code>## Model fitted using the gamma parameterization.
-## ASReml 4.1.0 Mon Mar 22 12:24:41 2021
+## ASReml 4.1.0 Mon Mar 22 18:08:58 2021
 ##           LogLik        Sigma2     DF     wall    cpu
-##  1      -100.682      0.428168    475 12:24:41    0.1
-##  2      -100.682      0.428168    475 12:24:41    0.0
-##  3      -100.682      0.428168    475 12:24:41    0.0</code></pre>
-<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="9-2-practical-6.html#cb298-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pred_rr_asr, <span class="fu">aes</span>(<span class="at">x =</span> opp_size,</span>
+##  1      -100.682      0.428168    475 18:08:58    0.1
+##  2      -100.682      0.428168    475 18:08:58    0.0
+##  3      -100.682      0.428168    475 18:08:58    0.0</code></pre>
+<div class="sourceCode" id="cb298"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb298-1"><a href="9-2-practical-6.html#cb298-1" aria-hidden="true" tabindex="-1"></a>p_rr <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pred_rr_asr, <span class="fu">aes</span>(<span class="at">x =</span> opp_size,</span>
 <span id="cb298-2"><a href="9-2-practical-6.html#cb298-2" aria-hidden="true" tabindex="-1"></a><span class="at">y =</span> predicted.value,</span>
 <span id="cb298-3"><a href="9-2-practical-6.html#cb298-3" aria-hidden="true" tabindex="-1"></a><span class="at">group =</span> ID)) <span class="sc">+</span></span>
 <span id="cb298-4"><a href="9-2-practical-6.html#cb298-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
@@ -576,8 +582,9 @@ need to figure out the code
 <span id="cb298-7"><a href="9-2-practical-6.html#cb298-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Opponent size (SDU)&quot;</span>,</span>
 <span id="cb298-8"><a href="9-2-practical-6.html#cb298-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Aggression&quot;</span></span>
 <span id="cb298-9"><a href="9-2-practical-6.html#cb298-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb298-10"><a href="9-2-practical-6.html#cb298-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
-<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-138-1.svg" width="672" /></p>
+<span id="cb298-10"><a href="9-2-practical-6.html#cb298-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb298-11"><a href="9-2-practical-6.html#cb298-11" aria-hidden="true" tabindex="-1"></a>p_rr</span></code></pre></div>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-139-1.svg" width="672" /></p>
 </div>
 <div id="with-mcmcglmm" class="section level4" number="9.2.3.3">
 <h4><span class="header-section-number">9.2.3.3</span> with <code>MCMCglmm</code></h4>
@@ -601,7 +608,7 @@ need to figure out the code
 <span id="cb299-18"><a href="9-2-practical-6.html#cb299-18" aria-hidden="true" tabindex="-1"></a><span class="at">pr =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb299-19"><a href="9-2-practical-6.html#cb299-19" aria-hidden="true" tabindex="-1"></a><span class="at">saveX =</span> <span class="cn">TRUE</span>, <span class="at">saveZ =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="9-2-practical-6.html#cb300-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(rr_mcmc<span class="sc">$</span>VCV)</span></code></pre></div>
-<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-140-1.svg" width="672" /><img src="BIO8940_book_files/figure-html/unnamed-chunk-140-2.svg" width="672" /></p>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-141-1.svg" width="672" /><img src="BIO8940_book_files/figure-html/unnamed-chunk-141-2.svg" width="672" /></p>
 <div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="9-2-practical-6.html#cb301-1" aria-hidden="true" tabindex="-1"></a><span class="fu">posterior.mode</span>(rr_mcmc<span class="sc">$</span>VCV[, <span class="st">&quot;opp_size:opp_size.ID&quot;</span>]) <span class="co"># mean</span></span></code></pre></div>
 <pre><code>##      var1 
 ## 0.2040523</code></pre>
@@ -641,18 +648,385 @@ need to figure out the code
 <span id="cb311-4"><a href="9-2-practical-6.html#cb311-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
 <span id="cb311-5"><a href="9-2-practical-6.html#cb311-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb311-6"><a href="9-2-practical-6.html#cb311-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> Type)</span></code></pre></div>
-<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-143-1.svg" width="672" /></p>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-144-1.svg" width="672" /></p>
+<table>
+<caption><span id="tab:unnamed-chunk-145">Table 9.1: </span>Variance estimated from random regression models using 3 different softwares</caption>
+<thead>
+<tr class="header">
+<th align="left">Method</th>
+<th align="right">v_int</th>
+<th align="right">cov</th>
+<th align="right">v_sl</th>
+<th align="right">v_r</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">lmer</td>
+<td align="right">0.0504347</td>
+<td align="right">0.0945863</td>
+<td align="right">0.1916653</td>
+<td align="right">0.4281625</td>
+</tr>
+<tr class="even">
+<td align="left">asreml</td>
+<td align="right">0.0504293</td>
+<td align="right">0.0945834</td>
+<td align="right">0.1916592</td>
+<td align="right">0.4281695</td>
+</tr>
+<tr class="odd">
+<td align="left">MCMCglmm</td>
+<td align="right">0.0446102</td>
+<td align="right">0.0768445</td>
+<td align="right">0.2040523</td>
+<td align="right">0.4181750</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="character-state-approach" class="section level3" number="9.2.4">
 <h3><span class="header-section-number">9.2.4</span> Character-State approach</h3>
+<p>Need to pivot to a wider format</p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="9-2-practical-6.html#cb312-1" aria-hidden="true" tabindex="-1"></a>unicorns_cs <span class="ot">&lt;-</span> unicorns <span class="sc">%&gt;%</span></span>
+<span id="cb312-2"><a href="9-2-practical-6.html#cb312-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ID, body_size, assay_rep, block, aggression, opp_size) <span class="sc">%&gt;%</span></span>
+<span id="cb312-3"><a href="9-2-practical-6.html#cb312-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb312-4"><a href="9-2-practical-6.html#cb312-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">opp_size =</span> <span class="fu">recode</span>(<span class="fu">as.character</span>(opp_size), <span class="st">&quot;-1&quot;</span> <span class="ot">=</span> <span class="st">&quot;s&quot;</span>, <span class="st">&quot;0&quot;</span> <span class="ot">=</span> <span class="st">&quot;m&quot;</span>, <span class="st">&quot;1&quot;</span> <span class="ot">=</span> <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb312-5"><a href="9-2-practical-6.html#cb312-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb312-6"><a href="9-2-practical-6.html#cb312-6" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">rename</span>(<span class="at">agg =</span> aggression) <span class="sc">%&gt;%</span></span>
+<span id="cb312-7"><a href="9-2-practical-6.html#cb312-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> opp_size, <span class="at">values_from =</span> <span class="fu">c</span>(agg, assay_rep)) <span class="sc">%&gt;%</span></span>
+<span id="cb312-8"><a href="9-2-practical-6.html#cb312-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb312-9"><a href="9-2-practical-6.html#cb312-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">body_size_sc =</span> <span class="fu">scale</span>(body_size),</span>
+<span id="cb312-10"><a href="9-2-practical-6.html#cb312-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">opp_order =</span> <span class="fu">as.factor</span>(<span class="fu">paste</span>(assay_rep_s, assay_rep_m, assay_rep_l, <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>))</span>
+<span id="cb312-11"><a href="9-2-practical-6.html#cb312-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb312-12"><a href="9-2-practical-6.html#cb312-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(unicorns_cs)</span></code></pre></div>
+<pre><code>## tibble [160 × 11] (S3: tbl_df/tbl/data.frame)
+##  $ ID          : Factor w/ 80 levels &quot;ID_1&quot;,&quot;ID_10&quot;,..: 1 1 2 2 3 3 4 4 5 5 ...
+##  $ body_size   : num [1:160] 206 207 283 288 229 ...
+##  $ block       : num [1:160] -0.5 0.5 -0.5 0.5 -0.5 0.5 -0.5 0.5 -0.5 0.5 ...
+##  $ agg_s       : num [1:160] 7.02 8.44 7.73 8.08 8.06 8.16 8.16 8.51 7.59 6.67 ...
+##  $ agg_l       : num [1:160] 10.67 10.51 10.81 10.67 9.77 ...
+##  $ agg_m       : num [1:160] 10.22 8.95 9.43 9.46 7.63 ...
+##  $ assay_rep_s : int [1:160] 1 3 2 2 1 1 3 3 1 1 ...
+##  $ assay_rep_l : int [1:160] 2 2 1 1 2 2 2 1 2 2 ...
+##  $ assay_rep_m : int [1:160] 3 1 3 3 3 3 1 2 3 3 ...
+##  $ body_size_sc: num [1:160, 1] -1.504 -1.456 0.988 1.143 -0.76 ...
+##   ..- attr(*, &quot;scaled:center&quot;)= num 253
+##   ..- attr(*, &quot;scaled:scale&quot;)= num 31.1
+##  $ opp_order   : Factor w/ 6 levels &quot;1_2_3&quot;,&quot;1_3_2&quot;,..: 2 5 4 4 2 2 5 6 2 2 ...</code></pre>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="9-2-practical-6.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(unicorns_cs)</span></code></pre></div>
+<pre><code>## # A tibble: 6 x 11
+##   ID    body_size block agg_s agg_l agg_m assay_rep_s assay_rep_l assay_rep_m body_size_sc[,1] opp_order
+##   &lt;fct&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;       &lt;int&gt;       &lt;int&gt;       &lt;int&gt;            &lt;dbl&gt; &lt;fct&gt;    
+## 1 ID_1       206.  -0.5  7.02 10.7  10.2            1           2           3           -1.50  1_3_2    
+## 2 ID_1       207.   0.5  8.44 10.5   8.95           3           2           1           -1.46  3_1_2    
+## 3 ID_10      283.  -0.5  7.73 10.8   9.43           2           1           3            0.988 2_3_1    
+## 4 ID_10      288    0.5  8.08 10.7   9.46           2           1           3            1.14  2_3_1    
+## 5 ID_11      229.  -0.5  8.06  9.77  7.63           1           2           3           -0.760 1_3_2    
+## 6 ID_11      236.   0.5  8.16 10.8   8.23           1           2           3           -0.525 1_3_2</code></pre>
+<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="9-2-practical-6.html#cb316-1" aria-hidden="true" tabindex="-1"></a>cs_asr <span class="ot">&lt;-</span> <span class="fu">asreml</span>(</span>
+<span id="cb316-2"><a href="9-2-practical-6.html#cb316-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(agg_s, agg_m, agg_l) <span class="sc">~</span> trait <span class="sc">+</span> trait<span class="sc">:</span>body_size_sc <span class="sc">+</span></span>
+<span id="cb316-3"><a href="9-2-practical-6.html#cb316-3" aria-hidden="true" tabindex="-1"></a>    trait<span class="sc">:</span>block <span class="sc">+</span></span>
+<span id="cb316-4"><a href="9-2-practical-6.html#cb316-4" aria-hidden="true" tabindex="-1"></a>    trait<span class="sc">:</span>opp_order,</span>
+<span id="cb316-5"><a href="9-2-practical-6.html#cb316-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span><span class="sc">~</span> ID<span class="sc">:</span><span class="fu">us</span>(trait),</span>
+<span id="cb316-6"><a href="9-2-practical-6.html#cb316-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">residual =</span><span class="sc">~</span> units<span class="sc">:</span><span class="fu">us</span>(trait),</span>
+<span id="cb316-7"><a href="9-2-practical-6.html#cb316-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> unicorns_cs,</span>
+<span id="cb316-8"><a href="9-2-practical-6.html#cb316-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxiter =</span> <span class="dv">200</span></span>
+<span id="cb316-9"><a href="9-2-practical-6.html#cb316-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Model fitted using the sigma parameterization.
+## ASReml 4.1.0 Mon Mar 22 18:11:25 2021
+##           LogLik        Sigma2     DF     wall    cpu
+##  1      -150.172           1.0    456 18:11:25    0.0
+##  2      -129.658           1.0    456 18:11:25    0.0
+##  3      -110.454           1.0    456 18:11:25    0.0
+##  4      -101.879           1.0    456 18:11:25    0.0
+##  5      -100.092           1.0    456 18:11:25    0.0
+##  6      -100.054           1.0    456 18:11:25    0.0
+##  7      -100.054           1.0    456 18:11:25    0.0</code></pre>
+<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="9-2-practical-6.html#cb318-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">residuals</span>(cs_asr) <span class="sc">~</span> <span class="fu">fitted</span>(cs_asr))</span></code></pre></div>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-147-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="9-2-practical-6.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(<span class="fu">residuals</span>(cs_asr))</span>
+<span id="cb319-2"><a href="9-2-practical-6.html#cb319-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(<span class="fu">residuals</span>(cs_asr))</span></code></pre></div>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-147-2.svg" width="672" /></p>
+<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="9-2-practical-6.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">residuals</span>(cs_asr))</span></code></pre></div>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-147-3.svg" width="672" /></p>
+<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="9-2-practical-6.html#cb321-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cs_asr, <span class="at">all =</span> T)<span class="sc">$</span>coef.fixed</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="9-2-practical-6.html#cb323-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wald.asreml</span>(cs_asr, <span class="at">ssType =</span> <span class="st">&quot;conditional&quot;</span>, <span class="at">denDF =</span> <span class="st">&quot;numeric&quot;</span>)</span></code></pre></div>
+<pre><code>## Model fitted using the sigma parameterization.
+## ASReml 4.1.0 Mon Mar 22 18:11:25 2021
+##           LogLik        Sigma2     DF     wall    cpu
+##  1      -100.054           1.0    456 18:11:25    0.0
+##  2      -100.054           1.0    456 18:11:25    0.0
+## Calculating denominator DF</code></pre>
+<pre><code>## $Wald
+## [0;34m
+## Wald tests for fixed effects.[0m
+## [0;34mResponse: cbind(agg_s, agg_m, agg_l)[0m
+## 
+##                    Df denDF   F.inc   F.con Margin      Pr
+## trait               3  73.2 21080.0 21080.0        0.00000
+## trait:body_size_sc  3  86.6     0.4     0.5      B 0.68324
+## trait:block         3  75.2     0.6     0.3      B 0.82418
+## trait:opp_order    15 240.5     1.3     1.3      B 0.23282
+## 
+## $stratumVariances
+## NULL</code></pre>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="9-2-practical-6.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(cs_asr)<span class="sc">$</span>varcomp[, <span class="fu">c</span>(<span class="st">&quot;component&quot;</span>, <span class="st">&quot;std.error&quot;</span>)]</span></code></pre></div>
+<pre><code>##                                  component  std.error
+## ID:trait!trait_agg_s:agg_s     0.192959991 0.06321872
+## ID:trait!trait_agg_m:agg_s    -0.168519644 0.05085583
+## ID:trait!trait_agg_m:agg_m     0.245594370 0.07096325
+## ID:trait!trait_agg_l:agg_s    -0.151990204 0.05660748
+## ID:trait!trait_agg_l:agg_m     0.158418588 0.06374995
+## ID:trait!trait_agg_l:agg_l     0.312548090 0.09125168
+## units:trait!R                  1.000000000         NA
+## units:trait!trait_agg_s:agg_s  0.318089965 0.05198135
+## units:trait!trait_agg_m:agg_s  0.010362390 0.03695483
+## units:trait!trait_agg_m:agg_m  0.322379911 0.05248291
+## units:trait!trait_agg_l:agg_s -0.009311656 0.04168455
+## units:trait!trait_agg_l:agg_m  0.159240476 0.04569305
+## units:trait!trait_agg_l:agg_l  0.405942147 0.06679700</code></pre>
+<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="9-2-practical-6.html#cb328-1" aria-hidden="true" tabindex="-1"></a>cs_idh_asr <span class="ot">&lt;-</span> <span class="fu">asreml</span>(</span>
+<span id="cb328-2"><a href="9-2-practical-6.html#cb328-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(agg_s, agg_m, agg_l) <span class="sc">~</span> trait <span class="sc">+</span> trait<span class="sc">:</span>body_size_sc <span class="sc">+</span></span>
+<span id="cb328-3"><a href="9-2-practical-6.html#cb328-3" aria-hidden="true" tabindex="-1"></a>    trait<span class="sc">:</span>block <span class="sc">+</span></span>
+<span id="cb328-4"><a href="9-2-practical-6.html#cb328-4" aria-hidden="true" tabindex="-1"></a>    trait<span class="sc">:</span>opp_order,</span>
+<span id="cb328-5"><a href="9-2-practical-6.html#cb328-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> ID<span class="sc">:</span><span class="fu">idh</span>(trait),</span>
+<span id="cb328-6"><a href="9-2-practical-6.html#cb328-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">residual =</span> <span class="sc">~</span> units<span class="sc">:</span><span class="fu">us</span>(trait),</span>
+<span id="cb328-7"><a href="9-2-practical-6.html#cb328-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> unicorns_cs,</span>
+<span id="cb328-8"><a href="9-2-practical-6.html#cb328-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxiter =</span> <span class="dv">200</span></span>
+<span id="cb328-9"><a href="9-2-practical-6.html#cb328-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Model fitted using the sigma parameterization.
+## ASReml 4.1.0 Mon Mar 22 18:11:25 2021
+##           LogLik        Sigma2     DF     wall    cpu
+##  1      -147.068           1.0    456 18:11:25    0.0
+##  2      -131.268           1.0    456 18:11:25    0.0
+##  3      -116.908           1.0    456 18:11:25    0.0
+##  4      -110.996           1.0    456 18:11:25    0.0
+##  5      -109.905           1.0    456 18:11:25    0.0
+##  6      -109.866           1.0    456 18:11:25    0.0
+##  7      -109.863           1.0    456 18:11:25    0.0</code></pre>
+<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="9-2-practical-6.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="dv">2</span> <span class="sc">*</span> (cs_asr<span class="sc">$</span>loglik <span class="sc">-</span> cs_idh_asr<span class="sc">$</span>loglik), <span class="dv">3</span>,</span>
+<span id="cb330-2"><a href="9-2-practical-6.html#cb330-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
+<span id="cb330-3"><a href="9-2-practical-6.html#cb330-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## [1] 0.0002038324</code></pre>
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="9-2-practical-6.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vpredict</span>(cs_asr, cor_S_M <span class="sc">~</span> V2 <span class="sc">/</span> (<span class="fu">sqrt</span>(V1) <span class="sc">*</span> <span class="fu">sqrt</span>(V3)))</span></code></pre></div>
+<pre><code>##           Estimate        SE
+## cor_S_M -0.7741189 0.1869789</code></pre>
+<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="9-2-practical-6.html#cb334-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vpredict</span>(cs_asr, cor_M_L <span class="sc">~</span> V5 <span class="sc">/</span> (<span class="fu">sqrt</span>(V3) <span class="sc">*</span> <span class="fu">sqrt</span>(V6)))</span></code></pre></div>
+<pre><code>##          Estimate        SE
+## cor_M_L 0.5717926 0.1469504</code></pre>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="9-2-practical-6.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vpredict</span>(cs_asr, cor_S_L <span class="sc">~</span> V4 <span class="sc">/</span> (<span class="fu">sqrt</span>(V1) <span class="sc">*</span> <span class="fu">sqrt</span>(V6)))</span></code></pre></div>
+<pre><code>##           Estimate        SE
+## cor_S_L -0.6189044 0.1912133</code></pre>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="9-2-practical-6.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vpredict</span>(cs_asr, prop_S <span class="sc">~</span> V1 <span class="sc">/</span> (V1 <span class="sc">+</span> V8))</span></code></pre></div>
+<pre><code>##         Estimate         SE
+## prop_S 0.3775756 0.09950306</code></pre>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="9-2-practical-6.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vpredict</span>(cs_asr, prop_M <span class="sc">~</span> V3 <span class="sc">/</span> (V3 <span class="sc">+</span> V10))</span></code></pre></div>
+<pre><code>##        Estimate        SE
+## prop_M 0.432404 0.0934477</code></pre>
+<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="9-2-practical-6.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vpredict</span>(cs_asr, prop_L <span class="sc">~</span> V6 <span class="sc">/</span> (V6 <span class="sc">+</span> V13))</span></code></pre></div>
+<pre><code>##         Estimate         SE
+## prop_L 0.4350067 0.09498512</code></pre>
+<div class="sourceCode" id="cb344"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb344-1"><a href="9-2-practical-6.html#cb344-1" aria-hidden="true" tabindex="-1"></a>init_CS_cor1_tri <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb344-2"><a href="9-2-practical-6.html#cb344-2" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.999</span>,</span>
+<span id="cb344-3"><a href="9-2-practical-6.html#cb344-3" aria-hidden="true" tabindex="-1"></a>  <span class="fl">0.999</span>, <span class="fl">0.999</span>,</span>
+<span id="cb344-4"><a href="9-2-practical-6.html#cb344-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span></span>
+<span id="cb344-5"><a href="9-2-practical-6.html#cb344-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb344-6"><a href="9-2-practical-6.html#cb344-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(init_CS_cor1_tri) <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb344-7"><a href="9-2-practical-6.html#cb344-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;F&quot;</span>,</span>
+<span id="cb344-8"><a href="9-2-practical-6.html#cb344-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;F&quot;</span>, <span class="st">&quot;F&quot;</span>,</span>
+<span id="cb344-9"><a href="9-2-practical-6.html#cb344-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;U&quot;</span>, <span class="st">&quot;U&quot;</span>, <span class="st">&quot;U&quot;</span></span>
+<span id="cb344-10"><a href="9-2-practical-6.html#cb344-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb344-11"><a href="9-2-practical-6.html#cb344-11" aria-hidden="true" tabindex="-1"></a>cs_asr_cor1_tri <span class="ot">&lt;-</span> <span class="fu">asreml</span>(</span>
+<span id="cb344-12"><a href="9-2-practical-6.html#cb344-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(agg_s, agg_m, agg_l) <span class="sc">~</span> trait <span class="sc">+</span> trait<span class="sc">:</span>body_size_sc <span class="sc">+</span></span>
+<span id="cb344-13"><a href="9-2-practical-6.html#cb344-13" aria-hidden="true" tabindex="-1"></a>    trait<span class="sc">:</span>block <span class="sc">+</span></span>
+<span id="cb344-14"><a href="9-2-practical-6.html#cb344-14" aria-hidden="true" tabindex="-1"></a>    trait<span class="sc">:</span>opp_order,</span>
+<span id="cb344-15"><a href="9-2-practical-6.html#cb344-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> ID<span class="sc">:</span><span class="fu">corgh</span>(trait, <span class="at">init =</span> init_CS_cor1_tri),</span>
+<span id="cb344-16"><a href="9-2-practical-6.html#cb344-16" aria-hidden="true" tabindex="-1"></a><span class="at">residual =</span> <span class="sc">~</span> units<span class="sc">:</span><span class="fu">us</span>(trait),</span>
+<span id="cb344-17"><a href="9-2-practical-6.html#cb344-17" aria-hidden="true" tabindex="-1"></a><span class="at">data =</span> unicorns_cs,</span>
+<span id="cb344-18"><a href="9-2-practical-6.html#cb344-18" aria-hidden="true" tabindex="-1"></a><span class="at">maxiter =</span> <span class="dv">500</span></span>
+<span id="cb344-19"><a href="9-2-practical-6.html#cb344-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Model fitted using the sigma parameterization.
+## ASReml 4.1.0 Mon Mar 22 18:11:25 2021
+##           LogLik        Sigma2     DF     wall    cpu
+##  1      -228.016           1.0    456 18:11:25    0.0 (3 restrained)
+##  2      -150.014           1.0    456 18:11:25    0.0
+##  3      -129.580           1.0    456 18:11:25    0.0
+##  4      -119.992           1.0    456 18:11:25    0.0 (1 restrained)
+##  5      -116.907           1.0    456 18:11:25    0.0 (1 restrained)
+##  6      -115.772           1.0    456 18:11:25    0.0
+##  7      -115.647           1.0    456 18:11:25    0.0
+##  8      -115.588           1.0    456 18:11:25    0.0
+##  9      -115.533           1.0    456 18:11:25    0.0
+## 10      -115.479           1.0    456 18:11:25    0.0
+## 11      -115.427           1.0    456 18:11:25    0.0
+## 12      -115.378           1.0    456 18:11:25    0.0
+## 13      -115.331           1.0    456 18:11:25    0.0
+## 14      -115.289           1.0    456 18:11:25    0.0
+## 15      -115.251           1.0    456 18:11:25    0.0
+## 16      -115.217           1.0    456 18:11:25    0.0
+## 17      -115.188           1.0    456 18:11:25    0.0
+## 18      -115.162           1.0    456 18:11:25    0.0
+## 19      -115.141           1.0    456 18:11:25    0.0
+## 20      -115.122           1.0    456 18:11:25    0.0
+## 21      -115.107           1.0    456 18:11:25    0.0
+## 22      -115.093           1.0    456 18:11:25    0.0
+## 23      -115.082           1.0    456 18:11:25    0.0
+## 24      -115.073           1.0    456 18:11:25    0.0 (1 restrained)
+## 25      -115.064           1.0    456 18:11:25    0.0
+## 26      -115.064           1.0    456 18:11:25    0.0</code></pre>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="9-2-practical-6.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pchisq</span>(<span class="dv">2</span> <span class="sc">*</span> (cs_asr<span class="sc">$</span>loglik <span class="sc">-</span> cs_asr_cor1_tri<span class="sc">$</span>loglik),</span>
+<span id="cb346-2"><a href="9-2-practical-6.html#cb346-2" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span>,</span>
+<span id="cb346-3"><a href="9-2-practical-6.html#cb346-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
+<span id="cb346-4"><a href="9-2-practical-6.html#cb346-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## [1] 1.367792e-06</code></pre>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="9-2-practical-6.html#cb348-1" aria-hidden="true" tabindex="-1"></a>df_CS_pred <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">predict</span>(cs_asr,</span>
+<span id="cb348-2"><a href="9-2-practical-6.html#cb348-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">classify =</span> <span class="st">&quot;trait:ID&quot;</span></span>
+<span id="cb348-3"><a href="9-2-practical-6.html#cb348-3" aria-hidden="true" tabindex="-1"></a>)<span class="sc">$</span>pvals)</span></code></pre></div>
+<pre><code>## Model fitted using the sigma parameterization.
+## ASReml 4.1.0 Mon Mar 22 18:11:25 2021
+##           LogLik        Sigma2     DF     wall    cpu
+##  1      -100.054           1.0    456 18:11:26    0.1
+##  2      -100.054           1.0    456 18:11:26    0.0
+##  3      -100.054           1.0    456 18:11:26    0.0</code></pre>
+<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="9-2-practical-6.html#cb350-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add numeric variable for easier plotting</span></span>
+<span id="cb350-2"><a href="9-2-practical-6.html#cb350-2" aria-hidden="true" tabindex="-1"></a><span class="co"># of opponent size</span></span>
+<span id="cb350-3"><a href="9-2-practical-6.html#cb350-3" aria-hidden="true" tabindex="-1"></a>df_CS_pred <span class="ot">&lt;-</span> df_CS_pred <span class="sc">%&gt;%</span></span>
+<span id="cb350-4"><a href="9-2-practical-6.html#cb350-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sizeNum =</span> <span class="fu">ifelse</span>(trait <span class="sc">==</span> <span class="st">&quot;agg_s&quot;</span>, <span class="sc">-</span><span class="dv">1</span>,</span>
+<span id="cb350-5"><a href="9-2-practical-6.html#cb350-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ifelse</span>(trait <span class="sc">==</span> <span class="st">&quot;agg_m&quot;</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb350-6"><a href="9-2-practical-6.html#cb350-6" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb350-7"><a href="9-2-practical-6.html#cb350-7" aria-hidden="true" tabindex="-1"></a>p_cs <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(df_CS_pred, <span class="fu">aes</span>(</span>
+<span id="cb350-8"><a href="9-2-practical-6.html#cb350-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> sizeNum,</span>
+<span id="cb350-9"><a href="9-2-practical-6.html#cb350-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> predicted.value,</span>
+<span id="cb350-10"><a href="9-2-practical-6.html#cb350-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">group =</span> ID</span>
+<span id="cb350-11"><a href="9-2-practical-6.html#cb350-11" aria-hidden="true" tabindex="-1"></a>)) <span class="sc">+</span></span>
+<span id="cb350-12"><a href="9-2-practical-6.html#cb350-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb350-13"><a href="9-2-practical-6.html#cb350-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb350-14"><a href="9-2-practical-6.html#cb350-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb350-15"><a href="9-2-practical-6.html#cb350-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Opponent size (SDU)&quot;</span>,</span>
+<span id="cb350-16"><a href="9-2-practical-6.html#cb350-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Aggression&quot;</span></span>
+<span id="cb350-17"><a href="9-2-practical-6.html#cb350-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb350-18"><a href="9-2-practical-6.html#cb350-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb350-19"><a href="9-2-practical-6.html#cb350-19" aria-hidden="true" tabindex="-1"></a>p_cs</span></code></pre></div>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-155-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb351"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb351-1"><a href="9-2-practical-6.html#cb351-1" aria-hidden="true" tabindex="-1"></a>unicorns <span class="ot">&lt;-</span> <span class="fu">arrange</span>(unicorns, opp_size, <span class="at">by_group =</span> ID)</span>
+<span id="cb351-2"><a href="9-2-practical-6.html#cb351-2" aria-hidden="true" tabindex="-1"></a>p_obs <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(unicorns[unicorns<span class="sc">$</span>block<span class="sc">==-</span><span class="fl">0.5</span>,], <span class="fu">aes</span>(<span class="at">x =</span> opp_size, <span class="at">y =</span> aggression, <span class="at">group =</span> ID)) <span class="sc">+</span></span>
+<span id="cb351-3"><a href="9-2-practical-6.html#cb351-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb351-4"><a href="9-2-practical-6.html#cb351-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb351-5"><a href="9-2-practical-6.html#cb351-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb351-6"><a href="9-2-practical-6.html#cb351-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;Opponent size (SDU)&quot;</span>,</span>
+<span id="cb351-7"><a href="9-2-practical-6.html#cb351-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Aggression&quot;</span></span>
+<span id="cb351-8"><a href="9-2-practical-6.html#cb351-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb351-9"><a href="9-2-practical-6.html#cb351-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Observed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb351-10"><a href="9-2-practical-6.html#cb351-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="fl">5.9</span>, <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb351-11"><a href="9-2-practical-6.html#cb351-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span>
+<span id="cb351-12"><a href="9-2-practical-6.html#cb351-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb351-13"><a href="9-2-practical-6.html#cb351-13" aria-hidden="true" tabindex="-1"></a>p_rr <span class="ot">&lt;-</span> p_rr <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Random regression&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fl">5.9</span>, <span class="dv">12</span>)</span>
+<span id="cb351-14"><a href="9-2-practical-6.html#cb351-14" aria-hidden="true" tabindex="-1"></a>p_cs <span class="ot">&lt;-</span> p_cs <span class="sc">+</span> <span class="fu">ggtitle</span>(<span class="st">&quot;Character-State&quot;</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fl">5.9</span>, <span class="dv">12</span>)</span>
+<span id="cb351-15"><a href="9-2-practical-6.html#cb351-15" aria-hidden="true" tabindex="-1"></a>p_obs <span class="sc">+</span> p_rr <span class="sc">+</span> p_cs</span></code></pre></div>
+<pre><code>## Warning: Removed 2 row(s) containing missing values (geom_path).</code></pre>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-156-1.svg" width="672" /></p>
 </div>
-<div id="conclusions-2" class="section level3" number="9.2.5">
-<h3><span class="header-section-number">9.2.5</span> Conclusions</h3>
+<div id="from-random-regression-to-character-state" class="section level3" number="9.2.5">
+<h3><span class="header-section-number">9.2.5</span> From random regression to character-state</h3>
+<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="9-2-practical-6.html#cb353-1" aria-hidden="true" tabindex="-1"></a>var_mat_asr <span class="ot">&lt;-</span> <span class="cf">function</span>(model, var_names, pos){</span>
+<span id="cb353-2"><a href="9-2-practical-6.html#cb353-2" aria-hidden="true" tabindex="-1"></a>  size <span class="ot">&lt;-</span> <span class="fu">length</span>(var_names)</span>
+<span id="cb353-3"><a href="9-2-practical-6.html#cb353-3" aria-hidden="true" tabindex="-1"></a>  v_out <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol =</span> size, <span class="at">nrow =</span> size)</span>
+<span id="cb353-4"><a href="9-2-practical-6.html#cb353-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames</span>(v_out) <span class="ot">&lt;-</span> var_names</span>
+<span id="cb353-5"><a href="9-2-practical-6.html#cb353-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">colnames</span>(v_out) <span class="ot">&lt;-</span> var_names</span>
+<span id="cb353-6"><a href="9-2-practical-6.html#cb353-6" aria-hidden="true" tabindex="-1"></a>  v_out[<span class="fu">upper.tri</span>(v_out, <span class="at">diag =</span> <span class="cn">TRUE</span>)] <span class="ot">&lt;-</span> <span class="fu">summary</span>(model)<span class="sc">$</span>varcomp[pos, <span class="dv">1</span>]</span>
+<span id="cb353-7"><a href="9-2-practical-6.html#cb353-7" aria-hidden="true" tabindex="-1"></a>  v_out <span class="ot">&lt;-</span> <span class="fu">forceSymmetric</span>(v_out, <span class="at">uplo =</span> <span class="st">&quot;U&quot;</span>)</span>
+<span id="cb353-8"><a href="9-2-practical-6.html#cb353-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.matrix</span>(v_out)</span>
+<span id="cb353-9"><a href="9-2-practical-6.html#cb353-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb353-10"><a href="9-2-practical-6.html#cb353-10" aria-hidden="true" tabindex="-1"></a>v_id_rr <span class="ot">&lt;-</span> <span class="fu">var_mat_asr</span>(rr_asr, <span class="fu">c</span>(<span class="st">&quot;v_int&quot;</span>, <span class="st">&quot;v_sl&quot;</span>), <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>)</span>
+<span id="cb353-11"><a href="9-2-practical-6.html#cb353-11" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(v_id_rr, <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">v_int</th>
+<th align="right">v_sl</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">v_int</td>
+<td align="right">0.050</td>
+<td align="right">0.095</td>
+</tr>
+<tr class="even">
+<td align="left">v_sl</td>
+<td align="right">0.095</td>
+<td align="right">0.192</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="9-2-practical-6.html#cb354-1" aria-hidden="true" tabindex="-1"></a>v_id_cs <span class="ot">&lt;-</span> <span class="fu">var_mat_asr</span>(cs_asr, <span class="fu">c</span>(<span class="st">&quot;v_s&quot;</span>, <span class="st">&quot;v_m&quot;</span>, <span class="st">&quot;v_l&quot;</span>), <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span>
+<span id="cb354-2"><a href="9-2-practical-6.html#cb354-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(v_id_cs, <span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">v_s</th>
+<th align="right">v_m</th>
+<th align="right">v_l</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">v_s</td>
+<td align="right">0.193</td>
+<td align="right">-0.169</td>
+<td align="right">-0.152</td>
+</tr>
+<tr class="even">
+<td align="left">v_m</td>
+<td align="right">-0.169</td>
+<td align="right">0.246</td>
+<td align="right">0.158</td>
+</tr>
+<tr class="odd">
+<td align="left">v_l</td>
+<td align="right">-0.152</td>
+<td align="right">0.158</td>
+<td align="right">0.313</td>
+</tr>
+</tbody>
+</table>
+<p>We also need to make a second matrix, let’s call it <strong>Q</strong> (no particular reason, pick something else if you want). This is going to contain the values needed to turn an individual’s intercept (mean) and slope (plasticity) deviations into estimates of environment-specific individual merit in a character state model.</p>
+<p>What do we mean by this? Well if an individual i has an intercept deviation of ID<sub>int(i)</sub> and a slope deviation of ID<sub>slp(i)</sub> for a given value of the environment <code>opp_size</code> we might be interested in:</p>
+<p>ID<sub>i</sub> = (1 x ID<sub>int(i)</sub>) + (<code>opp_size</code> x ID<sub>slp(i)</sub>)</p>
+<p>We want to look at character states representing the three observed values of <code>opp_size</code> here so</p>
+<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="9-2-practical-6.html#cb355-1" aria-hidden="true" tabindex="-1"></a>Q <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(<span class="fu">cbind</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb355-2"><a href="9-2-practical-6.html#cb355-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)))</span></code></pre></div>
+<p>Then we can generate our among-individual covariance matrix environment specific aggresiveness, which we can call <strong>ID_cs_rr</strong> by matrix multiplication:</p>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="9-2-practical-6.html#cb356-1" aria-hidden="true" tabindex="-1"></a>ID_cs_rr<span class="ot">&lt;-</span> Q <span class="sc">%*%</span> v_id_rr <span class="sc">%*%</span><span class="fu">t</span>(Q)    <span class="co">#where t(Q) is the transpose of Q</span></span>
+<span id="cb356-2"><a href="9-2-practical-6.html#cb356-2" aria-hidden="true" tabindex="-1"></a>                               <span class="co">#and %*% is matrix multiplication</span></span>
+<span id="cb356-3"><a href="9-2-practical-6.html#cb356-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb356-4"><a href="9-2-practical-6.html#cb356-4" aria-hidden="true" tabindex="-1"></a>ID_cs_rr  <span class="co">#rows and columns correspond to aggressiveness at opp_size=-1,0,1 in that order</span></span></code></pre></div>
+<pre><code>##             [,1]        [,2]       [,3]
+## [1,]  0.05292184 -0.04415404 -0.1412299
+## [2,] -0.04415404  0.05042932  0.1450127
+## [3,] -0.14122993  0.14501267  0.4312553</code></pre>
+<div class="sourceCode" id="cb358"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb358-1"><a href="9-2-practical-6.html#cb358-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov2cor</span>(ID_cs_rr)   <span class="co">#Converting to a correlation scale</span></span></code></pre></div>
+<pre><code>##            [,1]       [,2]       [,3]
+## [1,]  1.0000000 -0.8546956 -0.9348503
+## [2,] -0.8546956  1.0000000  0.9833253
+## [3,] -0.9348503  0.9833253  1.0000000</code></pre>
+<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="9-2-practical-6.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cov2cor</span>(v_id_cs)</span></code></pre></div>
+<pre><code>##            v_s        v_m        v_l
+## v_s  1.0000000 -0.7741189 -0.6189044
+## v_m -0.7741189  1.0000000  0.5717926
+## v_l -0.6189044  0.5717926  1.0000000</code></pre>
 </div>
-<div id="happy-multivariate-models-1" class="section level3" number="9.2.6">
-<h3><span class="header-section-number">9.2.6</span> Happy multivariate models</h3>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-144"></span>
+<div id="conclusions-2" class="section level3" number="9.2.6">
+<h3><span class="header-section-number">9.2.6</span> Conclusions</h3>
+</div>
+<div id="happy-multivariate-models-1" class="section level3" number="9.2.7">
+<h3><span class="header-section-number">9.2.7</span> Happy multivariate models</h3>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-161"></span>
 <img src="images/blue_dragon.jpg" alt="A female blue dragon of the West" width="50%" />
 <p class="caption">
 Figure 9.3: A female blue dragon of the West

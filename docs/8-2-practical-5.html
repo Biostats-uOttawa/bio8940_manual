@@ -254,8 +254,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.2.2" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#refresher-on-unicorn-aggression"><i class="fa fa-check"></i><b>9.2.2</b> Refresher on unicorn aggression</a></li>
 <li class="chapter" data-level="9.2.3" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#random-regression"><i class="fa fa-check"></i><b>9.2.3</b> Random regression</a></li>
 <li class="chapter" data-level="9.2.4" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#character-state-approach"><i class="fa fa-check"></i><b>9.2.4</b> Character-State approach</a></li>
-<li class="chapter" data-level="9.2.5" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#conclusions-2"><i class="fa fa-check"></i><b>9.2.5</b> Conclusions</a></li>
-<li class="chapter" data-level="9.2.6" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#happy-multivariate-models-1"><i class="fa fa-check"></i><b>9.2.6</b> Happy multivariate models</a></li>
+<li class="chapter" data-level="9.2.5" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#from-random-regression-to-character-state"><i class="fa fa-check"></i><b>9.2.5</b> From random regression to character-state</a></li>
+<li class="chapter" data-level="9.2.6" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#conclusions-2"><i class="fa fa-check"></i><b>9.2.6</b> Conclusions</a></li>
+<li class="chapter" data-level="9.2.7" data-path="9-2-practical-6.html"><a href="9-2-practical-6.html#happy-multivariate-models-1"><i class="fa fa-check"></i><b>9.2.7</b> Happy multivariate models</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>III Appendix</b></span></li>
@@ -486,9 +487,9 @@ behaviour of blue dragons</caption>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">6.951</td>
-<td align="right">11.682</td>
-<td align="right">0.373</td>
+<td align="right">3.623</td>
+<td align="right">9.091</td>
+<td align="right">0.285</td>
 </tr>
 </tbody>
 </table>
@@ -508,11 +509,11 @@ behaviour of blue dragons</caption>
 <span id="cb222-8"><a href="8-2-practical-5.html#cb222-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">exploration =</span> condval.y</span>
 <span id="cb222-9"><a href="8-2-practical-5.html#cb222-9" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <p>We can now test the correlation among-individual between flying speed and exploration.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="8-2-practical-5.html#cb223-1" aria-hidden="true" tabindex="-1"></a>(cor_blups <span class="ot">&lt;-</span> <span class="fu">with</span>(df_blups_fe, <span class="fu">cor.test</span>(condval.x, condval.y)))</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="8-2-practical-5.html#cb223-1" aria-hidden="true" tabindex="-1"></a>(cor_blups <span class="ot">&lt;-</span> <span class="fu">with</span>(df_blups_fe, <span class="fu">cor.test</span>(speed, exploration)))</span></code></pre></div>
 <pre><code>## 
 ##  Pearson&#39;s product-moment correlation
 ## 
-## data:  condval.x and condval.y
+## data:  speed and exploration
 ## t = 3.2131, df = 78, p-value = 0.00191
 ## alternative hypothesis: true correlation is not equal to 0
 ## 95 percent confidence interval:
@@ -530,7 +531,7 @@ behaviour of blue dragons</caption>
 Figure 8.5: Relation between exploration and flying speed using BLUPs from univariate models
 </p>
 </div>
-<p>As you can see, we get a positive correlation with a very small p-value (<span class="math inline">\(P = 0.0019099\)</span>), indicating that these traits are involved in a behavioural syndrome. While the correlation itself is fairly weak ($r = 0.3418867), it appears to be highly significant, and suggests that individuals that are faster than average also tend to be more exploratory than average.
+<p>As you can see, we get a positive correlation with a very small p-value (P = ), indicating that these traits are involved in a behavioural syndrome. While the correlation itself is fairly weak ($r = ), it appears to be highly significant, and suggests that individuals that are faster than average also tend to be more exploratory than average.
 However, as discussed in <span class="citation"><a href="references.html#ref-hadfield_misuse_2010" role="doc-biblioref">Hadfield et al.</a> (<a href="references.html#ref-hadfield_misuse_2010" role="doc-biblioref">2010</a>)</span> and <span class="citation"><a href="references.html#ref-houslay_avoiding_2017" role="doc-biblioref">Houslay and Wilson</a> (<a href="references.html#ref-houslay_avoiding_2017" role="doc-biblioref">2017</a>)</span>, using BLUPs in this way leads to anticonservative significance tests. This is because the error inherent in their prediction is not carried forward from the lmer models to the subsequent analysis (in this case, a correlation test).
 To illustrate this point quickly, below we plot the individual estimates along with their associated standard errors.</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="8-2-practical-5.html#cb226-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_blups_fe, <span class="fu">aes</span>(<span class="at">x =</span> exploration, <span class="at">y =</span> speed)) <span class="sc">+</span></span>
@@ -572,24 +573,24 @@ We set up our model using the <code>asreml</code> function call, with our bivari
 <span id="cb227-5"><a href="8-2-practical-5.html#cb227-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">exploration_sc =</span> <span class="fu">scale</span>(exploration)</span>
 <span id="cb227-6"><a href="8-2-practical-5.html#cb227-6" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb227-7"><a href="8-2-practical-5.html#cb227-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb227-8"><a href="8-2-practical-5.html#cb227-8" aria-hidden="true" tabindex="-1"></a>asr_us <span class="ot">&lt;-</span> <span class="fu">asreml</span>(<span class="fu">cbind</span>(speed_sc, exploration_sc) <span class="sc">~</span> trait <span class="sc">+</span></span>
-<span id="cb227-9"><a href="8-2-practical-5.html#cb227-9" aria-hidden="true" tabindex="-1"></a>  trait<span class="sc">:</span>assay_rep_sc <span class="sc">+</span> trait<span class="sc">:</span>body_size_sc,</span>
-<span id="cb227-10"><a href="8-2-practical-5.html#cb227-10" aria-hidden="true" tabindex="-1"></a><span class="at">random =</span> <span class="sc">~</span> ID<span class="sc">:</span><span class="fu">us</span>(trait),</span>
-<span id="cb227-11"><a href="8-2-practical-5.html#cb227-11" aria-hidden="true" tabindex="-1"></a><span class="at">residual =</span> <span class="sc">~</span> units<span class="sc">:</span><span class="fu">us</span>(trait),</span>
-<span id="cb227-12"><a href="8-2-practical-5.html#cb227-12" aria-hidden="true" tabindex="-1"></a><span class="at">data =</span> df_dragons,</span>
-<span id="cb227-13"><a href="8-2-practical-5.html#cb227-13" aria-hidden="true" tabindex="-1"></a><span class="at">maxiter =</span> <span class="dv">100</span></span>
-<span id="cb227-14"><a href="8-2-practical-5.html#cb227-14" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<pre><code>## Online License checked out Fri Mar 19 23:43:51 2021
-## Model fitted using the sigma parameterization.
-## ASReml 4.1.0 Fri Mar 19 23:43:51 2021
+<span id="cb227-8"><a href="8-2-practical-5.html#cb227-8" aria-hidden="true" tabindex="-1"></a>asr_us <span class="ot">&lt;-</span> <span class="fu">asreml</span>(</span>
+<span id="cb227-9"><a href="8-2-practical-5.html#cb227-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(speed_sc, exploration_sc) <span class="sc">~</span> trait <span class="sc">+</span></span>
+<span id="cb227-10"><a href="8-2-practical-5.html#cb227-10" aria-hidden="true" tabindex="-1"></a>    trait<span class="sc">:</span>assay_rep_sc <span class="sc">+</span> trait<span class="sc">:</span>body_size_sc,</span>
+<span id="cb227-11"><a href="8-2-practical-5.html#cb227-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> ID<span class="sc">:</span><span class="fu">us</span>(trait),</span>
+<span id="cb227-12"><a href="8-2-practical-5.html#cb227-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">residual =</span> <span class="sc">~</span> units<span class="sc">:</span><span class="fu">us</span>(trait),</span>
+<span id="cb227-13"><a href="8-2-practical-5.html#cb227-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_dragons,</span>
+<span id="cb227-14"><a href="8-2-practical-5.html#cb227-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxiter =</span> <span class="dv">100</span></span>
+<span id="cb227-15"><a href="8-2-practical-5.html#cb227-15" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Model fitted using the sigma parameterization.
+## ASReml 4.1.0 Mon Mar 22 16:14:55 2021
 ##           LogLik        Sigma2     DF     wall    cpu
-##  1      -333.105           1.0    634 23:43:51    0.0
-##  2      -303.637           1.0    634 23:43:51    0.0
-##  3      -274.849           1.0    634 23:43:51    0.0
-##  4      -260.243           1.0    634 23:43:51    0.0
-##  5      -256.118           1.0    634 23:43:51    0.0
-##  6      -255.891           1.0    634 23:43:51    0.0
-##  7      -255.889           1.0    634 23:43:51    0.0</code></pre>
+##  1      -333.105           1.0    634 16:14:55    0.0
+##  2      -303.637           1.0    634 16:14:55    0.0
+##  3      -274.849           1.0    634 16:14:55    0.0
+##  4      -260.243           1.0    634 16:14:55    0.0
+##  5      -256.118           1.0    634 16:14:55    0.0
+##  6      -255.891           1.0    634 16:14:55    0.0
+##  7      -255.889           1.0    634 16:14:55    0.0</code></pre>
 <p>On the right hand side of our model formula, we use the <code>trait</code> keyword to specify that this is a multivariate model — <code>trait</code> itself tells the model to give us the intercept for each trait. We then interact <code>trait</code> with the fixed effects, <code>assay_rep_sc</code> and <code>body_size_sc</code>, so that we get estimates for the effect of these variables on each of teh 2 traits.
 The random effects structure starts with the random effects, where we tell the model to fit an <em>unstructured</em> (us) covariance matrix for the grouping variable ID. This means that the variance in exploration due to differences among individuals, the variance in boldness due to differences among individuals, and the covariance between these variances will be estimated.
 Next, we set a structure for the residual variation (<code>residual</code>), which is also sometimes known as the <em>within-individual variation</em>. As we have repeated measures for both traits at the individual level, we also set an <em>unstructured</em> covariance matrix, which estimates the residual variance for each trait and also allows the residuals
@@ -657,11 +658,11 @@ For this function, we provide the name of the model object, followed by a name t
 <pre><code>##          Estimate         SE
 ## rep_expl 0.284956 0.06113539</code></pre>
 <p>We can also use this function to calculate the estimate and standard error of the correlation from our model (co)variances. We do this by specifying the formula for the correlation:</p>
-<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="8-2-practical-5.html#cb241-1" aria-hidden="true" tabindex="-1"></a>(cor_fe <span class="ot">&lt;-</span> <span class="fu">vpredict</span>(asr_us, rep_expl <span class="sc">~</span> V2 <span class="sc">/</span> (<span class="fu">sqrt</span>(V1 <span class="sc">*</span> V3))))</span></code></pre></div>
-<pre><code>##           Estimate        SE
-## rep_expl 0.2703462 0.1594097</code></pre>
+<div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="8-2-practical-5.html#cb241-1" aria-hidden="true" tabindex="-1"></a>(cor_fe <span class="ot">&lt;-</span> <span class="fu">vpredict</span>(asr_us, cor_expl_speed <span class="sc">~</span> V2 <span class="sc">/</span> (<span class="fu">sqrt</span>(V1 <span class="sc">*</span> V3))))</span></code></pre></div>
+<pre><code>##                 Estimate        SE
+## cor_expl_speed 0.2703462 0.1594097</code></pre>
 <p>In this case, the estimate is similar (here, slightly lower) than our correlation estimate using BLUPs.
-However, if we consider confidence intervals as <span class="math inline">\(+/- 1.96SE\)</span> around the estimate, the lower bound of the confidence interval would actually be -0.0420968.
+However, if we consider confidence intervals as <span class="math inline">\(+/- 1.96SE\)</span> around the estimate, the lower bound of the confidence interval would actually be .
 With confidence intervals straddling zero, we would conclude that this correlation is likely non-significant.
 As the use of standard errors in this way is only approximate, we should also test our hypothesis formally using likelihood ratio tests.</p>
 <div id="hypothesis-testing" class="section level5" number="8.2.4.1.1">
@@ -669,29 +670,30 @@ As the use of standard errors in this way is only approximate, we should also te
 <p>We can now test the statistical significance of this correlation directly, by fitting a second model without the among-individual covariance between our two traits, and then using a likelihood ratio test to determine whether the model with the covariance produces a better fit.
 Here, we use the <code>idh</code> structure for our random effects. This stands for ‘identity matrix’ (i.e., with 0s on the off-diagonals) with heterogeneous variances (i.e., the variance components for our two response traits are allowed to be different from one another).
 The rest of the model is identical to the previous version.</p>
-<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="8-2-practical-5.html#cb243-1" aria-hidden="true" tabindex="-1"></a>asr_us <span class="ot">&lt;-</span> <span class="fu">asreml</span>(<span class="fu">cbind</span>(speed_sc, exploration_sc) <span class="sc">~</span> trait <span class="sc">+</span></span>
-<span id="cb243-2"><a href="8-2-practical-5.html#cb243-2" aria-hidden="true" tabindex="-1"></a>  trait<span class="sc">:</span>assay_rep_sc <span class="sc">+</span> trait<span class="sc">:</span>body_size_sc,</span>
-<span id="cb243-3"><a href="8-2-practical-5.html#cb243-3" aria-hidden="true" tabindex="-1"></a><span class="at">random =</span> <span class="sc">~</span> ID<span class="sc">:</span><span class="fu">idh</span>(trait),</span>
-<span id="cb243-4"><a href="8-2-practical-5.html#cb243-4" aria-hidden="true" tabindex="-1"></a><span class="at">residual =</span> <span class="sc">~</span> units<span class="sc">:</span><span class="fu">us</span>(trait),</span>
-<span id="cb243-5"><a href="8-2-practical-5.html#cb243-5" aria-hidden="true" tabindex="-1"></a><span class="at">data =</span> df_dragons,</span>
-<span id="cb243-6"><a href="8-2-practical-5.html#cb243-6" aria-hidden="true" tabindex="-1"></a><span class="at">maxiter =</span> <span class="dv">100</span></span>
-<span id="cb243-7"><a href="8-2-practical-5.html#cb243-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="8-2-practical-5.html#cb243-1" aria-hidden="true" tabindex="-1"></a>asr_idh <span class="ot">&lt;-</span> <span class="fu">asreml</span>(</span>
+<span id="cb243-2"><a href="8-2-practical-5.html#cb243-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">cbind</span>(speed_sc, exploration_sc) <span class="sc">~</span> trait <span class="sc">+</span></span>
+<span id="cb243-3"><a href="8-2-practical-5.html#cb243-3" aria-hidden="true" tabindex="-1"></a>    trait<span class="sc">:</span>assay_rep_sc <span class="sc">+</span> trait<span class="sc">:</span>body_size_sc,</span>
+<span id="cb243-4"><a href="8-2-practical-5.html#cb243-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">random =</span> <span class="sc">~</span> ID<span class="sc">:</span><span class="fu">idh</span>(trait),</span>
+<span id="cb243-5"><a href="8-2-practical-5.html#cb243-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">residual =</span> <span class="sc">~</span> units<span class="sc">:</span><span class="fu">us</span>(trait),</span>
+<span id="cb243-6"><a href="8-2-practical-5.html#cb243-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> df_dragons,</span>
+<span id="cb243-7"><a href="8-2-practical-5.html#cb243-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxiter =</span> <span class="dv">100</span></span>
+<span id="cb243-8"><a href="8-2-practical-5.html#cb243-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## Model fitted using the sigma parameterization.
-## ASReml 4.1.0 Fri Mar 19 23:43:51 2021
+## ASReml 4.1.0 Mon Mar 22 16:14:55 2021
 ##           LogLik        Sigma2     DF     wall    cpu
-##  1      -327.051           1.0    634 23:43:52    0.0
-##  2      -299.874           1.0    634 23:43:52    0.0
-##  3      -273.689           1.0    634 23:43:52    0.0
-##  4      -260.838           1.0    634 23:43:52    0.0
-##  5      -257.331           1.0    634 23:43:52    0.0
-##  6      -257.120           1.0    634 23:43:52    0.0
-##  7      -257.118           1.0    634 23:43:52    0.0</code></pre>
+##  1      -327.051           1.0    634 16:14:55    0.0
+##  2      -299.874           1.0    634 16:14:55    0.0
+##  3      -273.689           1.0    634 16:14:55    0.0
+##  4      -260.838           1.0    634 16:14:55    0.0
+##  5      -257.331           1.0    634 16:14:55    0.0
+##  6      -257.120           1.0    634 16:14:55    0.0
+##  7      -257.118           1.0    634 16:14:55    0.0</code></pre>
 <p>The likelihood ratio test is calculated as twice the difference between model log-likelihoods, on a single degree of freedom (the covariance term):</p>
-<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="8-2-practical-5.html#cb245-1" aria-hidden="true" tabindex="-1"></a>(p_biv <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(<span class="dv">2</span> <span class="sc">*</span> (asr_us<span class="sc">$</span>loglik <span class="sc">-</span> asr_us<span class="sc">$</span>loglik),</span>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="8-2-practical-5.html#cb245-1" aria-hidden="true" tabindex="-1"></a>(p_biv <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(<span class="dv">2</span> <span class="sc">*</span> (asr_us<span class="sc">$</span>loglik <span class="sc">-</span> asr_idh<span class="sc">$</span>loglik),</span>
 <span id="cb245-2"><a href="8-2-practical-5.html#cb245-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">df =</span> <span class="dv">1</span>,</span>
 <span id="cb245-3"><a href="8-2-practical-5.html#cb245-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">lower.tail =</span> <span class="cn">FALSE</span></span>
 <span id="cb245-4"><a href="8-2-practical-5.html#cb245-4" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
-<pre><code>## [1] 1</code></pre>
+<pre><code>## [1] 0.1170385</code></pre>
 <p>In sharp contrast to the highly-significant P-value given by a correlation test using BLUPs, here we find no evidence for a correlation between flying speed and exploration.
 To better understand why BLUPs produce an anticonservative p-value in comparison to multivariate models, we should plot the correlation estimates and their confidence intervals. The confidence intervals are taken directly from the cor.test function for BLUPs, and for ASReml they are calculated as 1.96 times the standard error from the <code>vpredict</code> function.</p>
 <div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="8-2-practical-5.html#cb247-1" aria-hidden="true" tabindex="-1"></a>df_cor <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -712,9 +714,7 @@ To better understand why BLUPs produce an anticonservative p-value in comparison
 Figure 8.8: Correlation estimates (with CI) using 2 different methods
 </p>
 </div>
-<p>Here we can clearly see that the BLUPs method - having failed to carry through the error around the predictions of individual-level estimates - is anticonservative, with small confidence intervals and a correspondingly small P-value (<span class="math inline">\(P = 0.0019099\)</span>. Testing the syndrome directly in a bivariate model that retains all the data, by
-comparison, enables us to capture the true uncertainty about the estimate of the correlation. This is reflected
-in the larger confidence intervals and, in this case, the non-significant P-value ($P = 1).</p>
+<p>Here we can clearly see that the BLUPs method - having failed to carry through the error around the predictions of individual-level estimates - is anticonservative, with small confidence intervals and a correspondingly small P-value ($P = <span class="math inline">\(). Testing the syndrome directly in a bivariate model that retains all the data, by comparison, enables us to capture the true uncertainty about the estimate of the correlation. This is reflected in the larger confidence intervals and, in this case, the non-significant P-value (\)</span>P = $).</p>
 <!--
 need to add the selection aspect with trivariate model with fitness
 -->
@@ -850,24 +850,56 @@ Figure 8.13: Posterior trace and distribution of the correlation between flying 
 ## [1] 0.95</code></pre>
 <div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="8-2-practical-5.html#cb269-1" aria-hidden="true" tabindex="-1"></a>df_cor[<span class="dv">3</span>, <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="st">&quot;MCMCglmm&quot;</span></span>
 <span id="cb269-2"><a href="8-2-practical-5.html#cb269-2" aria-hidden="true" tabindex="-1"></a>df_cor[<span class="dv">3</span>, <span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">posterior.mode</span>(mcmc_cor_fe), <span class="fu">HPDinterval</span>(mcmc_cor_fe))</span>
-<span id="cb269-3"><a href="8-2-practical-5.html#cb269-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb269-4"><a href="8-2-practical-5.html#cb269-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_cor, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> Correlation)) <span class="sc">+</span></span>
-<span id="cb269-5"><a href="8-2-practical-5.html#cb269-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb269-6"><a href="8-2-practical-5.html#cb269-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> low, <span class="at">ymax =</span> high)) <span class="sc">+</span></span>
-<span id="cb269-7"><a href="8-2-practical-5.html#cb269-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb269-8"><a href="8-2-practical-5.html#cb269-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb269-9"><a href="8-2-practical-5.html#cb269-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<span id="cb269-3"><a href="8-2-practical-5.html#cb269-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(df_cor) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb269-4"><a href="8-2-practical-5.html#cb269-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb269-5"><a href="8-2-practical-5.html#cb269-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_cor, <span class="fu">aes</span>(<span class="at">x =</span> Method, <span class="at">y =</span> Correlation)) <span class="sc">+</span></span>
+<span id="cb269-6"><a href="8-2-practical-5.html#cb269-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb269-7"><a href="8-2-practical-5.html#cb269-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_linerange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> low, <span class="at">ymax =</span> high)) <span class="sc">+</span></span>
+<span id="cb269-8"><a href="8-2-practical-5.html#cb269-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb269-9"><a href="8-2-practical-5.html#cb269-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb269-10"><a href="8-2-practical-5.html#cb269-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-120"></span>
 <img src="BIO8940_book_files/figure-html/unnamed-chunk-120-1.svg" alt="Correlation estimates (with CI) using 3 different methods" width="672" />
 <p class="caption">
 Figure 8.14: Correlation estimates (with CI) using 3 different methods
 </p>
 </div>
+<table>
+<caption><span id="tab:unnamed-chunk-121">Table 8.3: </span>Correlation (with 95% intervals) between flying speed and exploration estimated with 3 different methods</caption>
+<thead>
+<tr class="header">
+<th align="left">Method</th>
+<th align="right">Correlation</th>
+<th align="right">low</th>
+<th align="right">high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ASReml</td>
+<td align="right">0.270</td>
+<td align="right">-0.042</td>
+<td align="right">0.583</td>
+</tr>
+<tr class="even">
+<td align="left">BLUPs</td>
+<td align="right">0.342</td>
+<td align="right">0.132</td>
+<td align="right">0.522</td>
+</tr>
+<tr class="odd">
+<td align="left">MCMCglmm</td>
+<td align="right">0.261</td>
+<td align="right">-0.087</td>
+<td align="right">0.521</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div id="happy-multivariate-models" class="section level3" number="8.2.5">
 <h3><span class="header-section-number">8.2.5</span> Happy multivariate models</h3>
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-121"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-122"></span>
 <img src="images/blue_dragon.jpg" alt="A female blue dragon of the West" width="50%" />
 <p class="caption">
 Figure 8.15: A female blue dragon of the West

@@ -47,10 +47,12 @@ fig:unnamed-chunk-116
 fig:unnamed-chunk-118
 fig:unnamed-chunk-119
 fig:unnamed-chunk-120
-fig:unnamed-chunk-121
+tab:unnamed-chunk-121
 fig:unnamed-chunk-122
-fig:unnamed-chunk-125
-fig:unnamed-chunk-144
+fig:unnamed-chunk-123
+fig:unnamed-chunk-126
+tab:unnamed-chunk-145
+fig:unnamed-chunk-161
 text-editor-or-ide
 introduction-to-open-science
 introduction-to-rmarkdown
@@ -148,5 +150,6 @@ with-lme4
 with-asreml
 with-mcmcglmm
 character-state-approach
+from-random-regression-to-character-state
 conclusions-2
 happy-multivariate-models-1
