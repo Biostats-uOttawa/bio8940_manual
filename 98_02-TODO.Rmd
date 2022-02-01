@@ -9,3 +9,23 @@
 * description of most common distributions and their use in ecology with packages on how to fit them
 * use git submodule for the data repos
 * intro and preface
+* add something about moving away from null hypothesis and think more about model competition (AIC) (start with null hypothesis and go to uncertainty evaluation)
+
+
+## potential structure
+
+**Stats**
+
+1. glm
+2. lmm
+3. Bayesian intro
+4. random regression
+5. multivariate models
+6. glmm
+
+**OS**
+
+1. tools github (maybe) and rmarkdown
+2. open data and code, preregistration, replication no culture of the great
+3. coding practice
+

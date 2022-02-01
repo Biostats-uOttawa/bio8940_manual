@@ -1,6 +1,13 @@
 # Introduction to linear mixed models
 
-## Shrinkage
+## Lecture
+
+### Testing fixed effects
+
+making a note that LRT on fixed effects should not be the preferred method and more inportantly should eb done using ML and not REML Fitsee pinheiro & Bates 
+2000 p76
+
+### Shrinkage
 
 
 ```{r setup_shrin, include=FALSE}
@@ -20,7 +27,7 @@ In other circumstances, we could ignore the clustering, and run a basic regressi
 
 Mixed models provide an alternative where we have cluster specific effects, but 'borrow strength' from the population-average effects.  In general, this borrowing is more apparent for what would otherwise be more extreme clusters, and those that have less data.  The following will demonstrate how shrinkage arises in different data situations.
 
-### Analysis
+#### Analysis
 
 For the following we run a basic mixed model with a random intercept and random slopes for a single predictor variable. There are a number of ways  to write such models, and the following does so for a single cluster $c$ and observation $i$. $y$ is a function of the covariate $x$, and otherwise we have a basic linear regression model.  In this formulation, the random effects for a given cluster ($u_{* c}$) are added to each fixed effect (intercept $b_0$ and the effect of $x$, $b_1$). The random effects are multivariate normally distributed with some covariance.  The per observation noise $\sigma$ is assumed constant across observations.
 
@@ -31,7 +38,7 @@ $$y \sim \mathcal{N}(\mu, \sigma^2)$$
 Such models are highly flexible and have many extensions, but this simple model is enough for our purposes.
 
 
-### Data
+#### Data
 
 Default settings for data creation are as follows:
 
@@ -125,7 +132,7 @@ create_plot_data <- function(model, data = df) {
 ```
 
 
-### Run the baseline model
+#### Run the baseline model
 
 We will use **lme4** to run the analysis.  We can see that the model recovers the parameters fairly well, even with the default of only 1000 observations.
 
@@ -141,7 +148,7 @@ summary(mod, cor = F)
 start with variance in intercept only then variance in both slope and intercept, then unbalanced sample -->
 
 
-### Visualize the baseline model
+#### Visualize the baseline model
 
 Now it is time to visualize the results.  We will use **gganimate** to bring the shrinkage into focus.  We start with the estimates that would be obtained by a 'regression-by-cluster' approach or a linear regression for each cluster.  The movement shown will be of those cluster-specific estimates toward the mixed model estimates.  On the x axis is the estimate for the intercepts, on the y axis are the estimated slopes of the `x` covariate.
 
@@ -172,7 +179,7 @@ if (knitr::is_html_output(excludes = "epub")) {
 We see more clearly what the mixed model does.  The general result  is that cluster-specific effects (lighter color) are shrunk back toward the population-average effects (the 'black hole'), as the imposed normal distribution for the random effects makes the extreme values less probable. Likewise, those more extreme cluster-specific effects, some of which are not displayed as they are so far from the population average, will generally have the most shrinkage imposed.  In terms of prediction, it is akin to introducing bias for the cluster specific effects while lowering variance for prediction of new data, and allows us to make predictions on new categories we have not previously seen - we just assume an 'average' cluster effect, i.e. a random effect of 0.
 
 
-### Summary
+#### Summary
 
 Mixed models incorporate some amount of shrinkage for cluster-specific effects.  Data nuances will determine the relative amount of 'strength borrowed', but in general, such models provide a good way for the data to speak for itself when it should, and reflect an 'average' when there is little information.  An additional benefit is that thinking about models in this way can be seen as a precursor to Bayesian approaches, which can allow for even more flexibility via priors, and more control over how shrinkage is added to the model.
 

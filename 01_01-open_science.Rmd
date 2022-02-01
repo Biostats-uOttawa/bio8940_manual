@@ -1,1 +1,16 @@
 # Introduction to open Science
+
+## Why do we need it?
+
+## Lecture
+
+```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Dream pet dragon"}
+knitr::include_graphics("images/fun_dragon.jpg")
+```
+
+## What it is?
+
+## Reproducible code and analysis
+
+<!-- insert a blurp about saving r object for sharing and examining without rerunning everything -->
+

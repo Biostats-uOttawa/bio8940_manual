@@ -1,5 +1,14 @@
 # Introduction to `GLMM`
 
+## Lecture
+
+theoretical intro to glmm and introduce DHarma package to evaluate fit of glmm
+
+```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Dream pet dragon"}
+knitr::include_graphics("images/fun_dragon.jpg")
+```
+
+
 
 ## Practical
 Spatial variation in nutrient availability and herbivory is likely to cause pop-ulation differentiation and maintain genetic diversity in plant populations.Here we measure the extent to which mouse-ear cress (Arabidopsis thaliana)exhibits population and genotypic variation in their responses to these im-portant environmental factors. We are particularly interested in whetherthese populations exhibit nutrient mediated compensation, where higher nutrient levels allow genotypes to better tolerate herbivory (Banta et al.,2010). We use GLMMs to estimate the effect of nutrient levels, simulated hebivory, and their interaction on fruit production in Arabidopsis thaliana(fixed effects), and the extent to which populations vary in their responses(random effects, or variance components)

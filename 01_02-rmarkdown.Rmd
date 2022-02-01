@@ -1,5 +1,17 @@
 # Introduction to Rmarkdown
 
+## Lecture
+
+<!-- add more details about installation of citr et tinytex
+devtools::install_github("crsh/citr")
+install.packages('tinytex')
+tinytex::install_tinytex()
+-->
+
+```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Dream pet dragon"}
+knitr::include_graphics("images/fun_dragon.jpg")
+```
+
 ## Practical
 
 We will create a new Rmarkdown document and edit it using basic `R` and `Rmarkdown` functions.

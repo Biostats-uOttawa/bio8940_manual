@@ -1,5 +1,11 @@
 # Introduction to github with R
 
+## Lecture
+
+```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Dream pet dragon"}
+knitr::include_graphics("images/fun_dragon.jpg")
+```
+
 ## Practical
 
 ### Context
@@ -34,15 +40,39 @@ For this exercise, we're gonna use the `penguins` dataset.
 
 ### Questions
 
-**1)** Create a github acocunt if not done yet.
+**1)** Create a github account if not done yet.
 
 **2)** Configure Rstudio with your github account using the `usethis` package.
 
-**3)** Store your GITHUB Personal Authorisation Token in your .Renviron file 
+```{r, eval = FALSE, class.source = "exer"}
+usethis::git_sitrep()
+usethis::use_git_config(
+  user.name = "your_username",
+  user.email = "your_email@address.com"
+)
+```
 
-**4)** Create a new R Markdown project, and create a new git repository
+**3)** Create and Store your GITHUB Personal Authorisation Token
 
-**5)** Create a new Rmarkdon document, in your project. Then save the file and stage it.
+
+```{r, eval = FALSE, class.source = "exer"}
+usethis::create_github_token()
+credentials::set_github_pat()
+```
+
+
+**4)** Create a new R Markdown project, initialize it for git, and create a new git repository
+
+```{r, eval = FALSE, class.source = "exer"}
+#create R project
+usethis::use_git()
+
+#restart R
+usethis::use_github()
+usethis::git_vaccinate()
+```
+
+**5)** Create a new Rmarkdown document, in your project. Then save the file and stage it.
 
 **6)** Create a new commit including the new file and push it to github (Check on github that it works).
 
@@ -52,11 +82,11 @@ For this exercise, we're gonna use the `penguins` dataset.
 
 **9)** Create a new branch, and add a new section to the rmarkdown file in this branch. Whatever you want. I would suggest a graph of the data.
 
-**10)** Creat a commit and push it to the branch.
+**10)** Create a commit and push it to the branch.
 
 **11)** On github, create a pull request to merge the 2 different branches. 
 
-**12)** Check and accep the pull request to merge the 2 branches.
+**12)** Check and accept the pull request to merge the 2 branches.
 
 You have successfully used all the essential tools of `git` `r emo::ji("tada")` . You are really to explore `r emo::ji("detective")` and discover its power `r emo::ji("flex")`
 

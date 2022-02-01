@@ -1,6 +1,6 @@
 # Multivariate mixed models
 
-## theory
+## Lecture
 
 Amazing beasties and crazy animals
 
@@ -8,6 +8,7 @@ Amazing beasties and crazy animals
 knitr::include_graphics("images/fun_dragon.jpg")
 ```
 
+add a comparison of lrt 
 
 ## Practical
 

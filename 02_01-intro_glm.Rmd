@@ -1,6 +1,42 @@
-# Refresher on `glm`
+# Generalized linear model, `glm`
 
+## Lecture
+
+```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Dream pet dragon"}
+knitr::include_graphics("images/fun_dragon.jpg")
+```
 
 ```{r, eval = FALSE}
 m1 <- glm(fish ~ french_captain, data = dads_joke, family = poisson)
 ```
+
+### Distributions
+
+#### Continuous linear
+
+- Gaussian
+
+#### Count data
+
+- poisson
+- negative binomial
+- quasi-poisson
+- generalized poisson
+- conway-maxwell poisson
+
+#### censored distribution
+
+#### zero-inflated / hurdle distribution
+- zero-inflated/zero-truncated poisson
+- censored poisson
+
+#### zero-truncated distribution
+
+#### zero-one-inflated distribution
+
+see https://cran.r-project.org/web/packages/brms/vignettes/brms_families.html
+see alo MCMCglmm coursenotes
+
+for help on description and to add some plots about those distribution
+
+## Practical

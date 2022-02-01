@@ -1,6 +1,12 @@
 # Introduction to `Bayesian Inference`
 
-## theory
+## Lecture
+
+Amazing beasties and crazy animals
+
+```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Dream pet dragon"}
+knitr::include_graphics("images/fun_dragon.jpg")
+```
 
 
 
@@ -378,6 +384,11 @@ mcglm_time
 
 Model is slow and not good. We need more iteration and maybe even a longer burnin, and honestly maybe better priors.
 
+We can still take the time to have a look at the R object output from `MCMCglmm()`. The 2 main parts we are interrested in are:
+
+- `Sol` which stand for the model solution and includes the posteriro distribution of the fixed effects
+- `VCV`, for the variance covariance estimates, which includes the posterior distribution of all (co)variances estimates for both random effects and residual variance.
+
 ```{r, fig.cap = "Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings"}
 plot(m_mcmcglmm$Sol)
 plot(m_mcmcglmm$VCV)
@@ -418,7 +429,7 @@ autocorr.diag(m_mcmcglmm$VCV)
 
 #### Fixed effects
 
-Easy peazy lemon squeezy just have a look at the posteriro distribution, does it overlap 0 yes or no.
+Easy peazy lemon squeezy just have a look at the posterior distribution, does it overlap 0 yes or no.
 
 ```{r}
 posterior.mode(m_mcmcglmm$Sol)
