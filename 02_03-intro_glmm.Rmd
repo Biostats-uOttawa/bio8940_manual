@@ -544,7 +544,7 @@ As expected from the similarity of the variance estimates, the population-level 
 
  Now we want to do inference on the fixed effects. We use the drop1 func- tion to assess both the AIC difference and the likelihood ratio test between models. (In glmm_funs.R we define a convenience function dfun to convert the AIC tables returned by drop1 (which we will create momentarily) into ∆AIC tables.) Although the likelihood ratio test (and the AIC) are asymptotic tests, comparing fits between full and reduced models is still more accurate than the Wald (curvature-based) tests shown in the summary tables for glmer fits.
 
- ```{r}
+```{r}
 (dd_aic <- dfun(drop1(mp4)))
 (dd_lrt <- drop1(mp4, test = "Chisq"))
 ```
