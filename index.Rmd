@@ -43,6 +43,12 @@ library(palmerpenguins)
 Work in progress. New chapters are going to appears regularly meaning that if you download the pdf it might be incomplete by the time we do the practical in class.
 ``` 
 
+if you see a dragon section is in severe development
+
+```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Dream pet dragon"}
+knitr::include_graphics("images/fun_dragon.jpg")
+```
+
 # Préface {-}
 
 <!-- {-} pour enlever num/rotation -->
