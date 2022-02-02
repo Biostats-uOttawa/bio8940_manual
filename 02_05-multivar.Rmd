@@ -214,7 +214,7 @@ We set up our model using the `asreml` function call, with our bivariate respons
 
 `asreml` can be a bit specific sometime and random effects should absolutely be `factor` and not `character` or `integer`
 
-```{r}
+```{r, warning = FALSE}
 df_dragons <- df_dragons %>%
   mutate(
     ID = as.factor(ID),
@@ -249,9 +249,16 @@ hist(residuals(asr_us))
 
 The summary part of the ASReml model fit contains a large amount of information, so it is best to look only at certain parts of it at a single time. While we are not particularly interested in the fixed effects for current purposes, you can inspect these using the following code to check whether there were any large effects of `assay repeat` or `body size` on either trait:
 
-```{r}
+```{r, eval = htmlT_pdfF}
 summary(asr_us, coef = TRUE)$coef.fixed
 wald(asr_us, ssType = "conditional", denDF = "numeric")
+```
+
+```{r, echo = FALSE, eval = htmlF_pdfT}
+summary(asr_us, coef = TRUE)$coef.fixed
+wa <- wald(asr_us, ssType = "conditional", denDF = "numeric")$Wald
+attr(wa, "heading") <- NULL
+wa
 ```
 
 We can see that there is a separate intercept for both personality traits (no surprise that these are very close to zero, given that we mean-centred and scaled each trait before fitting the model), and an estimate of the effect of assay repeat and body size on both traits. None of these appear to be large effects, so let’s move on to the more interesting parts — the random effects estimates:

@@ -1,29 +1,31 @@
 #!/usr/bin/env Rscript
 
-## use only if renv is activated (not activated now)
-renv::hydrate()
-renv::refresh()
-renv::snapshot()
+# use only if renv is activated (not activated now)
+# renv::hydrate()
+# renv::refresh()
+# renv::snapshot()
 
 
-knitr::write_bib(c(
-    .packages(), rownames(installed.packages())
-    # "bookdown", "knitr", "rmarkdown", "MCMCglmm", "gremlin"
-), "packages.bib")
+knitr::write_bib(.packages(TRUE), "packages.bib")
 
 
 rm(list = ls())
 bookdown::render_book(
     "index.Rmd",
     "bookdown::gitbook",
-    params = list(echo_sol = TRUE))
+    params = list(echo_sol = TRUE, html_pdf = TRUE)
+)
 rm(list = ls())
 bookdown::render_book(
     "index.Rmd",
     "bookdown::pdf_book",
-    params = list(echo_sol = FALSE))
+    params = list(echo_sol = FALSE, html_pdf = FALSE)
+)
 rm(list = ls())
-bookdown::render_book("index.Rmd", "bookdown::epub_book")
+bookdown::render_book(
+  "index.Rmd", "bookdown::epub_book",
+  params = list(echo_sol = FALSE, html_pdf = TRUE)
+)
 bookdown::calibre("docs/BIO8940_book.epub", "mobi")
 
 

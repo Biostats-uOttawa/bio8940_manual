@@ -141,10 +141,16 @@ rr_asr <- asreml(
 ```{r}
 plot(rr_asr)
 ```
-
-```{r}
+```{r, eval = htmlT_pdfF}
 summary(rr_asr, coef = TRUE)$coef.fixed
-wald.asreml(rr_asr, ssType = "conditional", denDF = "numeric")
+wald(rr_asr, ssType = "conditional", denDF = "numeric")
+```
+
+```{r, echo = FALSE, eval = htmlF_pdfT}
+summary(rr_asr, coef = TRUE)$coef.fixed
+wa <- wald(rr_asr, ssType = "conditional", denDF = "numeric")$Wald
+attr(wa, "heading") <- NULL
+wa
 ```
 
 ```{r}
@@ -303,9 +309,16 @@ qqline(residuals(cs_asr))
 hist(residuals(cs_asr))
 ```
 
-```{r}
+```{r, eval = htmlT_pdfF}
 summary(cs_asr, all = T)$coef.fixed
-wald.asreml(cs_asr, ssType = "conditional", denDF = "numeric")
+wald(cs_asr, ssType = "conditional", denDF = "numeric")
+```
+
+```{r, echo = FALSE, eval = htmlF_pdfT}
+summary(cs_asr, all = T)$coef.fixed
+wa <- wald(cs_asr, ssType = "conditional", denDF = "numeric")$Wald
+attr(wa, "heading") <- NULL
+wa
 ```
 
 ```{r}

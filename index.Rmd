@@ -20,9 +20,14 @@ cover-image: "images/missing.png"
 params:
   echo_sol: TRUE
   longrun: FALSE
+  html_pdf: FALSE
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+
+htmlT_pdfF <- ifelse(params$html_pdf == TRUE, TRUE, FALSE)
+htmlF_pdfT <- ifelse(params$html_pdf == TRUE, FALSE, TRUE)
+
 library(bookdown)
 library(lmerTest)
 library(rptR)
