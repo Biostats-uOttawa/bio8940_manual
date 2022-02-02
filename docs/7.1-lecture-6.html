@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7.1 Lecture | BIO8940 Advanced stats and Open Science</title>
+  <meta name="description" content="Theory and practicals for BIO8940 course at the University of Ottawa" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7.1 Lecture | BIO8940 Advanced stats and Open Science" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:image" content="/images/missing.png" />
+  <meta property="og:description" content="Theory and practicals for BIO8940 course at the University of Ottawa" />
+  <meta name="github-repo" content="BIO8940-uOttawa/class_book" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7.1 Lecture | BIO8940 Advanced stats and Open Science" />
+  
+  <meta name="twitter:description" content="Theory and practicals for BIO8940 course at the University of Ottawa" />
+  <meta name="twitter:image" content="/images/missing.png" />
+
+<meta name="author" content="Julien Martin" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="7-introduction-to-bayesian-inference.html"/>
+<link rel="next" href="7.2-practical-5.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Advanced stats and open science</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Note</a></li>
+<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a>
+<ul>
+<li class="chapter" data-level="" data-path="quelques-points-importants-à-retenir.html"><a href="quelques-points-importants-à-retenir.html"><i class="fa fa-check"></i>Quelques points importants à retenir</a></li>
+<li class="chapter" data-level="" data-path="quest-ce-que-r-et-pourquoi-lutiliser-dans-ce-cours.html"><a href="quest-ce-que-r-et-pourquoi-lutiliser-dans-ce-cours.html"><i class="fa fa-check"></i>Qu’est-ce que R et pourquoi l’utiliser dans ce cours?</a></li>
+<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html"><i class="fa fa-check"></i>Installation des logiciels nécessaires</a>
+<ul>
+<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#r"><i class="fa fa-check"></i>R</a></li>
+<li class="chapter" data-level="0.0.1" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#text-editor-or-ide"><i class="fa fa-check"></i><b>0.0.1</b> Text editor or IDE</a></li>
+<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#paquets-pour-r"><i class="fa fa-check"></i>Paquets pour R</a></li>
+<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#pandoc"><i class="fa fa-check"></i>pandoc</a></li>
+<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#latex"><i class="fa fa-check"></i>laTex</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="instructions-générales-pour-les-laboratoires.html"><a href="instructions-générales-pour-les-laboratoires.html"><i class="fa fa-check"></i>Instructions générales pour les laboratoires</a></li>
+<li class="chapter" data-level="" data-path="notes-sur-le-manuel.html"><a href="notes-sur-le-manuel.html"><i class="fa fa-check"></i>Notes sur le manuel</a>
+<ul>
+<li class="chapter" data-level="" data-path="notes-sur-le-manuel.html"><a href="notes-sur-le-manuel.html#resources"><i class="fa fa-check"></i>Resources</a></li>
+<li class="chapter" data-level="" data-path="notes-sur-le-manuel.html"><a href="notes-sur-le-manuel.html#licence"><i class="fa fa-check"></i>Licence</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I Open Science</b></span></li>
+<li class="chapter" data-level="1" data-path="1-introduction-to-open-science.html"><a href="1-introduction-to-open-science.html"><i class="fa fa-check"></i><b>1</b> Introduction to open Science</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1.1-why-do-we-need-it.html"><a href="1.1-why-do-we-need-it.html"><i class="fa fa-check"></i><b>1.1</b> Why do we need it?</a></li>
+<li class="chapter" data-level="1.2" data-path="1.2-lecture.html"><a href="1.2-lecture.html"><i class="fa fa-check"></i><b>1.2</b> Lecture</a></li>
+<li class="chapter" data-level="1.3" data-path="1.3-what-it-is.html"><a href="1.3-what-it-is.html"><i class="fa fa-check"></i><b>1.3</b> What it is?</a></li>
+<li class="chapter" data-level="1.4" data-path="1.4-reproducible-code-and-analysis.html"><a href="1.4-reproducible-code-and-analysis.html"><i class="fa fa-check"></i><b>1.4</b> Reproducible code and analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-introduction-to-rmarkdown.html"><a href="2-introduction-to-rmarkdown.html"><i class="fa fa-check"></i><b>2</b> Introduction to Rmarkdown</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2.1-lecture-1.html"><a href="2.1-lecture-1.html"><i class="fa fa-check"></i><b>2.1</b> Lecture</a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-practical.html"><a href="2.2-practical.html"><i class="fa fa-check"></i><b>2.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="2.2-practical.html"><a href="2.2-practical.html#context"><i class="fa fa-check"></i><b>2.2.1</b> Context</a></li>
+<li class="chapter" data-level="2.2.2" data-path="2.2-practical.html"><a href="2.2-practical.html#questions"><i class="fa fa-check"></i><b>2.2.2</b> Questions</a></li>
+<li class="chapter" data-level="" data-path="2.2-practical.html"><a href="2.2-practical.html#example-of-output"><i class="fa fa-check"></i>Example of output</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-introduction-to-github-with-r.html"><a href="3-introduction-to-github-with-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to github with R</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-lecture-2.html"><a href="3.1-lecture-2.html"><i class="fa fa-check"></i><b>3.1</b> Lecture</a></li>
+<li class="chapter" data-level="3.2" data-path="3.2-practical-1.html"><a href="3.2-practical-1.html"><i class="fa fa-check"></i><b>3.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3.2-practical-1.html"><a href="3.2-practical-1.html#context-1"><i class="fa fa-check"></i><b>3.2.1</b> Context</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-practical-1.html"><a href="3.2-practical-1.html#information-of-the-data"><i class="fa fa-check"></i><b>3.2.2</b> Information of the data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="3.2-practical-1.html"><a href="3.2-practical-1.html#questions-1"><i class="fa fa-check"></i><b>3.2.3</b> Questions</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Statistics</b></span></li>
+<li class="chapter" data-level="4" data-path="4-generalized-linear-model-glm.html"><a href="4-generalized-linear-model-glm.html"><i class="fa fa-check"></i><b>4</b> Generalized linear model, <code>glm</code></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4.1-lecture-3.html"><a href="4.1-lecture-3.html"><i class="fa fa-check"></i><b>4.1</b> Lecture</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-lecture-3.html"><a href="4.1-lecture-3.html#distributions"><i class="fa fa-check"></i><b>4.1.1</b> Distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html"><i class="fa fa-check"></i><b>4.2</b> Practical</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-introduction-to-linear-mixed-models.html"><a href="5-introduction-to-linear-mixed-models.html"><i class="fa fa-check"></i><b>5</b> Introduction to linear mixed models</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5.1-lecture-4.html"><a href="5.1-lecture-4.html"><i class="fa fa-check"></i><b>5.1</b> Lecture</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="5.1-lecture-4.html"><a href="5.1-lecture-4.html#testing-fixed-effects"><i class="fa fa-check"></i><b>5.1.1</b> Testing fixed effects</a></li>
+<li class="chapter" data-level="5.1.2" data-path="5.1-lecture-4.html"><a href="5.1-lecture-4.html#shrinkage"><i class="fa fa-check"></i><b>5.1.2</b> Shrinkage</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html"><i class="fa fa-check"></i><b>5.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#overview"><i class="fa fa-check"></i><b>5.2.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#r-packages-needed"><i class="fa fa-check"></i><b>5.2.2</b> R packages needed</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#the-superb-wild-unicorns-of-the-scottish-highlands"><i class="fa fa-check"></i><b>5.2.3</b> The superb wild unicorns of the Scottish Highlands</a></li>
+<li class="chapter" data-level="5.2.4" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#do-unicorns-differ-in-aggressiveness-your-first-mixed-model"><i class="fa fa-check"></i><b>5.2.4</b> Do unicorns differ in aggressiveness? Your first mixed model</a></li>
+<li class="chapter" data-level="5.2.5" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#do-unicorns-differ-in-aggressiveness-a-better-mixed-model"><i class="fa fa-check"></i><b>5.2.5</b> Do unicorns differ in aggressiveness? A better mixed model</a></li>
+<li class="chapter" data-level="5.2.6" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#what-is-the-repeatability"><i class="fa fa-check"></i><b>5.2.6</b> What is the repeatability?</a></li>
+<li class="chapter" data-level="5.2.7" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#a-quick-note-on-uncertainty"><i class="fa fa-check"></i><b>5.2.7</b> A quick note on uncertainty</a></li>
+<li class="chapter" data-level="5.2.8" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#an-easy-way-to-mess-up-your-mixed-models"><i class="fa fa-check"></i><b>5.2.8</b> An easy way to mess up your mixed models</a></li>
+<li class="chapter" data-level="5.2.9" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#happy-mixed-modelling"><i class="fa fa-check"></i><b>5.2.9</b> Happy mixed-modelling</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-introduction-to-glmm.html"><a href="6-introduction-to-glmm.html"><i class="fa fa-check"></i><b>6</b> Introduction to <code>GLMM</code></a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6.1-lecture-5.html"><a href="6.1-lecture-5.html"><i class="fa fa-check"></i><b>6.1</b> Lecture</a></li>
+<li class="chapter" data-level="6.2" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html"><i class="fa fa-check"></i><b>6.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#packages-and-functions"><i class="fa fa-check"></i><b>6.2.1</b> Packages and functions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#the-data-set"><i class="fa fa-check"></i><b>6.2.2</b> The data set</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#specifying-fixed-and-random-effects"><i class="fa fa-check"></i><b>6.2.3</b> Specifying fixed and random Effects</a></li>
+<li class="chapter" data-level="6.2.4" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#look-at-overall-patterns-in-data"><i class="fa fa-check"></i><b>6.2.4</b> Look at overall patterns in data</a></li>
+<li class="chapter" data-level="6.2.5" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#choose-an-error-distribution"><i class="fa fa-check"></i><b>6.2.5</b> Choose an error distribution</a></li>
+<li class="chapter" data-level="6.2.6" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#fitting-group-wise-glm"><i class="fa fa-check"></i><b>6.2.6</b> Fitting group-wise GLM</a></li>
+<li class="chapter" data-level="6.2.7" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#fitting-and-evaluating-glmms"><i class="fa fa-check"></i><b>6.2.7</b> Fitting and evaluating GLMMs</a></li>
+<li class="chapter" data-level="6.2.8" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#inference"><i class="fa fa-check"></i><b>6.2.8</b> Inference</a></li>
+<li class="chapter" data-level="6.2.9" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#conclusions"><i class="fa fa-check"></i><b>6.2.9</b> Conclusions</a></li>
+<li class="chapter" data-level="6.2.10" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#happy-generalized-mixed-modelling"><i class="fa fa-check"></i><b>6.2.10</b> Happy generalized mixed-modelling</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-introduction-to-bayesian-inference.html"><a href="7-introduction-to-bayesian-inference.html"><i class="fa fa-check"></i><b>7</b> Introduction to <code>Bayesian Inference</code></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7.1-lecture-6.html"><a href="7.1-lecture-6.html"><i class="fa fa-check"></i><b>7.1</b> Lecture</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="7.1-lecture-6.html"><a href="7.1-lecture-6.html#bayes-theorem"><i class="fa fa-check"></i><b>7.1.1</b> Bayes’ theorem</a></li>
+<li class="chapter" data-level="7.1.2" data-path="7.1-lecture-6.html"><a href="7.1-lecture-6.html#intro-to-mcmc"><i class="fa fa-check"></i><b>7.1.2</b> Intro to MCMC</a></li>
+<li class="chapter" data-level="7.1.3" data-path="7.1-lecture-6.html"><a href="7.1-lecture-6.html#inferences-1"><i class="fa fa-check"></i><b>7.1.3</b> Inferences</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html"><i class="fa fa-check"></i><b>7.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#r-packages-needed-1"><i class="fa fa-check"></i><b>7.2.1</b> R packages needed</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#a-refresher-on-unicorn-ecology"><i class="fa fa-check"></i><b>7.2.2</b> A refresher on unicorn ecology</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#mcmcglmm"><i class="fa fa-check"></i><b>7.2.3</b> MCMCglmm</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#inferences-2"><i class="fa fa-check"></i><b>7.2.4</b> Inferences</a></li>
+<li class="chapter" data-level="7.2.5" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#brms"><i class="fa fa-check"></i><b>7.2.5</b> brms</a></li>
+<li class="chapter" data-level="7.2.6" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#inferences-3"><i class="fa fa-check"></i><b>7.2.6</b> Inferences</a></li>
+<li class="chapter" data-level="7.2.7" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#happy-bayesian-stats"><i class="fa fa-check"></i><b>7.2.7</b> Happy Bayesian stats</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="8-multivariate-mixed-models.html"><a href="8-multivariate-mixed-models.html"><i class="fa fa-check"></i><b>8</b> Multivariate mixed models</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8.1-lecture-7.html"><a href="8.1-lecture-7.html"><i class="fa fa-check"></i><b>8.1</b> Lecture</a></li>
+<li class="chapter" data-level="8.2" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html"><i class="fa fa-check"></i><b>8.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html#r-packages-needed-2"><i class="fa fa-check"></i><b>8.2.1</b> R packages needed</a></li>
+<li class="chapter" data-level="8.2.2" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html#the-blue-dragon-of-the-east"><i class="fa fa-check"></i><b>8.2.2</b> The blue dragon of the East</a></li>
+<li class="chapter" data-level="8.2.3" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html#multiple-univariate-models"><i class="fa fa-check"></i><b>8.2.3</b> Multiple univariate models</a></li>
+<li class="chapter" data-level="8.2.4" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html#multivariate-approach"><i class="fa fa-check"></i><b>8.2.4</b> Multivariate approach</a></li>
+<li class="chapter" data-level="8.2.5" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html#happy-multivariate-models"><i class="fa fa-check"></i><b>8.2.5</b> Happy multivariate models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="9-random-regression-and-character-state-approaches.html"><a href="9-random-regression-and-character-state-approaches.html"><i class="fa fa-check"></i><b>9</b> Random regression and character state approaches</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="9.1-lecture-8.html"><a href="9.1-lecture-8.html"><i class="fa fa-check"></i><b>9.1</b> Lecture</a></li>
+<li class="chapter" data-level="9.2" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html"><i class="fa fa-check"></i><b>9.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#r-packages-needed-3"><i class="fa fa-check"></i><b>9.2.1</b> R packages needed</a></li>
+<li class="chapter" data-level="9.2.2" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#refresher-on-unicorn-aggression"><i class="fa fa-check"></i><b>9.2.2</b> Refresher on unicorn aggression</a></li>
+<li class="chapter" data-level="9.2.3" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#random-regression"><i class="fa fa-check"></i><b>9.2.3</b> Random regression</a></li>
+<li class="chapter" data-level="9.2.4" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#character-state-approach"><i class="fa fa-check"></i><b>9.2.4</b> Character-State approach</a></li>
+<li class="chapter" data-level="9.2.5" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#from-random-regression-to-character-state"><i class="fa fa-check"></i><b>9.2.5</b> From random regression to character-state</a></li>
+<li class="chapter" data-level="9.2.6" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#conclusions-2"><i class="fa fa-check"></i><b>9.2.6</b> Conclusions</a></li>
+<li class="chapter" data-level="9.2.7" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#happy-multivariate-models-1"><i class="fa fa-check"></i><b>9.2.7</b> Happy multivariate models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-beyong-p-0.html"><a href="10-beyong-p-0.html"><i class="fa fa-check"></i><b>10</b> Beyong <em>P &lt; 0.05</em></a></li>
+<li class="part"><span><b>III Appendix</b></span></li>
+<li class="chapter" data-level="" data-path="r-1.html"><a href="r-1.html"><i class="fa fa-check"></i>R</a></li>
+<li class="chapter" data-level="" data-path="to-do-list.html"><a href="to-do-list.html"><i class="fa fa-check"></i>To do list</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10.1-potential-structure.html"><a href="10.1-potential-structure.html"><i class="fa fa-check"></i><b>10.1</b> potential structure</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIO8940 Advanced stats and Open Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lecture-6" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> Lecture</h2>
+<p>Amazing beasties and crazy animals</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-79"></span>
+<img src="images/fun_dragon.jpg" alt="Dream pet dragon" width="50%" />
+<p class="caption">
+Figure 7.1: Dream pet dragon
+</p>
+</div>
+<div id="bayes-theorem" class="section level3" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Bayes’ theorem</h3>
+<p>First, let’s review the theorem. Mathematically, it says how to convert one conditional probability into another one.</p>
+<p><span class="math display">\[ P(B \mid A) = \frac{ P(A \mid B) * P(B)}{P(A)} \]</span></p>
+<p>The formula becomes more interesting in the context of statistical modeling. We
+have some model that describes a data-generating process and we have some
+<em>observed</em> data, but we want to estimate some <em>unknown</em> model parameters.
+In that case, the formula reads like:</p>
+<p><span class="math display">\[ P(\text{hypothesis} \mid \text{data}) = \frac{ P(\text{data} \mid \text{hypothesis}) * P(\text{hypothesis})}{P(\text{data})} \]</span></p>
+<p>These terms have conventional names:</p>
+<p><span class="math display">\[ \text{posterior} = \frac{ \text{likelihood} * \text{prior}}{\text{evidence}} \]</span></p>
+<p><em>Prior</em> and <em>posterior</em> describe when information is obtained: what we know pre-data is our
+prior information, and what we learn post-data is the updated information
+(“posterior”).</p>
+<p>The <em>likelihood</em> in the equation says how likely the data is given the model
+parameters. I think of it as <em>fit</em>: How well do the parameters fit the data?
+Classical regression’s line of best fit is the maximum likelihood line. The
+likelihood also encompasses the data-generating process behind the model. For
+example, if we assume that the observed data is normally distributed, then we
+evaluate the likelihood by using the normal probability density function. You
+don’t need to know what that last sentence means. What’s important is that the
+likelihood contains our built-in assumptions about how the data is distributed.</p>
+<p>The <em>evidence</em> (sometimes called <em>average likelihood</em>) is hareder to grasp. I am not sure how to describe it in an intuitive way.
+It’s there to make sure the math works out so that the posterior probabilities sum to 1.
+Some presentations of Bayes’ theorem gloss over it and I am not the exception 😄.
+The important thing to note is that the posterior is proportional to the
+likelihood and prior information.</p>
+<p><span class="math display">\[ 
+\text{posterior information} \propto 
+  \text{likelihood of data} * \text{prior information} 
+\]</span></p>
+<p>So simply put, <strong>you update your prior information in proportion to how well it fits
+the observed data</strong>. So essentially you are doing that on a daily basis for everything except when you ar doing frequentist stats 😄.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-81"></span>
+<img src="images/bayestriptic.png" alt="Bayesian Triptych" width="100%" />
+<p class="caption">
+Figure 7.2: Bayesian Triptych
+</p>
+</div>
+
+<div class="rmdwarning">
+<strong>A word of encouragement!</strong> The prior is an intimidating part of Bayesian
+statistics. It seems highly subjective, as though we are pulling numbers from
+thin air, and it can be overwhelming for complex models. But if we are familiar
+with the kind of data we are modeling, we have prior information. We can have
+the model simulate new observations using the prior distribution and then
+plot the hypothetical data. Does anything look wrong or implausible about the
+simulated data? If so, then we have some prior information that we can include
+in our model. Note that we do not evaluate the plausibility of the simulated
+data based on the data we have in hand (the data we want to model); that’s not
+prior information.
+</div>
+</div>
+<div id="intro-to-mcmc" class="section level3" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Intro to MCMC</h3>
+<p>We will now walk through a simple example coded in <code>R</code> to illustrate how an MCMC algorithm works.</p>
+<p>Suppose you are interested in the mean heart rate is of students when asked a question in a stat course. You are not sure what the exact mean value is, but you know the values are normally distributed with a standard deviation of 15. You have observed 5 individuals to have heart rate of <code>104, 120,160,90,130</code>. You could use MCMC sampling to draw samples from the target distribution.
+We need to specify:</p>
+<ol style="list-style-type: decimal">
+<li>the starting value for the chain.</li>
+<li>the length of the chain. In general, more iterations will give you more accurate output.</li>
+</ol>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="7.1-lecture-6.html#cb154-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">170</span>)</span>
+<span id="cb154-2"><a href="7.1-lecture-6.html#cb154-2" aria-hidden="true"></a>hr_obs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">104</span>, <span class="dv">112</span>, <span class="dv">132</span>, <span class="dv">115</span>, <span class="dv">110</span>)</span>
+<span id="cb154-3"><a href="7.1-lecture-6.html#cb154-3" aria-hidden="true"></a></span>
+<span id="cb154-4"><a href="7.1-lecture-6.html#cb154-4" aria-hidden="true"></a>start_value &lt;-<span class="st"> </span><span class="dv">250</span></span>
+<span id="cb154-5"><a href="7.1-lecture-6.html#cb154-5" aria-hidden="true"></a></span>
+<span id="cb154-6"><a href="7.1-lecture-6.html#cb154-6" aria-hidden="true"></a>n_iter &lt;-<span class="st"> </span><span class="dv">2500</span> <span class="co"># define number of iterations</span></span>
+<span id="cb154-7"><a href="7.1-lecture-6.html#cb154-7" aria-hidden="true"></a></span>
+<span id="cb154-8"><a href="7.1-lecture-6.html#cb154-8" aria-hidden="true"></a>pd_mean &lt;-<span class="st"> </span><span class="kw">numeric</span>(n_iter) <span class="co"># create vector for sample values</span></span>
+<span id="cb154-9"><a href="7.1-lecture-6.html#cb154-9" aria-hidden="true"></a></span>
+<span id="cb154-10"><a href="7.1-lecture-6.html#cb154-10" aria-hidden="true"></a>pd_mean[<span class="dv">1</span>] &lt;-<span class="st"> </span>start_value <span class="co"># define starting value</span></span>
+<span id="cb154-11"><a href="7.1-lecture-6.html#cb154-11" aria-hidden="true"></a></span>
+<span id="cb154-12"><a href="7.1-lecture-6.html#cb154-12" aria-hidden="true"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>n_iter) {</span>
+<span id="cb154-13"><a href="7.1-lecture-6.html#cb154-13" aria-hidden="true"></a>  proposal &lt;-<span class="st"> </span>pd_mean[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>MASS<span class="op">::</span><span class="kw">mvrnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>) <span class="co"># proposal</span></span>
+<span id="cb154-14"><a href="7.1-lecture-6.html#cb154-14" aria-hidden="true"></a>  lprop &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">dnorm</span>(proposal, hr_obs, <span class="dv">15</span>)) <span class="co"># likelihood of proposed parameter</span></span>
+<span id="cb154-15"><a href="7.1-lecture-6.html#cb154-15" aria-hidden="true"></a>  lprev &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">dnorm</span>(pd_mean[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>], hr_obs, <span class="dv">15</span>))</span>
+<span id="cb154-16"><a href="7.1-lecture-6.html#cb154-16" aria-hidden="true"></a>  <span class="cf">if</span> (lprop <span class="op">/</span><span class="st"> </span>lprev <span class="op">&gt;</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>)) { <span class="co"># if likelihood of prosposed &gt; likehood previous accept</span></span>
+<span id="cb154-17"><a href="7.1-lecture-6.html#cb154-17" aria-hidden="true"></a>    <span class="co"># and if likelihood is lower accept with random noise</span></span>
+<span id="cb154-18"><a href="7.1-lecture-6.html#cb154-18" aria-hidden="true"></a>    pd_mean[i] &lt;-<span class="st"> </span>proposal</span>
+<span id="cb154-19"><a href="7.1-lecture-6.html#cb154-19" aria-hidden="true"></a>  } <span class="co"># if true sample the proposal</span></span>
+<span id="cb154-20"><a href="7.1-lecture-6.html#cb154-20" aria-hidden="true"></a>  <span class="cf">else</span> {</span>
+<span id="cb154-21"><a href="7.1-lecture-6.html#cb154-21" aria-hidden="true"></a>    (pd_mean[i] &lt;-<span class="st"> </span>pd_mean[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>])</span>
+<span id="cb154-22"><a href="7.1-lecture-6.html#cb154-22" aria-hidden="true"></a>  } <span class="co"># if false sample the current value</span></span>
+<span id="cb154-23"><a href="7.1-lecture-6.html#cb154-23" aria-hidden="true"></a>}</span>
+<span id="cb154-24"><a href="7.1-lecture-6.html#cb154-24" aria-hidden="true"></a>pd_mean &lt;-<span class="st"> </span><span class="kw">as.mcmc</span>(<span class="kw">data.frame</span>(<span class="dt">mean =</span> pd_mean))</span>
+<span id="cb154-25"><a href="7.1-lecture-6.html#cb154-25" aria-hidden="true"></a><span class="kw">mcmc_combo</span>(pd_mean, <span class="dt">combo =</span> <span class="kw">c</span>(<span class="st">&quot;trace&quot;</span>, <span class="st">&quot;dens&quot;</span>))</span></code></pre></div>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-83-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="7.1-lecture-6.html#cb155-1" aria-hidden="true"></a><span class="kw">summary</span>(pd_mean)</span></code></pre></div>
+<pre><code>## 
+## Iterations = 1:2500
+## Thinning interval = 1 
+## Number of chains = 1 
+## Sample size per chain = 2500 
+## 
+## 1. Empirical mean and standard deviation for each variable,
+##    plus standard error of the mean:
+## 
+##           Mean             SD       Naive SE 
+##       125.8105        32.8672         0.6573 
+## Time-series SE 
+##        13.3046 
+## 
+## 2. Quantiles for each variable:
+## 
+##   2.5%    25%    50%    75%  97.5% 
+##  75.53 108.03 122.19 136.12 225.46</code></pre>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="7.1-lecture-6.html#cb157-1" aria-hidden="true"></a><span class="kw">set.seed</span>(<span class="dv">170</span>)</span>
+<span id="cb157-2"><a href="7.1-lecture-6.html#cb157-2" aria-hidden="true"></a>hr_obs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">104</span>, <span class="dv">112</span>, <span class="dv">132</span>, <span class="dv">115</span>, <span class="dv">110</span>)</span>
+<span id="cb157-3"><a href="7.1-lecture-6.html#cb157-3" aria-hidden="true"></a>n_iter &lt;-<span class="st"> </span><span class="dv">2500</span> <span class="co"># define number of iterations</span></span>
+<span id="cb157-4"><a href="7.1-lecture-6.html#cb157-4" aria-hidden="true"></a></span>
+<span id="cb157-5"><a href="7.1-lecture-6.html#cb157-5" aria-hidden="true"></a>n_chain &lt;-<span class="st"> </span><span class="dv">3</span></span>
+<span id="cb157-6"><a href="7.1-lecture-6.html#cb157-6" aria-hidden="true"></a>start_value &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">250</span>, <span class="dv">100</span>, <span class="dv">50</span>)</span>
+<span id="cb157-7"><a href="7.1-lecture-6.html#cb157-7" aria-hidden="true"></a></span>
+<span id="cb157-8"><a href="7.1-lecture-6.html#cb157-8" aria-hidden="true"></a>pd_mean &lt;-<span class="st"> </span><span class="kw">array</span>(<span class="ot">NA</span>, <span class="dt">dim =</span> <span class="kw">c</span>(n_iter, n_chain, <span class="dv">1</span>), <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="dt">iter =</span> <span class="ot">NULL</span>, <span class="dt">chain =</span> <span class="ot">NULL</span>, <span class="dt">params =</span> <span class="st">&quot;beta&quot;</span>)) <span class="co"># create vector for sample values</span></span>
+<span id="cb157-9"><a href="7.1-lecture-6.html#cb157-9" aria-hidden="true"></a></span>
+<span id="cb157-10"><a href="7.1-lecture-6.html#cb157-10" aria-hidden="true"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="kw">seq_len</span>(n_chain)) {</span>
+<span id="cb157-11"><a href="7.1-lecture-6.html#cb157-11" aria-hidden="true"></a>  pd_mean[<span class="dv">1</span>, j, <span class="dv">1</span>] &lt;-<span class="st"> </span>start_value[j] <span class="co"># define starting value</span></span>
+<span id="cb157-12"><a href="7.1-lecture-6.html#cb157-12" aria-hidden="true"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span>n_iter) {</span>
+<span id="cb157-13"><a href="7.1-lecture-6.html#cb157-13" aria-hidden="true"></a>    proposal &lt;-<span class="st"> </span>pd_mean[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, j, <span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>MASS<span class="op">::</span><span class="kw">mvrnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">5</span>) <span class="co"># proposal</span></span>
+<span id="cb157-14"><a href="7.1-lecture-6.html#cb157-14" aria-hidden="true"></a>    <span class="cf">if</span> (<span class="kw">sum</span>(<span class="kw">dnorm</span>(proposal, hr_obs, <span class="dv">15</span>)) <span class="co"># likelihood of proposed parameter</span></span>
+<span id="cb157-15"><a href="7.1-lecture-6.html#cb157-15" aria-hidden="true"></a>    <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(<span class="kw">dnorm</span>(pd_mean[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, j, <span class="dv">1</span>], hr_obs, <span class="dv">15</span>)) <span class="op">&gt;</span><span class="st"> </span><span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) {</span>
+<span id="cb157-16"><a href="7.1-lecture-6.html#cb157-16" aria-hidden="true"></a>      pd_mean[i, j, <span class="dv">1</span>] &lt;-<span class="st"> </span>proposal</span>
+<span id="cb157-17"><a href="7.1-lecture-6.html#cb157-17" aria-hidden="true"></a>    } <span class="co"># if true sample the proposal</span></span>
+<span id="cb157-18"><a href="7.1-lecture-6.html#cb157-18" aria-hidden="true"></a>    <span class="cf">else</span> {</span>
+<span id="cb157-19"><a href="7.1-lecture-6.html#cb157-19" aria-hidden="true"></a>      (pd_mean[i, j, <span class="dv">1</span>] &lt;-<span class="st"> </span>pd_mean[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, j, <span class="dv">1</span>])</span>
+<span id="cb157-20"><a href="7.1-lecture-6.html#cb157-20" aria-hidden="true"></a>    } <span class="co"># if false sample the current value</span></span>
+<span id="cb157-21"><a href="7.1-lecture-6.html#cb157-21" aria-hidden="true"></a>  }</span>
+<span id="cb157-22"><a href="7.1-lecture-6.html#cb157-22" aria-hidden="true"></a>}</span>
+<span id="cb157-23"><a href="7.1-lecture-6.html#cb157-23" aria-hidden="true"></a><span class="kw">color_scheme_set</span>(<span class="st">&quot;mix-blue-red&quot;</span>)</span>
+<span id="cb157-24"><a href="7.1-lecture-6.html#cb157-24" aria-hidden="true"></a><span class="kw">mcmc_combo</span>(pd_mean, <span class="dt">combo =</span> <span class="kw">c</span>(<span class="st">&quot;trace&quot;</span>, <span class="st">&quot;dens_overlay&quot;</span>))</span></code></pre></div>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-84-1.svg" width="672" /></p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="7.1-lecture-6.html#cb158-1" aria-hidden="true"></a><span class="kw">summary</span>(pd_mean)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   41.65   99.32  109.68  112.71  122.52  250.00</code></pre>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="7.1-lecture-6.html#cb160-1" aria-hidden="true"></a><span class="kw">mcmc_combo</span>(pd_mean, <span class="dt">combo =</span> <span class="kw">c</span>(<span class="st">&quot;trace&quot;</span>, <span class="st">&quot;dens_overlay&quot;</span>), <span class="dt">n_warmup =</span> <span class="dv">500</span>)</span></code></pre></div>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-84-2.svg" width="672" /></p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="7.1-lecture-6.html#cb161-1" aria-hidden="true"></a>pd_burn &lt;-<span class="st"> </span>pd_mean[<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">500</span>), , , drop =<span class="st"> </span><span class="ot">FALSE</span>]</span>
+<span id="cb161-2"><a href="7.1-lecture-6.html#cb161-2" aria-hidden="true"></a><span class="kw">summary</span>(pd_burn)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   51.98  100.71  110.38  111.42  122.69  163.58</code></pre>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="7.1-lecture-6.html#cb163-1" aria-hidden="true"></a><span class="kw">mcmc_combo</span>(pd_burn, <span class="dt">combo =</span> <span class="kw">c</span>(<span class="st">&quot;trace&quot;</span>, <span class="st">&quot;dens_overlay&quot;</span>), <span class="dt">iter1 =</span> <span class="dv">501</span>)</span></code></pre></div>
+<p><img src="BIO8940_book_files/figure-html/unnamed-chunk-84-3.svg" width="672" /></p>
+</div>
+<div id="inferences-1" class="section level3" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Inferences</h3>
+<div id="fixed-effects-1" class="section level4" number="7.1.3.1">
+<h4><span class="header-section-number">7.1.3.1</span> Fixed effects</h4>
+<p>Easy peazy lemon squeezy just have a look at the posteriro distribution, does it overlap 0 yes or no.</p>
+<p>talk about mean, median and mode of a distribution as well as credible intervals</p>
+</div>
+<div id="random-effects-1" class="section level4" number="7.1.3.2">
+<h4><span class="header-section-number">7.1.3.2</span> Random effects</h4>
+<p>Quite a bit more harder. because constrained to be positive</p>
+<ul>
+<li>Interpreting posterior distribution</li>
+<li>DIC</li>
+<li>WAIC</li>
+</ul>
+</div>
+</div>
+</div>
+<script src="js/solution.js"></script>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="7-introduction-to-bayesian-inference.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="7.2-practical-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/BIO8940-uOttawa/class_book/02_04-intro_bayesian.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["BIO8940_book.pdf", "BIO8940_book.epub", "BIO8940_book.mobi"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
