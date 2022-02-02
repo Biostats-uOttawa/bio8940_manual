@@ -146,7 +146,7 @@ summary(rr_asr, coef = TRUE)$coef.fixed
 wald(rr_asr, ssType = "conditional", denDF = "numeric")
 ```
 
-```{r, echo = FALSE, eval = htmlF_pdfT}
+```{r, echo = FALSE, eval = htmlF_pdfT, purl = FALSE}
 summary(rr_asr, coef = TRUE)$coef.fixed
 wa <- wald(rr_asr, ssType = "conditional", denDF = "numeric")$Wald
 attr(wa, "heading") <- NULL
@@ -314,7 +314,7 @@ summary(cs_asr, all = T)$coef.fixed
 wald(cs_asr, ssType = "conditional", denDF = "numeric")
 ```
 
-```{r, echo = FALSE, eval = htmlF_pdfT}
+```{r, echo = FALSE, eval = htmlF_pdfT, purl = FALSE}
 summary(cs_asr, all = T)$coef.fixed
 wa <- wald(cs_asr, ssType = "conditional", denDF = "numeric")$Wald
 attr(wa, "heading") <- NULL

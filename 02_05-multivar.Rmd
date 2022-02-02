@@ -254,7 +254,7 @@ summary(asr_us, coef = TRUE)$coef.fixed
 wald(asr_us, ssType = "conditional", denDF = "numeric")
 ```
 
-```{r, echo = FALSE, eval = htmlF_pdfT}
+```{r, echo = FALSE, eval = htmlF_pdfT, purl = FALSE}
 summary(asr_us, coef = TRUE)$coef.fixed
 wa <- wald(asr_us, ssType = "conditional", denDF = "numeric")$Wald
 attr(wa, "heading") <- NULL
