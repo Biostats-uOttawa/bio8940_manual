@@ -211,8 +211,10 @@ First we load required libraries
 ```{r loadlibs, message=FALSE, results='hide', warning=FALSE}
 
 library(lmerTest)
+library(performance)
 library(tidyverse)
 library(rptR)
+
 ```
 
 ### The superb wild unicorns of the Scottish Highlands
@@ -278,6 +280,12 @@ So the different columns in the data set are:
 Fit a first mixed model with `lmer` that have only individual identity as a random effect and only a population mean.
 
 Why, so simple? Because we simply want to partition variance around the mean into a component that among-individual variance and one that is within-individual variance.
+
+```{block2, type = "rmdimportant"}
+We are going to use the function `lmer()` from the  `r emo::ji("package")` `lme4` package. The notation of the model formula is similar as the notation for a linear model but now we also add random effects using the notation `(1 | r_effect)` which indicates that we want to fit the variable `r_effect` as a random effect for the intercept. Thus, in lmer notation a simploe model would be :
+
+`lmer(Y ~ x1 + x2 + (1 | r_effect), data = data)`
+```
 
 <div class= "exer">
 
@@ -420,45 +428,63 @@ m_2 <- lmer(aggression ~ opp_size + block + (1 | ID), data = unicorns)
 Run a few diagnostic plots before we look at the answers. In diagnostic plots, we want to check the condition of applications of the linear mixed model which are the same 4 as the linear model plus 2 extra:
 
 1. Linearity of the relation between covariates and the response
-2. No error on measurement of covariates
-3. Residual have a Gaussian distribution
-4. Homoscedasticty (variance of residuals is constant across covariates)
-
-5. Random effects have a Gaussian distribution
-6. Residual variance is constant across all levels of a random effect
 
 <div class = "exer">
-This is checked with:
+Done with data exploration graph (i.e. just plot the data see if it is linear)
+    - see previous graph \@ref(fig:rplotaggr).
+</div>
 
-1. done with data exploration graph (i.e. just plot the data see if it is linear)
-    - see previous graph
-2. assumed to be correct if measurement error is lower than 10% of variance in the variable
+2. No error on measurement of covariates
+
+<div class = "exer">
+assumed to be correct if measurement error is lower than 10% of variance in the variable
     - I know this sounds pretty bad
-3. using quantile-quantile plot or histogram of residuals
+</div>
+
+3. Residual have a Gaussian distribution
+
+<div class = "exer">
+using quantile-quantile plot or histogram of residuals
+
 ```{r, fig.cap = "Checking residuals have Gaussian distribution"}
 par(mfrow = c(1, 2)) # multiple graphs in a window
 qqnorm(residuals(m_2)) # a q-q plot
 qqline(residuals(m_2))
 hist(resid(m_2)) # are the residuals roughly Gaussian?
 ```
+</div>
 
-4. using plot of residuals by fitted values
+4. Homoscedasticty (variance of residuals is constant across covariates)
+
+<div class = "exer">
+Using plot of residuals by fitted values
+
 ```{r, fig.cap = "Residuals by fitted values for model m_2 to check homoscedasticity"}
 plot(m_2)
 ```
+</div>
 
-5. histogram of the predictions for the random effects (BLUPs)
+5. Random effects have a Gaussian distribution
+
+<div class = "exer">
+histogram of the predictions for the random effects (BLUPs)
+
 ```{r, fig.cap = "Checking random effects are gaussian"}
 # extracting blups
 r1 <- as.data.frame(ranef(m_2, condVar = TRUE))
-
 par(mfrow = c(1, 2))
 hist(r1$condval)
 qqnorm(r1$condval)
 qqline(r1$condval)
 ```
 
-6. plotting the sorted BLUPs with their errors
+</div>
+
+6. Residual variance is constant across all levels of a random effect
+
+<div class = "exer">
+No straightforward solution to deal with that. We can just do a plot is absolutely not-informative for that problem but I always like to look at. It is the plot of the sorted BLUPs with their associated errors.
+
 ```{r mod2_plots, eval=TRUE}
 r1 <- r1[order(r1$condval), ] # sorting the BLUPs
 ggplot(r1, aes(y = grp, x = condval)) +
@@ -470,7 +496,17 @@ ggplot(r1, aes(y = grp, x = condval)) +
   theme_classic() +
   theme(legend.position = "none")
 ```
+</div>
 
+
+
+Here is a great magic trick `r emo::ji("sparkler")` because 3-5 and more can be done in one step
+
+<div class = "exer">
+You need to use the function `check_model()` from the `r emo::ji("package")` performance package.
+```{r, fig.cap = "Graphical check of model assumptions", fig.asp = 2}
+check_model(m_2)
+```
 </div>
 
 #### Inferences
