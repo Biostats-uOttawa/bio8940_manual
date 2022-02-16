@@ -181,7 +181,7 @@ ggplot(df_blups_fe, aes(x = exploration, y = speed)) +
   theme_classic()
 ```
 
-As you can see, we get a positive correlation with a very small p-value (P = `r print(cor_blups$p.value, digits = 3)`), indicating that these traits are involved in a behavioural syndrome. While the correlation itself is fairly weak ($r = `r print(cor_blups$estimate, digits = 3)`), it appears to be highly significant, and suggests that individuals that are faster than average also tend to be more exploratory than average.
+As you can see, we get a positive correlation with a very small p-value (P = `r format(cor_blups$p.value, digits = 3)`), indicating that these traits are involved in a behavioural syndrome. While the correlation itself is fairly weak ($r = `r format(cor_blups$estimate, digits = 3)`), it appears to be highly significant, and suggests that individuals that are faster than average also tend to be more exploratory than average.
 However, as discussed in @hadfield_misuse_2010 and @houslay_avoiding_2017, using BLUPs in this way leads to anticonservative significance tests. This is because the error inherent in their prediction is not carried forward from the lmer models to the subsequent analysis (in this case, a correlation test).
 To illustrate this point quickly, below we plot the individual estimates along with their associated standard errors.
 
@@ -285,7 +285,7 @@ We can also use this function to calculate the estimate and standard error of th
 ```
 
 In this case, the estimate is similar (here, slightly lower) than our correlation estimate using BLUPs.
-However, if we consider confidence intervals as $+/- 1.96SE$ around the estimate, the lower bound of the confidence interval would actually be `r print(cor_fe[1] - cor_fe[2]*1.96, digits = 3)`.
+However, if we consider confidence intervals as *+/- 1.96 SE* around the estimate, the lower bound of the confidence interval would actually be `r format(cor_fe[1] - cor_fe[2]*1.96, digits = 3)`.
 With confidence intervals straddling zero, we would conclude that this correlation is likely non-significant.
 As the use of standard errors in this way is only approximate, we should also test our hypothesis formally using likelihood ratio tests.
 
@@ -332,10 +332,9 @@ ggplot(df_cor, aes(x = Method, y = Correlation)) +
   theme_classic()
 ```
 
-Here we can clearly see that the BLUPs method - having failed to carry through the error around the predictions of individual-level estimates - is anticonservative, with small confidence intervals and a correspondingly small P-value ($P = `r print(cor_blups$p.value, digits = 3)`$). Testing the syndrome directly in a bivariate model that retains all the data, by
+Here we can clearly see that the BLUPs method - having failed to carry through the error around the predictions of individual-level estimates - is anticonservative, with small confidence intervals and a correspondingly small P-value (*P =* `r format(cor_blups$p.value, digits = 3)`). Testing the syndrome directly in a bivariate model that retains all the data, by
 comparison, enables us to capture the true uncertainty about the estimate of the correlation. This is reflected
-in the larger confidence intervals and, in this case, the non-significant P-value ($P = `r print(p_biv, digits = 3)`$).
-
+in the larger confidence intervals and, in this case, the non-significant P-value (*P =* `r format(p_biv, digits = 3)`).
 
 <!--
 need to add the selection aspect with trivariate model with fitness
