@@ -550,7 +550,7 @@ behaviour of blue dragons</caption>
 Figure 8.5: Relation between exploration and flying speed using BLUPs from univariate models
 </p>
 </div>
-<p>As you can see, we get a positive correlation with a very small p-value (P = ), indicating that these traits are involved in a behavioural syndrome. While the correlation itself is fairly weak ($r = ), it appears to be highly significant, and suggests that individuals that are faster than average also tend to be more exploratory than average.
+<p>As you can see, we get a positive correlation with a very small p-value (P = 0.00191), indicating that these traits are involved in a behavioural syndrome. While the correlation itself is fairly weak ($r = 0.342), it appears to be highly significant, and suggests that individuals that are faster than average also tend to be more exploratory than average.
 However, as discussed in <span class="citation">Hadfield et al. (<a href="#ref-hadfield_misuse_2010" role="doc-biblioref">2010</a>)</span> and <span class="citation">Houslay and Wilson (<a href="#ref-houslay_avoiding_2017" role="doc-biblioref">2017</a>)</span>, using BLUPs in this way leads to anticonservative significance tests. This is because the error inherent in their prediction is not carried forward from the lmer models to the subsequent analysis (in this case, a correlation test).
 To illustrate this point quickly, below we plot the individual estimates along with their associated standard errors.</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="8.2-practical-6.html#cb228-1" aria-hidden="true"></a><span class="kw">ggplot</span>(df_blups_fe, <span class="kw">aes</span>(<span class="dt">x =</span> exploration, <span class="dt">y =</span> speed)) <span class="op">+</span></span>
@@ -691,7 +691,7 @@ For this function, we provide the name of the model object, followed by a name t
 <pre><code>##                 Estimate        SE
 ## cor_expl_speed 0.2703462 0.1594097</code></pre>
 <p>In this case, the estimate is similar (here, slightly lower) than our correlation estimate using BLUPs.
-However, if we consider confidence intervals as <span class="math inline">\(+/- 1.96SE\)</span> around the estimate, the lower bound of the confidence interval would actually be .
+However, if we consider confidence intervals as <em>+/- 1.96 SE</em> around the estimate, the lower bound of the confidence interval would actually be -0.0421.
 With confidence intervals straddling zero, we would conclude that this correlation is likely non-significant.
 As the use of standard errors in this way is only approximate, we should also test our hypothesis formally using likelihood ratio tests.</p>
 <div id="hypothesis-testing" class="section level5" number="8.2.4.1.1">
@@ -750,7 +750,9 @@ To better understand why BLUPs produce an anticonservative p-value in comparison
 Figure 8.8: Correlation estimates (with CI) using 2 different methods
 </p>
 </div>
-<p>Here we can clearly see that the BLUPs method - having failed to carry through the error around the predictions of individual-level estimates - is anticonservative, with small confidence intervals and a correspondingly small P-value ($P = <span class="math inline">\(). Testing the syndrome directly in a bivariate model that retains all the data, by comparison, enables us to capture the true uncertainty about the estimate of the correlation. This is reflected in the larger confidence intervals and, in this case, the non-significant P-value (\)</span>P = $).</p>
+<p>Here we can clearly see that the BLUPs method - having failed to carry through the error around the predictions of individual-level estimates - is anticonservative, with small confidence intervals and a correspondingly small P-value (<em>P =</em> 0.00191). Testing the syndrome directly in a bivariate model that retains all the data, by
+comparison, enables us to capture the true uncertainty about the estimate of the correlation. This is reflected
+in the larger confidence intervals and, in this case, the non-significant P-value (<em>P =</em> 0.117).</p>
 <!--
 need to add the selection aspect with trivariate model with fitness
 -->
