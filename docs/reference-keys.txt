@@ -89,8 +89,8 @@ zero-truncated-distribution
 zero-one-inflated-distribution
 practical-2
 logistic-regression
-effet-sex-du-jeune-précédent
-régression-de-poisson
+previous-offspring-sex-effect
+poisson-regression
 introduction-to-linear-mixed-models
 lecture-4
 testing-fixed-effects

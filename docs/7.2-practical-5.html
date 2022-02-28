@@ -191,7 +191,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="4.1-lecture-3.html"><a href="4.1-lecture-3.html#distributions"><i class="fa fa-check"></i><b>4.1.1</b> Distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html"><i class="fa fa-check"></i><b>4.2</b> Practical</a></li>
+<li class="chapter" data-level="4.2" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html"><i class="fa fa-check"></i><b>4.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html#logistic-regression"><i class="fa fa-check"></i><b>4.2.1</b> Logistic regression</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html#poisson-regression"><i class="fa fa-check"></i><b>4.2.2</b> Poisson regression</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="5-introduction-to-linear-mixed-models.html"><a href="5-introduction-to-linear-mixed-models.html"><i class="fa fa-check"></i><b>5</b> Introduction to linear mixed models</a>
 <ul>
@@ -315,46 +319,48 @@ softwares fitting models with a Bayesian approach: <code>MCMCglmm</code> <span c
 <div id="r-packages-needed-1" class="section level3" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> R packages needed</h3>
 <p>First we load required libraries</p>
-<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="7.2-practical-5.html#cb160-1" aria-hidden="true"></a><span class="kw">library</span>(lmerTest)</span>
-<span id="cb160-2"><a href="7.2-practical-5.html#cb160-2" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb160-3"><a href="7.2-practical-5.html#cb160-3" aria-hidden="true"></a><span class="kw">library</span>(rptR)</span>
-<span id="cb160-4"><a href="7.2-practical-5.html#cb160-4" aria-hidden="true"></a><span class="kw">library</span>(brms)</span>
-<span id="cb160-5"><a href="7.2-practical-5.html#cb160-5" aria-hidden="true"></a><span class="kw">library</span>(MCMCglmm)</span>
-<span id="cb160-6"><a href="7.2-practical-5.html#cb160-6" aria-hidden="true"></a><span class="kw">library</span>(bayesplot)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="7.2-practical-5.html#cb203-1" aria-hidden="true"></a><span class="kw">library</span>(lmerTest)</span>
+<span id="cb203-2"><a href="7.2-practical-5.html#cb203-2" aria-hidden="true"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb203-3"><a href="7.2-practical-5.html#cb203-3" aria-hidden="true"></a><span class="kw">library</span>(rptR)</span>
+<span id="cb203-4"><a href="7.2-practical-5.html#cb203-4" aria-hidden="true"></a><span class="kw">library</span>(brms)</span>
+<span id="cb203-5"><a href="7.2-practical-5.html#cb203-5" aria-hidden="true"></a><span class="kw">library</span>(MCMCglmm)</span>
+<span id="cb203-6"><a href="7.2-practical-5.html#cb203-6" aria-hidden="true"></a><span class="kw">library</span>(bayesplot)</span></code></pre></div>
 </div>
 <div id="a-refresher-on-unicorn-ecology" class="section level3" number="7.2.2">
 <h3><span class="header-section-number">7.2.2</span> A refresher on unicorn ecology</h3>
 <p>The last model on unicorns was:</p>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="7.2-practical-5.html#cb161-1" aria-hidden="true"></a>aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span><span class="kw">scale</span>(body_size, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb161-2"><a href="7.2-practical-5.html#cb161-2" aria-hidden="true"></a>              <span class="op">+</span><span class="st"> </span><span class="kw">scale</span>(assay_rep, <span class="dt">scale =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>block</span>
-<span id="cb161-3"><a href="7.2-practical-5.html#cb161-3" aria-hidden="true"></a>              <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>ID)</span></code></pre></div>
+<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="7.2-practical-5.html#cb204-1" aria-hidden="true"></a>aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span><span class="kw">scale</span>(body_size, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb204-2"><a href="7.2-practical-5.html#cb204-2" aria-hidden="true"></a>              <span class="op">+</span><span class="st"> </span><span class="kw">scale</span>(assay_rep, <span class="dt">scale =</span> <span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span>block</span>
+<span id="cb204-3"><a href="7.2-practical-5.html#cb204-3" aria-hidden="true"></a>              <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>ID)</span></code></pre></div>
 <p>Those scaled terms are abit a sore for my eyes and way too long if we need to type them multiple times in this practical.
 So first let’s recode them.
 -</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="7.2-practical-5.html#cb162-1" aria-hidden="true"></a>unicorns &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/unicorns_aggression.csv&quot;</span>)</span>
-<span id="cb162-2"><a href="7.2-practical-5.html#cb162-2" aria-hidden="true"></a>unicorns &lt;-<span class="st"> </span>unicorns <span class="op">%&gt;%</span></span>
-<span id="cb162-3"><a href="7.2-practical-5.html#cb162-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
-<span id="cb162-4"><a href="7.2-practical-5.html#cb162-4" aria-hidden="true"></a>    <span class="dt">body_size_sc =</span> <span class="kw">scale</span>(body_size),</span>
-<span id="cb162-5"><a href="7.2-practical-5.html#cb162-5" aria-hidden="true"></a>    <span class="dt">assay_rep_sc =</span> <span class="kw">scale</span>(assay_rep, <span class="dt">scale =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb162-6"><a href="7.2-practical-5.html#cb162-6" aria-hidden="true"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="7.2-practical-5.html#cb205-1" aria-hidden="true"></a>unicorns &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/unicorns_aggression.csv&quot;</span>)</span>
+<span id="cb205-2"><a href="7.2-practical-5.html#cb205-2" aria-hidden="true"></a>unicorns &lt;-<span class="st"> </span>unicorns <span class="op">%&gt;%</span></span>
+<span id="cb205-3"><a href="7.2-practical-5.html#cb205-3" aria-hidden="true"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb205-4"><a href="7.2-practical-5.html#cb205-4" aria-hidden="true"></a>    <span class="dt">body_size_sc =</span> <span class="kw">scale</span>(body_size),</span>
+<span id="cb205-5"><a href="7.2-practical-5.html#cb205-5" aria-hidden="true"></a>    <span class="dt">assay_rep_sc =</span> <span class="kw">scale</span>(assay_rep, <span class="dt">scale =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb205-6"><a href="7.2-practical-5.html#cb205-6" aria-hidden="true"></a>  )</span></code></pre></div>
 <p>Ok now we can fit the same model by just using:</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="7.2-practical-5.html#cb163-1" aria-hidden="true"></a>aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span>body_size_sc <span class="op">+</span><span class="st"> </span>assay_rep_sc <span class="op">+</span><span class="st"> </span>block</span>
-<span id="cb163-2"><a href="7.2-practical-5.html#cb163-2" aria-hidden="true"></a>              <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>ID)</span></code></pre></div>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="7.2-practical-5.html#cb206-1" aria-hidden="true"></a>aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span>body_size_sc <span class="op">+</span><span class="st"> </span>assay_rep_sc <span class="op">+</span><span class="st"> </span>block</span>
+<span id="cb206-2"><a href="7.2-practical-5.html#cb206-2" aria-hidden="true"></a>              <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>ID)</span></code></pre></div>
 <p>We can now fit a model using <code>lmer()</code>. Since we want to compare a bit <code>REML</code> and <code>Bayesian</code> aproaches, I am going to wrap the model function in a function called <code>system.time()</code>.
 This function simply estimate the <code>user</code> and <code>computer</code> time use by the function.</p>
-<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="7.2-practical-5.html#cb164-1" aria-hidden="true"></a>mer_time &lt;-<span class="st"> </span><span class="kw">system.time</span>(</span>
-<span id="cb164-2"><a href="7.2-practical-5.html#cb164-2" aria-hidden="true"></a>  m_mer &lt;-<span class="st"> </span><span class="kw">lmer</span>(</span>
-<span id="cb164-3"><a href="7.2-practical-5.html#cb164-3" aria-hidden="true"></a>    aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span>body_size_sc <span class="op">+</span><span class="st"> </span>assay_rep_sc <span class="op">+</span><span class="st"> </span>block</span>
-<span id="cb164-4"><a href="7.2-practical-5.html#cb164-4" aria-hidden="true"></a>      <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>ID),</span>
-<span id="cb164-5"><a href="7.2-practical-5.html#cb164-5" aria-hidden="true"></a>    <span class="dt">data =</span> unicorns</span>
-<span id="cb164-6"><a href="7.2-practical-5.html#cb164-6" aria-hidden="true"></a>  )</span>
-<span id="cb164-7"><a href="7.2-practical-5.html#cb164-7" aria-hidden="true"></a>)</span>
-<span id="cb164-8"><a href="7.2-practical-5.html#cb164-8" aria-hidden="true"></a>mer_time</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="7.2-practical-5.html#cb207-1" aria-hidden="true"></a>mer_time &lt;-<span class="st"> </span><span class="kw">system.time</span>(</span>
+<span id="cb207-2"><a href="7.2-practical-5.html#cb207-2" aria-hidden="true"></a>  m_mer &lt;-<span class="st"> </span><span class="kw">lmer</span>(</span>
+<span id="cb207-3"><a href="7.2-practical-5.html#cb207-3" aria-hidden="true"></a>    aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span>body_size_sc <span class="op">+</span><span class="st"> </span>assay_rep_sc <span class="op">+</span><span class="st"> </span>block</span>
+<span id="cb207-4"><a href="7.2-practical-5.html#cb207-4" aria-hidden="true"></a>      <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>ID),</span>
+<span id="cb207-5"><a href="7.2-practical-5.html#cb207-5" aria-hidden="true"></a>    <span class="dt">data =</span> unicorns</span>
+<span id="cb207-6"><a href="7.2-practical-5.html#cb207-6" aria-hidden="true"></a>  )</span>
+<span id="cb207-7"><a href="7.2-practical-5.html#cb207-7" aria-hidden="true"></a>)</span>
+<span id="cb207-8"><a href="7.2-practical-5.html#cb207-8" aria-hidden="true"></a>mer_time</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   0.067   0.000   0.068</code></pre>
-<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="7.2-practical-5.html#cb166-1" aria-hidden="true"></a><span class="kw">summary</span>(m_mer)</span></code></pre></div>
-<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [&#39;lmerModLmerTest&#39;]
-## Formula: aggression ~ opp_size + body_size_sc + assay_rep_sc + block +      (1 | ID)
+##   0.059   0.000   0.059</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="7.2-practical-5.html#cb209-1" aria-hidden="true"></a><span class="kw">summary</span>(m_mer)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: aggression ~ opp_size + body_size_sc + assay_rep_sc + block +  
+##     (1 | ID)
 ##    Data: unicorns
 ## 
 ## REML criterion at convergence: 1136.5
@@ -403,13 +409,13 @@ This function simply estimate the <code>user</code> and <code>computer</code> ti
 <div id="fitting-the-model" class="section level4" number="7.2.3.1">
 <h4><span class="header-section-number">7.2.3.1</span> Fitting the Model</h4>
 <p>So here is how we can code the model in <code>MCMCglmm()</code>. It is fairly similar to <code>lmer()</code> except that the random effects are specified in a different <em>argument</em>.</p>
-<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="7.2-practical-5.html#cb168-1" aria-hidden="true"></a>mcglm_time &lt;-<span class="st"> </span><span class="kw">system.time</span>(</span>
-<span id="cb168-2"><a href="7.2-practical-5.html#cb168-2" aria-hidden="true"></a>  m_mcmcglmm &lt;-<span class="st"> </span><span class="kw">MCMCglmm</span>(</span>
-<span id="cb168-3"><a href="7.2-practical-5.html#cb168-3" aria-hidden="true"></a>    aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span>body_size_sc <span class="op">+</span><span class="st"> </span>assay_rep_sc <span class="op">+</span><span class="st"> </span>block,</span>
-<span id="cb168-4"><a href="7.2-practical-5.html#cb168-4" aria-hidden="true"></a>    <span class="dt">random =</span> <span class="op">~</span>ID,</span>
-<span id="cb168-5"><a href="7.2-practical-5.html#cb168-5" aria-hidden="true"></a>    <span class="dt">data =</span> unicorns</span>
-<span id="cb168-6"><a href="7.2-practical-5.html#cb168-6" aria-hidden="true"></a>  )</span>
-<span id="cb168-7"><a href="7.2-practical-5.html#cb168-7" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="7.2-practical-5.html#cb211-1" aria-hidden="true"></a>mcglm_time &lt;-<span class="st"> </span><span class="kw">system.time</span>(</span>
+<span id="cb211-2"><a href="7.2-practical-5.html#cb211-2" aria-hidden="true"></a>  m_mcmcglmm &lt;-<span class="st"> </span><span class="kw">MCMCglmm</span>(</span>
+<span id="cb211-3"><a href="7.2-practical-5.html#cb211-3" aria-hidden="true"></a>    aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span>body_size_sc <span class="op">+</span><span class="st"> </span>assay_rep_sc <span class="op">+</span><span class="st"> </span>block,</span>
+<span id="cb211-4"><a href="7.2-practical-5.html#cb211-4" aria-hidden="true"></a>    <span class="dt">random =</span> <span class="op">~</span>ID,</span>
+<span id="cb211-5"><a href="7.2-practical-5.html#cb211-5" aria-hidden="true"></a>    <span class="dt">data =</span> unicorns</span>
+<span id="cb211-6"><a href="7.2-practical-5.html#cb211-6" aria-hidden="true"></a>  )</span>
+<span id="cb211-7"><a href="7.2-practical-5.html#cb211-7" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## 
 ##                        MCMC iteration = 0
 ## 
@@ -438,7 +444,7 @@ This function simply estimate the <code>user</code> and <code>computer</code> ti
 ##                        MCMC iteration = 12000
 ## 
 ##                        MCMC iteration = 13000</code></pre>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="7.2-practical-5.html#cb170-1" aria-hidden="true"></a><span class="kw">summary</span>(m_mcmcglmm)</span></code></pre></div>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="7.2-practical-5.html#cb213-1" aria-hidden="true"></a><span class="kw">summary</span>(m_mcmcglmm)</span></code></pre></div>
 <pre><code>## 
 ##  Iterations = 3001:12991
 ##  Thinning interval  = 10
@@ -466,36 +472,36 @@ This function simply estimate the <code>user</code> and <code>computer</code> ti
 ## block         -0.02069 -0.16186  0.11553     1000  0.774    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="7.2-practical-5.html#cb172-1" aria-hidden="true"></a>mcglm_time</span></code></pre></div>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="7.2-practical-5.html#cb215-1" aria-hidden="true"></a>mcglm_time</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##   2.036   0.000   2.037</code></pre>
+##   2.095   0.003   2.100</code></pre>
 <p>Model is slow and not good. We need more iteration and maybe even a longer burnin, and honestly maybe better priors.</p>
 <p>We can still take the time to have a look at the R object output from <code>MCMCglmm()</code>. The 2 main parts we are interrested in are:</p>
 <ul>
 <li><code>Sol</code> which stand for the model solution and includes the posteriro distribution of the fixed effects</li>
 <li><code>VCV</code>, for the variance covariance estimates, which includes the posterior distribution of all (co)variances estimates for both random effects and residual variance.</li>
 </ul>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="7.2-practical-5.html#cb174-1" aria-hidden="true"></a><span class="kw">plot</span>(m_mcmcglmm<span class="op">$</span>Sol)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-90-1"></span>
-<img src="BIO8940_book_files/figure-html/unnamed-chunk-90-1.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings" width="672" />
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="7.2-practical-5.html#cb217-1" aria-hidden="true"></a><span class="kw">plot</span>(m_mcmcglmm<span class="op">$</span>Sol)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-103-1"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-103-1.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings" width="672" />
 <p class="caption">
 Figure 7.3: Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-90-2"></span>
-<img src="BIO8940_book_files/figure-html/unnamed-chunk-90-2.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-103-2"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-103-2.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings" width="672" />
 <p class="caption">
 Figure 7.4: Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings
 </p>
 </div>
-<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="7.2-practical-5.html#cb175-1" aria-hidden="true"></a><span class="kw">plot</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-90-3"></span>
-<img src="BIO8940_book_files/figure-html/unnamed-chunk-90-3.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings" width="672" />
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="7.2-practical-5.html#cb218-1" aria-hidden="true"></a><span class="kw">plot</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-103-3"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-103-3.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings" width="672" />
 <p class="caption">
 Figure 7.5: Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings
 </p>
 </div>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="7.2-practical-5.html#cb176-1" aria-hidden="true"></a><span class="kw">autocorr.diag</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="7.2-practical-5.html#cb219-1" aria-hidden="true"></a><span class="kw">autocorr.diag</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
 <pre><code>##                ID       units
 ## Lag 0   1.0000000  1.00000000
 ## Lag 10  0.8042405 -0.02074155
@@ -503,25 +509,25 @@ Figure 7.5: Posterior trace and distribution of the paremeters in m_mcmcglmm usi
 ## Lag 100 0.1951356  0.04422296
 ## Lag 500 0.1254589  0.04401956</code></pre>
 <p>Talk about autocorrelation, mixing, convergence and priors here</p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="7.2-practical-5.html#cb178-1" aria-hidden="true"></a>n_samp &lt;-<span class="st"> </span><span class="dv">1000</span></span>
-<span id="cb178-2"><a href="7.2-practical-5.html#cb178-2" aria-hidden="true"></a>thin &lt;-<span class="st"> </span><span class="dv">500</span></span>
-<span id="cb178-3"><a href="7.2-practical-5.html#cb178-3" aria-hidden="true"></a>burnin &lt;-<span class="st"> </span><span class="dv">20000</span></span>
-<span id="cb178-4"><a href="7.2-practical-5.html#cb178-4" aria-hidden="true"></a>mcglm_time &lt;-<span class="st"> </span><span class="kw">system.time</span>(</span>
-<span id="cb178-5"><a href="7.2-practical-5.html#cb178-5" aria-hidden="true"></a>  m_mcmcglmm &lt;-<span class="st"> </span><span class="kw">MCMCglmm</span>(</span>
-<span id="cb178-6"><a href="7.2-practical-5.html#cb178-6" aria-hidden="true"></a>    aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span>body_size_sc <span class="op">+</span><span class="st"> </span>assay_rep_sc <span class="op">+</span><span class="st"> </span>block,</span>
-<span id="cb178-7"><a href="7.2-practical-5.html#cb178-7" aria-hidden="true"></a>    <span class="dt">random =</span> <span class="op">~</span>ID,</span>
-<span id="cb178-8"><a href="7.2-practical-5.html#cb178-8" aria-hidden="true"></a>    <span class="dt">data =</span> unicorns,</span>
-<span id="cb178-9"><a href="7.2-practical-5.html#cb178-9" aria-hidden="true"></a>    <span class="dt">nitt =</span> n_samp <span class="op">*</span><span class="st"> </span>thin <span class="op">+</span><span class="st"> </span>burnin, <span class="dt">thin =</span> thin, <span class="dt">burnin =</span> burnin,</span>
-<span id="cb178-10"><a href="7.2-practical-5.html#cb178-10" aria-hidden="true"></a>    <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb178-11"><a href="7.2-practical-5.html#cb178-11" aria-hidden="true"></a>    <span class="dt">prior =</span> <span class="kw">list</span>(</span>
-<span id="cb178-12"><a href="7.2-practical-5.html#cb178-12" aria-hidden="true"></a>      <span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>),</span>
-<span id="cb178-13"><a href="7.2-practical-5.html#cb178-13" aria-hidden="true"></a>      <span class="dt">G =</span> <span class="kw">list</span>(</span>
-<span id="cb178-14"><a href="7.2-practical-5.html#cb178-14" aria-hidden="true"></a>        <span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>)</span>
-<span id="cb178-15"><a href="7.2-practical-5.html#cb178-15" aria-hidden="true"></a>      )</span>
-<span id="cb178-16"><a href="7.2-practical-5.html#cb178-16" aria-hidden="true"></a>    )</span>
-<span id="cb178-17"><a href="7.2-practical-5.html#cb178-17" aria-hidden="true"></a>  )</span>
-<span id="cb178-18"><a href="7.2-practical-5.html#cb178-18" aria-hidden="true"></a>)</span>
-<span id="cb178-19"><a href="7.2-practical-5.html#cb178-19" aria-hidden="true"></a><span class="kw">summary</span>(m_mcmcglmm)</span></code></pre></div>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="7.2-practical-5.html#cb221-1" aria-hidden="true"></a>n_samp &lt;-<span class="st"> </span><span class="dv">1000</span></span>
+<span id="cb221-2"><a href="7.2-practical-5.html#cb221-2" aria-hidden="true"></a>thin &lt;-<span class="st"> </span><span class="dv">500</span></span>
+<span id="cb221-3"><a href="7.2-practical-5.html#cb221-3" aria-hidden="true"></a>burnin &lt;-<span class="st"> </span><span class="dv">20000</span></span>
+<span id="cb221-4"><a href="7.2-practical-5.html#cb221-4" aria-hidden="true"></a>mcglm_time &lt;-<span class="st"> </span><span class="kw">system.time</span>(</span>
+<span id="cb221-5"><a href="7.2-practical-5.html#cb221-5" aria-hidden="true"></a>  m_mcmcglmm &lt;-<span class="st"> </span><span class="kw">MCMCglmm</span>(</span>
+<span id="cb221-6"><a href="7.2-practical-5.html#cb221-6" aria-hidden="true"></a>    aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span>body_size_sc <span class="op">+</span><span class="st"> </span>assay_rep_sc <span class="op">+</span><span class="st"> </span>block,</span>
+<span id="cb221-7"><a href="7.2-practical-5.html#cb221-7" aria-hidden="true"></a>    <span class="dt">random =</span> <span class="op">~</span>ID,</span>
+<span id="cb221-8"><a href="7.2-practical-5.html#cb221-8" aria-hidden="true"></a>    <span class="dt">data =</span> unicorns,</span>
+<span id="cb221-9"><a href="7.2-practical-5.html#cb221-9" aria-hidden="true"></a>    <span class="dt">nitt =</span> n_samp <span class="op">*</span><span class="st"> </span>thin <span class="op">+</span><span class="st"> </span>burnin, <span class="dt">thin =</span> thin, <span class="dt">burnin =</span> burnin,</span>
+<span id="cb221-10"><a href="7.2-practical-5.html#cb221-10" aria-hidden="true"></a>    <span class="dt">verbose =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb221-11"><a href="7.2-practical-5.html#cb221-11" aria-hidden="true"></a>    <span class="dt">prior =</span> <span class="kw">list</span>(</span>
+<span id="cb221-12"><a href="7.2-practical-5.html#cb221-12" aria-hidden="true"></a>      <span class="dt">R =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>),</span>
+<span id="cb221-13"><a href="7.2-practical-5.html#cb221-13" aria-hidden="true"></a>      <span class="dt">G =</span> <span class="kw">list</span>(</span>
+<span id="cb221-14"><a href="7.2-practical-5.html#cb221-14" aria-hidden="true"></a>        <span class="dt">G1 =</span> <span class="kw">list</span>(<span class="dt">V =</span> <span class="dv">1</span>, <span class="dt">nu =</span> <span class="fl">0.002</span>)</span>
+<span id="cb221-15"><a href="7.2-practical-5.html#cb221-15" aria-hidden="true"></a>      )</span>
+<span id="cb221-16"><a href="7.2-practical-5.html#cb221-16" aria-hidden="true"></a>    )</span>
+<span id="cb221-17"><a href="7.2-practical-5.html#cb221-17" aria-hidden="true"></a>  )</span>
+<span id="cb221-18"><a href="7.2-practical-5.html#cb221-18" aria-hidden="true"></a>)</span>
+<span id="cb221-19"><a href="7.2-practical-5.html#cb221-19" aria-hidden="true"></a><span class="kw">summary</span>(m_mcmcglmm)</span></code></pre></div>
 <pre><code>## 
 ##  Iterations = 20001:519501
 ##  Thinning interval  = 500
@@ -549,31 +555,31 @@ Figure 7.5: Posterior trace and distribution of the paremeters in m_mcmcglmm usi
 ## block         -0.02709 -0.16061  0.11441     1000  0.698    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="7.2-practical-5.html#cb180-1" aria-hidden="true"></a>mcglm_time</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="7.2-practical-5.html#cb223-1" aria-hidden="true"></a>mcglm_time</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-##  76.820   0.057  77.269</code></pre>
+##  72.388   0.002  72.448</code></pre>
 <p>evaluate model here</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="7.2-practical-5.html#cb182-1" aria-hidden="true"></a><span class="kw">plot</span>(m_mcmcglmm<span class="op">$</span>Sol)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-92-1"></span>
-<img src="BIO8940_book_files/figure-html/unnamed-chunk-92-1.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings" width="672" />
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="7.2-practical-5.html#cb225-1" aria-hidden="true"></a><span class="kw">plot</span>(m_mcmcglmm<span class="op">$</span>Sol)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-105-1"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-105-1.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings" width="672" />
 <p class="caption">
 Figure 7.6: Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings
 </p>
 </div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-92-2"></span>
-<img src="BIO8940_book_files/figure-html/unnamed-chunk-92-2.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-105-2"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-105-2.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings" width="672" />
 <p class="caption">
 Figure 7.7: Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings
 </p>
 </div>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="7.2-practical-5.html#cb183-1" aria-hidden="true"></a><span class="kw">plot</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-92-3"></span>
-<img src="BIO8940_book_files/figure-html/unnamed-chunk-92-3.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings" width="672" />
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="7.2-practical-5.html#cb226-1" aria-hidden="true"></a><span class="kw">plot</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-105-3"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-105-3.svg" alt="Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings" width="672" />
 <p class="caption">
 Figure 7.8: Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings
 </p>
 </div>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="7.2-practical-5.html#cb184-1" aria-hidden="true"></a><span class="kw">autocorr.diag</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="7.2-practical-5.html#cb227-1" aria-hidden="true"></a><span class="kw">autocorr.diag</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
 <pre><code>##                     ID        units
 ## Lag 0      1.000000000  1.000000000
 ## Lag 500    0.013876043 -0.044235206
@@ -587,10 +593,10 @@ Figure 7.8: Posterior trace and distribution of the paremeters in m_mcmcglmm wit
 <div id="fixed-effects-2" class="section level4" number="7.2.4.1">
 <h4><span class="header-section-number">7.2.4.1</span> Fixed effects</h4>
 <p>Easy peazy lemon squeezy just have a look at the posterior distribution, does it overlap 0 yes or no.</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="7.2-practical-5.html#cb186-1" aria-hidden="true"></a><span class="kw">posterior.mode</span>(m_mcmcglmm<span class="op">$</span>Sol)</span></code></pre></div>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="7.2-practical-5.html#cb229-1" aria-hidden="true"></a><span class="kw">posterior.mode</span>(m_mcmcglmm<span class="op">$</span>Sol)</span></code></pre></div>
 <pre><code>##  (Intercept)     opp_size body_size_sc assay_rep_sc        block 
 ##   9.00632282   1.07353252   0.03500916  -0.04048582  -0.03276275</code></pre>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="7.2-practical-5.html#cb188-1" aria-hidden="true"></a><span class="kw">HPDinterval</span>(m_mcmcglmm<span class="op">$</span>Sol)</span></code></pre></div>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="7.2-practical-5.html#cb231-1" aria-hidden="true"></a><span class="kw">HPDinterval</span>(m_mcmcglmm<span class="op">$</span>Sol)</span></code></pre></div>
 <pre><code>##                    lower      upper
 ## (Intercept)   8.92221005 9.07383400
 ## opp_size      0.96382086 1.13649873
@@ -603,10 +609,10 @@ Figure 7.8: Posterior trace and distribution of the paremeters in m_mcmcglmm wit
 <div id="random-effects-2" class="section level4" number="7.2.4.2">
 <h4><span class="header-section-number">7.2.4.2</span> Random effects</h4>
 <p>Quite a bit more harder. because constrained to be positive</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="7.2-practical-5.html#cb190-1" aria-hidden="true"></a><span class="kw">posterior.mode</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="7.2-practical-5.html#cb233-1" aria-hidden="true"></a><span class="kw">posterior.mode</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
 <pre><code>##         ID      units 
 ## 0.00096263 0.59129362</code></pre>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="7.2-practical-5.html#cb192-1" aria-hidden="true"></a><span class="kw">HPDinterval</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="7.2-practical-5.html#cb235-1" aria-hidden="true"></a><span class="kw">HPDinterval</span>(m_mcmcglmm<span class="op">$</span>VCV)</span></code></pre></div>
 <pre><code>##              lower      upper
 ## ID    0.0002903938 0.05458376
 ## units 0.5188238599 0.67634529
@@ -623,20 +629,20 @@ Figure 7.8: Posterior trace and distribution of the paremeters in m_mcmcglmm wit
 <li>it is incredibly flexible since it is essentially a front end for <code>stan</code> via its <code>rstan</code> interface <span class="citation">(Guo et al. <a href="#ref-R-rstan" role="doc-biblioref">2021</a>)</span></li>
 </ol>
 <p><strong>but</strong> with <em>great powers come great responsability</em> 🕷</p>
-<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="7.2-practical-5.html#cb194-1" aria-hidden="true"></a>brm_time &lt;-<span class="st"> </span><span class="kw">system.time</span>(</span>
-<span id="cb194-2"><a href="7.2-practical-5.html#cb194-2" aria-hidden="true"></a>  m_brm &lt;-<span class="st"> </span><span class="kw">brm</span>(</span>
-<span id="cb194-3"><a href="7.2-practical-5.html#cb194-3" aria-hidden="true"></a>    aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span>body_size_sc <span class="op">+</span><span class="st"> </span>assay_rep_sc <span class="op">+</span><span class="st"> </span>block</span>
-<span id="cb194-4"><a href="7.2-practical-5.html#cb194-4" aria-hidden="true"></a>      <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>ID),</span>
-<span id="cb194-5"><a href="7.2-practical-5.html#cb194-5" aria-hidden="true"></a>    <span class="dt">data =</span> unicorns, <span class="dt">iter =</span> <span class="dv">4750</span>, <span class="dt">warmup =</span> <span class="dv">1000</span>, <span class="dt">thin =</span> <span class="dv">15</span>, <span class="dt">cores =</span> <span class="dv">4</span></span>
-<span id="cb194-6"><a href="7.2-practical-5.html#cb194-6" aria-hidden="true"></a>    <span class="co"># refresh = 0</span></span>
-<span id="cb194-7"><a href="7.2-practical-5.html#cb194-7" aria-hidden="true"></a>  )</span>
-<span id="cb194-8"><a href="7.2-practical-5.html#cb194-8" aria-hidden="true"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="7.2-practical-5.html#cb237-1" aria-hidden="true"></a>brm_time &lt;-<span class="st"> </span><span class="kw">system.time</span>(</span>
+<span id="cb237-2"><a href="7.2-practical-5.html#cb237-2" aria-hidden="true"></a>  m_brm &lt;-<span class="st"> </span><span class="kw">brm</span>(</span>
+<span id="cb237-3"><a href="7.2-practical-5.html#cb237-3" aria-hidden="true"></a>    aggression <span class="op">~</span><span class="st"> </span>opp_size <span class="op">+</span><span class="st"> </span>body_size_sc <span class="op">+</span><span class="st"> </span>assay_rep_sc <span class="op">+</span><span class="st"> </span>block</span>
+<span id="cb237-4"><a href="7.2-practical-5.html#cb237-4" aria-hidden="true"></a>      <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>ID),</span>
+<span id="cb237-5"><a href="7.2-practical-5.html#cb237-5" aria-hidden="true"></a>    <span class="dt">data =</span> unicorns, <span class="dt">iter =</span> <span class="dv">4750</span>, <span class="dt">warmup =</span> <span class="dv">1000</span>, <span class="dt">thin =</span> <span class="dv">15</span>, <span class="dt">cores =</span> <span class="dv">4</span></span>
+<span id="cb237-6"><a href="7.2-practical-5.html#cb237-6" aria-hidden="true"></a>    <span class="co"># refresh = 0</span></span>
+<span id="cb237-7"><a href="7.2-practical-5.html#cb237-7" aria-hidden="true"></a>  )</span>
+<span id="cb237-8"><a href="7.2-practical-5.html#cb237-8" aria-hidden="true"></a>)</span></code></pre></div>
 <pre><code>## Compiling Stan program...</code></pre>
 <pre><code>## Start sampling</code></pre>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="7.2-practical-5.html#cb197-1" aria-hidden="true"></a>brm_time</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="7.2-practical-5.html#cb240-1" aria-hidden="true"></a>brm_time</span></code></pre></div>
 <pre><code>##    user  system elapsed 
-## 108.432   7.146  82.386</code></pre>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="7.2-practical-5.html#cb199-1" aria-hidden="true"></a><span class="kw">summary</span>(m_brm)</span></code></pre></div>
+## 107.467   7.168  78.337</code></pre>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="7.2-practical-5.html#cb242-1" aria-hidden="true"></a><span class="kw">summary</span>(m_brm)</span></code></pre></div>
 <pre><code>##  Family: gaussian 
 ##   Links: mu = identity; sigma = identity 
 ## Formula: aggression ~ opp_size + body_size_sc + assay_rep_sc + block + (1 | ID) 
@@ -647,26 +653,26 @@ Figure 7.8: Posterior trace and distribution of the paremeters in m_mcmcglmm wit
 ## Group-Level Effects: 
 ## ~ID (Number of levels: 80) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.14      0.07     0.01     0.28 1.00     1118      978
+## sd(Intercept)     0.14      0.07     0.01     0.27 1.00     1032     1037
 ## 
 ## Population-Level Effects: 
 ##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept        9.00      0.04     8.92     9.08 1.00     1068      939
-## opp_size         1.05      0.04     0.97     1.13 1.00      974      940
-## body_size_sc     0.03      0.04    -0.05     0.10 1.00      961      942
-## assay_rep_sc    -0.06      0.04    -0.14     0.03 1.00      969      971
-## block           -0.02      0.07    -0.16     0.12 1.00      970      902
+## Intercept        9.00      0.04     8.93     9.07 1.00      952      954
+## opp_size         1.05      0.04     0.97     1.14 1.00      937      909
+## body_size_sc     0.03      0.04    -0.04     0.11 1.00      896      821
+## assay_rep_sc    -0.06      0.04    -0.14     0.02 1.00      892      662
+## block           -0.02      0.07    -0.17     0.11 1.00     1082      973
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.77      0.03     0.72     0.82 1.00      859      766
+## sigma     0.77      0.03     0.71     0.82 1.00      997      952
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="7.2-practical-5.html#cb201-1" aria-hidden="true"></a><span class="kw">mcmc_acf_bar</span>(m_brm, <span class="dt">regex_pars =</span> <span class="kw">c</span>(<span class="st">&quot;sd&quot;</span>))</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-95"></span>
-<img src="BIO8940_book_files/figure-html/unnamed-chunk-95-1.svg" alt="Autocorrelation in the chain for variance parameters in model m_brm" width="672" />
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="7.2-practical-5.html#cb244-1" aria-hidden="true"></a><span class="kw">mcmc_acf_bar</span>(m_brm, <span class="dt">regex_pars =</span> <span class="kw">c</span>(<span class="st">&quot;sd&quot;</span>))</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-108"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-108-1.svg" alt="Autocorrelation in the chain for variance parameters in model m_brm" width="672" />
 <p class="caption">
 Figure 7.9: Autocorrelation in the chain for variance parameters in model m_brm
 </p>
@@ -674,7 +680,7 @@ Figure 7.9: Autocorrelation in the chain for variance parameters in model m_brm
 <div id="hunder-the-hood" class="section level4" number="7.2.5.1">
 <h4><span class="header-section-number">7.2.5.1</span> Hunder the hood</h4>
 <p>have a look at the <code>stan</code> code</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="7.2-practical-5.html#cb202-1" aria-hidden="true"></a><span class="kw">stancode</span>(m_brm)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="7.2-practical-5.html#cb245-1" aria-hidden="true"></a><span class="kw">stancode</span>(m_brm)</span></code></pre></div>
 <pre><code>## // generated with brms 2.16.3
 ## functions {
 ## }
@@ -737,8 +743,8 @@ Figure 7.9: Autocorrelation in the chain for variance parameters in model m_brm
 </div>
 <div id="using-shiny" class="section level4" number="7.2.5.2">
 <h4><span class="header-section-number">7.2.5.2</span> using shiny</h4>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="7.2-practical-5.html#cb204-1" aria-hidden="true"></a><span class="kw">launch_shinystan</span>(m_brm)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-98"></span>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="7.2-practical-5.html#cb247-1" aria-hidden="true"></a><span class="kw">launch_shinystan</span>(m_brm)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-111"></span>
 <img src="images/shinystan.png" alt="Shinystan interface" width="50%" />
 <p class="caption">
 Figure 7.10: Shinystan interface
@@ -750,7 +756,7 @@ Figure 7.10: Shinystan interface
 <h3><span class="header-section-number">7.2.6</span> Inferences</h3>
 <div id="fixed-effects-3" class="section level4" number="7.2.6.1">
 <h4><span class="header-section-number">7.2.6.1</span> Fixed effects</h4>
-<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="7.2-practical-5.html#cb205-1" aria-hidden="true"></a><span class="kw">summary</span>(m_brm)</span></code></pre></div>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="7.2-practical-5.html#cb248-1" aria-hidden="true"></a><span class="kw">summary</span>(m_brm)</span></code></pre></div>
 <pre><code>##  Family: gaussian 
 ##   Links: mu = identity; sigma = identity 
 ## Formula: aggression ~ opp_size + body_size_sc + assay_rep_sc + block + (1 | ID) 
@@ -761,26 +767,26 @@ Figure 7.10: Shinystan interface
 ## Group-Level Effects: 
 ## ~ID (Number of levels: 80) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.14      0.07     0.01     0.28 1.00     1118      978
+## sd(Intercept)     0.14      0.07     0.01     0.27 1.00     1032     1037
 ## 
 ## Population-Level Effects: 
 ##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept        9.00      0.04     8.92     9.08 1.00     1068      939
-## opp_size         1.05      0.04     0.97     1.13 1.00      974      940
-## body_size_sc     0.03      0.04    -0.05     0.10 1.00      961      942
-## assay_rep_sc    -0.06      0.04    -0.14     0.03 1.00      969      971
-## block           -0.02      0.07    -0.16     0.12 1.00      970      902
+## Intercept        9.00      0.04     8.93     9.07 1.00      952      954
+## opp_size         1.05      0.04     0.97     1.14 1.00      937      909
+## body_size_sc     0.03      0.04    -0.04     0.11 1.00      896      821
+## assay_rep_sc    -0.06      0.04    -0.14     0.02 1.00      892      662
+## block           -0.02      0.07    -0.17     0.11 1.00     1082      973
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.77      0.03     0.72     0.82 1.00      859      766
+## sigma     0.77      0.03     0.71     0.82 1.00      997      952
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="7.2-practical-5.html#cb207-1" aria-hidden="true"></a><span class="kw">mcmc_plot</span>(m_brm, <span class="dt">regex_pars =</span> <span class="st">&quot;b_&quot;</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-99"></span>
-<img src="BIO8940_book_files/figure-html/unnamed-chunk-99-1.svg" alt="Fixed effect estimates (with 95% credible intervals) from model m_brm" width="672" />
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="7.2-practical-5.html#cb250-1" aria-hidden="true"></a><span class="kw">mcmc_plot</span>(m_brm, <span class="dt">regex_pars =</span> <span class="st">&quot;b_&quot;</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-112"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-112-1.svg" alt="Fixed effect estimates (with 95% credible intervals) from model m_brm" width="672" />
 <p class="caption">
 Figure 7.11: Fixed effect estimates (with 95% credible intervals) from model m_brm
 </p>
@@ -788,7 +794,7 @@ Figure 7.11: Fixed effect estimates (with 95% credible intervals) from model m_b
 </div>
 <div id="random-effects-3" class="section level4" number="7.2.6.2">
 <h4><span class="header-section-number">7.2.6.2</span> Random effects</h4>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="7.2-practical-5.html#cb208-1" aria-hidden="true"></a><span class="kw">summary</span>(m_brm)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="7.2-practical-5.html#cb251-1" aria-hidden="true"></a><span class="kw">summary</span>(m_brm)</span></code></pre></div>
 <pre><code>##  Family: gaussian 
 ##   Links: mu = identity; sigma = identity 
 ## Formula: aggression ~ opp_size + body_size_sc + assay_rep_sc + block + (1 | ID) 
@@ -799,27 +805,27 @@ Figure 7.11: Fixed effect estimates (with 95% credible intervals) from model m_b
 ## Group-Level Effects: 
 ## ~ID (Number of levels: 80) 
 ##               Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sd(Intercept)     0.14      0.07     0.01     0.28 1.00     1118      978
+## sd(Intercept)     0.14      0.07     0.01     0.27 1.00     1032     1037
 ## 
 ## Population-Level Effects: 
 ##              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## Intercept        9.00      0.04     8.92     9.08 1.00     1068      939
-## opp_size         1.05      0.04     0.97     1.13 1.00      974      940
-## body_size_sc     0.03      0.04    -0.05     0.10 1.00      961      942
-## assay_rep_sc    -0.06      0.04    -0.14     0.03 1.00      969      971
-## block           -0.02      0.07    -0.16     0.12 1.00      970      902
+## Intercept        9.00      0.04     8.93     9.07 1.00      952      954
+## opp_size         1.05      0.04     0.97     1.14 1.00      937      909
+## body_size_sc     0.03      0.04    -0.04     0.11 1.00      896      821
+## assay_rep_sc    -0.06      0.04    -0.14     0.02 1.00      892      662
+## block           -0.02      0.07    -0.17     0.11 1.00     1082      973
 ## 
 ## Family Specific Parameters: 
 ##       Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS
-## sigma     0.77      0.03     0.72     0.82 1.00      859      766
+## sigma     0.77      0.03     0.71     0.82 1.00      997      952
 ## 
 ## Draws were sampled using sampling(NUTS). For each parameter, Bulk_ESS
 ## and Tail_ESS are effective sample size measures, and Rhat is the potential
 ## scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="7.2-practical-5.html#cb210-1" aria-hidden="true"></a><span class="kw">mcmc_plot</span>(m_brm, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;sd_ID__Intercept&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="7.2-practical-5.html#cb253-1" aria-hidden="true"></a><span class="kw">mcmc_plot</span>(m_brm, <span class="dt">pars =</span> <span class="kw">c</span>(<span class="st">&quot;sd_ID__Intercept&quot;</span>, <span class="st">&quot;sigma&quot;</span>))</span></code></pre></div>
 <pre><code>## Warning: Argument &#39;pars&#39; is deprecated. Please use &#39;variable&#39; instead.</code></pre>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-100"></span>
-<img src="BIO8940_book_files/figure-html/unnamed-chunk-100-1.svg" alt="Among-individual and residual standard deviance ( with 95% credible intervals) estimated from model m_brm" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-113"></span>
+<img src="BIO8940_book_files/figure-html/unnamed-chunk-113-1.svg" alt="Among-individual and residual standard deviance ( with 95% credible intervals) estimated from model m_brm" width="672" />
 <p class="caption">
 Figure 7.12: Among-individual and residual standard deviance ( with 95% credible intervals) estimated from model m_brm
 </p>
@@ -828,7 +834,7 @@ Figure 7.12: Among-individual and residual standard deviance ( with 95% credible
 </div>
 <div id="happy-bayesian-stats" class="section level3" number="7.2.7">
 <h3><span class="header-section-number">7.2.7</span> Happy Bayesian stats</h3>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-101"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-114"></span>
 <img src="images/sherlock.jpg" alt="Sherlock Holmes, a truly bayesian detective" width="50%" />
 <p class="caption">
 Figure 7.13: Sherlock Holmes, a truly bayesian detective

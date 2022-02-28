@@ -121,7 +121,7 @@ simulationOutput <- simulateResiduals(m2)
 plot(simulationOutput)
 ```
 
-## effet sex du jeune précédent
+#### previous offspring sex effect
 
 
 ```{r}
@@ -138,7 +138,7 @@ pred.data <- data.frame(
 
 
 
-# Régression de poisson
+### Poisson regression
 
 data on galapagos islands species richness
 model of total number of species

@@ -191,7 +191,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="4.1-lecture-3.html"><a href="4.1-lecture-3.html#distributions"><i class="fa fa-check"></i><b>4.1.1</b> Distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html"><i class="fa fa-check"></i><b>4.2</b> Practical</a></li>
+<li class="chapter" data-level="4.2" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html"><i class="fa fa-check"></i><b>4.2</b> Practical</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html#logistic-regression"><i class="fa fa-check"></i><b>4.2.1</b> Logistic regression</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html#poisson-regression"><i class="fa fa-check"></i><b>4.2.2</b> Poisson regression</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="5-introduction-to-linear-mixed-models.html"><a href="5-introduction-to-linear-mixed-models.html"><i class="fa fa-check"></i><b>5</b> Introduction to linear mixed models</a>
 <ul>
@@ -345,11 +349,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="run-the-baseline-model" class="section level4" number="5.1.2.3">
 <h4><span class="header-section-number">5.1.2.3</span> Run the baseline model</h4>
 <p>We will use <strong>lme4</strong> to run the analysis. We can see that the model recovers the parameters fairly well, even with the default of only 1000 observations.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="5.1-lecture-4.html#cb20-1" aria-hidden="true"></a>df &lt;-<span class="st"> </span><span class="kw">create_data</span>()</span>
-<span id="cb20-2"><a href="5.1-lecture-4.html#cb20-2" aria-hidden="true"></a></span>
-<span id="cb20-3"><a href="5.1-lecture-4.html#cb20-3" aria-hidden="true"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb20-4"><a href="5.1-lecture-4.html#cb20-4" aria-hidden="true"></a>mod &lt;-<span class="st"> </span><span class="kw">lmer</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>(x <span class="op">|</span><span class="st"> </span>cluster), df)</span>
-<span id="cb20-5"><a href="5.1-lecture-4.html#cb20-5" aria-hidden="true"></a><span class="kw">summary</span>(mod, <span class="dt">cor =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="5.1-lecture-4.html#cb51-1" aria-hidden="true"></a>df &lt;-<span class="st"> </span><span class="kw">create_data</span>()</span>
+<span id="cb51-2"><a href="5.1-lecture-4.html#cb51-2" aria-hidden="true"></a></span>
+<span id="cb51-3"><a href="5.1-lecture-4.html#cb51-3" aria-hidden="true"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb51-4"><a href="5.1-lecture-4.html#cb51-4" aria-hidden="true"></a>mod &lt;-<span class="st"> </span><span class="kw">lmer</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>(x <span class="op">|</span><span class="st"> </span>cluster), df)</span>
+<span id="cb51-5"><a href="5.1-lecture-4.html#cb51-5" aria-hidden="true"></a><span class="kw">summary</span>(mod, <span class="dt">cor =</span> F)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML. t-tests use
 ##   Satterthwaite&#39;s method [lmerModLmerTest]
 ## Formula: y ~ x + (x | cluster)
