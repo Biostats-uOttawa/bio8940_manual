@@ -11,7 +11,9 @@ knitr::include_graphics("images/fun_dragon.jpg")
 
 
 ## Practical
-Spatial variation in nutrient availability and herbivory is likely to cause pop-ulation differentiation and maintain genetic diversity in plant populations.Here we measure the extent to which mouse-ear cress (Arabidopsis thaliana)exhibits population and genotypic variation in their responses to these im-portant environmental factors. We are particularly interested in whetherthese populations exhibit nutrient mediated compensation, where higher nutrient levels allow genotypes to better tolerate herbivory (Banta et al.,2010). We use GLMMs to estimate the effect of nutrient levels, simulated hebivory, and their interaction on fruit production in Arabidopsis thaliana(fixed effects), and the extent to which populations vary in their responses(random effects, or variance components)
+
+This is an adapted version largely inspired by the tutorial in [@bolker_generalized_2009].
+Spatial variation in nutrient availability and herbivory is likely to cause population differentiation and maintain genetic diversity in plant populations.Here we measure the extent to which mouse-ear cress (Arabidopsis thaliana)exhibits population and genotypic variation in their responses to these im-portant environmental factors. We are particularly interested in whether these populations exhibit nutrient mediated compensation, where higher nutrient levels allow genotypes to better tolerate herbivory [@banta_comprehensive_2010]. We use GLMMs to estimate the effect of nutrient levels, simulated herbivory, and their interaction on fruit production in Arabidopsis thaliana(fixed effects), and the extent to which populations vary in their responses(random effects, or variance components)
 
 ### Packages and functions
 
@@ -22,12 +24,13 @@ library(lme4)
 library(tidyverse)
 library(patchwork)
 library(lattice)
+library(DHARMa)
 source("data/extra_funs.R")
 ```
 
 ### The data set
 
-In this data set, the response variable is the number of fruits (i.e. seedcapsules) per plant. The number of fruits produced by an individual plant(the experimental unit) was hypothesized to be a function of fixed effects,including nutrient levels (low vs. high), simulated herbivory (none vs. apicalmeristem damage), region (Sweden, Netherlands, Spain), and interactionsamong these. Fruit number was also a function of random effects including both the population and individual genotype. Because Arabidopsis is highlyselfing, seeds of a single individual served as replicates of that individual.There were also nuisance variables, including the placement of the plantin the greenhouse, and the method used to germinate seeds. These were estimated as fixed effects but interactions were excluded.
+In this data set, the response variable is the number of fruits (i.e. seed capsules) per plant. The number of fruits produced by an individual plant(the experimental unit) was hypothesized to be a function of fixed effects,including nutrient levels (low vs. high), simulated herbivory (none vs. apical meristem damage), region (Sweden, Netherlands, Spain), and interactions among these. Fruit number was also a function of random effects including both the population and individual genotype. Because Arabidopsis is highly selfing, seeds of a single individual served as replicates of that individual.There were also nuisance variables, including the placement of the plant in the greenhouse, and the method used to germinate seeds. These were estimated as fixed effects but interactions were excluded.
 
 - `X` observation number (we will use this observation number later, when we are accounting for overdispersion)
 - `reg` a factor for region (Netherlands, Spain, Sweden).
@@ -37,11 +40,11 @@ In this data set, the response variable is the number of fruits (i.e. seedcapsul
 - `nutrient` a factor with levels for minimal or additional nutrients.
 - `amd` a factor with levels for no damage or simulated herbivory (apical meristem damage; we will sometimes refer to this as “clipping”)
 - `status` a nuisance factor for germination method.
-- `total.fruits` the response; an integer count of the number of fruits perplant.
+- `total.fruits` the response; an integer count of the number of fruits per plant.
 
 ### Specifying fixed and random Effects
 
-Here we need to select a realistic full model, based on the scientific ques-tions and the data actually at hand. We first load the data set and makesure that each variable is appropriately designated as numeric or factor (i.e.categorical variable).
+Here we need to select a realistic full model, based on the scientific questions and the data actually at hand. We first load the data set and make sure that each variable is appropriately designated as numeric or factor (i.e.categorical variable).
 
 ```{r}
 dat_tf <- read.csv("data/Banta_TotalFruits.csv")
@@ -49,7 +52,7 @@ str(dat_tf)
 ```
 
 The `X`, `gen`, `rack` and `nutrient` variables are coded as integers, but we want them to be factors.
- We use transform(), which operates within the data set, to avoid typing lots of commands like `dat_tf$rack <- factor(dat_tf$rack)`
+ We use `mutate()` `dplyr` `r emo::ji("package")`, which operates within the data set, to avoid typing lots of commands like `dat_tf$rack <- factor(dat_tf$rack)`
  At the same time, we reorder the `clipping` variable so that `"unclipped"` is the reference level (we could also have used `relevel(amd,"unclipped")`).
 
 ```{r}
@@ -110,7 +113,7 @@ However, as in all GLMMs where the scale parameter is treated as fixed and devia
 
 I usually like to start with a relatively simple overall plot of the data, disregarding the random factors, just to see what’s going on. For reasons to be discussed below, we choose to look at the data on the log (or log(1 + x) scale. Let’s plot either box-and-whisker plots (useful summaries) or dot plots (more detailed, good for seeing if we missed anything).
 
-```{r, echo = FALSE, fig.cap = "Number of fruits (log + 1) as a function of treatments"}
+```{r, echo = FALSE, fig.cap = "Number of fruits (log + 1) as a function of treatments", purl = FALSE}
 p1 <- qplot(
     interaction(nutrient, amd),
     log(1 + total.fruits),
@@ -130,7 +133,7 @@ p1 + p2
 ```
 
 ```{block2, type = "rmdcode"}
-**Exercise** generate these plots and figure out how they work before continuing. Try conditioning/faceting on population rather than region: for facet_wrap you might want to take out the nrow=1 specification. If you want try reorder the subplots by overall mean fruit set and/or colour the points according to the region they come from.
+**Exercise** generate these plots and figure out how they work before continuing. Try conditioning/faceting on population rather than region: for facet_wrap you might want to take out the nrow = 1 specification. If you want try reorder the subplots by overall mean fruit set and/or colour the points according to the region they come from.
 ```
 <div class="exer">
 
@@ -365,8 +368,17 @@ overdisp_fun(mp1)
 
 <!-- add description of the overdispersion function -->
 
+The `overdisp_fun()` is described [here] https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html#testing-for-overdispersioncomputing-overdispersion-factor) on the absolutely fantastic FAQ about GLMMs by Ben Bolker https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html
 
 We can ignore the model convergence for the moment. This shows that the data are (extremely) over-dispersed, given the model.
+
+We can also use the excellent `DHARMa` `r emo::ji("package")` [@R-DHARMa] to evaluate fit of *glm* and *glmm*. So instead of using the function `overdisp_fun()`, we can simply use the function `testDispersion()`.
+
+```{r}
+testDispersion(mp1)
+```
+
+As you can see, DHARMa suggests that there is no overdispersion based on the distribution of residuals from simulated data. We are going to consider that we have overdispersion and adjust the model accordingly.
 
 Now we add the observation-level random effect to the model to account for overdispersion [@elston2001].
 
@@ -450,10 +462,32 @@ Let’s check that mp4 no longer incorporates overdispersion (the observationlev
 overdisp_fun(mp4)
 ```
 
+
+Using the `DHARMa` `r emo::ji("package")`, we will also check the model. To do so we first need to simulate some data and get the *scaled residuals* following the DHARMa notation.
+Then we can check the distributional properties of the *scaled residuals* and see if they follow the classic assumption using the different functions provided.
+
+```{r}
+scaled_res <- simulateResiduals(mp4)
+plot(scaled_res)
+testZeroInflation(mp4, plot = TRUE)
+```
+
+```{r}
+# note about overdispersion
+sum(dat_tf$total.fruits == 0)
+b <- rep(0, 500)
+for (j in 1:500) {
+  b[j] <- sum(sapply(seq(nrow(dat_tf)), function(i) rpois(1, a[i])) == 0)
+}
+hist(b)
+```
+
+
 ### Inference
 
 
 #### Random effects
+
 `glmer` (`lmer`) does not return information about the standard errors or confidence intervals of the variance components.
 ```{r}
 VarCorr(mp4)
@@ -571,6 +605,16 @@ ggplot(data = r5, aes(sample = condval)) +
   theme_classic()
 ```
 
+Checking everything with DHARMa also
+
+
+```{r}
+scaled_res <- simulateResiduals(mp5)
+plot(scaled_res)
+testZeroInflation(mp5, plot = TRUE)
+```
+
+It is better than before but not perfect. I think this is completely OK and that it will extremely rarely be perfect. You need to learn what is acceptable (by that I mean you find acceptable) and be happy to justify and discuss your decisions.
 
 ### Conclusions
  Our final model includes fixed effects of nutrients and clipping, as well as the nuisance variables rack and status; observation-level random effects to ac- count for overdispersion; and variation in overall fruit set at the population and genotype levels. However, we don’t (apparently) have quite enough in- formation to estimate the variation in clipping and nutrient effects, or their interaction, at the genotype or population levels. There is a strong overall positive effect of nutrients and a slightly weaker negative effect of clipping. The interaction between clipping and nutrients is only weakly supported (i.e. the p-value is not very small), but it is positive and about the same magnitude as the clipping effect, which is consistent with the statement that “nutrients cancel out the effect of herbivory”.
