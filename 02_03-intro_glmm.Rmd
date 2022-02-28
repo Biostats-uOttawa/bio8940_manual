@@ -475,6 +475,7 @@ testZeroInflation(mp4, plot = TRUE)
 ```{r}
 # note about overdispersion
 sum(dat_tf$total.fruits == 0)
+a <- predict(mp4, type = "response")
 b <- rep(0, 500)
 for (j in 1:500) {
   b[j] <- sum(sapply(seq(nrow(dat_tf)), function(i) rpois(1, a[i])) == 0)
