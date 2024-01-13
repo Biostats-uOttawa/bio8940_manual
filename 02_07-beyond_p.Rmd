@@ -1,4 +1,4 @@
-# Beyong *P < 0.05*
+# Beyond *P < 0.05*
 
 cite a bunch a must read paper on the subject and maybe summarize the big point of **Do** and **Don't**
 
@@ -7,7 +7,7 @@ library(ggplot2)
 
 
 alpha <- 0.05
-beta <- 0.5 
+beta <- 0.2 
 
 p_h1_true <- seq(0, 1, length = 100)
 p_fp <- alpha * (1 - p_h1_true) /

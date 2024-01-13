@@ -17,7 +17,7 @@ In this practical, we have collected data on the amazing blue dragon of the East
 We will use two different `r emo::ji("package")` to fit more complex models that are not possible with  `lmer()` from `lme4` 
 `r emo::ji("package")` [@R-lme4]. We will use:
 
-- `asreml-R` which is a commercial software developped by VSNi [@R-asreml]. `ASReml` fit models using a maxiumum likelihood approach, is quite flexible and fast.
+- `asreml-R` which is a commercial software developed by VSNi [@R-asreml]. `ASReml` fit models using a maximum likelihood approach, is quite flexible and fast.
 - `MCMCglmm` which is free and open-source and fit model using a Bayesian approach [@MCMCglmm2010]. It is super flexible and allow to fit a wide diversity of distribution.
 
 
@@ -297,7 +297,7 @@ The rest of the model is identical to the previous version.
 
 ```{r}
 asr_idh <- asreml(
-    cbind(speed_sc, exploration_sc) ~ trait +
+  cbind(speed_sc, exploration_sc) ~ trait +
     trait:assay_rep_sc + trait:body_size_sc,
   random = ~ ID:idh(trait),
   residual = ~ units:us(trait),
@@ -366,17 +366,17 @@ prior_1ex <- list(
 
 ```{r, message = FALSE, warning = FALSE, cache = TRUE}
 mcmc_us <- MCMCglmm(cbind(speed_sc, exploration_sc) ~ trait - 1 +
-    trait:assay_rep_sc +
-    trait:body_size_sc,
-  random = ~ us(trait):ID,
-  rcov = ~ us(trait):units,
-  family = c("gaussian", "gaussian"),
-  prior = prior_1ex,
-  nitt = 420000,
-  burnin = 20000,
-  thin = 100,
-  verbose = FALSE,
-  data = df_dragons
+  trait:assay_rep_sc +
+  trait:body_size_sc,
+random = ~ us(trait):ID,
+rcov = ~ us(trait):units,
+family = c("gaussian", "gaussian"),
+prior = prior_1ex,
+nitt = 420000,
+burnin = 20000,
+thin = 100,
+verbose = FALSE,
+data = df_dragons
 )
 ```
 
@@ -431,7 +431,9 @@ ggplot(df_cor, aes(x = Method, y = Correlation)) +
 ```{r, echo = FALSE, purl = FALSE}
 knitr::kable(df_cor,
   digits = 3,
-  caption = "Correlation (with 95% intervals) between flying speed and exploration estimated with 3 different methods"
+  caption =
+    "Correlation (with 95% intervals) between flying speed
+     and exploration estimated with 3 different methods"
 )
 ```
 ### Happy multivariate models

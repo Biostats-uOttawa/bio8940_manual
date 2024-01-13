@@ -1,6 +1,8 @@
 #*.html
-#docs/
+docs/
 *.log
 _bookdown_files/
 extra/
 BIO8940_book.Rmd
+BIO8940_book_cache/
+.vscode/
