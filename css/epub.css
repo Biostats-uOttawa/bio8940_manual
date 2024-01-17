@@ -133,18 +133,17 @@ pre.sourceCode {
 
 /* Environments */
 
-.rmdimportant,
-.rmdnote {
+.infobox {
   border-radius: 8px;
   padding: 1px 20px 1px 20px;
   margin: 2em 0px;
 }
 
-.rmdimportant {
+.important {
   background-color: #fef4f4;
 }
 
-.rmdnote {
+.note {
   background-color: #f0f4fd;
 }
 

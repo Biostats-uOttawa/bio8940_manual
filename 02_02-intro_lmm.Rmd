@@ -281,11 +281,11 @@ Fit a first mixed model with `lmer` that have only individual identity as a rand
 
 Why, so simple? Because we simply want to partition variance around the mean into a component that among-individual variance and one that is within-individual variance.
 
-```{block2, type = "rmdimportant"}
+::: {.infobox .important data-latex = "important"}
 We are going to use the function `lmer()` from the  `r emo::ji("package")` `lme4` package. The notation of the model formula is similar as the notation for a linear model but now we also add random effects using the notation `(1 | r_effect)` which indicates that we want to fit the variable `r_effect` as a random effect for the intercept. Thus, in lmer notation a simploe model would be :
 
 `lmer(Y ~ x1 + x2 + (1 | r_effect), data = data)`
-```
+:::
 
 <div class= "exer">
 
@@ -524,7 +524,7 @@ summary(m_2)
 </div>
 
 
-```{block2, type = "rmdcode"}
+::: {.infobox .code data-latex = "code"}
 **Try tweaking the fixed part of your model:**
 
 - What happens if you add more fixed effects? Try it!
@@ -532,16 +532,16 @@ summary(m_2)
 - Should you add interactions (e.g. block:opp_size)?
 - Should you drop non-significant fixed effects?
 
-```
+:::
 
 
-```{block2, type = "rmdcode"}
+::: {.infobox .code data-latex = "code"}
 **Having changed the fixed part of your model, do the variance estimates change at all?**
 
 * Is among-individual variance always estimated as zero regardless of fixed effects?
 * Is among-individual variance significant with some fixed effets structures but not others?
 
-```
+:::
 
 ### What is the repeatability?
 
@@ -565,9 +565,9 @@ So we'd probably calculate R using the individual and residual variance simply a
 0.02538 / (0.02538 + 0.58048)
 ```
 
-```{block2, type = "rmdcode"}
+::: {.infobox .code data-latex = "code"}
 Do you see where I took the numbers ?
-```
+:::
 
 We can use some more fancy coding to extract the estimates and plugged them in a formula to estimate the repeatbility
 
@@ -620,18 +620,18 @@ ranova(lmer_size)
 </div>
 
 
-```{block2, type = "rmdcode"}
+::: {.infobox .code data-latex = "code"}
 **What might you conclude, and why would this be foolish?**
-```
+:::
 
 <div class = "exer">
 
 Hopefully you spotted the problem here. You have fed in a data set with 6 records per individual (with 2 sets of 3 identical values per unicorns), when you know size was only measured twice in reality. This means you'd expect to get a (potentially very) upwardly biased estimate of R and a (potentially very) downwardly biased P value when testing among-individual variance. 
 </div>
 
-```{block2, type = "rmdcode"}
+::: {.infobox .code data-latex = "code"}
 **How can we do it properly?**
-```
+:::
 <div class = "exer">
 We can prune the data to the two actual observations per unicorns by just selecting the first assay in each block.
 

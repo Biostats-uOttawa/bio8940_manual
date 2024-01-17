@@ -35,19 +35,20 @@ library(performance)
 library(MCMCglmm)
 library(nadiv)
 library(brms)
-library(tidyverse)
-library(tidybayes)
-library(bayesplot)
-library(patchwork)
 library(lattice)
 library(palmerpenguins)
+library(factoextra)
+library(tidybayes)
+library(tidyverse)
+library(bayesplot)
+library(patchwork)
 ```
 
 # Note {-}
 
-```{block2, type = "rmdimportant"}
+::: {.infobox .important data-latex="{important}"}
 Work in progress. New chapters are going to appears regularly meaning that if you download the pdf it might be incomplete by the time we do the practical in class.
-``` 
+:::  
 
 if you see a dragon section is in severe development
 
@@ -55,9 +56,9 @@ if you see a dragon section is in severe development
 knitr::include_graphics("images/fun_dragon.jpg")
 ```
 
-# Préface {-}
+<!--# Préface {-}
 
-<!-- {-} pour enlever num/rotation -->
+ {-} pour enlever num/rotation
 
 Les exercices de laboratoire que vous retrouverez dans les pages qui suivent sont conçus de manière à vous permettre de développer une expérience pratique en analyse de données à l'aide d'un logiciel (R).
 R est un logiciel très puissant, mais comme tous les logiciels, il a des limites.
@@ -158,7 +159,7 @@ https://www.rstudio.com/products/rstudio/download/
 
 Ces 2 paquets devrait être installé automatiquement avec RStudio, mais pas toujours. Je vous recommande donc de les installer manuellement. Pour ce faire, simplement copier-coller le texte suivant dans le terminal R.
 
-```{r, ind-install, eval = FALSE}
+```{r, ind-install, include = FALSE, eval = FALSE}
 install.packages(c("rmarkdown", "tinytex"))
 ```
 
@@ -192,29 +193,30 @@ Vous trouverez dans le manuel des explications sur la théorie, du code R, des e
 Le manuel essaie aussi de mettre en évidence le texte de différentes manières.
 
 
-```{block2, type = "rmdcode"}
+::: {.infobox .code data-latex="{code}"}
 Avec des sections à vous de jouer, ui indique un exercise à faire, idéalement sans regarder la solution qui se trouve plus bas.
-```
+:::
 
-```{block2, type = "rmdcaution"}
+::: {.infobox .caution data-latex="{caution}"}
 des avertissements
-```
+:::
 
-```{block2, type = "rmdwarning"}
+::: {.infobox .warning data-latex="{warning}"}
 des avertissements
-```
+:::
 
-```{block2, type = "rmdimportant"}
+::: {.infobox .important data-latex="{important}"}
 des points importants
-```
+:::
 
-```{block2, type = "rmdnote"}
+::: {.infobox .note data-latex="{note}"}
 des notes
-```
+:::
 
-```{block2, type = "rmdtip"}
+::: {.infobox .tip data-latex="{tip}"}
 et des conseils
-```
+:::
+
 ### Resources {-}
 
 Ce document est généré par l'excellente extension [bookdown](https://bookdown.org/) de [Yihui Xie](https://yihui.name/). Il est basé sur le précédent manuel de laboratoire *BIO4558 manuel de laboratoire* par Antoine Morin. L'introduction à R est largement reprise de l'excellent manuel de **Julien Barnier** intitulé [*Introduction à R et au tidyverse*](https://juba.github.io/tidyverse/)
@@ -225,3 +227,4 @@ Ce document est généré par l'excellente extension [bookdown](https://bookdown
 Ce document est mis à disposition selon les termes de la [Licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ![Licence Creative Commons](images/icons/license_cc.png)
+-->

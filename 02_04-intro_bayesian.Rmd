@@ -174,7 +174,7 @@ ggsave("bayestriptic.png", width = 10.4, height = 5.1)
 knitr::include_graphics("images/bayestriptic.png")
 ```
 
-```{block2, type="rmdwarning"}
+::: {.infobox .warning data-latex = "warning"}
 **A word of encouragement!** The prior is an intimidating part of Bayesian
 statistics. It seems highly subjective, as though we are pulling numbers from
 thin air, and it can be overwhelming for complex models. But if we are familiar
@@ -184,8 +184,7 @@ plot the hypothetical data. Does anything look wrong or implausible about the
 simulated data? If so, then we have some prior information that we can include
 in our model. Note that we do not evaluate the plausibility of the simulated
 data based on the data we have in hand (the data we want to model); that's not 
-prior information. 
-```
+:::
 
 
 ### Intro to MCMC

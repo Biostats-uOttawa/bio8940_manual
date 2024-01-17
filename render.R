@@ -26,7 +26,6 @@ bookdown::render_book(
   "index.Rmd", "bookdown::epub_book",
   params = list(echo_sol = FALSE, html_pdf = TRUE)
 )
-bookdown::calibre("docs/BIO8940_book.epub", "mobi")
 
 
 bookdown::preview_chapter("02_02-intro_lmm.Rmd", output_dir = "docs/preview")

@@ -1,24 +1,26 @@
-.rmdcaution, .rmdimportant, .rmdnote, .rmdtip, .rmdwarning, .rmdcode {
+.infobox {
   padding: 1em 1em 1em 4em;
   margin-bottom: 10px;
+  border: 2px solid orange;
+  border-radius: 10px;
   background: #f5f5f5 5px center/3em no-repeat;
 }
-.rmdcaution {
+.caution {
   background-image: url("../images/icons/caution.png");
 }
-.rmdimportant {
+.important {
   background-image: url("../images/icons/important.png");
 }
-.rmdnote {
+.note {
   background-image: url("../images/icons/note.png");
 }
-.rmdtip {
+.tip {
   background-image: url("../images/icons/tip.png");
 }
-.rmdwarning {
+.warning {
   background-image: url("../images/icons/warning.png");
 }
-.rmdcode {
+.code {
   background-image: url("../images/icons/code.png");
 }
 p.caption {

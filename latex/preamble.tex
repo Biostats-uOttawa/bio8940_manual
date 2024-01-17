@@ -68,12 +68,13 @@
 % \renewenvironment{Shaded}{\vspace{0.2cm}\begin{kframe}}{\end{kframe}}
 % \renewenvironment{verbatim}{\begin{shaded}\begin{oldverbatim}}{\end{oldverbatim}\end{shaded}}
 
-\newenvironment{rmdblock}[1]
+\newenvironment{infobox}[1]
  {
  \begin{itemize}
  \renewcommand{\labelitemi}{
    \raisebox{-.7\height}[0pt][0pt]{
-     {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{images/icons/#1}}
+     {\setkeys{Gin}{width=3em,keepaspectratio}
+       \includegraphics{images/icons/#1}}
    }
  }
  \begin{kframe}
@@ -84,24 +85,6 @@
  \end{kframe}
  \end{itemize}
  }
-\newenvironment{rmdnote}
-  {\begin{rmdblock}{note}}
-  {\end{rmdblock}}
-\newenvironment{rmdcaution}
-  {\begin{rmdblock}{caution}}
-  {\end{rmdblock}}
-\newenvironment{rmdimportant}
-  {\begin{rmdblock}{important}}
-  {\end{rmdblock}}
-\newenvironment{rmdtip}
-  {\begin{rmdblock}{tip}}
-  {\end{rmdblock}}
-\newenvironment{rmdwarning}
-  {\begin{rmdblock}{warning}}
-  {\end{rmdblock}}
-\newenvironment{rmdcode}
-  {\begin{rmdblock}{code}}
-  {\end{rmdblock}}
 
 \usepackage{makeidx}
 \makeindex

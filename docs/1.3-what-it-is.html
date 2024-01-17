@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.3 What it is? | BIO8940 Advanced stats and Open Science</title>
   <meta name="description" content="Theory and practicals for BIO8940 course at the University of Ottawa" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.37 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.3 What it is? | BIO8940 Advanced stats and Open Science" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/missing.png" />
   <meta property="og:description" content="Theory and practicals for BIO8940 course at the University of Ottawa" />
   <meta name="github-repo" content="BIO8940-uOttawa/class_book" />
@@ -32,7 +31,6 @@
   
 <link rel="prev" href="1.2-lecture.html"/>
 <link rel="next" href="1.4-reproducible-code-and-analysis.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -119,6 +118,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
@@ -137,25 +140,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Note</a></li>
-<li class="chapter" data-level="" data-path="préface.html"><a href="préface.html"><i class="fa fa-check"></i>Préface</a>
-<ul>
-<li class="chapter" data-level="" data-path="quelques-points-importants-à-retenir.html"><a href="quelques-points-importants-à-retenir.html"><i class="fa fa-check"></i>Quelques points importants à retenir</a></li>
-<li class="chapter" data-level="" data-path="quest-ce-que-r-et-pourquoi-lutiliser-dans-ce-cours.html"><a href="quest-ce-que-r-et-pourquoi-lutiliser-dans-ce-cours.html"><i class="fa fa-check"></i>Qu’est-ce que R et pourquoi l’utiliser dans ce cours?</a></li>
-<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html"><i class="fa fa-check"></i>Installation des logiciels nécessaires</a>
-<ul>
-<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#r"><i class="fa fa-check"></i>R</a></li>
-<li class="chapter" data-level="0.0.1" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#text-editor-or-ide"><i class="fa fa-check"></i><b>0.0.1</b> Text editor or IDE</a></li>
-<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#paquets-pour-r"><i class="fa fa-check"></i>Paquets pour R</a></li>
-<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#pandoc"><i class="fa fa-check"></i>pandoc</a></li>
-<li class="chapter" data-level="" data-path="installation-des-logiciels-nécessaires.html"><a href="installation-des-logiciels-nécessaires.html#latex"><i class="fa fa-check"></i>laTex</a></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="instructions-générales-pour-les-laboratoires.html"><a href="instructions-générales-pour-les-laboratoires.html"><i class="fa fa-check"></i>Instructions générales pour les laboratoires</a></li>
-<li class="chapter" data-level="" data-path="notes-sur-le-manuel.html"><a href="notes-sur-le-manuel.html"><i class="fa fa-check"></i>Notes sur le manuel</a>
-<ul>
-<li class="chapter" data-level="" data-path="notes-sur-le-manuel.html"><a href="notes-sur-le-manuel.html#resources"><i class="fa fa-check"></i>Resources</a></li>
-<li class="chapter" data-level="" data-path="notes-sur-le-manuel.html"><a href="notes-sur-le-manuel.html#licence"><i class="fa fa-check"></i>Licence</a></li>
-</ul></li>
-</ul></li>
 <li class="part"><span><b>I Open Science</b></span></li>
 <li class="chapter" data-level="1" data-path="1-introduction-to-open-science.html"><a href="1-introduction-to-open-science.html"><i class="fa fa-check"></i><b>1</b> Introduction to open Science</a>
 <ul>
@@ -177,11 +161,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3" data-path="3-introduction-to-github-with-r.html"><a href="3-introduction-to-github-with-r.html"><i class="fa fa-check"></i><b>3</b> Introduction to github with R</a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="3.1-lecture-2.html"><a href="3.1-lecture-2.html"><i class="fa fa-check"></i><b>3.1</b> Lecture</a></li>
-<li class="chapter" data-level="3.2" data-path="3.2-practical-1.html"><a href="3.2-practical-1.html"><i class="fa fa-check"></i><b>3.2</b> Practical</a>
+<li class="chapter" data-level="3.2" data-path="3.2-git_practical.html"><a href="3.2-git_practical.html"><i class="fa fa-check"></i><b>3.2</b> Practical</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="3.2-practical-1.html"><a href="3.2-practical-1.html#context-1"><i class="fa fa-check"></i><b>3.2.1</b> Context</a></li>
-<li class="chapter" data-level="3.2.2" data-path="3.2-practical-1.html"><a href="3.2-practical-1.html#information-of-the-data"><i class="fa fa-check"></i><b>3.2.2</b> Information of the data</a></li>
-<li class="chapter" data-level="3.2.3" data-path="3.2-practical-1.html"><a href="3.2-practical-1.html#questions-1"><i class="fa fa-check"></i><b>3.2.3</b> Questions</a></li>
+<li class="chapter" data-level="3.2.1" data-path="3.2-git_practical.html"><a href="3.2-git_practical.html#context-1"><i class="fa fa-check"></i><b>3.2.1</b> Context</a></li>
+<li class="chapter" data-level="3.2.2" data-path="3.2-git_practical.html"><a href="3.2-git_practical.html#information-of-the-data"><i class="fa fa-check"></i><b>3.2.2</b> Information of the data</a></li>
+<li class="chapter" data-level="3.2.3" data-path="3.2-git_practical.html"><a href="3.2-git_practical.html#questions-1"><i class="fa fa-check"></i><b>3.2.3</b> Questions</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Statistics</b></span></li>
@@ -191,10 +175,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="4.1.1" data-path="4.1-lecture-3.html"><a href="4.1-lecture-3.html#distributions"><i class="fa fa-check"></i><b>4.1.1</b> Distributions</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html"><i class="fa fa-check"></i><b>4.2</b> Practical</a>
+<li class="chapter" data-level="4.2" data-path="4.2-practical-1.html"><a href="4.2-practical-1.html"><i class="fa fa-check"></i><b>4.2</b> Practical</a>
 <ul>
-<li class="chapter" data-level="4.2.1" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html#logistic-regression"><i class="fa fa-check"></i><b>4.2.1</b> Logistic regression</a></li>
-<li class="chapter" data-level="4.2.2" data-path="4.2-practical-2.html"><a href="4.2-practical-2.html#poisson-regression"><i class="fa fa-check"></i><b>4.2.2</b> Poisson regression</a></li>
+<li class="chapter" data-level="4.2.1" data-path="4.2-practical-1.html"><a href="4.2-practical-1.html#logistic-regression"><i class="fa fa-check"></i><b>4.2.1</b> Logistic regression</a></li>
+<li class="chapter" data-level="4.2.2" data-path="4.2-practical-1.html"><a href="4.2-practical-1.html#poisson-regression"><i class="fa fa-check"></i><b>4.2.2</b> Poisson regression</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="5-introduction-to-linear-mixed-models.html"><a href="5-introduction-to-linear-mixed-models.html"><i class="fa fa-check"></i><b>5</b> Introduction to linear mixed models</a>
@@ -204,34 +188,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.1" data-path="5.1-lecture-4.html"><a href="5.1-lecture-4.html#testing-fixed-effects"><i class="fa fa-check"></i><b>5.1.1</b> Testing fixed effects</a></li>
 <li class="chapter" data-level="5.1.2" data-path="5.1-lecture-4.html"><a href="5.1-lecture-4.html#shrinkage"><i class="fa fa-check"></i><b>5.1.2</b> Shrinkage</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html"><i class="fa fa-check"></i><b>5.2</b> Practical</a>
+<li class="chapter" data-level="5.2" data-path="5.2-practical-2.html"><a href="5.2-practical-2.html"><i class="fa fa-check"></i><b>5.2</b> Practical</a>
 <ul>
-<li class="chapter" data-level="5.2.1" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#overview"><i class="fa fa-check"></i><b>5.2.1</b> Overview</a></li>
-<li class="chapter" data-level="5.2.2" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#r-packages-needed"><i class="fa fa-check"></i><b>5.2.2</b> R packages needed</a></li>
-<li class="chapter" data-level="5.2.3" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#the-superb-wild-unicorns-of-the-scottish-highlands"><i class="fa fa-check"></i><b>5.2.3</b> The superb wild unicorns of the Scottish Highlands</a></li>
-<li class="chapter" data-level="5.2.4" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#do-unicorns-differ-in-aggressiveness-your-first-mixed-model"><i class="fa fa-check"></i><b>5.2.4</b> Do unicorns differ in aggressiveness? Your first mixed model</a></li>
-<li class="chapter" data-level="5.2.5" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#do-unicorns-differ-in-aggressiveness-a-better-mixed-model"><i class="fa fa-check"></i><b>5.2.5</b> Do unicorns differ in aggressiveness? A better mixed model</a></li>
-<li class="chapter" data-level="5.2.6" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#what-is-the-repeatability"><i class="fa fa-check"></i><b>5.2.6</b> What is the repeatability?</a></li>
-<li class="chapter" data-level="5.2.7" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#a-quick-note-on-uncertainty"><i class="fa fa-check"></i><b>5.2.7</b> A quick note on uncertainty</a></li>
-<li class="chapter" data-level="5.2.8" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#an-easy-way-to-mess-up-your-mixed-models"><i class="fa fa-check"></i><b>5.2.8</b> An easy way to mess up your mixed models</a></li>
-<li class="chapter" data-level="5.2.9" data-path="5.2-practical-3.html"><a href="5.2-practical-3.html#happy-mixed-modelling"><i class="fa fa-check"></i><b>5.2.9</b> Happy mixed-modelling</a></li>
+<li class="chapter" data-level="5.2.1" data-path="5.2-practical-2.html"><a href="5.2-practical-2.html#overview"><i class="fa fa-check"></i><b>5.2.1</b> Overview</a></li>
+<li class="chapter" data-level="5.2.2" data-path="5.2-practical-2.html"><a href="5.2-practical-2.html#r-packages-needed"><i class="fa fa-check"></i><b>5.2.2</b> R packages needed</a></li>
+<li class="chapter" data-level="5.2.3" data-path="5.2-practical-2.html"><a href="5.2-practical-2.html#the-superb-wild-unicorns-of-the-scottish-highlands"><i class="fa fa-check"></i><b>5.2.3</b> The superb wild unicorns of the Scottish Highlands</a></li>
+<li class="chapter" data-level="5.2.4" data-path="5.2-practical-2.html"><a href="5.2-practical-2.html#do-unicorns-differ-in-aggressiveness-your-first-mixed-model"><i class="fa fa-check"></i><b>5.2.4</b> Do unicorns differ in aggressiveness? Your first mixed model</a></li>
+<li class="chapter" data-level="5.2.5" data-path="5.2-practical-2.html"><a href="5.2-practical-2.html#do-unicorns-differ-in-aggressiveness-a-better-mixed-model"><i class="fa fa-check"></i><b>5.2.5</b> Do unicorns differ in aggressiveness? A better mixed model</a></li>
+<li class="chapter" data-level="5.2.6" data-path="5.2-practical-2.html"><a href="5.2-practical-2.html#what-is-the-repeatability"><i class="fa fa-check"></i><b>5.2.6</b> What is the repeatability?</a></li>
+<li class="chapter" data-level="5.2.7" data-path="5.2-practical-2.html"><a href="5.2-practical-2.html#a-quick-note-on-uncertainty"><i class="fa fa-check"></i><b>5.2.7</b> A quick note on uncertainty</a></li>
+<li class="chapter" data-level="5.2.8" data-path="5.2-practical-2.html"><a href="5.2-practical-2.html#an-easy-way-to-mess-up-your-mixed-models"><i class="fa fa-check"></i><b>5.2.8</b> An easy way to mess up your mixed models</a></li>
+<li class="chapter" data-level="5.2.9" data-path="5.2-practical-2.html"><a href="5.2-practical-2.html#happy-mixed-modelling"><i class="fa fa-check"></i><b>5.2.9</b> Happy mixed-modelling</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="6-introduction-to-glmm.html"><a href="6-introduction-to-glmm.html"><i class="fa fa-check"></i><b>6</b> Introduction to <code>GLMM</code></a>
 <ul>
 <li class="chapter" data-level="6.1" data-path="6.1-lecture-5.html"><a href="6.1-lecture-5.html"><i class="fa fa-check"></i><b>6.1</b> Lecture</a></li>
-<li class="chapter" data-level="6.2" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html"><i class="fa fa-check"></i><b>6.2</b> Practical</a>
+<li class="chapter" data-level="6.2" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html"><i class="fa fa-check"></i><b>6.2</b> Practical</a>
 <ul>
-<li class="chapter" data-level="6.2.1" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#packages-and-functions"><i class="fa fa-check"></i><b>6.2.1</b> Packages and functions</a></li>
-<li class="chapter" data-level="6.2.2" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#the-data-set"><i class="fa fa-check"></i><b>6.2.2</b> The data set</a></li>
-<li class="chapter" data-level="6.2.3" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#specifying-fixed-and-random-effects"><i class="fa fa-check"></i><b>6.2.3</b> Specifying fixed and random Effects</a></li>
-<li class="chapter" data-level="6.2.4" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#look-at-overall-patterns-in-data"><i class="fa fa-check"></i><b>6.2.4</b> Look at overall patterns in data</a></li>
-<li class="chapter" data-level="6.2.5" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#choose-an-error-distribution"><i class="fa fa-check"></i><b>6.2.5</b> Choose an error distribution</a></li>
-<li class="chapter" data-level="6.2.6" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#fitting-group-wise-glm"><i class="fa fa-check"></i><b>6.2.6</b> Fitting group-wise GLM</a></li>
-<li class="chapter" data-level="6.2.7" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#fitting-and-evaluating-glmms"><i class="fa fa-check"></i><b>6.2.7</b> Fitting and evaluating GLMMs</a></li>
-<li class="chapter" data-level="6.2.8" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#inference"><i class="fa fa-check"></i><b>6.2.8</b> Inference</a></li>
-<li class="chapter" data-level="6.2.9" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#conclusions"><i class="fa fa-check"></i><b>6.2.9</b> Conclusions</a></li>
-<li class="chapter" data-level="6.2.10" data-path="6.2-practical-4.html"><a href="6.2-practical-4.html#happy-generalized-mixed-modelling"><i class="fa fa-check"></i><b>6.2.10</b> Happy generalized mixed-modelling</a></li>
+<li class="chapter" data-level="6.2.1" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html#packages-and-functions"><i class="fa fa-check"></i><b>6.2.1</b> Packages and functions</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html#the-data-set"><i class="fa fa-check"></i><b>6.2.2</b> The data set</a></li>
+<li class="chapter" data-level="6.2.3" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html#specifying-fixed-and-random-effects"><i class="fa fa-check"></i><b>6.2.3</b> Specifying fixed and random Effects</a></li>
+<li class="chapter" data-level="6.2.4" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html#look-at-overall-patterns-in-data"><i class="fa fa-check"></i><b>6.2.4</b> Look at overall patterns in data</a></li>
+<li class="chapter" data-level="6.2.5" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html#choose-an-error-distribution"><i class="fa fa-check"></i><b>6.2.5</b> Choose an error distribution</a></li>
+<li class="chapter" data-level="6.2.6" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html#fitting-group-wise-glm"><i class="fa fa-check"></i><b>6.2.6</b> Fitting group-wise GLM</a></li>
+<li class="chapter" data-level="6.2.7" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html#fitting-and-evaluating-glmms"><i class="fa fa-check"></i><b>6.2.7</b> Fitting and evaluating GLMMs</a></li>
+<li class="chapter" data-level="6.2.8" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html#inference"><i class="fa fa-check"></i><b>6.2.8</b> Inference</a></li>
+<li class="chapter" data-level="6.2.9" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html#conclusions"><i class="fa fa-check"></i><b>6.2.9</b> Conclusions</a></li>
+<li class="chapter" data-level="6.2.10" data-path="6.2-practical-3.html"><a href="6.2-practical-3.html#happy-generalized-mixed-modelling"><i class="fa fa-check"></i><b>6.2.10</b> Happy generalized mixed-modelling</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="7-introduction-to-bayesian-inference.html"><a href="7-introduction-to-bayesian-inference.html"><i class="fa fa-check"></i><b>7</b> Introduction to <code>Bayesian Inference</code></a>
@@ -242,49 +226,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.1.2" data-path="7.1-lecture-6.html"><a href="7.1-lecture-6.html#intro-to-mcmc"><i class="fa fa-check"></i><b>7.1.2</b> Intro to MCMC</a></li>
 <li class="chapter" data-level="7.1.3" data-path="7.1-lecture-6.html"><a href="7.1-lecture-6.html#inferences-1"><i class="fa fa-check"></i><b>7.1.3</b> Inferences</a></li>
 </ul></li>
-<li class="chapter" data-level="7.2" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html"><i class="fa fa-check"></i><b>7.2</b> Practical</a>
+<li class="chapter" data-level="7.2" data-path="7.2-practical-4.html"><a href="7.2-practical-4.html"><i class="fa fa-check"></i><b>7.2</b> Practical</a>
 <ul>
-<li class="chapter" data-level="7.2.1" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#r-packages-needed-1"><i class="fa fa-check"></i><b>7.2.1</b> R packages needed</a></li>
-<li class="chapter" data-level="7.2.2" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#a-refresher-on-unicorn-ecology"><i class="fa fa-check"></i><b>7.2.2</b> A refresher on unicorn ecology</a></li>
-<li class="chapter" data-level="7.2.3" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#mcmcglmm"><i class="fa fa-check"></i><b>7.2.3</b> MCMCglmm</a></li>
-<li class="chapter" data-level="7.2.4" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#inferences-2"><i class="fa fa-check"></i><b>7.2.4</b> Inferences</a></li>
-<li class="chapter" data-level="7.2.5" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#brms"><i class="fa fa-check"></i><b>7.2.5</b> brms</a></li>
-<li class="chapter" data-level="7.2.6" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#inferences-3"><i class="fa fa-check"></i><b>7.2.6</b> Inferences</a></li>
-<li class="chapter" data-level="7.2.7" data-path="7.2-practical-5.html"><a href="7.2-practical-5.html#happy-bayesian-stats"><i class="fa fa-check"></i><b>7.2.7</b> Happy Bayesian stats</a></li>
+<li class="chapter" data-level="7.2.1" data-path="7.2-practical-4.html"><a href="7.2-practical-4.html#r-packages-needed-1"><i class="fa fa-check"></i><b>7.2.1</b> R packages needed</a></li>
+<li class="chapter" data-level="7.2.2" data-path="7.2-practical-4.html"><a href="7.2-practical-4.html#a-refresher-on-unicorn-ecology"><i class="fa fa-check"></i><b>7.2.2</b> A refresher on unicorn ecology</a></li>
+<li class="chapter" data-level="7.2.3" data-path="7.2-practical-4.html"><a href="7.2-practical-4.html#mcmcglmm"><i class="fa fa-check"></i><b>7.2.3</b> MCMCglmm</a></li>
+<li class="chapter" data-level="7.2.4" data-path="7.2-practical-4.html"><a href="7.2-practical-4.html#inferences-2"><i class="fa fa-check"></i><b>7.2.4</b> Inferences</a></li>
+<li class="chapter" data-level="7.2.5" data-path="7.2-practical-4.html"><a href="7.2-practical-4.html#brms"><i class="fa fa-check"></i><b>7.2.5</b> brms</a></li>
+<li class="chapter" data-level="7.2.6" data-path="7.2-practical-4.html"><a href="7.2-practical-4.html#inferences-3"><i class="fa fa-check"></i><b>7.2.6</b> Inferences</a></li>
+<li class="chapter" data-level="7.2.7" data-path="7.2-practical-4.html"><a href="7.2-practical-4.html#happy-bayesian-stats"><i class="fa fa-check"></i><b>7.2.7</b> Happy Bayesian stats</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="8-multivariate-mixed-models.html"><a href="8-multivariate-mixed-models.html"><i class="fa fa-check"></i><b>8</b> Multivariate mixed models</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="8.1-lecture-7.html"><a href="8.1-lecture-7.html"><i class="fa fa-check"></i><b>8.1</b> Lecture</a></li>
-<li class="chapter" data-level="8.2" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html"><i class="fa fa-check"></i><b>8.2</b> Practical</a>
+<li class="chapter" data-level="8.2" data-path="8.2-practical-5.html"><a href="8.2-practical-5.html"><i class="fa fa-check"></i><b>8.2</b> Practical</a>
 <ul>
-<li class="chapter" data-level="8.2.1" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html#r-packages-needed-2"><i class="fa fa-check"></i><b>8.2.1</b> R packages needed</a></li>
-<li class="chapter" data-level="8.2.2" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html#the-blue-dragon-of-the-east"><i class="fa fa-check"></i><b>8.2.2</b> The blue dragon of the East</a></li>
-<li class="chapter" data-level="8.2.3" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html#multiple-univariate-models"><i class="fa fa-check"></i><b>8.2.3</b> Multiple univariate models</a></li>
-<li class="chapter" data-level="8.2.4" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html#multivariate-approach"><i class="fa fa-check"></i><b>8.2.4</b> Multivariate approach</a></li>
-<li class="chapter" data-level="8.2.5" data-path="8.2-practical-6.html"><a href="8.2-practical-6.html#happy-multivariate-models"><i class="fa fa-check"></i><b>8.2.5</b> Happy multivariate models</a></li>
+<li class="chapter" data-level="8.2.1" data-path="8.2-practical-5.html"><a href="8.2-practical-5.html#r-packages-needed-2"><i class="fa fa-check"></i><b>8.2.1</b> R packages needed</a></li>
+<li class="chapter" data-level="8.2.2" data-path="8.2-practical-5.html"><a href="8.2-practical-5.html#the-blue-dragon-of-the-east"><i class="fa fa-check"></i><b>8.2.2</b> The blue dragon of the East</a></li>
+<li class="chapter" data-level="8.2.3" data-path="8.2-practical-5.html"><a href="8.2-practical-5.html#multiple-univariate-models"><i class="fa fa-check"></i><b>8.2.3</b> Multiple univariate models</a></li>
+<li class="chapter" data-level="8.2.4" data-path="8.2-practical-5.html"><a href="8.2-practical-5.html#multivariate-approach"><i class="fa fa-check"></i><b>8.2.4</b> Multivariate approach</a></li>
+<li class="chapter" data-level="8.2.5" data-path="8.2-practical-5.html"><a href="8.2-practical-5.html#happy-multivariate-models"><i class="fa fa-check"></i><b>8.2.5</b> Happy multivariate models</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="9-random-regression-and-character-state-approaches.html"><a href="9-random-regression-and-character-state-approaches.html"><i class="fa fa-check"></i><b>9</b> Random regression and character state approaches</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="9.1-lecture-8.html"><a href="9.1-lecture-8.html"><i class="fa fa-check"></i><b>9.1</b> Lecture</a></li>
-<li class="chapter" data-level="9.2" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html"><i class="fa fa-check"></i><b>9.2</b> Practical</a>
+<li class="chapter" data-level="9.2" data-path="9.2-practical-6.html"><a href="9.2-practical-6.html"><i class="fa fa-check"></i><b>9.2</b> Practical</a>
 <ul>
-<li class="chapter" data-level="9.2.1" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#r-packages-needed-3"><i class="fa fa-check"></i><b>9.2.1</b> R packages needed</a></li>
-<li class="chapter" data-level="9.2.2" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#refresher-on-unicorn-aggression"><i class="fa fa-check"></i><b>9.2.2</b> Refresher on unicorn aggression</a></li>
-<li class="chapter" data-level="9.2.3" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#random-regression"><i class="fa fa-check"></i><b>9.2.3</b> Random regression</a></li>
-<li class="chapter" data-level="9.2.4" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#character-state-approach"><i class="fa fa-check"></i><b>9.2.4</b> Character-State approach</a></li>
-<li class="chapter" data-level="9.2.5" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#from-random-regression-to-character-state"><i class="fa fa-check"></i><b>9.2.5</b> From random regression to character-state</a></li>
-<li class="chapter" data-level="9.2.6" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#conclusions-2"><i class="fa fa-check"></i><b>9.2.6</b> Conclusions</a></li>
-<li class="chapter" data-level="9.2.7" data-path="9.2-practical-7.html"><a href="9.2-practical-7.html#happy-multivariate-models-1"><i class="fa fa-check"></i><b>9.2.7</b> Happy multivariate models</a></li>
+<li class="chapter" data-level="9.2.1" data-path="9.2-practical-6.html"><a href="9.2-practical-6.html#r-packages-needed-3"><i class="fa fa-check"></i><b>9.2.1</b> R packages needed</a></li>
+<li class="chapter" data-level="9.2.2" data-path="9.2-practical-6.html"><a href="9.2-practical-6.html#refresher-on-unicorn-aggression"><i class="fa fa-check"></i><b>9.2.2</b> Refresher on unicorn aggression</a></li>
+<li class="chapter" data-level="9.2.3" data-path="9.2-practical-6.html"><a href="9.2-practical-6.html#random-regression"><i class="fa fa-check"></i><b>9.2.3</b> Random regression</a></li>
+<li class="chapter" data-level="9.2.4" data-path="9.2-practical-6.html"><a href="9.2-practical-6.html#character-state-approach"><i class="fa fa-check"></i><b>9.2.4</b> Character-State approach</a></li>
+<li class="chapter" data-level="9.2.5" data-path="9.2-practical-6.html"><a href="9.2-practical-6.html#from-random-regression-to-character-state"><i class="fa fa-check"></i><b>9.2.5</b> From random regression to character-state</a></li>
+<li class="chapter" data-level="9.2.6" data-path="9.2-practical-6.html"><a href="9.2-practical-6.html#conclusions-2"><i class="fa fa-check"></i><b>9.2.6</b> Conclusions</a></li>
+<li class="chapter" data-level="9.2.7" data-path="9.2-practical-6.html"><a href="9.2-practical-6.html#happy-multivariate-models-1"><i class="fa fa-check"></i><b>9.2.7</b> Happy multivariate models</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="10-beyong-p-0.html"><a href="10-beyong-p-0.html"><i class="fa fa-check"></i><b>10</b> Beyong <em>P &lt; 0.05</em></a></li>
+<li class="chapter" data-level="10" data-path="10-beyond-p-0.html"><a href="10-beyond-p-0.html"><i class="fa fa-check"></i><b>10</b> Beyond <em>P &lt; 0.05</em></a></li>
+<li class="chapter" data-level="11" data-path="11-pca.html"><a href="11-pca.html"><i class="fa fa-check"></i><b>11</b> PCA</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11.1-lecture-9.html"><a href="11.1-lecture-9.html"><i class="fa fa-check"></i><b>11.1</b> Lecture</a></li>
+<li class="chapter" data-level="11.2" data-path="11.2-practical-7.html"><a href="11.2-practical-7.html"><i class="fa fa-check"></i><b>11.2</b> Practical</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="12-coordinates.html"><a href="12-coordinates.html"><i class="fa fa-check"></i><b>12</b> Coordinates</a></li>
+<li class="chapter" data-level="13" data-path="13-coordinates-of-variables.html"><a href="13-coordinates-of-variables.html"><i class="fa fa-check"></i><b>13</b> Coordinates of variables</a></li>
+<li class="chapter" data-level="14" data-path="14-total-cos2-of-variables-on-dim.1-and-dim.html"><a href="14-total-cos2-of-variables-on-dim.1-and-dim.html"><i class="fa fa-check"></i><b>14</b> Total cos2 of variables on Dim.1 and Dim.2</a></li>
+<li class="chapter" data-level="15" data-path="15-color-by-cos2-values-quality-on-the-factor-map.html"><a href="15-color-by-cos2-values-quality-on-the-factor-map.html"><i class="fa fa-check"></i><b>15</b> Color by cos2 values: quality on the factor map</a></li>
+<li class="chapter" data-level="16" data-path="16-change-the-transparency-by-cos2-values.html"><a href="16-change-the-transparency-by-cos2-values.html"><i class="fa fa-check"></i><b>16</b> Change the transparency by cos2 values</a></li>
+<li class="chapter" data-level="17" data-path="17-contributions-of-variables-to-pc1.html"><a href="17-contributions-of-variables-to-pc1.html"><i class="fa fa-check"></i><b>17</b> Contributions of variables to PC1</a></li>
+<li class="chapter" data-level="18" data-path="18-change-the-transparency-by-contrib-values.html"><a href="18-change-the-transparency-by-contrib-values.html"><i class="fa fa-check"></i><b>18</b> Change the transparency by contrib values</a></li>
+<li class="chapter" data-level="19" data-path="19-create-a-random-continuous-variable-of-length-10.html"><a href="19-create-a-random-continuous-variable-of-length-10.html"><i class="fa fa-check"></i><b>19</b> Create a random continuous variable of length 10</a></li>
+<li class="chapter" data-level="20" data-path="20-create-a-grouping-variable-using-kmeans.html"><a href="20-create-a-grouping-variable-using-kmeans.html"><i class="fa fa-check"></i><b>20</b> Create a grouping variable using kmeans</a></li>
+<li class="chapter" data-level="21" data-path="21-create-3-groups-of-variables-centers-3.html"><a href="21-create-3-groups-of-variables-centers-3.html"><i class="fa fa-check"></i><b>21</b> Create 3 groups of variables (centers = 3)</a>
+<ul>
+<li class="chapter" data-level="21.1" data-path="21.1-principal-component-analysis-results-for-individuals.html"><a href="21.1-principal-component-analysis-results-for-individuals.html"><i class="fa fa-check"></i><b>21.1</b> Principal Component Analysis Results for individuals</a></li>
+<li class="chapter" data-level="21.2" data-path="21.2-section.html"><a href="21.2-section.html"><i class="fa fa-check"></i><b>21.2</b> ===================================================</a></li>
+<li class="chapter" data-level="21.3" data-path="21.3-name-description.html"><a href="21.3-name-description.html"><i class="fa fa-check"></i><b>21.3</b> Name Description</a></li>
+<li class="chapter" data-level="21.4" data-path="21.4-coord-coordinates-for-the-individuals-2-cos2-cos2-for-the-individuals.html"><a href="21.4-coord-coordinates-for-the-individuals-2-cos2-cos2-for-the-individuals.html"><i class="fa fa-check"></i><b>21.4</b> 1 “<span class="math inline">\(coord&quot; &quot;Coordinates for the individuals&quot; ## 2 &quot;\)</span>cos2” “Cos2 for the individuals”</a></li>
+<li class="chapter" data-level="21.5" data-path="21.5-contrib-contributions-of-the-individuals.html"><a href="21.5-contrib-contributions-of-the-individuals.html"><i class="fa fa-check"></i><b>21.5</b> 3 “$contrib” “contributions of the individuals”</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="22-coordinates-of-individuals.html"><a href="22-coordinates-of-individuals.html"><i class="fa fa-check"></i><b>22</b> Coordinates of individuals</a></li>
+<li class="chapter" data-level="23" data-path="23-total-contribution-on-pc1-and-pc2.html"><a href="23-total-contribution-on-pc1-and-pc2.html"><i class="fa fa-check"></i><b>23</b> Total contribution on PC1 and PC2</a></li>
+<li class="chapter" data-level="24" data-path="24-create-a-random-continuous-variable-of-length-23.html"><a href="24-create-a-random-continuous-variable-of-length-23.html"><i class="fa fa-check"></i><b>24</b> Create a random continuous variable of length 23,</a></li>
+<li class="chapter" data-level="25" data-path="25-same-length-as-the-number-of-active-individuals-in-the-pca.html"><a href="25-same-length-as-the-number-of-active-individuals-in-the-pca.html"><i class="fa fa-check"></i><b>25</b> Same length as the number of active individuals in the PCA</a>
+<ul>
+<li class="chapter" data-level="25.1" data-path="25.1-sepal.length-sepal.width-petal.length-petal.width-species.html"><a href="25.1-sepal.length-sepal.width-petal.length-petal.width-species.html"><i class="fa fa-check"></i><b>25.1</b> Sepal.Length Sepal.Width Petal.Length Petal.Width Species</a></li>
+<li class="chapter" data-level="25.2" data-path="25.2-setosa.html"><a href="25.2-setosa.html"><i class="fa fa-check"></i><b>25.2</b> 1 5.1 3.5 1.4 0.2 setosa</a></li>
+<li class="chapter" data-level="25.3" data-path="25.3-setosa-1.html"><a href="25.3-setosa-1.html"><i class="fa fa-check"></i><b>25.3</b> 2 4.9 3.0 1.4 0.2 setosa</a></li>
+<li class="chapter" data-level="25.4" data-path="25.4-setosa-2.html"><a href="25.4-setosa-2.html"><i class="fa fa-check"></i><b>25.4</b> 3 4.7 3.2 1.3 0.2 setosa</a></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="26-the-variable-species-index-5-is-removed.html"><a href="26-the-variable-species-index-5-is-removed.html"><i class="fa fa-check"></i><b>26</b> The variable Species (index = 5) is removed</a></li>
+<li class="chapter" data-level="27" data-path="27-before-pca-analysis.html"><a href="27-before-pca-analysis.html"><i class="fa fa-check"></i><b>27</b> before PCA analysis</a></li>
+<li class="chapter" data-level="28" data-path="28-add-confidence-ellipses.html"><a href="28-add-confidence-ellipses.html"><i class="fa fa-check"></i><b>28</b> Add confidence ellipses</a></li>
+<li class="chapter" data-level="29" data-path="29-variables-on-dimensions-2-and-3.html"><a href="29-variables-on-dimensions-2-and-3.html"><i class="fa fa-check"></i><b>29</b> Variables on dimensions 2 and 3</a></li>
+<li class="chapter" data-level="30" data-path="30-show-variable-points-and-text-labels.html"><a href="30-show-variable-points-and-text-labels.html"><i class="fa fa-check"></i><b>30</b> Show variable points and text labels</a></li>
+<li class="chapter" data-level="31" data-path="31-show-individuals-text-labels-only.html"><a href="31-show-individuals-text-labels-only.html"><i class="fa fa-check"></i><b>31</b> Show individuals text labels only</a></li>
+<li class="chapter" data-level="32" data-path="32-change-the-size-of-arrows-an-labels.html"><a href="32-change-the-size-of-arrows-an-labels.html"><i class="fa fa-check"></i><b>32</b> Change the size of arrows an labels</a></li>
+<li class="chapter" data-level="33" data-path="33-add-confidence-ellipses-1.html"><a href="33-add-confidence-ellipses-1.html"><i class="fa fa-check"></i><b>33</b> Add confidence ellipses</a>
+<ul>
+<li class="chapter" data-level="33.1" data-path="33.1-coord.html"><a href="33.1-coord.html"><i class="fa fa-check"></i><b>33.1</b> $coord</a></li>
+<li class="chapter" data-level="33.2" data-path="33.2-dim.1-dim.2-dim.3-dim.4-dim.html"><a href="33.2-dim.1-dim.2-dim.3-dim.4-dim.html"><i class="fa fa-check"></i><b>33.2</b> Dim.1 Dim.2 Dim.3 Dim.4 Dim.5</a></li>
+<li class="chapter" data-level="33.3" data-path="33.3-rank--0.701--0.2452--0.183-0.0558--0.html"><a href="33.3-rank--0.701--0.2452--0.183-0.0558--0.html"><i class="fa fa-check"></i><b>33.3</b> Rank -0.701 -0.2452 -0.183 0.0558 -0.0738</a></li>
+<li class="chapter" data-level="33.4" data-path="33.4-points-0.964-0.0777-0.158--0.1662--0.html"><a href="33.4-points-0.964-0.0777-0.158--0.1662--0.html"><i class="fa fa-check"></i><b>33.4</b> Points 0.964 0.0777 0.158 -0.1662 -0.0311</a></li>
+<li class="chapter" data-level="33.5" data-path="33.5-section-1.html"><a href="33.5-section-1.html"><i class="fa fa-check"></i><b>33.5</b> </a></li>
+<li class="chapter" data-level="33.6" data-path="33.6-cor.html"><a href="33.6-cor.html"><i class="fa fa-check"></i><b>33.6</b> $cor</a></li>
+<li class="chapter" data-level="33.7" data-path="33.7-dim.1-dim.2-dim.3-dim.4-dim.5-1.html"><a href="33.7-dim.1-dim.2-dim.3-dim.4-dim.5-1.html"><i class="fa fa-check"></i><b>33.7</b> Dim.1 Dim.2 Dim.3 Dim.4 Dim.5</a></li>
+<li class="chapter" data-level="33.8" data-path="33.8-rank--0.701--0.2452--0.183-0.0558--0.0738-1.html"><a href="33.8-rank--0.701--0.2452--0.183-0.0558--0.0738-1.html"><i class="fa fa-check"></i><b>33.8</b> Rank -0.701 -0.2452 -0.183 0.0558 -0.0738</a></li>
+<li class="chapter" data-level="33.9" data-path="33.9-points-0.964-0.0777-0.158--0.1662--0.0311-1.html"><a href="33.9-points-0.964-0.0777-0.158--0.1662--0.0311-1.html"><i class="fa fa-check"></i><b>33.9</b> Points 0.964 0.0777 0.158 -0.1662 -0.0311</a></li>
+<li class="chapter" data-level="33.10" data-path="33.10-section-2.html"><a href="33.10-section-2.html"><i class="fa fa-check"></i><b>33.10</b> </a></li>
+<li class="chapter" data-level="33.11" data-path="33.11-cos2.html"><a href="33.11-cos2.html"><i class="fa fa-check"></i><b>33.11</b> $cos2</a></li>
+<li class="chapter" data-level="33.12" data-path="33.12-dim.1-dim.2-dim.3-dim.4-dim.5-2.html"><a href="33.12-dim.1-dim.2-dim.3-dim.4-dim.5-2.html"><i class="fa fa-check"></i><b>33.12</b> Dim.1 Dim.2 Dim.3 Dim.4 Dim.5</a></li>
+<li class="chapter" data-level="33.13" data-path="33.13-rank-0.492-0.06012-0.0336-0.00311-0.html"><a href="33.13-rank-0.492-0.06012-0.0336-0.00311-0.html"><i class="fa fa-check"></i><b>33.13</b> Rank 0.492 0.06012 0.0336 0.00311 0.00545</a></li>
+<li class="chapter" data-level="33.14" data-path="33.14-points-0.929-0.00603-0.0250-0.02763-0.html"><a href="33.14-points-0.929-0.00603-0.0250-0.02763-0.html"><i class="fa fa-check"></i><b>33.14</b> Points 0.929 0.00603 0.0250 0.02763 0.00097</a></li>
+</ul></li>
+<li class="chapter" data-level="34" data-path="34-change-color-of-variables.html"><a href="34-change-color-of-variables.html"><i class="fa fa-check"></i><b>34</b> Change color of variables</a></li>
+<li class="chapter" data-level="35" data-path="35-plot-of-active-variables.html"><a href="35-plot-of-active-variables.html"><i class="fa fa-check"></i><b>35</b> Plot of active variables</a></li>
+<li class="chapter" data-level="36" data-path="36-visualize-variable-with-cos2-0.html"><a href="36-visualize-variable-with-cos2-0.html"><i class="fa fa-check"></i><b>36</b> Visualize variable with cos2 &gt;= 0.6</a></li>
+<li class="chapter" data-level="37" data-path="37-print-the-plot-to-a-pdf-file.html"><a href="37-print-the-plot-to-a-pdf-file.html"><i class="fa fa-check"></i><b>37</b> Print the plot to a pdf file</a></li>
+<li class="chapter" data-level="38" data-path="38-scree-plot.html"><a href="38-scree-plot.html"><i class="fa fa-check"></i><b>38</b> Scree plot</a></li>
+<li class="chapter" data-level="39" data-path="39-print-scree-plot-to-a-png-file.html"><a href="39-print-scree-plot-to-a-png-file.html"><i class="fa fa-check"></i><b>39</b> Print scree plot to a png file</a></li>
+<li class="chapter" data-level="40" data-path="40-export-into-a-txt-file.html"><a href="40-export-into-a-txt-file.html"><i class="fa fa-check"></i><b>40</b> Export into a TXT file</a></li>
 <li class="part"><span><b>III Appendix</b></span></li>
-<li class="chapter" data-level="" data-path="r-1.html"><a href="r-1.html"><i class="fa fa-check"></i>R</a></li>
+<li class="chapter" data-level="" data-path="r.html"><a href="r.html"><i class="fa fa-check"></i>R</a></li>
 <li class="chapter" data-level="" data-path="to-do-list.html"><a href="to-do-list.html"><i class="fa fa-check"></i>To do list</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="10.1-potential-structure.html"><a href="10.1-potential-structure.html"><i class="fa fa-check"></i><b>10.1</b> potential structure</a></li>
+<li class="chapter" data-level="40.1" data-path="40.1-potential-structure.html"><a href="40.1-potential-structure.html"><i class="fa fa-check"></i><b>40.1</b> potential structure</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -307,8 +354,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="what-it-is" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> What it is?</h2>
+<div id="what-it-is" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> What it is?<a href="1.3-what-it-is.html#what-it-is" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
 <script src="js/solution.js"></script>
             </section>
@@ -367,7 +414,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
