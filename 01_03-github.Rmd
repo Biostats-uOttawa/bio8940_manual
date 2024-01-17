@@ -6,7 +6,7 @@
 knitr::include_graphics("images/fun_dragon.jpg")
 ```
 
-## Practical
+## Practical {#git_practical}
 
 ### Context
 
@@ -57,7 +57,7 @@ usethis::use_git_config(
 
 ```{r, eval = FALSE, class.source = "exer"}
 usethis::create_github_token()
-credentials::set_github_pat()
+gitcreds::gitcreds_set()
 ```
 
 
