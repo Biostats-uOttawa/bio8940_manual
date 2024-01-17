@@ -1,5 +1,4 @@
 #*.html
-docs/
 *.log
 _bookdown_files/
 extra/
