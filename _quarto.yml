@@ -29,11 +29,11 @@ book:
 #    logo: quarto.png
 #    logo-alt: "Quarto logo."
     collapse-below: lg
-    title: "BIO8940 lab manual"
+    title: "BIO8940: manual"
     left:
       - text: Course
         href: https://biostats-uottawa.github.io/bio8940_course/
-      - text: "Data"
+      - text: Data
         href: https://biostats-uottawa.github.io/bio8940_course/dataset.html
       - text: Other resources
         menu:
