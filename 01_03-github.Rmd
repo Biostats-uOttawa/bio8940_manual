@@ -1,5 +1,11 @@
 # Introduction to github with R
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
 
+source("_common.R")
+```
 ## Lecture
 
 ```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Dream pet dragon"}
@@ -44,26 +50,35 @@ For this exercise, we're gonna use the `penguins` dataset.
 
 **2)** Configure Rstudio with your github account using the `usethis` package.
 
-```{r, eval = FALSE, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+
+# Solution
+```{r, eval = FALSE}
 usethis::git_sitrep()
 usethis::use_git_config(
   user.name = "your_username",
   user.email = "your_email@address.com"
 )
 ```
+:::
 
 **3)** Create and Store your GITHUB Personal Authorisation Token
 
+::: {.callout-tip collapse='true'}
 
-```{r, eval = FALSE, class.source = "exer"}
+# Solution
+```{r, eval = FALSE}
 usethis::create_github_token()
 gitcreds::gitcreds_set()
 ```
-
+:::
 
 **4)** Create a new R Markdown project, initialize it for git, and create a new git repository
 
-```{r, eval = FALSE, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+
+# Solution
+```{r, eval = FALSE}
 #create R project
 usethis::use_git()
 
@@ -71,6 +86,7 @@ usethis::use_git()
 usethis::use_github()
 usethis::git_vaccinate()
 ```
+:::
 
 **5)** Create a new Rmarkdown document, in your project. Then save the file and stage it.
 

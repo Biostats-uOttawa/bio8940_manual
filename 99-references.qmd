@@ -1,0 +1,13 @@
+# References  {.unnumbered}
+
+### Bibliography  {.unnumbered}
+
+::: {#refs}
+:::
+
+
+### List of R packages used in this book {.unnumbered}
+
+```{r, echo = FALSE}
+sort(rownames(installed.packages()))
+```

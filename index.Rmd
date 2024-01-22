@@ -1,56 +1,10 @@
----
-title: "BIO8940 Advanced stats and Open Science"
-subtitle: "Work in Progress"
-author: "Julien Martin"
-date: "`r format(Sys.Date(), '%d-%m-%Y')`"
-site: bookdown::bookdown_site
-documentclass: book
-bibliography: [book.bib, packages.bib]
-biblio-style: apalike
-csl: ecology.csl
-link-citations: yes
-#lot: yes
-#lof: yes
-fontsize: 12pt
-#monofont: "Source Code Pro"
-monofontoptions: "Scale=0.7"
-description: "Theory and practicals for BIO8940 course at the University of Ottawa"
-github-repo: "BIO8940-uOttawa/class_book"
-cover-image: "images/missing.png"
-params:
-  echo_sol: TRUE
-  longrun: FALSE
-  html_pdf: FALSE
----
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
-
-htmlT_pdfF <- ifelse(params$html_pdf == TRUE, TRUE, FALSE)
-htmlF_pdfT <- ifelse(params$html_pdf == TRUE, FALSE, TRUE)
-
-library(bookdown)
-library(lmerTest)
-library(rptR)
-library(performance)
-library(MCMCglmm)
-library(nadiv)
-library(brms)
-library(lattice)
-library(palmerpenguins)
-library(factoextra)
-library(tidybayes)
-library(tidyverse)
-library(bayesplot)
-library(patchwork)
-```
-
 # Note {-}
 
-::: {.infobox .important data-latex="{important}"}
+::: {.callout-important data-latex="{important}"}
 Work in progress. New chapters are going to appears regularly meaning that if you download the pdf it might be incomplete by the time we do the practical in class.
 :::  
 
-if you see a dragon section is in severe development
+if you see a dragon in a section, it means it is under development
 
 ```{r, out.width = "50%", echo = FALSE, fig.align = "center", fig.cap = "Dream pet dragon"}
 knitr::include_graphics("images/fun_dragon.jpg")

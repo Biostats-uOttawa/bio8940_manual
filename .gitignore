@@ -5,4 +5,10 @@ extra/
 BIO8940_book.Rmd
 BIO8940_book_cache/
 .vscode/
+*_cache/
+*_files/
+*_freeze/
 
+!docs/*_files/
+
+/.quarto/

@@ -1,5 +1,13 @@
 # Introduction to Rmarkdown
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+source("_common.R")
+```
+
 ## Lecture
 
 <!-- add more details about installation of citr et tinytex
@@ -41,9 +49,14 @@ head(penguins)
 
 **1)** Install the package `palmerpenguins`.
 
-```{r, eval = FALSE, class.source = "exer"}
+::: {.callout-tip collapse='true'}
+
+# Solution
+```{r, eval = FALSE}
 install.packages("palmerpenguins")
 ```
+
+:::
 
 **2)** 
 
@@ -57,18 +70,22 @@ install.packages("palmerpenguins")
 - Add a chunk in which you load the `palmerpenguins`. The corresponding line of code should be hidden in the output.
 - Load also the `tidyverse` suite of packages. Modify the defaults to suppress all messages.
 
-<div class= "exer">
+::: {.callout-tip collapse='true'}
+
+### Solution
 ````markdown
 `r ''````{r, echo = FALSE, message = FALSE}
 library(palmerpenguins)
 library(tidyverse)
 ```
 ````
-</div>
+:::
 
 **4)** Add another chunk in which you build a table with the 10 first rows of the dataset.
 
-<div class= "exer">
+::: {.callout-tip collapse='true'}
+
+# Solution
 ````markdown
 `r ''````{r}
 penguins %>%
@@ -76,11 +93,13 @@ penguins %>%
   knitr::kable()
 ```
 ````
-</div>
+:::
 
 **5)** In a new section, display how many individuals, penguins species and islands we have in the dataset. This info should appear directly in the text, you need to use inline code `r emo::ji("smile")`. Calculate the mean of the (numeric) traits measured on the penguins.
 
-<div class= "exer">
+::: {.callout-tip collapse='true'}
+
+### Solution
 
 ````markdown
 ## Numerical exploration
@@ -98,11 +117,13 @@ penguins %>%
   summarize(across(where(is.numeric), mean, na.rm = TRUE))
 ```
 ````
-</div>
+:::
 
 **6)** In another section, entitled 'Graphical exploration', build a figure with 3 superimposed histograms, each one corresponding to the body mass of a species.
 
-<div class= "exer">
+::: {.callout-tip collapse='true'}
+
+### Solution
 
 ````markdown
 ## Graphical exploration
@@ -122,7 +143,7 @@ A histogram of body mass per species:
        title = "Penguin body mass")
 ```
 ````
-</div>
+:::
 
 
 **7)** In another section, entitled *Linear regression*, fit a model of bill length as a function of body size (flipper length), body mass and sex. Obtain the output and graphically evaluate the assumptions of the model. As reminder here is how you fit a linear regression.
@@ -134,7 +155,9 @@ summary(model)
 plot(model)
 ```
 ````
-<div class= "exer">
+::: {.callout-tip collapse='true'}
+
+### Solution
 
 ````markdown
 ## Linear regression
@@ -148,7 +171,7 @@ par(mfrow= c(2,2))
 plot(m1)
 ```
 ````
-</div>
+:::
 
 **8)** Add references manually or using `citr` in `RStudio`.
 

@@ -1,5 +1,12 @@
-# R {-}
+# R
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+source("_common.R")
+```
 Need to write something about R
 
 We also use various methods for manipulating and visualising data frames using the `r emo::ji("package")` `tidyverse` [@R-tidyverse] (including `tidyr`, `dplyr`, `ggplot2` etc).

@@ -1,5 +1,13 @@
 # Beyond *P < 0.05*
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+source("_common.R")
+```
+
 cite a bunch a must read paper on the subject and maybe summarize the big point of **Do** and **Don't**
 
 ```{r}

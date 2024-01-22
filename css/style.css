@@ -71,65 +71,23 @@ h1.title {
 }
 
 /* Exercices */
-.solution-link {
-  width: 100%;
-  text-align: right;
-  font-size: 80%;
-  margin-top: -0.3em;
-  margin-bottom: 1.8em;
+details {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  padding: 0.5em 0.5em 0;
 }
 
-.solution-link a:before {
-  content: "Show ";
+summary {
+  font-weight: bold;
+  margin: -0.5em -0.5em 0;
+  padding: 0.5em;
 }
 
-.solution-link.shown a:before {
-  content: "Hide ";
+details[open] {
+  padding: 0.5em;
 }
 
-.exer {
-  margin-top: 1.3em;
-  margin-bottom: 1.2em;
-  padding-left: 1em;
-  border-left: 6px solid #4183C4;
-  display: none;
-}
-
-.exer pre.sourceCode {
-  background-color: #f0f4fd;
-}
-
-.showopt {
-  /* background-color: #004c93;
-  color: #FFFFFF;
-  width: 100px;
-  height: 20px;
-  font-size: 80%
-  text-align: center;
-  vertical-align: middle !important;
-  float: right;
-  font-family: sans-serif;
-  border-radius: 8px; */
-  width: 100%;
-  text-align: right;
-  font-size: 75%;
-  margin-top: -0.3em;
-  /* margin-bottom: 1.8em; */
-}
-/*
-.showopt:hover {
-    background-color: #dfe4f2;
-    color: #004c93;
-} */
-
-pre.plot {
-  background-color: white !important;
-}
-
-.showopt a:before {
-  content: "Show ";
-}
-
-.showopt.shown a:before {
-  content: "Hide ";
+details[open] summary {
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 0.5em;
 }

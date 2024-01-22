@@ -1,0 +1,98 @@
+project:
+  type: book
+  output-dir: docs
+  resources:
+    - .nojekyll
+
+execute: 
+  cache: true
+  freeze: true #auto
+
+book:
+  title: "Bio8940 manual"
+  author: Julien Martin
+  reader-mode: true
+  search: true
+  page-footer:
+    left: |
+      Written by Julien Martin.
+    right: |
+      This book was built with <a href="https://quarto.org/">Quarto</a>.
+  cover-image: images/blue_dragon.jpg
+  favicon: cover.jpg
+  site-url: https://biostats-uottawa.github.io/bio8940_course/
+  repo-url: https://github.com/biostats-uottawa/bio8940_course/
+  repo-actions: [edit, issue]
+  downloads: [pdf, epub]
+  navbar:
+    background: light
+#    logo: quarto.png
+#    logo-alt: "Quarto logo."
+    collapse-below: lg
+    title: "BIO8940 lab manual"
+    left:
+      - text: Course
+        href: https://biostats-uottawa.github.io/bio8940_course/
+      - text: "Data"
+        href: https://biostats-uottawa.github.io/bio8940_course/dataset.html
+      - text: Other resources
+        menu:
+          - text: Biostats uOttawa
+            href: https://biostats-uottawa.github.io/
+          - text: Bio4158 (english)
+            href: https://biostats-uottawa.github.io/bio4158_course/
+          - text: Bio4558 (français)
+            href: https://biostats-uottawa.github.io/bio4558_cours/
+          - text: R-way to hell
+            href: https://biostats-uottawa.github.io/intro_r_en.html 
+          - text: Chemin de l'enf-R
+            href: https://biostats-uottawa.github.io/intro_r_fr.html
+
+  chapters:
+    - index.Rmd
+    - part: "Open Science"
+      chapters:
+        - 01_01-open_science.Rmd
+        - 01_02-rmarkdown.Rmd
+        - 01_03-github.Rmd
+    - part: Statistics
+      chapters:
+        - 02_01-glm.Rmd
+        - 02_02-lmm.Rmd
+        - 02_03-intro_glmm.Rmd
+        - 02_04-intro_bayesian.Rmd
+        - 02_05-multivar.Rmd
+        - 02_06-randreg.Rmd
+        - 02_07-beyond_p.Rmd
+    - 99-references.qmd
+  appendices:
+    - 98_01-R.Rmd
+
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+csl: ecology.csl
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: [cosmo, css/theme-dark.scss]
+      #- r4ds.scss
+    css: css/style.css
+    code-link: true
+
+    author-meta: "Julien Martin"
+    callout-appearance: simple
+
+#  pdf:
+#    documentclass: scrreprt
+#    include-in-header: latex/preamble.tex
+#    include-before-body: latex/before_body.tex
+#    include-after-body: latex/after_body.tex
+
+  epub:
+    dev: svglite
+    stylesheet: css/epub.css
+    toc: true
+
+editor: visual

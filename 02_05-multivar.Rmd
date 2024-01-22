@@ -1,5 +1,12 @@
 # Multivariate mixed models
 
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+source("_common.R")
+```
 ## Lecture
 
 Amazing beasties and crazy animals

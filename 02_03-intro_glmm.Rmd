@@ -1,5 +1,11 @@
 # Introduction to `GLMM`
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
 
+source("_common.R")
+```
 ## Lecture
 
 theoretical intro to glmm and introduce DHarma package to evaluate fit of glmm
@@ -72,16 +78,17 @@ Now we check replication for each genotype (columns) within each population (row
 (reptab <- with(dat_tf, table(popu, gen)))
 ```
 
-::: {.infobox .code data-latex = "code"}
+::: {.infobox .code data-latex="code"}
 **Exercise**: this mode of inspection is OK for this data set but might fail for much larger data sets or for more levels of nesting. See if you can think of some other numerical or graphical methods for inspecting the structure of data sets. 
 
 1. plot(reptab) gives a mosaic plot of the two-way table; examine this, see if you can figure out how to interpret it, and decide whether you think it might be useful
 2. try the commands colSums(reptab>0) (and the equivalent for rowSums) and figure out what they are telling you.
 3. Using this recipe, how would you compute the range of number of genotypes per treatment combination?
-
 :::
 
-<div class = "exer">
+::: {.callout-tip collapse='true'}
+
+# Solution
 
 1. Do you find the mosaic plot you obtained ugly and super hard to read? Me too `r emo::ji("laugh")`
 ```{r, fig.cap ="A truly useless plot no one can understand"}
@@ -101,7 +108,7 @@ reptab2 <- with(dat_tf, table(paste(amd, nutrient, sep = "_"), gen))
 range(reptab2)
 ```
 
-</div>
+:::
 
 This reveals that we have only 2–4 populations per region and 2–3 genotypes per population. However, we also have 2–13 replicates per genotype for each treatment combination (four unique treatment combinations: 2 levels of nutrients by 2 levels of simulated herbivory). Thus, even though this was a reasonably large experiment (625 plants), there were a very small number of replicates with which to estimate variance components, and many more potential interactions than our data can support. Therefore, judicious selection of model terms, based on both biology and the data, is warranted. We note that we don’t really have enough levels per random effect, nor enough replication per unique treatment combination. Therefore, we decide to omit the fixed effect of “region”, although we recognize that populations in different regions are widely geographically separated.
 
@@ -132,10 +139,13 @@ p2 <- qplot(
 p1 + p2
 ```
 
-::: {.infobox .code data-latex = "code"}
+::: {.infobox .code data-latex="code"}
 **Exercise** generate these plots and figure out how they work before continuing. Try conditioning/faceting on population rather than region: for facet_wrap you might want to take out the nrow = 1 specification. If you want try reorder the subplots by overall mean fruit set and/or colour the points according to the region they come from.
 :::
-<div class="exer">
+
+::: {.callout-tip collapse='true'}
+
+# Solution
 
 ```{r, eval = FALSE, fig.cap = "Number of fruits (log + 1) as a function of treatments"}
 p1 <- qplot(
@@ -156,7 +166,7 @@ p2 <- qplot(
 p1 + p2
 ```
 
-</div>
+:::
 
 
 ### Choose an error distribution
@@ -274,7 +284,9 @@ These fits are not rigorous statistical tests — they violate a variety of assu
 - compare a simple quadratic fit to the data (i.e., without the linear part) with the negative binomial and quasipoisson fits
 <!-- -  Draw a plot to suggest whether one might be able to stabilize the variance of the data by log(1 + x)-transforming the data. -->
 
-<div class = "exer">
+::: {.callout-tip collapse='true'}
+
+# Solution
 
 ```{r, fig.cap = "Graphical evaluation of distribution to use including quadratic effect"}
 lm3 <- lm(grp_vars ~ I(grp_means)^2 - 1) ## quadratic fit
@@ -303,7 +315,7 @@ ggplot(
   guides(fill = FALSE)
 ```
 
-</div>
+:::
 
 #### Plotting the response vs treatments
 
@@ -424,16 +436,17 @@ data = dat_tf, family = "poisson"
 
 Now, for example, `update(mp_obs,.~.+(1|gen)+(amd|popu))` fits the model with intercept random effects at the genotype level and variation in clipping effects across populations.
 
-::: {.infobox .code data-latex = "code"}
+::: {.infobox .code data-latex="code"}
 **Exercise** using update, fit the models with 
 
 1. clipping variation at both genotype and population levels;
 2. nutrient variation at both genotype and populations; convince yourself that trying to fit variation in either clipping or nutrients leads to overfitting (perfect correlations).
 3. Fit the model with only intercept variation at the population and genotype levels, saving it as mp4; show that there is non-zero variance estimated
-
 :::
 
-<div class = "exer">
+::: {.callout-tip collapse='true'}
+
+# Solution
 
 1. 
 ```{r}
@@ -453,7 +466,7 @@ mp4 <- update(mp_obs, . ~ . + (1 | gen) + (1 | popu))
 VarCorr(mp4)
 ```
 
-</div>
+:::
 
 In other words, while it’s biologically plausible that there is some variation in the nutrient or clipping effect at the genotype or population levels, with this modeling approach we really don’t have enough data to speak confidently about these effects.
 Let’s check that mp4 no longer incorporates overdispersion (the observationlevel random effect should have taken care of it):
@@ -621,12 +634,11 @@ It is better than before but not perfect. I think this is completely OK and that
  Our final model includes fixed effects of nutrients and clipping, as well as the nuisance variables rack and status; observation-level random effects to ac- count for overdispersion; and variation in overall fruit set at the population and genotype levels. However, we don’t (apparently) have quite enough in- formation to estimate the variation in clipping and nutrient effects, or their interaction, at the genotype or population levels. There is a strong overall positive effect of nutrients and a slightly weaker negative effect of clipping. The interaction between clipping and nutrients is only weakly supported (i.e. the p-value is not very small), but it is positive and about the same magnitude as the clipping effect, which is consistent with the statement that “nutrients cancel out the effect of herbivory”.
 
 
-::: {.infobox .code data-latex = "code"}
+::: {.infobox .code data-latex="code"}
 **Exercise**
 
 - Re-do the analysis with region as a fixed effect.
 - Re-do the analysis with a one-way layout as suggested above
-
 :::
 
 ### Happy generalized mixed-modelling
