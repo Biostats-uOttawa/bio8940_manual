@@ -147,12 +147,9 @@ Vous trouverez dans le manuel des explications sur la théorie, du code R, des e
 Le manuel essaie aussi de mettre en évidence le texte de différentes manières.
 
 
-::: {.infobox .code data-latex="{code}"}
+::: {.callout-caution}
+# Exercise
 Avec des sections à vous de jouer, ui indique un exercise à faire, idéalement sans regarder la solution qui se trouve plus bas.
-:::
-
-::: {.infobox .caution data-latex="{caution}"}
-des avertissements
 :::
 
 ::: {.infobox .warning data-latex="{warning}"}
@@ -167,8 +164,9 @@ des points importants
 des notes
 :::
 
-::: {.infobox .tip data-latex="{tip}"}
-et des conseils
+::: {.callout-tip collapse="true"}
+# Solution
+
 :::
 
 ### Resources {-}

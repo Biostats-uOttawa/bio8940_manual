@@ -561,7 +561,8 @@ summary(m_2)
 :::
 
 
-::: {.infobox .code data-latex="code"}
+::: {.callout-caution}
+# Exercise
 **Try tweaking the fixed part of your model:**
 
 - What happens if you add more fixed effects? Try it!
@@ -571,7 +572,8 @@ summary(m_2)
 :::
 
 
-::: {.infobox .code data-latex="code"}
+::: {.callout-caution}
+# Exercise
 **Having changed the fixed part of your model, do the variance estimates change at all?**
 
 * Is among-individual variance always estimated as zero regardless of fixed effects?
@@ -600,7 +602,8 @@ So we'd probably calculate R using the individual and residual variance simply a
 0.02538 / (0.02538 + 0.58048)
 ```
 
-::: {.infobox .code data-latex="code"}
+::: {.callout-caution}
+# Exercise
 Do you see where I took the numbers ?
 :::
 
@@ -657,7 +660,8 @@ ranova(lmer_size)
 :::
 
 
-::: {.infobox .code data-latex="code"}
+::: {.callout-caution}
+# Exercise
 **What might you conclude, and why would this be foolish?**
 :::
 
@@ -669,7 +673,8 @@ Hopefully you spotted the problem here. You have fed in a data set with 6 record
 
 :::
 
-::: {.infobox .code data-latex="code"}
+::: {.callout-caution}
+# Exercise
 **How can we do it properly?**
 :::
 

@@ -3,16 +3,18 @@
 \usepackage{fancyhdr}
 \usepackage{float}
 \usepackage[margin=2cm]{geometry}
+ \usepackage{letltxmacro}
+\usepackage{hyperref} 
 
 \floatplacement{figure}{H}
 
 %\usepackage[sf,bf]{titlesec}
 
-\hypersetup{colorlinks=true, urlcolor=blue}
+%\hypersetup{colorlinks=true, urlcolor=blue}
 
-\renewcommand{\chaptername}{Chapter}
-\renewcommand{\contentsname}{Table of Content}
-\renewcommand{\partname}{Part}
+\renewcommand{\chaptername}{Chapitre}
+\renewcommand{\contentsname}{Table des Matières}
+\renewcommand{\partname}{Partie}
 
 \usepackage{framed,color}
 \definecolor{incolor}{RGB}{240,240,240}
@@ -25,6 +27,7 @@
 
 %\renewenvironment{quote}{\begin{VF}}{\end{VF}}
 
+%not using xetex
 \ifxetex
  \usepackage{letltxmacro}
  \setlength{\XeTeXLinkMargin}{1pt}
@@ -68,13 +71,12 @@
 % \renewenvironment{Shaded}{\vspace{0.2cm}\begin{kframe}}{\end{kframe}}
 % \renewenvironment{verbatim}{\begin{shaded}\begin{oldverbatim}}{\end{oldverbatim}\end{shaded}}
 
-\newenvironment{infobox}[1]
+\newenvironment{rmdblock}[1]
  {
  \begin{itemize}
  \renewcommand{\labelitemi}{
    \raisebox{-.7\height}[0pt][0pt]{
-     {\setkeys{Gin}{width=3em,keepaspectratio}
-       \includegraphics{images/icons/#1}}
+     {\setkeys{Gin}{width=3em,keepaspectratio}\includegraphics{images/#1}}
    }
  }
  \begin{kframe}
@@ -85,13 +87,29 @@
  \end{kframe}
  \end{itemize}
  }
+\newenvironment{rmdnote}
+  {\begin{rmdblock}{note}}
+  {\end{rmdblock}}
+\newenvironment{rmdcaution}
+  {\begin{rmdblock}{caution}}
+  {\end{rmdblock}}
+\newenvironment{rmdimportant}
+  {\begin{rmdblock}{important}}
+  {\end{rmdblock}}
+\newenvironment{rmdtip}
+  {\begin{rmdblock}{tip}}
+  {\end{rmdblock}}
+\newenvironment{rmdwarning}
+  {\begin{rmdblock}{warning}}
+  {\end{rmdblock}}
+\newenvironment{rmdcode}
+  {\begin{rmdblock}{screen}}
+  {\end{rmdblock}}
 
 \usepackage{makeidx}
 \makeindex
 
 \urlstyle{tt}
-
-\newcommand{\xelatexemojipath}[1]{images/emoji/#1}
 
 \usepackage{amsthm}
 \makeatletter

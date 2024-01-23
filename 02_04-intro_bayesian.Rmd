@@ -399,9 +399,14 @@ We can still take the time to have a look at the R object output from `MCMCglmm(
 - `Sol` which stand for the model solution and includes the posteriro distribution of the fixed effects
 - `VCV`, for the variance covariance estimates, which includes the posterior distribution of all (co)variances estimates for both random effects and residual variance.
 
-```{r, fig.cap = "Posterior trace and distribution of the paremeters in m_mcmcglmm using default settings"}
+```{r}
+#| fig.cap: "Posterior trace and distribution of the parameters in m_mcmcglmm using default settings"
+#| warning: false
+omar <- par()
+par(mar = c(4, 2, 1.5, 2))
 plot(m_mcmcglmm$Sol)
 plot(m_mcmcglmm$VCV)
+par(omar)
 autocorr.diag(m_mcmcglmm$VCV)
 ```
 
@@ -429,9 +434,14 @@ summary(m_mcmcglmm)
 mcglm_time
 ```
  evaluate model here
-```{r, fig.cap = "Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings"}
+```{r}
+#| fig.cap: "Posterior trace and distribution of the paremeters in m_mcmcglmm with better settings"
+#| warning: false
+omar <- par()
+par(mar = c(4, 2, 1.5, 2))
 plot(m_mcmcglmm$Sol)
 plot(m_mcmcglmm$VCV)
+par(omar)
 autocorr.diag(m_mcmcglmm$VCV)
 ```
 

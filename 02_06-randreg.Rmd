@@ -151,15 +151,10 @@ rr_asr <- asreml(
 ```{r}
 plot(rr_asr)
 ```
-```{r, eval = htmlT_pdfF}
+```{r}
 summary(rr_asr, coef = TRUE)$coef.fixed
-wald(rr_asr, ssType = "conditional", denDF = "numeric")
-```
-
-```{r, echo = FALSE, eval = htmlF_pdfT, purl = FALSE}
-summary(rr_asr, coef = TRUE)$coef.fixed
-wa <- wald(rr_asr, ssType = "conditional", denDF = "numeric")$Wald
-attr(wa, "heading") <- NULL
+wa <- wald(rr_asr, ssType = "conditional", denDF = "numeric")
+attr(wa$Wald, "heading") <- NULL
 wa
 ```
 
@@ -235,7 +230,10 @@ saveX = TRUE, saveZ = TRUE)
 
 
 ```{r}
+omar <- par()
+par(mar = c(4, 2, 1.5, 2))
 plot(rr_mcmc$VCV)
+par(omar)
 ```
 
 ```{r}
@@ -286,6 +284,7 @@ knitr::kable(df_var,
 ### Character-State approach
 
 Need to pivot to a wider format
+
 ```{r}
 unicorns_cs <- unicorns %>%
   select(ID, body_size, assay_rep, block, aggression, opp_size) %>%
@@ -319,15 +318,10 @@ qqline(residuals(cs_asr))
 hist(residuals(cs_asr))
 ```
 
-```{r, eval = htmlT_pdfF}
+```{r}
 summary(cs_asr, all = T)$coef.fixed
-wald(cs_asr, ssType = "conditional", denDF = "numeric")
-```
-
-```{r, echo = FALSE, eval = htmlF_pdfT, purl = FALSE}
-summary(cs_asr, all = T)$coef.fixed
-wa <- wald(cs_asr, ssType = "conditional", denDF = "numeric")$Wald
-attr(wa, "heading") <- NULL
+wa <- wald(cs_asr, ssType = "conditional", denDF = "numeric")
+attr(wa$Wald, "heading") <- NULL
 wa
 ```
 

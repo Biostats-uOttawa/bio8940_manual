@@ -6,11 +6,13 @@ project:
 
 execute: 
   cache: true
-  freeze: true #auto
+  freeze: auto
 
 book:
   title: "Bio8940 manual"
   author: Julien Martin
+  date: today
+  date-format: iso 
   reader-mode: true
   search: true
   page-footer:
@@ -20,8 +22,8 @@ book:
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   cover-image: images/blue_dragon.jpg
   favicon: cover.jpg
-  site-url: https://biostats-uottawa.github.io/bio8940_course/
-  repo-url: https://github.com/biostats-uottawa/bio8940_course/
+  site-url: https://biostats-uottawa.github.io/bio8940_manual/
+  repo-url: https://github.com/biostats-uottawa/bio8940_manual/
   repo-actions: [edit, issue]
   downloads: [pdf, epub]
   navbar:
@@ -84,11 +86,12 @@ format:
     author-meta: "Julien Martin"
     callout-appearance: simple
 
-#  pdf:
-#    documentclass: scrreprt
-#    include-in-header: latex/preamble.tex
-#    include-before-body: latex/before_body.tex
-#    include-after-body: latex/after_body.tex
+  pdf:
+    documentclass: scrbook
+    include-in-header: latex/preamble.tex
+    include-before-body: latex/before_body.tex
+    include-after-body: latex/after_body.tex
+    toc-depth: 2
 
   epub:
     dev: svglite
