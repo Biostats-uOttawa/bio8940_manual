@@ -9,7 +9,9 @@ execute:
   freeze: auto
 
 book:
-  title: "Bio8940 manual"
+  title: "Advanced biostatistics and Open science"
+  subtitle: "Lab manual for BIO8940"
+  description: "Include extra information and exercises"
   author: Julien Martin
   date: today
   date-format: iso 
@@ -17,7 +19,7 @@ book:
   search: true
   page-footer:
     left: |
-      Written by Julien Martin.
+      By Julien Martin.
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   cover-image: images/blue_dragon.jpg
