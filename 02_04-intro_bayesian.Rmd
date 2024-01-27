@@ -299,9 +299,9 @@ In this practical, we will revisit our analysis on unicorn aggressivity.
 Honestly, we can use any other data with repeated measures for this exercise
 but I just love unicorns `r emo::ji("heart")`.
 However, instead of fittng the model using `lmer()` from the `lmerTest` 
-`r emo::ji("package")` [@R-lmerTest], we will refit the model using 2 excellent 
-softwares fitting models with a Bayesian approach: `MCMCglmm` [@MCMCglmm2010] and
-`brms` [@R-brms].
+`r emo::ji("package")` [@lmerTest], we will refit the model using 2 excellent 
+softwares fitting models with a Bayesian approach: `MCMCglmm` [@MCMCglmm] and
+`brms` [@brms2021].
 
 
 ### R packages needed
@@ -467,12 +467,12 @@ HPDinterval(m_mcmcglmm$VCV)
 
 ### brms
 
-**brms** is an acronym for *Bayesian Regression Models using 'Stan'* [@R-brms]. It is a package developed to fit regression models with a Bayesian approach using the amazing `stan` software [@stan2021]. 
+**brms** is an acronym for *Bayesian Regression Models using 'Stan'* [@brms2021]. It is a package developed to fit regression models with a Bayesian approach using the amazing `stan` software [@stan2021]. 
 
 What makes `brms` so useful and powerful `r emo::ji("muscle")` in ecology is that:
 
 1. it is really intuitive to code (same syntax as `glmer()`)
-2. it is incredibly flexible since it is essentially a front end for `stan` via its `rstan` interface [@R-rstan]
+2. it is incredibly flexible since it is essentially a front end for `stan` via its `rstan` interface [@rstan]
 
 **but** with *great powers come great responsability* `r emo::ji("spider")`
 

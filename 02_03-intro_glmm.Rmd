@@ -386,7 +386,7 @@ The `overdisp_fun()` is described [here] https://bbolker.github.io/mixedmodels-m
 
 We can ignore the model convergence for the moment. This shows that the data are (extremely) over-dispersed, given the model.
 
-We can also use the excellent `DHARMa` `r emo::ji("package")` [@R-DHARMa] to evaluate fit of *glm* and *glmm*. So instead of using the function `overdisp_fun()`, we can simply use the function `testDispersion()`.
+We can also use the excellent `DHARMa` `r emo::ji("package")` [@DHARMa] to evaluate fit of *glm* and *glmm*. So instead of using the function `overdisp_fun()`, we can simply use the function `testDispersion()`.
 
 ```{r}
 testDispersion(mp1)

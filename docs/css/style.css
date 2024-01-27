@@ -91,3 +91,8 @@ details[open] summary {
   border-bottom: 1px solid #aaa;
   margin-bottom: 0.5em;
 }
+
+.cell-output {
+  background-color: #f0f2f4;
+  border-radius: 4px;
+}

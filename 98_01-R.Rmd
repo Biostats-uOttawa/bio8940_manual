@@ -9,6 +9,6 @@ source("_common.R")
 ```
 Need to write something about R
 
-We also use various methods for manipulating and visualising data frames using the `r emo::ji("package")` `tidyverse` [@R-tidyverse] (including `tidyr`, `dplyr`, `ggplot2` etc).
+We also use various methods for manipulating and visualising data frames using the `r emo::ji("package")` `tidyverse` [@tidyverse] (including `tidyr`, `dplyr`, `ggplot2` etc).
 You can get more details on their use can be found at in the Book `R for Data Science` [@wickhamDataScienceImport2016] which is freely available as a [bookdown website here](http://r4ds.had.co.nz/). 
 

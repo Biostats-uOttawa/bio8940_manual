@@ -23,10 +23,10 @@ add a comparison of lrt
 In this practical, we have collected data on the amazing blue dragon of the East that roam the sky at night.
 
 We will use two different `r emo::ji("package")` to fit more complex models that are not possible with  `lmer()` from `lme4` 
-`r emo::ji("package")` [@R-lme4]. We will use:
+`r emo::ji("package")` [@lme4]. We will use:
 
-- `asreml-R` which is a commercial software developed by VSNi [@R-asreml]. `ASReml` fit models using a maximum likelihood approach, is quite flexible and fast.
-- `MCMCglmm` which is free and open-source and fit model using a Bayesian approach [@MCMCglmm2010]. It is super flexible and allow to fit a wide diversity of distribution.
+- `asreml-R` which is a commercial software developed by VSNi [@asreml]. `ASReml` fit models using a maximum likelihood approach, is quite flexible and fast.
+- `MCMCglmm` which is free and open-source and fit model using a Bayesian approach [@MCMCglmm]. It is super flexible and allow to fit a wide diversity of distribution.
 
 
 The aims of the practical are to learn:
@@ -354,7 +354,7 @@ In this section I present the code needed to fit the model and explain only the 
 
 To be completed. with more details
 
-First, we need to create a ‘prior’ for our model. We recommend reading up on the use of priors [see the course notes of `MCMCglmm` @R-MCMCglmm]; briefly, we use a parameter-expanded prior here that should be uninformative for our model. One of the model diagnostic steps that should be used later is to check that the model is robust to multiple prior specifications.
+First, we need to create a ‘prior’ for our model. We recommend reading up on the use of priors [see the course notes of `MCMCglmm` @MCMCglmm]; briefly, we use a parameter-expanded prior here that should be uninformative for our model. One of the model diagnostic steps that should be used later is to check that the model is robust to multiple prior specifications.
 
 ```{r}
 prior_1ex <- list(

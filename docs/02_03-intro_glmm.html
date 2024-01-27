@@ -889,7 +889,7 @@ Model failed to converge with max|grad| = 0.0185742 (tol = 0.002, component 1)</
 <!-- add description of the overdispersion function -->
 <p>The <code>overdisp_fun()</code> is described [here] https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html#testing-for-overdispersioncomputing-overdispersion-factor) on the absolutely fantastic FAQ about GLMMs by Ben Bolker https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html</p>
 <p>We can ignore the model convergence for the moment. This shows that the data are (extremely) over-dispersed, given the model.</p>
-<p>We can also use the excellent <code>DHARMa</code> 📦 <span class="citation" data-cites="R-DHARMa">(<a href="99-references.html#ref-R-DHARMa" role="doc-biblioref">Hartig 2022</a>)</span> to evaluate fit of <em>glm</em> and <em>glmm</em>. So instead of using the function <code>overdisp_fun()</code>, we can simply use the function <code><a href="https://rdrr.io/pkg/DHARMa/man/testDispersion.html">testDispersion()</a></code>.</p>
+<p>We can also use the excellent <code>DHARMa</code> 📦 <span class="citation" data-cites="DHARMa">(<a href="99-references.html#ref-DHARMa" role="doc-biblioref">Hartig 2022</a>)</span> to evaluate fit of <em>glm</em> and <em>glmm</em>. So instead of using the function <code>overdisp_fun()</code>, we can simply use the function <code><a href="https://rdrr.io/pkg/DHARMa/man/testDispersion.html">testDispersion()</a></code>.</p>
 <div class="cell">
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/DHARMa/man/testDispersion.html">testDispersion</a></span><span class="op">(</span><span class="va">mp1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
@@ -1362,8 +1362,8 @@ Bolker, B. M., M. E. Brooks, C. J. Clark, S. W. Geange, J. R. Poulsen, M. H. H. 
 <div id="ref-elston2001" class="csl-entry" role="listitem">
 Elston, D. A., R. Moss, T. Boulinier, C. Arrowsmith, and X. Lambin. 2001. Analysis of aggregation, a worked example: Numbers of ticks on red grouse chicks. Parasitology 122:563–569.
 </div>
-<div id="ref-R-DHARMa" class="csl-entry" role="listitem">
-Hartig, F. 2022. <a href="http://florianhartig.github.io/DHARMa/">DHARMa: Residual diagnostics for hierarchical (multi-level / mixed) regression models</a>.
+<div id="ref-DHARMa" class="csl-entry" role="listitem">
+Hartig, F. 2022. <a href="https://CRAN.R-project.org/package=DHARMa"><span>DHARMa</span>: Residual diagnostics for hierarchical (multi-level / mixed) regression models</a>.
 </div>
 </div>
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

@@ -575,7 +575,7 @@ Sample size per chain = 2500
 <li>WAIC</li>
 </ul></section></section></section><section id="practical" class="level2" data-number="7.2"><h2 data-number="7.2" class="anchored" data-anchor-id="practical">
 <span class="header-section-number">7.2</span> Practical</h2>
-<p>In this practical, we will revisit our analysis on unicorn aggressivity. Honestly, we can use any other data with repeated measures for this exercise but I just love unicorns ❤️. However, instead of fittng the model using <code><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer()</a></code> from the <code>lmerTest</code> 📦 <span class="citation" data-cites="R-lmerTest">(<a href="99-references.html#ref-R-lmerTest" role="doc-biblioref">Kuznetsova et al. 2020</a>)</span>, we will refit the model using 2 excellent softwares fitting models with a Bayesian approach: <code>MCMCglmm</code> <span class="citation" data-cites="MCMCglmm2010">(<a href="99-references.html#ref-MCMCglmm2010" role="doc-biblioref">Hadfield 2010</a>)</span> and <code>brms</code> <span class="citation" data-cites="R-brms">(<a href="99-references.html#ref-R-brms" role="doc-biblioref">Bürkner 2021</a>)</span>.</p>
+<p>In this practical, we will revisit our analysis on unicorn aggressivity. Honestly, we can use any other data with repeated measures for this exercise but I just love unicorns ❤️. However, instead of fittng the model using <code><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer()</a></code> from the <code>lmerTest</code> 📦 <span class="citation" data-cites="lmerTest">(<a href="99-references.html#ref-lmerTest" role="doc-biblioref">Kuznetsova et al. 2017</a>)</span>, we will refit the model using 2 excellent softwares fitting models with a Bayesian approach: <code>MCMCglmm</code> <span class="citation" data-cites="MCMCglmm">(<a href="99-references.html#ref-MCMCglmm" role="doc-biblioref">Hadfield 2010</a>)</span> and <code>brms</code> <span class="citation" data-cites="brms2021">(<a href="99-references.html#ref-brms2021" role="doc-biblioref">Bürkner 2021</a>)</span>.</p>
 <section id="r-packages-needed" class="level3" data-number="7.2.1"><h3 data-number="7.2.1" class="anchored" data-anchor-id="r-packages-needed">
 <span class="header-section-number">7.2.1</span> R packages needed</h3>
 <p>First we load required libraries</p>
@@ -924,11 +924,11 @@ attr(,"Probability")
 </div>
 </section></section><section id="brms" class="level3" data-number="7.2.5"><h3 data-number="7.2.5" class="anchored" data-anchor-id="brms">
 <span class="header-section-number">7.2.5</span> brms</h3>
-<p><strong>brms</strong> is an acronym for <em>Bayesian Regression Models using ‘Stan’</em> <span class="citation" data-cites="R-brms">(<a href="99-references.html#ref-R-brms" role="doc-biblioref">Bürkner 2021</a>)</span>. It is a package developed to fit regression models with a Bayesian approach using the amazing <code>stan</code> software <span class="citation" data-cites="stan2021">(<a href="99-references.html#ref-stan2021" role="doc-biblioref">Stan Development Team 2021</a>)</span>.</p>
+<p><strong>brms</strong> is an acronym for <em>Bayesian Regression Models using ‘Stan’</em> <span class="citation" data-cites="brms2021">(<a href="99-references.html#ref-brms2021" role="doc-biblioref">Bürkner 2021</a>)</span>. It is a package developed to fit regression models with a Bayesian approach using the amazing <code>stan</code> software <span class="citation" data-cites="stan2021">(<a href="99-references.html#ref-stan2021" role="doc-biblioref">Stan Development Team 2021</a>)</span>.</p>
 <p>What makes <code>brms</code> so useful and powerful 💪 in ecology is that:</p>
 <ol type="1">
 <li>it is really intuitive to code (same syntax as <code><a href="https://rdrr.io/pkg/lme4/man/glmer.html">glmer()</a></code>)</li>
-<li>it is incredibly flexible since it is essentially a front end for <code>stan</code> via its <code>rstan</code> interface <span class="citation" data-cites="R-rstan">(<a href="99-references.html#ref-R-rstan" role="doc-biblioref">Guo et al. 2021</a>)</span>
+<li>it is incredibly flexible since it is essentially a front end for <code>stan</code> via its <code>rstan</code> interface <span class="citation" data-cites="rstan">(<a href="99-references.html#ref-rstan" role="doc-biblioref">Stan Development Team 2024</a>)</span>
 </li>
 </ol>
 <p><strong>but</strong> with <em>great powers come great responsability</em> 🕷</p>
@@ -1179,20 +1179,20 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-R-brms" class="csl-entry" role="listitem">
-Bürkner, P.-C. 2021. <a href="https://CRAN.R-project.org/package=brms">Brms: Bayesian regression models using stan</a>.
+<div id="ref-brms2021" class="csl-entry" role="listitem">
+Bürkner, P.-C. 2021. <a href="https://doi.org/10.18637/jss.v100.i05">Bayesian item response modeling in <span>R</span> with <span class="nocase">brms</span> and <span>Stan</span></a>. Journal of Statistical Software 100:1–54.
 </div>
-<div id="ref-R-rstan" class="csl-entry" role="listitem">
-Guo, J., J. Gabry, B. Goodrich, and S. Weber. 2021. <a href="https://CRAN.R-project.org/package=rstan">Rstan: R interface to stan</a>.
-</div>
-<div id="ref-MCMCglmm2010" class="csl-entry" role="listitem">
+<div id="ref-MCMCglmm" class="csl-entry" role="listitem">
 Hadfield, J. D. 2010. <a href="https://www.jstatsoft.org/v33/i02/">MCMC methods for multi-response generalized linear mixed models: The <span>MCMCglmm</span> <span>R</span> package</a>. Journal of Statistical Software 33:1–22.
 </div>
-<div id="ref-R-lmerTest" class="csl-entry" role="listitem">
-Kuznetsova, A., P. Bruun Brockhoff, and R. Haubo Bojesen Christensen. 2020. <a href="https://github.com/runehaubo/lmerTestR">lmerTest: Tests in linear mixed effects models</a>.
+<div id="ref-lmerTest" class="csl-entry" role="listitem">
+Kuznetsova, A., P. B. Brockhoff, and R. H. B. Christensen. 2017. <a href="https://doi.org/10.18637/jss.v082.i13"><span class="nocase">lmerTest</span> package: Tests in linear mixed effects models</a>. Journal of Statistical Software 82:1–26.
 </div>
 <div id="ref-stan2021" class="csl-entry" role="listitem">
 Stan Development Team. 2021. <a href="https://mc-stan.org">Stan modeling language users guide and reference manual, 2.26</a>.
+</div>
+<div id="ref-rstan" class="csl-entry" role="listitem">
+Stan Development Team. 2024. <a href="https://mc-stan.org/"><span>RStan</span>: The <span>R</span> interface to <span>Stan</span></a>.
 </div>
 </div>
 </section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">

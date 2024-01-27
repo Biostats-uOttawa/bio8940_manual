@@ -1,0 +1,12 @@
+_freeze/
+_quarto/
+.github/
+.vscode/
+*_cache/
+css/
+data/
+docs/
+images/
+latex/
+libs/
+site_libs/

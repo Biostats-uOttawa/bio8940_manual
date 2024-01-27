@@ -404,12 +404,12 @@ window.Quarto = {
 </section><section id="practical" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="practical">
 <span class="header-section-number">8.2</span> Practical</h2>
 <p>In this practical, we have collected data on the amazing blue dragon of the East that roam the sky at night.</p>
-<p>We will use two different 📦 to fit more complex models that are not possible with <code><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer()</a></code> from <code>lme4</code> 📦 <span class="citation" data-cites="R-lme4">(<a href="99-references.html#ref-R-lme4" role="doc-biblioref">Bates et al. 2021</a>)</span>. We will use:</p>
+<p>We will use two different 📦 to fit more complex models that are not possible with <code><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html">lmer()</a></code> from <code>lme4</code> 📦 <span class="citation" data-cites="lme4">(<a href="99-references.html#ref-lme4" role="doc-biblioref">Bates et al. 2015</a>)</span>. We will use:</p>
 <ul>
 <li>
-<code>asreml-R</code> which is a commercial software developed by VSNi <span class="citation" data-cites="R-asreml">(<a href="99-references.html#ref-R-asreml" role="doc-biblioref">Butler 2021</a>)</span>. <code>ASReml</code> fit models using a maximum likelihood approach, is quite flexible and fast.</li>
+<code>asreml-R</code> which is a commercial software developed by VSNi <span class="citation" data-cites="asreml">(<a href="99-references.html#ref-asreml" role="doc-biblioref">Butler 2022</a>)</span>. <code>ASReml</code> fit models using a maximum likelihood approach, is quite flexible and fast.</li>
 <li>
-<code>MCMCglmm</code> which is free and open-source and fit model using a Bayesian approach <span class="citation" data-cites="MCMCglmm2010">(<a href="99-references.html#ref-MCMCglmm2010" role="doc-biblioref">Hadfield 2010</a>)</span>. It is super flexible and allow to fit a wide diversity of distribution.</li>
+<code>MCMCglmm</code> which is free and open-source and fit model using a Bayesian approach <span class="citation" data-cites="MCMCglmm">(<a href="99-references.html#ref-MCMCglmm" role="doc-biblioref">Hadfield 2010</a>)</span>. It is super flexible and allow to fit a wide diversity of distribution.</li>
 </ul>
 <p>The aims of the practical are to learn:</p>
 <ul>
@@ -892,7 +892,7 @@ need to add the selection aspect with trivariate model with fitness
 <span class="header-section-number">8.2.4.2</span> Using MCMCglmm</h4>
 <p>In this section I present the code needed to fit the model and explain only the specific aspect of fittign and evaluating the models with <code>MCMCglmm</code>.</p>
 <p>To be completed. with more details</p>
-<p>First, we need to create a ‘prior’ for our model. We recommend reading up on the use of priors <span class="citation" data-cites="R-MCMCglmm">(see the course notes of <code>MCMCglmm</code> <a href="99-references.html#ref-R-MCMCglmm" role="doc-biblioref">Hadfield 2022</a>)</span>; briefly, we use a parameter-expanded prior here that should be uninformative for our model. One of the model diagnostic steps that should be used later is to check that the model is robust to multiple prior specifications.</p>
+<p>First, we need to create a ‘prior’ for our model. We recommend reading up on the use of priors <span class="citation" data-cites="MCMCglmm">(see the course notes of <code>MCMCglmm</code> <a href="99-references.html#ref-MCMCglmm" role="doc-biblioref">Hadfield 2010</a>)</span>; briefly, we use a parameter-expanded prior here that should be uninformative for our model. One of the model diagnostic steps that should be used later is to check that the model is robust to multiple prior specifications.</p>
 <div class="cell">
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">prior_1ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>  R <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>V <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>, nu <span class="op">=</span> <span class="fl">0.002</span><span class="op">)</span>,</span>
@@ -1114,16 +1114,13 @@ attr(,"Probability")
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-R-lme4" class="csl-entry" role="listitem">
-Bates, D., M. Maechler, B. Bolker, and S. Walker. 2021. <a href="https://github.com/lme4/lme4/">lme4: Linear mixed-effects models using eigen and S4</a>.
+<div id="ref-lme4" class="csl-entry" role="listitem">
+Bates, D., M. Mächler, B. Bolker, and S. Walker. 2015. <a href="https://doi.org/10.18637/jss.v067.i01">Fitting linear mixed-effects models using <span class="nocase">lme4</span></a>. Journal of Statistical Software 67:1–48.
 </div>
-<div id="ref-R-asreml" class="csl-entry" role="listitem">
-Butler, D. 2021. <a href="https://www.vsni.co.uk">Asreml: Fits the linear mixed model</a>.
+<div id="ref-asreml" class="csl-entry" role="listitem">
+Butler, D. 2022. <a href="https://www.vsni.co.uk"><span class="nocase">asreml</span>: Fits the linear mixed model</a>.
 </div>
-<div id="ref-R-MCMCglmm" class="csl-entry" role="listitem">
-Hadfield, J. 2022. <a href="https://CRAN.R-project.org/package=MCMCglmm">MCMCglmm: MCMC generalised linear mixed models</a>.
-</div>
-<div id="ref-MCMCglmm2010" class="csl-entry" role="listitem">
+<div id="ref-MCMCglmm" class="csl-entry" role="listitem">
 Hadfield, J. D. 2010. <a href="https://www.jstatsoft.org/v33/i02/">MCMC methods for multi-response generalized linear mixed models: The <span>MCMCglmm</span> <span>R</span> package</a>. Journal of Statistical Software 33:1–22.
 </div>
 <div id="ref-hadfield_misuse_2010" class="csl-entry" role="listitem">
