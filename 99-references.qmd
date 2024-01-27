@@ -1,19 +1,30 @@
 # References  {.unnumbered}
 
-## R packages used in this book {.unnumbered}
+## R packages {.unnumbered}
 
-This book was produced using all the following
+
+This book was produced using all the following R packages
 
 ```{r}
 #| echo: FALSE
+#| cache: false
 library(grateful)
 pkgs <- cite_packages(
   output = "table",
+  out.dir = ".")
+pkgs_dep <- cite_packages(
+  output = "table",
   out.dir = ".",
-  dependencies = TRUE)
+  dependencies = TRUE) %>%
+  filter(!(Package %in% pkgs$Package))
 knitr::kable(
   pkgs,
-  captions = "List of packages used in this book including all their dependencies"
+  captions = "List of packages used in this book"
+  )
+
+knitr::kable(
+  pkgs_dep,
+  captions = "List of dependencies of packages used in this book"
   )
 ```
 
@@ -21,3 +32,4 @@ knitr::kable(
 
 ::: {#refs}
 :::
+
