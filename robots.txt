@@ -1,0 +1,1 @@
+Sitemap: https://biostats-uottawa.github.io/bio8940_manual/sitemap.xml
