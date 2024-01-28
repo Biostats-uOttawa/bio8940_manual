@@ -9,6 +9,6 @@ BIO8940_book_cache/
 *_files/
 *_freeze/
 
-!docs/*_files/
-
+#!docs/*_files/
+/docs/
 /.quarto/
