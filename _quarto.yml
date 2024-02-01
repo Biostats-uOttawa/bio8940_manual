@@ -3,12 +3,14 @@ project:
   output-dir: _book
   resources:
     - .nojekyll
+  pre-render: assets/_refs.r
 
 execute: 
   cache: true
   freeze: auto
 
 book:
+  google-analytics: G-6LLMGL3T2Q
   title: "Advanced biostatistics and Open science"
   subtitle: "Lab manual for BIO8940"
   description: "Include extra information and exercises"
@@ -72,9 +74,9 @@ book:
   appendices:
     - 98_01-R.Rmd
 
-bibliography: [book.bib, grateful-refs.bib]
+bibliography: [assets/book.bib, assets/grateful-refs.bib]
 biblio-style: apalike
-csl: ecology.csl
+csl: assets/ecology.csl
 
 format:
   html:
