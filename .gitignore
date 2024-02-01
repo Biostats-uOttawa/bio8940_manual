@@ -13,3 +13,6 @@ BIO8940_book_cache/
 /docs/
 /.quarto/
 /_book/
+/libs/
+/site_libs/
+_ignore-refs.bib
