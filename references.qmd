@@ -13,23 +13,29 @@ library(tidyverse)
 library(grateful)
 pkgs <- cite_packages(
   output = "table",
-  out.dir = ".")
+  out.dir = ".",
+  omit = NULL,
+  bib.file = "_ignore-refs"
+)
 pkgs_dep <- cite_packages(
   output = "table",
   out.dir = ".",
-  dependencies = TRUE) %>%
+  dependencies = TRUE,
+  omit = NULL,
+  bib.file = "_ignore-refs"
+) %>%
   filter(!(Package %in% pkgs$Package))
 knitr::kable(
   pkgs,
   captions = "List of packages used in this book"
-  )
+)
 
 knitr::kable(
   pkgs_dep,
   captions = "List of dependencies of packages used in this book"
-  )
+)
 ```
-
+ 
 ### Bibliography  {.unnumbered}
 
 ::: {#refs}

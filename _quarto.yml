@@ -58,21 +58,21 @@ book:
     - index.Rmd
     - part: "Open Science"
       chapters:
-        - 01_01-open_science.Rmd
-        - 01_02-rmarkdown.Rmd
-        - 01_03-github.Rmd
+        - open_science.Rmd
+        - rmarkdown.Rmd
+        - github.Rmd
     - part: Statistics
       chapters:
-        - 02_01-glm.Rmd
-        - 02_02-lmm.Rmd
-        - 02_03-intro_glmm.Rmd
-        - 02_04-intro_bayesian.Rmd
-        - 02_05-multivar.Rmd
-        - 02_06-randreg.Rmd
-        - 02_07-beyond_p.Rmd
-    - 99-references.qmd
+        - glm.Rmd
+        - lmm.Rmd
+        - intro_glmm.Rmd
+        - intro_bayesian.Rmd
+        - multivar.Rmd
+        - randreg.Rmd
+        - beyond_p.Rmd
+    - references.qmd
   appendices:
-    - 98_01-R.Rmd
+    - app-R.Rmd
 
 bibliography: [assets/book.bib, assets/grateful-refs.bib]
 biblio-style: apalike
