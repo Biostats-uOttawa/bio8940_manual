@@ -2,62 +2,62 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://biostats-uottawa.github.io/bio8940_manual/index.html</loc>
-    <lastmod>2024-01-28T16:50:35.696Z</lastmod>
+    <lastmod>2024-02-01T20:00:09.183Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/01_01-open_science.html</loc>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/open_science.html</loc>
     <lastmod>2024-01-28T16:50:35.096Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/01_02-rmarkdown.html</loc>
-    <lastmod>2024-01-28T16:50:35.100Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/rmarkdown.html</loc>
+    <lastmod>2024-02-01T20:18:12.858Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/01_03-github.html</loc>
-    <lastmod>2024-01-28T16:50:35.100Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/github.html</loc>
+    <lastmod>2024-02-01T20:18:04.938Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/02_01-glm.html</loc>
-    <lastmod>2024-01-28T16:50:35.100Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/glm.html</loc>
+    <lastmod>2024-02-01T20:18:23.782Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/02_02-lmm.html</loc>
-    <lastmod>2024-01-28T16:50:35.100Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/lmm.html</loc>
+    <lastmod>2024-02-01T20:18:17.490Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/02_03-intro_glmm.html</loc>
-    <lastmod>2024-01-28T16:50:35.100Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/intro_glmm.html</loc>
+    <lastmod>2024-02-01T20:18:19.354Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/02_04-intro_bayesian.html</loc>
-    <lastmod>2024-01-28T16:50:35.100Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/intro_bayesian.html</loc>
+    <lastmod>2024-02-01T20:18:21.214Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/02_05-multivar.html</loc>
-    <lastmod>2024-01-28T16:50:35.100Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/multivar.html</loc>
+    <lastmod>2024-02-01T20:18:15.974Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/02_06-randreg.html</loc>
-    <lastmod>2024-01-28T16:50:35.100Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/randreg.html</loc>
+    <lastmod>2024-02-01T20:18:14.446Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/02_07-beyond_p.html</loc>
-    <lastmod>2024-01-28T16:50:35.100Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/beyond_p.html</loc>
+    <lastmod>2024-02-01T20:17:36.310Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/99-references.html</loc>
-    <lastmod>2024-01-28T16:53:51.624Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/references.html</loc>
+    <lastmod>2024-02-01T20:01:59.751Z</lastmod>
   </url>
   <url>
-    <loc>https://biostats-uottawa.github.io/bio8940_manual/98_01-R.html</loc>
-    <lastmod>2024-01-28T16:50:35.100Z</lastmod>
+    <loc>https://biostats-uottawa.github.io/bio8940_manual/app-R.html</loc>
+    <lastmod>2024-02-01T20:18:54.626Z</lastmod>
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio8940_manual/Advanced-biostatistics-and-Open-science.pdf</loc>
-    <lastmod>2024-01-28T16:56:43.868Z</lastmod>
+    <lastmod>2024-02-01T21:13:02.864Z</lastmod>
   </url>
   <url>
     <loc>https://biostats-uottawa.github.io/bio8940_manual/Advanced-biostatistics-and-Open-science.epub</loc>
-    <lastmod>2024-01-28T16:56:51.332Z</lastmod>
+    <lastmod>2024-02-01T21:13:11.224Z</lastmod>
   </url>
 </urlset>
