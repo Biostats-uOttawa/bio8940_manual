@@ -16,7 +16,7 @@ knitr::include_graphics("images/fun_dragon.jpg")
 
 ### Context
 
-We will configure Rstudio to work with our github account, then create a new project and start using `github`. To have some data I suggest to use the awesome `palmerpenguins` dataset `r emo::ji("penguin")`.
+We will configure Rstudio to work with our github account, then create a new project and start using `github`. To have some data I suggest to use the awesome `palmerpenguins` dataset `r emoji::emoji("penguin")`.
 
 ### Information of the data
 These data have been collected and shared by [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and [Palmer Station, Antarctica LTER](https://pal.lternet.edu/).
@@ -50,6 +50,7 @@ For this exercise, we're gonna use the `penguins` dataset.
 
 **2)** Configure Rstudio with your github account using the `usethis` package.
 
+:::: {.content-hidden when-format="pdf"}
 ::: {.callout-tip collapse='true'}
 
 # Solution
@@ -61,9 +62,11 @@ usethis::use_git_config(
 )
 ```
 :::
+::::
 
 **3)** Create and Store your GITHUB Personal Authorisation Token
 
+:::: {.content-hidden when-format="pdf"}
 ::: {.callout-tip collapse='true'}
 
 # Solution
@@ -72,9 +75,11 @@ usethis::create_github_token()
 gitcreds::gitcreds_set()
 ```
 :::
+::::
 
 **4)** Create a new R Markdown project, initialize it for git, and create a new git repository
 
+:::: {.content-hidden when-format="pdf"}
 ::: {.callout-tip collapse='true'}
 
 # Solution
@@ -87,6 +92,7 @@ usethis::use_github()
 usethis::git_vaccinate()
 ```
 :::
+::::
 
 **5)** Create a new Rmarkdown document, in your project. Then save the file and stage it.
 
@@ -104,8 +110,44 @@ usethis::git_vaccinate()
 
 **12)** Check and accept the pull request to merge the 2 branches.
 
-You have successfully used all the essential tools of `git` `r emo::ji("tada")` . You are really to explore `r emo::ji("detective")` and discover its power `r emo::ji("flex")`
+You have successfully used all the essential tools of `git` `r emoji::emoji("tada")` . You are really to explore `r emoji::emoji("detective")` and discover its power `r emoji::emoji("flex")`
 
 ```{r, out.width="30%", echo = FALSE, fig.align="center", fig.cap = "Happy git(hub)-ing"}
 knitr::include_graphics("images/github_ninja.jpg")
 ```
+
+::: {.content-show when-format="pdf"}
+
+
+### Solution
+
+**2)**
+
+```{r, eval = FALSE}
+usethis::git_sitrep()
+usethis::use_git_config(
+  user.name = "your_username",
+  user.email = "your_email@address.com"
+)
+```
+
+**3)**
+
+
+```{r, eval = FALSE}
+usethis::create_github_token()
+gitcreds::gitcreds_set()
+```
+
+**4)**
+
+```{r, eval = FALSE}
+#create R project
+usethis::use_git()
+
+#restart R
+usethis::use_github()
+usethis::git_vaccinate()
+```
+
+:::

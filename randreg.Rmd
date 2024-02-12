@@ -22,7 +22,7 @@ knitr::include_graphics("images/fun_dragon.jpg")
 
 In this practical, we will revisit our analysis on unicorn aggressivity.
 Honestly, we can use any other data with repeated measures for this exercise
-but I just `r emo::ji("heart")` unicorns.
+but I just `r emoji::emoji("heart")` unicorns.
 
 ### R packages needed
 
@@ -65,7 +65,7 @@ m_mer <- lmer(
 summary(m_mer)
 ```
 
-We can now plot the predictions for each of our observations and plot for the observed and the fitted data for each individuals. Todo so we will use the `augment()` function from the `r emo::ji("package")` `broom.mixed`.
+We can now plot the predictions for each of our observations and plot for the observed and the fitted data for each individuals. Todo so we will use the `augment()` function from the `r emoji::emoji("package")` `broom.mixed`.
 
 Below, we plot the raw data for each individual in one panel, with the fitted slopes in a second panel. Because
 we have 2 blocks of data, and block is fitted as a fixed effect, for ease of presentation we need to either  select only 1 block for representation, take teh avaerage over the block effect or do a more complex graph with the two blocks. Here I have selected only one of the blocks for this plot

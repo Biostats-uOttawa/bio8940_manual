@@ -22,8 +22,8 @@ add a comparison of lrt
 
 In this practical, we have collected data on the amazing blue dragon of the East that roam the sky at night.
 
-We will use two different `r emo::ji("package")` to fit more complex models that are not possible with  `lmer()` from `lme4` 
-`r emo::ji("package")` [@lme4]. We will use:
+We will use two different `r emoji::emoji("package")` to fit more complex models that are not possible with  `lmer()` from `lme4` 
+`r emoji::emoji("package")` [@lme4]. We will use:
 
 - `asreml-R` which is a commercial software developed by VSNi [@asreml]. `ASReml` fit models using a maximum likelihood approach, is quite flexible and fast.
 - `MCMCglmm` which is free and open-source and fit model using a Bayesian approach [@MCMCglmm]. It is super flexible and allow to fit a wide diversity of distribution.
@@ -88,7 +88,7 @@ df_dragons <- df_dragons %>%
 
 ### Multiple univariate models
 
-We first use the `lme4` `r emo::ji("package")` to determine the proportion of phenotypic variation (adjusted for fixed effects) that is due to differences among individuals, separately for each trait with repeated measures. 
+We first use the `lme4` `r emoji::emoji("package")` to determine the proportion of phenotypic variation (adjusted for fixed effects) that is due to differences among individuals, separately for each trait with repeated measures. 
 
 #### Flying speed
 

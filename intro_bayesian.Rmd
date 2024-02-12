@@ -51,7 +51,7 @@ likelihood contains our built-in assumptions about how the data is distributed.
 
 The *evidence* (sometimes called *average likelihood*) is hareder to grasp. I am not sure how to describe it in an intuitive way.
 It's there to make sure the math works out so that the posterior probabilities sum to 1.
-Some presentations of Bayes' theorem gloss over it and I am not the exception `r emo::ji("smile")`.
+Some presentations of Bayes' theorem gloss over it and I am not the exception `r emoji::emoji("smile")`.
 The important thing to note is that the posterior is proportional to the
 likelihood and prior information.
 
@@ -61,7 +61,7 @@ $$
 $$
 
 So simply put, **you update your prior information in proportion to how well it fits
-the observed data**. So essentially you are doing that on a daily basis for everything except when you ar doing frequentist stats `r emo::ji("smile")`.
+the observed data**. So essentially you are doing that on a daily basis for everything except when you ar doing frequentist stats `r emoji::emoji("smile")`.
 
 
 
@@ -297,9 +297,9 @@ Quite a bit more harder. because constrained to be positive
 
 In this practical, we will revisit our analysis on unicorn aggressivity.
 Honestly, we can use any other data with repeated measures for this exercise
-but I just love unicorns `r emo::ji("heart")`.
+but I just love unicorns `r emoji::emoji("heart")`.
 However, instead of fittng the model using `lmer()` from the `lmerTest` 
-`r emo::ji("package")` [@lmerTest], we will refit the model using 2 excellent 
+`r emoji::emoji("package")` [@lmerTest], we will refit the model using 2 excellent 
 softwares fitting models with a Bayesian approach: `MCMCglmm` [@MCMCglmm] and
 `brms` [@brms2021].
 
@@ -364,16 +364,16 @@ Ok so it took no time at all to do it and we got our "classic" results.
 
 ### MCMCglmm
 
-What makes `MCMCglmm` so useful and powerful `r emo::ji("muscle")` in ecology and for *practical Bayesian people* is that:
+What makes `MCMCglmm` so useful and powerful `r emoji::emoji("muscle")` in ecology and for *practical Bayesian people* is that:
 
-1. it is blazing fast `r emo::ji("fast")` (for Bayesian analysis) for some models particularly models with structured covariances
+1. it is blazing fast `r emoji::emoji("fast")` (for Bayesian analysis) for some models particularly models with structured covariances
 2. it is fairly intuitive to code
 
 **but** it also has some inconvenients:
 
-1. it is blazing fast for **Bayesian analysis** meaning it is `r emo::ji("snail")` compared to *maximum likelihood* approaches
+1. it is blazing fast for **Bayesian analysis** meaning it is `r emoji::emoji("snail")` compared to *maximum likelihood* approaches
 2. it has some limitations in terms of functionality, distribution availability and model specifications compared to other *Bayesian* softwares
-3. the priors, *oh, the priors* `r emo::ji("loudly_crying_face")`, are a bit tricky to code and understand `r emo::ji("exploding_head")`.
+3. the priors, *oh, the priors* `r emoji::emoji("loudly_crying_face")`, are a bit tricky to code and understand `r emoji::emoji("exploding_head")`.
 
 
 #### Fitting the Model
@@ -469,12 +469,12 @@ HPDinterval(m_mcmcglmm$VCV)
 
 **brms** is an acronym for *Bayesian Regression Models using 'Stan'* [@brms2021]. It is a package developed to fit regression models with a Bayesian approach using the amazing `stan` software [@stan2021]. 
 
-What makes `brms` so useful and powerful `r emo::ji("muscle")` in ecology is that:
+What makes `brms` so useful and powerful `r emoji::emoji("muscle")` in ecology is that:
 
 1. it is really intuitive to code (same syntax as `glmer()`)
 2. it is incredibly flexible since it is essentially a front end for `stan` via its `rstan` interface [@rstan]
 
-**but** with *great powers come great responsability* `r emo::ji("spider")`
+**but** with *great powers come great responsability* `r emoji::emoji("spider")`
 
 
 ```{r, cache = TRUE, fig.cap = "Autocorrelation in the chain for variance parameters in model m_brm"}
