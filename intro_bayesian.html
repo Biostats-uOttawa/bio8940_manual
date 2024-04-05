@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.544">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Julien Martin">
 <meta name="description" content="Include extra information and exercises">
@@ -188,19 +188,19 @@ window.Quarto = {
   </li>  
         <li>
     <a class="dropdown-item" href="https://biostats-uottawa.github.io/bio4158_course/">
- <span class="dropdown-text">Bio4158 (english)</span></a>
+ <span class="dropdown-text">Biostats with R (Bio4158)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://biostats-uottawa.github.io/bio4558_cours/">
- <span class="dropdown-text">Bio4558 (français)</span></a>
+ <span class="dropdown-text">Biostats avec R (Bio4558)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://biostats-uottawa.github.io/intro_r_en.html">
- <span class="dropdown-text">R-way to hell</span></a>
+    <a class="dropdown-item" href="https://biostats-uottawa.github.io/R/en/">
+ <span class="dropdown-text">R-way to hell (R book)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://biostats-uottawa.github.io/intro_r_fr.html">
- <span class="dropdown-text">Chemin de l’enf-R</span></a>
+    <a class="dropdown-item" href="https://biostats-uottawa.github.io/R/fr/">
+ <span class="dropdown-text">Chemin de l’enf-R (livre R)</span></a>
   </li>  
     </ul>
 </li>
@@ -937,7 +937,7 @@ attr(,"Probability")
 <li>it is incredibly flexible since it is essentially a front end for <code>stan</code> via its <code>rstan</code> interface <span class="citation" data-cites="rstan">(<a href="references.html#ref-rstan" role="doc-biblioref">Stan Development Team 2024</a>)</span>
 </li>
 </ol>
-<p><strong>but</strong> with <em>great powers come great responsability</em> 🕷</p>
+<p><strong>but</strong> with <em>great powers come great responsability</em> 🕷️</p>
 <div class="cell">
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">brm_time</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="va">m_brm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/brm.html">brm</a></span><span class="op">(</span></span>
@@ -1006,7 +1006,7 @@ scale reduction factor on split chains (at convergence, Rhat = 1).</code></pre>
 <span class="header-section-number">7.2.5.1</span> Hunder the hood</h4>
 <p>have a look at the <code>stan</code> code</p>
 <div class="cell">
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/stancode.brmsfit.html">stancode</a></span><span class="op">(</span><span class="va">m_brm</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://paul-buerkner.github.io/brms/reference/stancode.html">stancode</a></span><span class="op">(</span><span class="va">m_brm</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>// generated with brms 2.20.4
 functions {
@@ -1075,7 +1075,7 @@ generated quantities {
 </section><section id="using-shiny" class="level4" data-number="7.2.5.2"><h4 data-number="7.2.5.2" class="anchored" data-anchor-id="using-shiny">
 <span class="header-section-number">7.2.5.2</span> using shiny</h4>
 <div class="cell">
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://mc-stan.org/shinystan/reference/launch_shinystan.html">launch_shinystan</a></span><span class="op">(</span><span class="va">m_brm</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">launch_shinystan</span><span class="op">(</span><span class="va">m_brm</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -1732,12 +1732,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./intro_glmm.html" class="pagination-link  aria-label=" to="">
+      <a href="./intro_glmm.html" class="pagination-link" aria-label="Introduction to `GLMM`">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Introduction to <code>GLMM</code></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./multivar.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Multivariate mixed models</span>">
+      <a href="./multivar.html" class="pagination-link" aria-label="Multivariate mixed models">
         <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Multivariate mixed models</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

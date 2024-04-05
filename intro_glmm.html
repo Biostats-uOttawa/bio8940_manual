@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.544">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Julien Martin">
 <meta name="description" content="Include extra information and exercises">
@@ -163,19 +163,19 @@ gtag('config', 'G-6LLMGL3T2Q', { 'anonymize_ip': true});
   </li>  
         <li>
     <a class="dropdown-item" href="https://biostats-uottawa.github.io/bio4158_course/">
- <span class="dropdown-text">Bio4158 (english)</span></a>
+ <span class="dropdown-text">Biostats with R (Bio4158)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://biostats-uottawa.github.io/bio4558_cours/">
- <span class="dropdown-text">Bio4558 (français)</span></a>
+ <span class="dropdown-text">Biostats avec R (Bio4558)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://biostats-uottawa.github.io/intro_r_en.html">
- <span class="dropdown-text">R-way to hell</span></a>
+    <a class="dropdown-item" href="https://biostats-uottawa.github.io/R/en/">
+ <span class="dropdown-text">R-way to hell (R book)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://biostats-uottawa.github.io/intro_r_fr.html">
- <span class="dropdown-text">Chemin de l’enf-R</span></a>
+    <a class="dropdown-item" href="https://biostats-uottawa.github.io/R/fr/">
+ <span class="dropdown-text">Chemin de l’enf-R (livre R)</span></a>
   </li>  
     </ul>
 </li>
@@ -500,7 +500,7 @@ Solution
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
-<li>Do you find the mosaic plot you obtained ugly and super hard to read? Me too 😂</li>
+<li>Do you find the mosaic plot you obtained ugly and super hard to read? Me too 😄</li>
 </ol>
 <div class="cell">
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">reptab</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -874,7 +874,7 @@ Attaching package: 'reshape'</code></pre>
 <p>We see that these extreme coefficients fall far outside a normal error distribution. We shouldn’t take these outliers too seriously at this point — we are not actually plotting the random effects, or even estimates of random effects, but rather separate estimates for each group. Especially if these groups have relatively small sample sizes, the estimates may eventually be “shrunk” closer to the mean when we do the mixed model. We should nonetheless take care to see if the coefficients for these genotypes from the GLMM are still outliers, and take the same precautions as we usually do for outliers. For example, we can look back at the original data to see if there is something weird about the way those genotypes were collected, or try re-running the analysis without those genotypes to see if the results are robust.</p>
 </section><section id="fitting-and-evaluating-glmms" class="level3" data-number="6.2.7"><h3 data-number="6.2.7" class="anchored" data-anchor-id="fitting-and-evaluating-glmms">
 <span class="header-section-number">6.2.7</span> Fitting and evaluating GLMMs</h3>
-<p>Now we (try to) build and fit a full model, using <code>glmer</code> in the <code>emo::ji("pacakage")</code> <code>lme4</code>. This model has random effects for all genotype and population × treatment random effects, and for the nuisance variables for the rack and germination method (status). (Given the mean-variance relationship we saw it’s pretty clear that we are going to have to proceed eventually to a model with overdispersion, but we fit the Poisson model first for illustration.)</p>
+<p>Now we (try to) build and fit a full model, using <code>glmer</code> in the <code>emoji::emoji("pacakage")</code> <code>lme4</code>. This model has random effects for all genotype and population × treatment random effects, and for the nuisance variables for the rack and germination method (status). (Given the mean-variance relationship we saw it’s pretty clear that we are going to have to proceed eventually to a model with overdispersion, but we fit the Poisson model first for illustration.)</p>
 <div class="cell">
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">mp1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html">glmer</a></span><span class="op">(</span><span class="va">total.fruits</span> <span class="op">~</span> <span class="va">nutrient</span> <span class="op">*</span> <span class="va">amd</span> <span class="op">+</span></span>
 <span>  <span class="va">rack</span> <span class="op">+</span> <span class="va">status</span> <span class="op">+</span></span>
@@ -1903,12 +1903,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./lmm.html" class="pagination-link  aria-label=" to="" linear="" mixed="" models="">
+      <a href="./lmm.html" class="pagination-link" aria-label="Introduction to linear mixed models">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction to linear mixed models</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./intro_bayesian.html" class="pagination-link" aria-label="<span class='chapter-number'>7</span>&nbsp; <span class='chapter-title'>Introduction to `Bayesian Inference`</span>">
+      <a href="./intro_bayesian.html" class="pagination-link" aria-label="Introduction to `Bayesian Inference`">
         <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction to <code>Bayesian Inference</code></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

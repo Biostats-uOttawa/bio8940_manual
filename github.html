@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.544">
+<meta name="generator" content="quarto-1.4.550">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Julien Martin">
 <meta name="description" content="Include extra information and exercises">
@@ -143,19 +143,19 @@ gtag('config', 'G-6LLMGL3T2Q', { 'anonymize_ip': true});
   </li>  
         <li>
     <a class="dropdown-item" href="https://biostats-uottawa.github.io/bio4158_course/">
- <span class="dropdown-text">Bio4158 (english)</span></a>
+ <span class="dropdown-text">Biostats with R (Bio4158)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://biostats-uottawa.github.io/bio4558_cours/">
- <span class="dropdown-text">Bio4558 (français)</span></a>
+ <span class="dropdown-text">Biostats avec R (Bio4558)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://biostats-uottawa.github.io/intro_r_en.html">
- <span class="dropdown-text">R-way to hell</span></a>
+    <a class="dropdown-item" href="https://biostats-uottawa.github.io/R/en/">
+ <span class="dropdown-text">R-way to hell (R book)</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://biostats-uottawa.github.io/intro_r_fr.html">
- <span class="dropdown-text">Chemin de l’enf-R</span></a>
+    <a class="dropdown-item" href="https://biostats-uottawa.github.io/R/fr/">
+ <span class="dropdown-text">Chemin de l’enf-R (livre R)</span></a>
   </li>  
     </ul>
 </li>
@@ -326,6 +326,7 @@ gtag('config', 'G-6LLMGL3T2Q', { 'anonymize_ip': true});
 <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context"><span class="header-section-number">3.2.1</span> Context</a></li>
   <li><a href="#information-of-the-data" id="toc-information-of-the-data" class="nav-link" data-scroll-target="#information-of-the-data"><span class="header-section-number">3.2.2</span> Information of the data</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">3.2.3</span> Questions</a></li>
+  <li><a href="#solution-3" id="toc-solution-3" class="nav-link" data-scroll-target="#solution-3"><span class="header-section-number">3.2.4</span> Solution</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/biostats-uottawa/bio8940_manual/edit/main/github.Rmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/biostats-uottawa/bio8940_manual/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -485,7 +486,7 @@ Solution
 <p><strong>10)</strong> Create a commit and push it to the branch.</p>
 <p><strong>11)</strong> On github, create a pull request to merge the 2 different branches.</p>
 <p><strong>12)</strong> Check and accept the pull request to merge the 2 branches.</p>
-<p>You have successfully used all the essential tools of <code>git</code> 🎉 . You are really to explore 🕵 and discover its power 💪</p>
+<p>You have successfully used all the essential tools of <code>git</code> 🎉 . You are really to explore 🕵️ and discover its power 💪</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -494,9 +495,33 @@ Solution
 </div>
 </div>
 </div>
+</section><section id="solution-3" class="level3 content-show" data-when-format="pdf" data-number="3.2.4"><h3 data-number="3.2.4" class="anchored" data-anchor-id="solution-3">
+<span class="header-section-number">3.2.4</span> Solution</h3>
+<p><strong>2)</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/git_sitrep.html">git_sitrep</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git_config.html">use_git_config</a></span><span class="op">(</span></span>
+<span>  user.name <span class="op">=</span> <span class="st">"your_username"</span>,</span>
+<span>  user.email <span class="op">=</span> <span class="st">"your_email@address.com"</span></span>
+<span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>3)</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/github-token.html">create_github_token</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">gitcreds</span><span class="fu">::</span><span class="fu"><a href="https://gitcreds.r-lib.org/reference/gitcreds_get.html">gitcreds_set</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>4)</strong></p>
+<div class="cell">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">#create R project</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_git.html">use_git</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#restart R</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/use_github.html">use_github</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/git_vaccinate.html">git_vaccinate</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 
-
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1027,12 +1052,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./rmarkdown.html" class="pagination-link  aria-label=" to="" rmarkdown="">
+      <a href="./rmarkdown.html" class="pagination-link" aria-label="Introduction to Rmarkdown">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introduction to Rmarkdown</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./glm.html" class="pagination-link" aria-label="<span class='chapter-number'>4</span>&nbsp; <span class='chapter-title'>Generalized linear model, `glm`</span>">
+      <a href="./glm.html" class="pagination-link" aria-label="Generalized linear model, `glm`">
         <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Generalized linear model, <code>glm</code></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
