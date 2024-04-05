@@ -45,14 +45,14 @@ book:
         menu:
           - text: Biostats uOttawa
             href: https://biostats-uottawa.github.io/
-          - text: Bio4158 (english)
+          - text: Biostats with R (Bio4158)
             href: https://biostats-uottawa.github.io/bio4158_course/
-          - text: Bio4558 (français)
+          - text: Biostats avec R (Bio4558)
             href: https://biostats-uottawa.github.io/bio4558_cours/
-          - text: R-way to hell
-            href: https://biostats-uottawa.github.io/intro_r_en.html 
-          - text: Chemin de l'enf-R
-            href: https://biostats-uottawa.github.io/intro_r_fr.html
+          - text: R-way to hell (R book)
+            href: https://biostats-uottawa.github.io/R/en/
+          - text: Chemin de l'enf-R (livre R)
+            href: https://biostats-uottawa.github.io/R/fr/
 
   chapters:
     - index.Rmd
