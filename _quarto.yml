@@ -96,6 +96,7 @@ format:
     include-before-body: latex/before_body.tex
     include-after-body: latex/after_body.tex
     toc-depth: 2
+    pdf-engine: lualatex
 
   epub:
     dev: svglite
