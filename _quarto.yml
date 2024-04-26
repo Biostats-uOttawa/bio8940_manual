@@ -25,12 +25,13 @@ book:
     right: |
       This book was built with <a href="https://quarto.org/">Quarto</a>.
   cover-image: images/blue_dragon.jpg
-  favicon: cover.jpg
   site-url: https://biostats-uottawa.github.io/bio8940_manual/
   repo-url: https://github.com/biostats-uottawa/bio8940_manual/
   repo-actions: [edit, issue]
   downloads: [pdf, epub]
+  favicon: images/hex/logo_hex.png
   navbar:
+    title: '![](images/hex/logo_hex.png){width="50px"} BIO8940: manual'
     background: light
 #    logo: quarto.png
 #    logo-alt: "Quarto logo."
